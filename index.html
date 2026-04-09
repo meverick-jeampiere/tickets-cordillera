@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de tickets</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111828;
+      --text: #f3f4f6;
+      --muted: #a5b4c7;
+      --accent: #ea994b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: radial-gradient(circle at top, #16233f 0%, #0a0f1d 55%, #060913 100%);
+      color: var(--text);
+    }
+
+    .wrap {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .panel,
+    .preview {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    .panel {
+      padding: 22px;
+      position: sticky;
+      top: 24px;
+      height: fit-content;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 1.45rem;
+    }
+
+    .sub {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.96rem;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0b1220;
+      color: white;
+      font-size: 1rem;
+      font-family: 'Poppins', Arial, sans-serif;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(249, 196, 100, 0.14);
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Poppins', Arial, sans-serif;
+      cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #101010;
+    }
+
+    .preview {
+      padding: 18px;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .canvas-wrap {
+      width: min(100%, 560px);
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+      background: transparent;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .mini-title {
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    code {
+      color: #ea994b;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        position: static;
+      }
+
+      .canvas-wrap {
+        width: min(100%, 500px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel">
+      <h1>Generador de tickets</h1>
+      <p class="sub">
+        Escribe el primer nombre, el primer apellido y el tipo de ingreso.
+        Luego pulsa <strong>Generar ticket</strong> y se descargará automáticamente.
+      </p>
+
+      <div class="field">
+        <label for="firstName">Primer nombre</label>
+        <input id="firstName" type="text" maxlength="24" placeholder="Ej.: María" />
+      </div>
+
+      <div class="field">
+        <label for="lastName">Primer apellido</label>
+        <input id="lastName" type="text" maxlength="24" placeholder="Ej.: González" />
+      </div>
+
+      <div class="field">
+        <label for="ticketType">Tipo de ingreso</label>
+        <select id="ticketType">
+          <option value="conferencia">Solo conferencia</option>
+          <option value="tarde_conferencia">Tarde científica-cultural + conferencia</option>
+        </select>
+        <div class="help">
+          El sistema cambiará automáticamente la plantilla según la opción elegida.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="generateBtn">Generar ticket</button>
+      </div>
+
+      <div class="note">
+        <div class="mini-title">Archivos que deben estar en la misma carpeta</div>
+        <div><code>index.html</code></div>
+        <div><code>INGRESO SOLO CONFERENCIA.png</code> o <code>.jpeg</code></div>
+        <div><code>INGRESO TARDE + CONFERENCIA.png</code> o <code>.jpeg</code></div>
+        <br>
+        <div class="mini-title">Resultado</div>
+        <div>La imagen generada sale en <strong>1080 × 1920 píxeles</strong>.</div>
+        <div>Color del nombre: <strong>#ea994b</strong>.</div>
+        <div>Fuente: <strong>Poppins SemiBold</strong>.</div>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div class="canvas-wrap">
+        <canvas id="ticketCanvas" width="1080" height="1920"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('ticketCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const ticketTypeSelect = document.getElementById('ticketType');
+    const generateBtn = document.getElementById('generateBtn');
+
+    const NAME_COLOR = '#ea994b';
+
+    // Si tus archivos son .jpeg, cambia .png por .jpeg aquí
+    const templates = {
+      conferencia: {
+        src: 'INGRESO SOLO CONFERENCIA.png',
+        image: new Image()
+      },
+      tarde_conferencia: {
+        src: 'INGRESO TARDE + CONFERENCIA.png',
+        image: new Image()
+      }
+    };
+
+    Object.values(templates).forEach((item) => {
+      item.image.src = item.src;
+    });
+
+    function drawFallback() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#060913';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = NAME_COLOR;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+
+      ctx.fillStyle = NAME_COLOR;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '600 52px Poppins, Arial, sans-serif';
+      ctx.fillText('PLANTILLA NO ENCONTRADA', canvas.width / 2, 180);
+      ctx.font = '600 28px Poppins, Arial, sans-serif';
+      ctx.fillText('Verifica nombre y extensión del archivo', canvas.width / 2, 245);
+    }
+
+    function fitText(text, maxWidth, baseSize, minSize = 66) {
+      let size = baseSize;
+
+      while (size >= minSize) {
+        ctx.font = `600 ${size}px Poppins, Arial, sans-serif`;
+        if (ctx.measureText(text).width <= maxWidth) {
+          return size;
+        }
+        size -= 1;
+      }
+
+      return minSize;
+    }
+
+    function getTicketConfig() {
+      return {
+        nameY1: 1025,   // 30 px más abajo que 970
+        nameY2: 1145,   // 30 px más abajo que 1085
+        maxWidth: 835,
+        baseSize: 130,  // letra más grande
+        color: NAME_COLOR
+      };
+    }
+
+    function normalizeText(value, fallback) {
+      return (value.trim() || fallback).toUpperCase();
+    }
+
+    function drawCoverImage(img) {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+
+    function drawTicket() {
+      const type = ticketTypeSelect.value;
+      const template = templates[type];
+      const cfg = getTicketConfig();
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (template.image.complete && template.image.naturalWidth > 0) {
+        drawCoverImage(template.image);
+      } else {
+        drawFallback();
+        return;
+      }
+
+      const firstName = normalizeText(firstNameInput.value, 'MARÍA');
+      const lastName = normalizeText(lastNameInput.value, 'GONZÁLEZ');
+
+      const firstNameSize = fitText(firstName, cfg.maxWidth, cfg.baseSize, 66);
+      const lastNameSize = fitText(lastName, cfg.maxWidth, cfg.baseSize, 66);
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = cfg.color;
+
+      ctx.font = `600 ${firstNameSize}px Poppins, Arial, sans-serif`;
+      ctx.fillText(firstName, canvas.width / 2, cfg.nameY1);
+
+      ctx.font = `600 ${lastNameSize}px Poppins, Arial, sans-serif`;
+      ctx.fillText(lastName, canvas.width / 2, cfg.nameY2);
+    }
+
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    }
+
+    function downloadTicket() {
+      const firstName = slugify(firstNameInput.value || 'maria');
+      const lastName = slugify(lastNameInput.value || 'gonzalez');
+      const type = ticketTypeSelect.value === 'conferencia'
+        ? 'solo-conferencia'
+        : 'tarde-mas-conferencia';
+
+      const link = document.createElement('a');
+      link.download = `ticket-${type}-${firstName}-${lastName}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function generateAndDownloadTicket() {
+      drawTicket();
+      setTimeout(downloadTicket, 120);
+    }
+
+    generateBtn.addEventListener('click', generateAndDownloadTicket);
+    ticketTypeSelect.addEventListener('change', drawTicket);
+    firstNameInput.addEventListener('input', drawTicket);
+    lastNameInput.addEventListener('input', drawTicket);
+
+    Object.values(templates).forEach((item) => {
+      item.image.onload = () => drawTicket();
+      item.image.onerror = () => drawTicket();
+    });
+
+    window.addEventListener('load', () => {
+      drawTicket();
+    });
+  </script>
+</body>
+</html>
