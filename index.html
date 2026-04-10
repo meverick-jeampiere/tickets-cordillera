@@ -7,20 +7,24 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #0b1020;
       --panel: #111828;
+      --panel-soft: rgba(255,255,255,0.03);
+      --panel-soft-2: rgba(255,255,255,0.04);
       --text: #f3f4f6;
       --muted: #a5b4c7;
-      --accent: #ea994b;
+      --muted-2: #dfe6f3;
+      --accent: #F9C464;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-soft: rgba(255,255,255,0.05);
+      --selected: rgba(249, 196, 100, 0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -32,7 +36,7 @@
     .wrap {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 400px 1fr;
       gap: 24px;
       padding: 24px;
     }
@@ -40,7 +44,7 @@
     .panel,
     .preview {
       background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
       border-radius: 22px;
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
     }
@@ -53,78 +57,262 @@
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: 1.45rem;
+      margin: 0;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
     }
 
-    .sub {
-      margin: 0 0 20px;
-      color: var(--muted);
-      line-height: 1.5;
+    .event-header {
+      margin-bottom: 26px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .event-kicker {
+      color: var(--accent);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .event-meta {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      color: var(--muted-2);
       font-size: 0.96rem;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .event-meta div {
+      margin-bottom: 10px;
+    }
+
+    .event-meta div:last-child {
+      margin-bottom: 0;
+    }
+
+    .program-box {
+      background: var(--panel-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .program-title {
+      color: #fff;
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .program-guide {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .program-block {
+      background: var(--panel-soft-2);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      margin-bottom: 14px;
+      transition: border-color .15s ease, transform .15s ease, background .15s ease, box-shadow .15s ease, opacity .15s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .program-block:hover {
+      transform: translateY(-1px);
+      border-color: rgba(249, 196, 100, 0.28);
+    }
+
+    .program-block.selected {
+      background: var(--selected);
+      border-color: rgba(249, 196, 100, 0.55);
+      box-shadow: 0 0 0 1px rgba(249, 196, 100, 0.18) inset;
+    }
+
+    .program-block.unselected {
+      opacity: 0.78;
+    }
+
+    .program-block:last-of-type {
+      margin-bottom: 12px;
+    }
+
+    .program-time {
+      color: #ffffff;
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .program-subtitle {
+      color: var(--accent);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .program-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #dbe3f1;
+      font-size: 0.89rem;
+      line-height: 1.5;
+    }
+
+    .program-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 8px;
+    }
+
+    .program-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .program-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: translateY(-50%);
+      opacity: 0.95;
+    }
+
+    .selection-result {
+      margin-top: 4px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: #dfe6f3;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .selection-result strong {
+      color: #fff;
     }
 
     .field {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 600;
       margin-bottom: 8px;
     }
 
     input,
-    select {
+    select,
+    textarea {
       width: 100%;
-      padding: 13px 14px;
-      border-radius: 12px;
+      padding: 15px 16px;
+      border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      background: #0b1220;
+      background: #071126;
       color: white;
       font-size: 1rem;
       font-family: 'Poppins', Arial, sans-serif;
       outline: none;
     }
 
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+
     input:focus,
-    select:focus {
+    select:focus,
+    textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(249, 196, 100, 0.14);
     }
 
     .help {
       color: var(--muted);
-      font-size: 0.86rem;
-      margin-top: 6px;
+      font-size: 0.9rem;
+      margin-top: 8px;
       line-height: 1.45;
+    }
+
+    .textarea-wrap {
+      position: relative;
+    }
+
+    .char-counter {
+      margin-top: 8px;
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
     .actions {
       display: grid;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 22px;
     }
 
     button {
       border: 0;
-      border-radius: 14px;
-      padding: 13px 16px;
+      border-radius: 16px;
+      padding: 15px 16px;
       font-size: 1rem;
       font-weight: 600;
       font-family: 'Poppins', Arial, sans-serif;
       cursor: pointer;
-      transition: transform 0.12s ease;
+      transition: transform 0.12s ease, opacity 0.12s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
+    button:hover { transform: translateY(-1px); }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .primary {
       background: var(--accent);
       color: #101010;
+    }
+
+    .secondary {
+      background: #1a2644;
+      color: #ffffff;
+    }
+
+    .ghost {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     .preview {
@@ -147,26 +335,38 @@
       background: transparent;
     }
 
-    .note {
+    .status {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .status strong {
+      color: #fff;
+    }
+
+    .organizers {
       margin-top: 18px;
       padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.55;
+      border-top: 1px solid var(--line);
     }
 
-    .mini-title {
+    .organizers-title {
       color: #fff;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    code {
-      color: #ea994b;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2px 6px;
-      border-radius: 6px;
+    .organizers-list {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
     }
 
     @media (max-width: 980px) {
@@ -179,7 +379,7 @@
       }
 
       .canvas-wrap {
-        width: min(100%, 500px);
+        width: min(100%, 520px);
       }
     }
   </style>
@@ -187,11 +387,45 @@
 <body>
   <div class="wrap">
     <section class="panel">
-      <h1>Generador de tickets</h1>
-      <p class="sub">
-        Escribe el primer nombre, el primer apellido y el tipo de ingreso.
-        Luego pulsa <strong>Generar ticket</strong> y se descargará automáticamente.
-      </p>
+      <div class="event-header">
+        <div class="event-kicker">DÍA DE LA TIERRA</div>
+        <h1>22 DE ABRIL · Huaraz</h1>
+
+        <div class="event-meta">
+          <div><strong>UNASAM</strong> · Campus Shancayán</div>
+          <div><strong>Auditorio Principal</strong> · "Sabio Santiago Antúnez de Mayolo"</div>
+        </div>
+
+        <div class="program-box">
+          <div class="program-title">PROGRAMACIÓN</div>
+          <div class="program-guide">Toca uno o ambos segmentos según tu interés. Puedes activarlos y desactivarlos.</div>
+
+          <div class="program-block selected" id="afternoonBlock">
+            <div class="program-time">3:00 PM – 6:00 PM</div>
+            <div class="program-subtitle">Tarde científico cultural</div>
+            <ul class="program-list">
+              <li>Stands: ESAT · La Base · Cumbres Blancas · Youth Peruvian Leaders</li>
+              <li>5:00 PM · Entrevista: Chismes de la Antártida</li>
+              <li>5:45 PM · Lanzamiento de la revista de Cumbres Blancas</li>
+            </ul>
+          </div>
+
+          <div class="program-block selected" id="conferenceBlock">
+            <div class="program-time">6:00 PM – 7:15 PM</div>
+            <div class="program-subtitle">Conferencia / Documental</div>
+            <ul class="program-list">
+              <li>6:00 PM · Número de danza</li>
+              <li>6:10 PM · El origen de la Cordillera Blanca y la Cordillera Negra</li>
+              <li>7:20 PM · Cierre y foto grupal</li>
+            </ul>
+          </div>
+
+          <div class="selection-result">
+            <strong>Elegiste:</strong>
+            <div id="selectedProgramLabel">LA PROGRAMACIÓN COMPLETA</div>
+          </div>
+        </div>
+      </div>
 
       <div class="field">
         <label for="firstName">Primer nombre</label>
@@ -204,30 +438,39 @@
       </div>
 
       <div class="field">
-        <label for="ticketType">Tipo de ingreso</label>
-        <select id="ticketType">
-          <option value="conferencia">Solo conferencia</option>
-          <option value="tarde_conferencia">Tarde científica-cultural + conferencia</option>
+        <label for="guestCount">Cantidad de personas</label>
+        <select id="guestCount">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </select>
-        <div class="help">
-          El sistema cambiará automáticamente la plantilla según la opción elegida.
+        <div class="help">El tipo de pase cambiará automáticamente según la cantidad de personas.</div>
+      </div>
+
+      <div class="field">
+        <label for="orgMessage">Envíale un mensaje a la organización</label>
+        <div class="textarea-wrap">
+          <textarea id="orgMessage" maxlength="300" placeholder="Escribe aquí tu mensaje..."></textarea>
         </div>
+        <div class="char-counter"><span id="charCount">0</span>/300</div>
       </div>
 
       <div class="actions">
         <button class="primary" id="generateBtn">Generar ticket</button>
+        <button class="secondary" id="saveBtn" disabled>Guardar ticket</button>
+        <button class="ghost" id="shareBtn" disabled>Compartir ticket</button>
       </div>
 
-      <div class="note">
-        <div class="mini-title">Archivos que deben estar en la misma carpeta</div>
-        <div><code>index.html</code></div>
-        <div><code>INGRESO SOLO CONFERENCIA.png</code> o <code>.jpeg</code></div>
-        <div><code>INGRESO TARDE + CONFERENCIA.png</code> o <code>.jpeg</code></div>
-        <br>
-        <div class="mini-title">Resultado</div>
-        <div>La imagen generada sale en <strong>1080 × 1920 píxeles</strong>.</div>
-        <div>Color del nombre: <strong>#ea994b</strong>.</div>
-        <div>Fuente: <strong>Poppins SemiBold</strong>.</div>
+      <div class="status" id="statusBox">
+        <strong>Listo para generar.</strong><br>
+        Cuando generes el ticket, aparecerá en la vista previa y podrás guardarlo o compartirlo.
+      </div>
+
+      <div class="organizers">
+        <div class="organizers-title">Organizadores</div>
+        <div class="organizers-list">Cumbres Blancas · La Base · ESAT-FCAM · UNASAM</div>
       </div>
     </section>
 
@@ -244,15 +487,51 @@
 
     const firstNameInput = document.getElementById('firstName');
     const lastNameInput = document.getElementById('lastName');
-    const ticketTypeSelect = document.getElementById('ticketType');
+    const guestCountSelect = document.getElementById('guestCount');
+    const orgMessageInput = document.getElementById('orgMessage');
+    const charCount = document.getElementById('charCount');
+
     const generateBtn = document.getElementById('generateBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const statusBox = document.getElementById('statusBox');
 
-    const NAME_COLOR = '#ea994b';
+    const afternoonBlock = document.getElementById('afternoonBlock');
+    const conferenceBlock = document.getElementById('conferenceBlock');
+    const selectedProgramLabel = document.getElementById('selectedProgramLabel');
 
-    // Si tus archivos son .jpeg, cambia .png por .jpeg aquí
+    const NAME_COLOR = '#F9C464';
+    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+
+    let generatedBlob = null;
+    let generatedFile = null;
+    let generatedFileName = 'ticket.png';
+    let registrationNumber = null;
+
+    let selectedSegments = {
+      afternoon: false,
+      conference: false
+    };
+
+    const passLabels = {
+      '1': 'PASE PERSONAL',
+      '2': 'PASE DOBLE',
+      '3': 'PASE TRIPLE',
+      '4': 'PASE CUÁDRUPLE',
+      '5': 'PASE X5'
+    };
+
     const templates = {
+      sin_seleccion: {
+        src: 'INGRESO SIN SELECCION.png',
+        image: new Image()
+      },
       conferencia: {
         src: 'INGRESO SOLO CONFERENCIA.png',
+        image: new Image()
+      },
+      tarde: {
+        src: 'INGRESO SOLO TARDE.png',
         image: new Image()
       },
       tarde_conferencia: {
@@ -264,6 +543,48 @@
     Object.values(templates).forEach((item) => {
       item.image.src = item.src;
     });
+
+    function setStatus(html) {
+      statusBox.innerHTML = html;
+    }
+
+    function getPassLabel() {
+      return passLabels[guestCountSelect.value] || 'PASE PERSONAL';
+    }
+
+    function getSelectedTicketType() {
+      if (selectedSegments.afternoon && selectedSegments.conference) return 'tarde_conferencia';
+      if (selectedSegments.afternoon) return 'tarde';
+      if (selectedSegments.conference) return 'conferencia';
+      return 'sin_seleccion';
+    }
+
+    function getTicketTypeLabel() {
+      const type = getSelectedTicketType();
+      if (type === 'tarde_conferencia') return 'LA PROGRAMACIÓN COMPLETA';
+      if (type === 'tarde') return 'LA TARDE CIENTÍFICO CULTURAL';
+      if (type === 'conferencia') return 'LA CONFERENCIA';
+      return 'NINGÚN SEGMENTO SELECCIONADO';
+    }
+
+    function updateProgramSelectionUI() {
+      afternoonBlock.classList.toggle('selected', selectedSegments.afternoon);
+      afternoonBlock.classList.toggle('unselected', !selectedSegments.afternoon);
+
+      conferenceBlock.classList.toggle('selected', selectedSegments.conference);
+      conferenceBlock.classList.toggle('unselected', !selectedSegments.conference);
+
+      selectedProgramLabel.textContent = getTicketTypeLabel();
+
+      const hasSelection = getSelectedTicketType() !== 'sin_seleccion';
+      generateBtn.disabled = !hasSelection;
+
+      if (!hasSelection) {
+        setStatus('<strong>Selecciona al menos un segmento.</strong><br>La vista previa muestra el estado sin selección, pero no se puede generar ese ticket.');
+      } else {
+        setStatus('<strong>Listo para generar.</strong><br>Cuando generes el ticket, aparecerá en la vista previa y podrás guardarlo o compartirlo.');
+      }
+    }
 
     function drawFallback() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -285,24 +606,68 @@
 
     function fitText(text, maxWidth, baseSize, minSize = 66) {
       let size = baseSize;
-
       while (size >= minSize) {
         ctx.font = `600 ${size}px Poppins, Arial, sans-serif`;
-        if (ctx.measureText(text).width <= maxWidth) {
-          return size;
-        }
+        if (ctx.measureText(text).width <= maxWidth) return size;
         size -= 1;
       }
-
       return minSize;
+    }
+
+    function fitSmallText(text, maxWidth, baseSize, minSize = 24, fontFamily = 'Poppins, Arial, sans-serif', fontWeight = 600) {
+      let size = baseSize;
+      while (size >= minSize) {
+        ctx.font = `${fontWeight} ${size}px ${fontFamily}`;
+        if (ctx.measureText(text).width <= maxWidth) return size;
+        size -= 1;
+      }
+      return minSize;
+    }
+
+    function drawSpacedText(text, x, y, letterSpacing, font, color) {
+      ctx.font = font;
+      ctx.fillStyle = color;
+      ctx.textBaseline = 'middle';
+
+      let totalWidth = 0;
+      for (let i = 0; i < text.length; i++) {
+        totalWidth += ctx.measureText(text[i]).width;
+        if (i < text.length - 1) totalWidth += letterSpacing;
+      }
+
+      let startX = x - totalWidth / 2;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        ctx.fillText(char, startX, y);
+        startX += ctx.measureText(char).width + letterSpacing;
+      }
+    }
+
+    function drawPassLabel(passLabel, cfg, passSize) {
+      drawSpacedText(
+        passLabel,
+        canvas.width / 2,
+        cfg.passY,
+        cfg.passLetterSpacing,
+        `300 ${passSize}px Montserrat, Arial, sans-serif`,
+        '#FFFFFF'
+      );
     }
 
     function getTicketConfig() {
       return {
-        nameY1: 1025,   // 30 px más abajo que 970
-        nameY2: 1145,   // 30 px más abajo que 1085
+        nameY1: 1030,
+        nameY2: 1145,
+        passY: 930,
+        numberY: 1688,
         maxWidth: 835,
-        baseSize: 130,  // letra más grande
+        passMaxWidth: 460,
+        numberMaxWidth: 520,
+        baseSize: 120,
+        passSize: 20,
+        passLetterSpacing: 6,
+        numberSize: 22,
         color: NAME_COLOR
       };
     }
@@ -316,8 +681,8 @@
     }
 
     function drawTicket() {
-      const type = ticketTypeSelect.value;
-      const template = templates[type];
+      const ticketType = getSelectedTicketType();
+      const template = templates[ticketType];
       const cfg = getTicketConfig();
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -326,24 +691,48 @@
         drawCoverImage(template.image);
       } else {
         drawFallback();
-        return;
+        return false;
+      }
+
+      if (ticketType === 'sin_seleccion') {
+        return true;
       }
 
       const firstName = normalizeText(firstNameInput.value, 'MARÍA');
       const lastName = normalizeText(lastNameInput.value, 'GONZÁLEZ');
+      const passLabel = getPassLabel();
+      const ticketNumberText = registrationNumber
+        ? `PASE N.° ${String(registrationNumber).padStart(4, '0')}`
+        : 'PASE N.° ----';
 
       const firstNameSize = fitText(firstName, cfg.maxWidth, cfg.baseSize, 66);
       const lastNameSize = fitText(lastName, cfg.maxWidth, cfg.baseSize, 66);
+      const passSize = fitSmallText(
+        passLabel,
+        cfg.passMaxWidth,
+        cfg.passSize,
+        14,
+        'Montserrat, Arial, sans-serif',
+        300
+      );
+      const numberSize = fitSmallText(ticketNumberText, cfg.numberMaxWidth, cfg.numberSize, 18);
 
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = cfg.color;
 
+      drawPassLabel(passLabel, cfg, passSize);
+
+      ctx.fillStyle = cfg.color;
       ctx.font = `600 ${firstNameSize}px Poppins, Arial, sans-serif`;
       ctx.fillText(firstName, canvas.width / 2, cfg.nameY1);
 
       ctx.font = `600 ${lastNameSize}px Poppins, Arial, sans-serif`;
       ctx.fillText(lastName, canvas.width / 2, cfg.nameY2);
+
+      ctx.font = `600 ${numberSize}px Poppins, Arial, sans-serif`;
+      ctx.fillText(ticketNumberText, canvas.width / 2, cfg.numberY);
+
+      return true;
     }
 
     function slugify(text) {
@@ -355,28 +744,195 @@
         .replace(/[^a-z0-9-]/g, '');
     }
 
-    function downloadTicket() {
-      const firstName = slugify(firstNameInput.value || 'maria');
-      const lastName = slugify(lastNameInput.value || 'gonzalez');
-      const type = ticketTypeSelect.value === 'conferencia'
-        ? 'solo-conferencia'
-        : 'tarde-mas-conferencia';
+    async function buildGeneratedFile() {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            reject(new Error('No se pudo generar la imagen.'));
+            return;
+          }
+
+          generatedBlob = blob;
+
+          const firstName = slugify(firstNameInput.value || 'maria');
+          const lastName = slugify(lastNameInput.value || 'gonzalez');
+          const type = getSelectedTicketType();
+
+          generatedFileName = `ticket-${type}-${firstName}-${lastName}.png`;
+          generatedFile = new File([blob], generatedFileName, { type: 'image/png' });
+
+          resolve(generatedFile);
+        }, 'image/png');
+      });
+    }
+
+    function enableActionButtons() {
+      saveBtn.disabled = false;
+      shareBtn.disabled = false;
+    }
+
+    async function registerInSheet() {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT') {
+        return { ok: true, registrationNumber: null, skipped: true };
+      }
+
+      const ticketType = getSelectedTicketType();
+      const payload = {
+        firstName: firstNameInput.value.trim(),
+        lastName: lastNameInput.value.trim(),
+        fullName: `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`.trim(),
+        guestCount: Number(guestCountSelect.value),
+        passType: getPassLabel(),
+        ticketType,
+        ticketTypeLabel:
+          ticketType === 'tarde_conferencia'
+            ? 'Tarde científica-cultural + conferencia'
+            : ticketType === 'tarde'
+              ? 'Solo tarde científica-cultural'
+              : 'Solo conferencia',
+        organizationMessage: orgMessageInput.value.trim(),
+        createdAt: new Date().toISOString(),
+        userAgent: navigator.userAgent
+      };
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await response.text();
+      let data = {};
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { ok: response.ok };
+      }
+
+      if (!response.ok || data.ok === false) {
+        throw new Error(data.error || 'No se pudo registrar en Google Sheets.');
+      }
+
+      return data;
+    }
+
+    async function generateTicket() {
+      const firstName = firstNameInput.value.trim();
+      const lastName = lastNameInput.value.trim();
+      const ticketType = getSelectedTicketType();
+
+      if (ticketType === 'sin_seleccion') {
+        setStatus('<strong>Falta seleccionar programación.</strong><br>Activa al menos un segmento antes de generar el ticket.');
+        return;
+      }
+
+      if (!firstName || !lastName) {
+        setStatus('<strong>Faltan datos.</strong><br>Completa el primer nombre y el primer apellido.');
+        return;
+      }
+
+      generateBtn.disabled = true;
+      saveBtn.disabled = true;
+      shareBtn.disabled = true;
+      setStatus('<strong>Generando ticket…</strong><br>Estamos registrando tus datos y preparando tu pase.');
+
+      try {
+        const sheetResult = await registerInSheet();
+        registrationNumber = sheetResult.registrationNumber || null;
+
+        const ok = drawTicket();
+        if (!ok) {
+          throw new Error('No se pudo dibujar el ticket.');
+        }
+
+        await buildGeneratedFile();
+        enableActionButtons();
+
+        if (registrationNumber) {
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. Ya puedes guardarlo o compartirlo.`);
+        } else {
+          setStatus('<strong>Ticket generado.</strong><br>Ya puedes guardarlo o compartirlo desde tu dispositivo.');
+        }
+      } catch (error) {
+        setStatus(`<strong>Ocurrió un problema.</strong><br>${error.message}`);
+      } finally {
+        generateBtn.disabled = false;
+        updateProgramSelectionUI();
+      }
+    }
+
+    function saveTicket() {
+      if (!generatedBlob || !generatedFileName) return;
 
       const link = document.createElement('a');
-      link.download = `ticket-${type}-${firstName}-${lastName}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.download = generatedFileName;
+      link.href = URL.createObjectURL(generatedBlob);
+      document.body.appendChild(link);
       link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      setStatus('<strong>Ticket listo para guardar.</strong><br>Según tu celular, puede ir a Descargas o Archivos. También puedes usar Compartir.');
     }
 
-    function generateAndDownloadTicket() {
+    async function shareTicket() {
+      if (!generatedFile) return;
+
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [generatedFile] })) {
+          await navigator.share({
+            files: [generatedFile],
+            title: 'Mi ticket del evento',
+            text: 'Aquí está mi ticket del evento.'
+          });
+          setStatus('<strong>Ticket compartido.</strong><br>Si quieres subirlo a Stories, también puedes guardarlo y publicarlo desde tu app.');
+          return;
+        }
+
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Mi ticket del evento',
+            text: 'Aquí está mi ticket del evento.'
+          });
+          setStatus('<strong>Se abrió el menú de compartir.</strong><br>Tu navegador no permitió compartir el archivo directamente, pero aún puedes guardarlo.');
+          return;
+        }
+
+        setStatus('<strong>Tu navegador no soporta compartir directamente.</strong><br>Usa el botón Guardar ticket.');
+      } catch (error) {
+        setStatus('<strong>Compartir cancelado o no disponible.</strong><br>Puedes guardar el ticket manualmente.');
+      }
+    }
+
+    function updatePreviewOnly() {
+      registrationNumber = null;
       drawTicket();
-      setTimeout(downloadTicket, 120);
+      saveBtn.disabled = true;
+      shareBtn.disabled = true;
+      updateProgramSelectionUI();
     }
 
-    generateBtn.addEventListener('click', generateAndDownloadTicket);
-    ticketTypeSelect.addEventListener('change', drawTicket);
-    firstNameInput.addEventListener('input', drawTicket);
-    lastNameInput.addEventListener('input', drawTicket);
+    function updateCharCounter() {
+      charCount.textContent = orgMessageInput.value.length;
+    }
+
+    function toggleSegment(segment) {
+      selectedSegments[segment] = !selectedSegments[segment];
+      updatePreviewOnly();
+    }
+
+    generateBtn.addEventListener('click', generateTicket);
+    saveBtn.addEventListener('click', saveTicket);
+    shareBtn.addEventListener('click', shareTicket);
+
+    afternoonBlock.addEventListener('click', () => toggleSegment('afternoon'));
+    conferenceBlock.addEventListener('click', () => toggleSegment('conference'));
+
+    guestCountSelect.addEventListener('change', updatePreviewOnly);
+    firstNameInput.addEventListener('input', updatePreviewOnly);
+    lastNameInput.addEventListener('input', updatePreviewOnly);
+    orgMessageInput.addEventListener('input', updateCharCounter);
 
     Object.values(templates).forEach((item) => {
       item.image.onload = () => drawTicket();
@@ -384,6 +940,8 @@
     });
 
     window.addEventListener('load', () => {
+      updateCharCounter();
+      updateProgramSelectionUI();
       drawTicket();
     });
   </script>
