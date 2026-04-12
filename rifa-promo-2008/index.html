@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rifa Promo 2008</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0a0d16;
+      --panel: #111625;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f4f6;
+      --muted: #b7bfd0;
+      --gold: #f1c35d;
+      --available: #1a2238;
+      --selected: #8a5a00;
+      --reserved: #2b2f3a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Montserrat", Arial, sans-serif;
+      background: radial-gradient(circle at top, #1b2746 0%, #0c1020 45%, #05070d 100%);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 22px;
+    }
+
+    .panel, .board {
+      background: rgba(17,22,37,.94);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.28);
+    }
+
+    .panel {
+      padding: 22px;
+      position: sticky;
+      top: 22px;
+      height: fit-content;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .kicker {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .9rem;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      font-size: 2rem;
+      line-height: 1.05;
+    }
+
+    .meta {
+      margin-top: 12px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.45;
+      font-size: .98rem;
+    }
+
+    .micro-guide {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.05);
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: .95rem;
+      text-align: center;
+    }
+
+    .micro-guide strong {
+      color: var(--gold);
+    }
+
+    .field {
+      margin-top: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #091121;
+      color: white;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(241,195,93,.12);
+    }
+
+    .field-help {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+
+    .summary {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.05);
+      line-height: 1.5;
+      font-size: .95rem;
+    }
+
+    .summary strong {
+      color: white;
+    }
+
+    .summary-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+
+    .picked-list {
+      margin-top: 8px;
+      color: var(--gold);
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: .12s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+    .primary {
+      background: var(--gold);
+      color: #131313;
+    }
+
+    .secondary {
+      background: #1d2742;
+      color: white;
+    }
+
+    .contact-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .contact-kicker {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .86rem;
+      margin-bottom: 6px;
+    }
+
+    .contact-name {
+      color: white;
+      font-weight: 700;
+      font-size: .98rem;
+    }
+
+    .contact-yape {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .contact-phone {
+      margin-top: 4px;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.25rem;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .legend {
+      margin-top: 18px;
+      display: grid;
+      gap: 8px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 5px;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .d-available { background: var(--available); }
+    .d-selected { background: var(--selected); }
+    .d-reserved { background: var(--reserved); }
+
+    .board {
+      padding: 20px;
+    }
+
+    .board-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .board-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .board-sub {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(44px, 1fr));
+      gap: 6px;
+    }
+
+    .ticket-btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: var(--available);
+      color: white;
+      min-height: 52px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: .12s ease;
+      padding: 0;
+    }
+
+    .ticket-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(241,195,93,.5);
+    }
+
+    .ticket-btn.selected {
+      background: var(--selected);
+      border-color: rgba(241,195,93,.75);
+      color: white;
+    }
+
+    .ticket-btn.reserved {
+      background: var(--reserved);
+      color: #8c93a3;
+      cursor: not-allowed;
+      border-color: rgba(255,255,255,.08);
+      text-decoration: line-through;
+    }
+
+    .ticket-btn:disabled:hover {
+      transform: none;
+    }
+
+    @media (max-width: 1100px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+      .panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: repeat(6, minmax(42px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="panel">
+      <div class="title">
+        <div class="kicker">RIFA</div>
+        <h1>Promo 2008</h1>
+        <div class="meta">
+          18/04/26 · 4:00 p.m.<br>
+          Valor por ticket: <strong>S/ 8.00</strong>
+        </div>
+      </div>
+
+      <div class="micro-guide">
+        Elige tus números disponibles y descarga <strong>un único PDF</strong> con tus boletos.
+      </div>
+
+      <div class="field">
+        <label for="firstName">Primer nombre</label>
+        <input id="firstName" type="text" maxlength="30" placeholder="Ej.: María" />
+      </div>
+
+      <div class="field">
+        <label for="lastName">Primer apellido</label>
+        <input id="lastName" type="text" maxlength="30" placeholder="Ej.: González" />
+        <div class="field-help">Primero completa tus datos y luego selecciona mínimo 5 boletos.</div>
+      </div>
+
+      <div class="summary">
+        <strong>Tu selección</strong><br>
+        Cantidad: <span id="selectedCount">0</span><br>
+        <div class="picked-list" id="pickedList">Aún no elegiste boletos.</div>
+        <div class="summary-note">Debes seleccionar <strong>mínimo 5</strong> para habilitar la descarga del PDF.</div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="confirmBtn" disabled>Descargar tickets en PDF</button>
+        <button class="secondary" id="reloadBtn">Actualizar disponibilidad</button>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-kicker">Recaudación</div>
+        <div class="contact-name">ÁNGELA AVILA RAMIREZ</div>
+        <div class="contact-yape">YAPE:</div>
+        <div class="contact-phone">973 518 025</div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-row"><span class="dot d-available"></span> Disponible</div>
+        <div class="legend-row"><span class="dot d-selected"></span> Tu selección</div>
+        <div class="legend-row"><span class="dot d-reserved"></span> No disponible</div>
+      </div>
+    </aside>
+
+    <main class="board">
+      <div class="board-head">
+        <div>
+          <div class="board-title">Cuadro de boletos</div>
+          <div class="board-sub">Toca los números que quieras. Si te arrepientes, vuelve a tocarlos para quitarlos.</div>
+        </div>
+      </div>
+
+      <div class="grid" id="ticketGrid"></div>
+    </main>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-STp51Kx7qnvmEAcUljrch4wwQDdq_zM-Hpmkrw6QCKQ0l3IvNbfLcBvJCU0C3673Vg/exec';
+    const TICKET_TEMPLATE_SRC = 'boleto.jpeg';
+
+    const TOTAL_TICKETS = 240;
+    const MIN_REQUIRED = 5;
+
+    const NUMBER_X = 724;
+    const NUMBER_Y = 2420;
+    const NUMBER_SIZE = 220;
+    const NUMBER_PREFIX = 'N°';
+
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const reloadBtn = document.getElementById('reloadBtn');
+    const ticketGrid = document.getElementById('ticketGrid');
+    const selectedCount = document.getElementById('selectedCount');
+    const pickedList = document.getElementById('pickedList');
+
+    let reservedNumbers = new Set();
+    let selectedNumbers = new Set();
+
+    const ticketTemplate = new Image();
+    ticketTemplate.src = TICKET_TEMPLATE_SRC;
+
+    function formatNumber(n) {
+      return String(n).padStart(3, '0');
+    }
+
+    function updateSummary() {
+      const nums = [...selectedNumbers].sort((a, b) => a - b);
+      selectedCount.textContent = nums.length;
+      pickedList.textContent = nums.length ? nums.map(formatNumber).join(', ') : 'Aún no elegiste boletos.';
+      confirmBtn.disabled = nums.length < MIN_REQUIRED;
+    }
+
+    function createGrid() {
+      ticketGrid.innerHTML = '';
+
+      for (let i = 1; i <= TOTAL_TICKETS; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ticket-btn';
+        btn.textContent = i;
+        btn.dataset.number = i;
+
+        if (reservedNumbers.has(i)) {
+          btn.classList.add('reserved');
+          btn.disabled = true;
+        } else if (selectedNumbers.has(i)) {
+          btn.classList.add('selected');
+        }
+
+        btn.addEventListener('click', () => toggleTicket(i));
+        ticketGrid.appendChild(btn);
+      }
+    }
+
+    function refreshGridState() {
+      const buttons = ticketGrid.querySelectorAll('.ticket-btn');
+      buttons.forEach((btn) => {
+        const n = Number(btn.dataset.number);
+        btn.classList.remove('selected', 'reserved');
+
+        if (reservedNumbers.has(n)) {
+          btn.classList.add('reserved');
+          btn.disabled = true;
+        } else {
+          btn.disabled = false;
+          if (selectedNumbers.has(n)) btn.classList.add('selected');
+        }
+      });
+    }
+
+    function toggleTicket(number) {
+      if (reservedNumbers.has(number)) return;
+
+      if (selectedNumbers.has(number)) {
+        selectedNumbers.delete(number);
+      } else {
+        selectedNumbers.add(number);
+      }
+
+      refreshGridState();
+      updateSummary();
+    }
+
+    async function fetchReservedNumbers() {
+      if (!GOOGLE_SCRIPT_URL) {
+        alert('Falta pegar la URL del Google Apps Script.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=list`, {
+          method: 'GET',
+          redirect: 'follow'
+        });
+
+        const rawText = await response.text();
+
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch {
+          throw new Error(`La respuesta no fue JSON. Respuesta recibida: ${rawText.slice(0, 200)}`);
+        }
+
+        if (!data.ok) {
+          throw new Error(data.error || 'No se pudo cargar la disponibilidad.');
+        }
+
+        reservedNumbers = new Set((data.reservedNumbers || []).map(Number));
+        selectedNumbers = new Set([...selectedNumbers].filter(n => !reservedNumbers.has(n)));
+
+        refreshGridState();
+        updateSummary();
+      } catch (error) {
+        alert(`Ocurrió un problema al cargar la disponibilidad: ${error.message}`);
+      }
+    }
+
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    }
+
+    function drawTicketCanvas(number) {
+      const canvas = document.createElement('canvas');
+      canvas.width = ticketTemplate.naturalWidth || 800;
+      canvas.height = ticketTemplate.naturalHeight || 1600;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(ticketTemplate, 0, 0, canvas.width, canvas.height);
+
+      const formatted = formatNumber(number);
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#000000';
+      ctx.font = `700 ${NUMBER_SIZE}px Poppins, Arial, sans-serif`;
+      ctx.fillText(`${NUMBER_PREFIX} ${formatted}`, NUMBER_X, NUMBER_Y);
+
+      return canvas;
+    }
+
+    async function reserveAndDownloadPDF() {
+      const firstName = firstNameInput.value.trim();
+      const lastName = lastNameInput.value.trim();
+      const numbers = [...selectedNumbers].sort((a, b) => a - b);
+
+      if (!firstName || !lastName) {
+        alert('Completa el primer nombre y el primer apellido.');
+        return;
+      }
+
+      if (numbers.length < MIN_REQUIRED) {
+        alert(`Debes seleccionar al menos ${MIN_REQUIRED} boletos.`);
+        return;
+      }
+
+      if (!ticketTemplate.complete || !ticketTemplate.naturalWidth) {
+        alert('No se pudo cargar la plantilla boleto.jpeg');
+        return;
+      }
+
+      confirmBtn.disabled = true;
+      reloadBtn.disabled = true;
+
+      try {
+        if (!GOOGLE_SCRIPT_URL) {
+          throw new Error('Falta pegar la URL del Google Apps Script.');
+        }
+
+        const payload = {
+          action: 'reserve',
+          firstName,
+          lastName,
+          fullName: `${firstName} ${lastName}`.trim(),
+          ticketNumbers: numbers,
+          quantity: numbers.length,
+          createdAt: new Date().toISOString()
+        };
+
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        const rawText = await response.text();
+
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch {
+          throw new Error(`La respuesta no fue JSON. Respuesta recibida: ${rawText.slice(0, 200)}`);
+        }
+
+        if (!data.ok) throw new Error(data.error || 'No se pudieron reservar los boletos.');
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4'
+        });
+
+        for (let i = 0; i < numbers.length; i++) {
+          const ticketCanvas = drawTicketCanvas(numbers[i]);
+          const imgData = ticketCanvas.toDataURL('image/jpeg', 1.0);
+
+          if (i > 0) pdf.addPage();
+
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const pageHeight = pdf.internal.pageSize.getHeight();
+
+          const margin = 10;
+          const maxWidth = pageWidth - margin * 2;
+          const maxHeight = pageHeight - margin * 2;
+
+          let drawWidth = maxWidth;
+          let drawHeight = (ticketCanvas.height * drawWidth) / ticketCanvas.width;
+
+          if (drawHeight > maxHeight) {
+            drawHeight = maxHeight;
+            drawWidth = (ticketCanvas.width * drawHeight) / ticketCanvas.height;
+          }
+
+          const x = (pageWidth - drawWidth) / 2;
+          const y = (pageHeight - drawHeight) / 2;
+
+          pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
+        }
+
+        const baseName = `${slugify(firstName)}-${slugify(lastName)}`;
+        pdf.save(`tickets-rifa-${baseName}.pdf`);
+
+        alert(`Elegiste ${numbers.length} tickets. El PDF se descargó correctamente.`);
+
+        selectedNumbers.clear();
+        await fetchReservedNumbers();
+      } catch (error) {
+        alert(`Ocurrió un problema: ${error.message}`);
+      } finally {
+        reloadBtn.disabled = false;
+        confirmBtn.disabled = false;
+        updateSummary();
+      }
+    }
+
+    confirmBtn.addEventListener('click', reserveAndDownloadPDF);
+    reloadBtn.addEventListener('click', fetchReservedNumbers);
+
+    window.addEventListener('load', () => {
+      createGrid();
+      updateSummary();
+      fetchReservedNumbers();
+
+      ticketTemplate.onload = () => {
+        console.log('Plantilla boleto.jpeg cargada correctamente.');
+      };
+
+      ticketTemplate.onerror = () => {
+        alert('No se pudo cargar la plantilla boleto.jpeg. La grilla funciona, pero no se podrá generar el PDF hasta corregir ese archivo.');
+      };
+    });
+  </script>
+</body>
+</html>
