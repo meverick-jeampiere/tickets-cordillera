@@ -672,7 +672,12 @@
           throw new Error(`La respuesta no fue JSON. Respuesta recibida: ${rawText.slice(0, 200)}`);
         }
 
-        if (!data.ok) throw new Error(data.error || 'No se pudieron reservar los boletos.');
+      if (!data.ok) {
+  alert('Backend respondió error: ' + JSON.stringify(data));
+  throw new Error(data.error || 'No se pudieron reservar los boletos.');
+}
+
+alert('Backend respondió OK: ' + JSON.stringify(data));
 
         numbers.forEach(n => reservedNumbers.add(n));
         selectedNumbers.clear();
