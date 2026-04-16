@@ -19,9 +19,15 @@
       --text: #f4f4f6;
       --muted: #b7bfd0;
       --gold: #f1c35d;
+
       --available: #1a2238;
-      --selected: #8a5a00;
-      --reserved: #2b2f3a;
+      --available-border: rgba(255,255,255,.12);
+
+      --selected: #d27a00;
+      --selected-border: #ffb347;
+
+      --reserved: #a32020;
+      --reserved-border: #d14b4b;
     }
 
     * { box-sizing: border-box; }
@@ -259,6 +265,39 @@
     .d-selected { background: var(--selected); }
     .d-reserved { background: var(--reserved); }
 
+    .credit-box {
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .credit-title {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      margin-top: 14px;
+      margin-bottom: 0;
+    }
+
+    .credit-label {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .92rem;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .credit-name {
+      color: #ffffff;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.08;
+    }
+
     .board {
       padding: 20px;
     }
@@ -290,7 +329,7 @@
 
     .ticket-btn {
       appearance: none;
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid var(--available-border);
       background: var(--available);
       color: white;
       min-height: 52px;
@@ -309,16 +348,18 @@
 
     .ticket-btn.selected {
       background: var(--selected);
-      border-color: rgba(241,195,93,.75);
+      border-color: var(--selected-border);
       color: white;
+      box-shadow: 0 0 0 1px rgba(255,179,71,.2) inset;
     }
 
     .ticket-btn.reserved {
       background: var(--reserved);
-      color: #8c93a3;
+      color: #ffffff;
       cursor: not-allowed;
-      border-color: rgba(255,255,255,.08);
-      text-decoration: line-through;
+      border-color: var(--reserved-border);
+      text-decoration: none;
+      opacity: 1;
     }
 
     .ticket-btn:disabled:hover {
@@ -348,7 +389,7 @@
         <div class="kicker">RIFA</div>
         <h1>Promo 2008</h1>
         <div class="meta">
-          18/04/26 · 4:00 p.m.<br>
+          22/04/26 · 7:00 p.m.<br>
           Valor por ticket: <strong>S/ 8.00</strong>
         </div>
       </div>
@@ -390,7 +431,13 @@
       <div class="legend">
         <div class="legend-row"><span class="dot d-available"></span> Disponible</div>
         <div class="legend-row"><span class="dot d-selected"></span> Tu selección</div>
-        <div class="legend-row"><span class="dot d-reserved"></span> No disponible</div>
+        <div class="legend-row"><span class="dot d-reserved"></span> Bloqueado</div>
+      </div>
+
+      <div class="credit-box">
+        <div class="credit-label">Sistema desarrollado por</div>
+        <div class="credit-name">Meverick Jeampiere</div>
+        <div class="credit-title">Junta Directiva 2026</div>
       </div>
     </aside>
 
@@ -436,6 +483,10 @@
       return String(n).padStart(3, '0');
     }
 
+    function normalizePersonText(text) {
+      return text.trim().replace(/\s+/g, ' ');
+    }
+
     function updateSummary() {
       const nums = [...selectedNumbers].sort((a, b) => a - b);
       selectedCount.textContent = nums.length;
@@ -467,6 +518,7 @@
 
     function refreshGridState() {
       const buttons = ticketGrid.querySelectorAll('.ticket-btn');
+
       buttons.forEach((btn) => {
         const n = Number(btn.dataset.number);
         btn.classList.remove('selected', 'reserved');
@@ -476,7 +528,9 @@
           btn.disabled = true;
         } else {
           btn.disabled = false;
-          if (selectedNumbers.has(n)) btn.classList.add('selected');
+          if (selectedNumbers.has(n)) {
+            btn.classList.add('selected');
+          }
         }
       });
     }
@@ -505,6 +559,10 @@
           method: 'GET',
           redirect: 'follow'
         });
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP ${response.status}`);
+        }
 
         const rawText = await response.text();
 
@@ -558,8 +616,8 @@
     }
 
     async function reserveAndDownloadPDF() {
-      const firstName = firstNameInput.value.trim();
-      const lastName = lastNameInput.value.trim();
+      const firstName = normalizePersonText(firstNameInput.value);
+      const lastName = normalizePersonText(lastNameInput.value);
       const numbers = [...selectedNumbers].sort((a, b) => a - b);
 
       if (!firstName || !lastName) {
@@ -601,6 +659,10 @@
           body: JSON.stringify(payload)
         });
 
+        if (!response.ok) {
+          throw new Error(`Error HTTP ${response.status}`);
+        }
+
         const rawText = await response.text();
 
         let data;
@@ -611,6 +673,11 @@
         }
 
         if (!data.ok) throw new Error(data.error || 'No se pudieron reservar los boletos.');
+
+        numbers.forEach(n => reservedNumbers.add(n));
+        selectedNumbers.clear();
+        refreshGridState();
+        updateSummary();
 
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({
@@ -646,12 +713,12 @@
           pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
         }
 
-        const baseName = `${slugify(firstName)}-${slugify(lastName)}`;
+        const fileSeed = numbers[0] ? formatNumber(numbers[0]) : '000';
+        const baseName = `${slugify(firstName)}-${slugify(lastName)}-${fileSeed}`;
         pdf.save(`tickets-rifa-${baseName}.pdf`);
 
         alert(`Elegiste ${numbers.length} tickets. El PDF se descargó correctamente.`);
 
-        selectedNumbers.clear();
         await fetchReservedNumbers();
       } catch (error) {
         alert(`Ocurrió un problema: ${error.message}`);
