@@ -771,7 +771,7 @@
     const baseImageLink = document.getElementById('baseImageLink');
 
     const NAME_COLOR = '#F9C464';
-    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKiXlS4tL-m9YnhesgmGZwRxTbYrsTIWevRA2ogE0AfiPrvpLcRdgtxEG5hn2aB5ah/exec';
 
     let generatedBlob = null;
     let generatedFile = null;
@@ -893,14 +893,15 @@
         nameY1: 1030,
         nameY2: 1145,
         passY: 930,
-        numberY: 1688,
+        numberX: (1080 / 2) - 40,
+        numberY: 1848,
         maxWidth: 835,
         passMaxWidth: 460,
-        numberMaxWidth: 520,
+        numberMaxWidth: 180,
         baseSize: 120,
         passSize: 20,
         passLetterSpacing: 6,
-        numberSize: 22,
+        numberSize: 4,
         color: NAME_COLOR
       };
     }
@@ -930,8 +931,8 @@
       const lastName = normalizeText(lastNameInput.value, 'GONZÁLEZ');
       const passLabel = getPassLabel();
       const ticketNumberText = registrationNumber
-        ? `PASE N.° ${String(registrationNumber).padStart(4, '0')}`
-        : 'PASE N.° ----';
+        ? String(registrationNumber).padStart(3, '0')
+        : '---';
 
       const firstNameSize = fitText(firstName, cfg.maxWidth, cfg.baseSize, 66);
       const lastNameSize = fitText(lastName, cfg.maxWidth, cfg.baseSize, 66);
@@ -943,7 +944,7 @@
         'Montserrat, Arial, sans-serif',
         300
       );
-      const numberSize = fitSmallText(ticketNumberText, cfg.numberMaxWidth, cfg.numberSize, 18);
+      const numberSize = fitSmallText(ticketNumberText, cfg.numberMaxWidth, cfg.numberSize, 22);
 
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -958,7 +959,7 @@
       ctx.fillText(lastName, canvas.width / 2, cfg.nameY2);
 
       ctx.font = `600 ${numberSize}px Poppins, Arial, sans-serif`;
-      ctx.fillText(ticketNumberText, canvas.width / 2, cfg.numberY);
+      ctx.fillText(ticketNumberText, cfg.numberX, cfg.numberY);
 
       return true;
     }
@@ -1107,9 +1108,9 @@
         const shared = await shareTicket();
 
         if (registrationNumber && shared) {
-          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. El ticket se guardó en la planilla, se descargó y se abrió el menú de compartir.`);
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>. El ticket se guardó en la planilla, se descargó y se abrió el menú de compartir.`);
         } else if (registrationNumber) {
-          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. Los datos se guardaron en la planilla y el ticket se descargó correctamente.`);
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>. Los datos se guardaron en la planilla y el ticket se descargó correctamente.`);
         } else {
           setStatus('<strong>Ticket generado.</strong><br>Los datos se registraron y el ticket se descargó correctamente.');
         }
