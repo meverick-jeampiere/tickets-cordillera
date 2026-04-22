@@ -7,21 +7,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #0b1020;
       --panel: #111828;
       --panel-soft: rgba(255,255,255,0.03);
-      --panel-soft-2: rgba(255,255,255,0.04);
+      --panel-soft-2: rgba(255,255,255,0.045);
       --text: #f3f4f6;
       --muted: #a5b4c7;
       --muted-2: #dfe6f3;
+      --muted-3: #b9c8de;
       --accent: #F9C464;
       --line: rgba(255, 255, 255, 0.08);
       --line-soft: rgba(255,255,255,0.05);
-      --selected: rgba(249, 196, 100, 0.12);
+      --line-accent: rgba(249, 196, 100, 0.28);
     }
 
     * { box-sizing: border-box; }
@@ -36,7 +37,7 @@
     .wrap {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 400px 1fr;
+      grid-template-columns: 440px 1fr;
       gap: 24px;
       padding: 24px;
     }
@@ -58,42 +59,70 @@
 
     h1 {
       margin: 0;
-      font-size: 1.9rem;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      font-size: 1.76rem;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
     }
 
     .event-header {
-      margin-bottom: 26px;
-      padding-bottom: 22px;
+      margin-bottom: 22px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--line);
       text-align: center;
     }
 
     .event-kicker {
-      color: var(--accent);
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      margin-bottom: 16px;
       text-transform: uppercase;
       text-align: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+
+    .origin-line {
+      color: var(--accent);
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .title-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .title-line {
+      display: block;
+      color: var(--accent);
     }
 
     .event-meta {
-      margin-top: 18px;
+      margin-top: 12px;
       margin-bottom: 18px;
-      color: var(--muted-2);
-      font-size: 0.96rem;
-      line-height: 1.35;
       text-align: center;
     }
 
-    .event-meta div {
+    .event-meta-main {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
       margin-bottom: 10px;
     }
 
-    .event-meta div:last-child {
-      margin-bottom: 0;
+    .event-meta-place {
+      color: var(--muted-2);
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.35;
+      font-family: 'Montserrat', Arial, sans-serif;
     }
 
     .program-box {
@@ -106,111 +135,233 @@
 
     .program-title {
       color: #fff;
-      font-size: 0.92rem;
-      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .program-guide {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.45;
-      text-align: center;
       margin-bottom: 16px;
+      text-align: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
     }
 
-    .program-block {
+    .program-shell {
       background: var(--panel-soft-2);
       border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 14px;
-      padding: 14px 14px 12px;
-      margin-bottom: 14px;
-      transition: border-color .15s ease, transform .15s ease, background .15s ease, box-shadow .15s ease, opacity .15s ease;
-      cursor: pointer;
-      user-select: none;
+      border-radius: 18px;
+      padding: 18px 16px 18px;
     }
 
-    .program-block:hover {
-      transform: translateY(-1px);
-      border-color: rgba(249, 196, 100, 0.28);
+    .program-item {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .program-block.selected {
-      background: var(--selected);
-      border-color: rgba(249, 196, 100, 0.55);
-      box-shadow: 0 0 0 1px rgba(249, 196, 100, 0.18) inset;
+    .program-item:first-child {
+      padding-top: 6px;
     }
 
-    .program-block.unselected {
-      opacity: 0.78;
+    .program-item:last-child {
+      border-bottom: none;
+      padding-bottom: 8px;
     }
 
-    .program-block:last-of-type {
-      margin-bottom: 12px;
+    .program-time-wrap {
+      padding-top: 2px;
     }
 
     .program-time {
-      color: #ffffff;
-      font-size: 1.02rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.96rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 999px;
+      padding: 8px 12px;
+      min-width: 94px;
+      text-align: center;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
     }
 
-    .program-subtitle {
+    .program-content-wrap {
+      min-width: 0;
+    }
+
+    .program-main {
+      color: #eef3fb;
+      font-size: 0.95rem;
+      line-height: 1.40;
+      font-weight: 700;
+    }
+
+    .program-credit {
+      margin-top: 6px;
+      color: var(--muted-3);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
+    .program-feature {
+      margin: 18px 0;
+      padding: 18px 16px 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(249,196,100,0.09), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-accent);
+      box-shadow: 0 0 0 1px rgba(249,196,100,0.08) inset;
+    }
+
+    .program-feature-top {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 22px;
+    }
+
+    .program-feature .program-time {
+      background: rgba(249,196,100,0.12);
+      border-color: rgba(249,196,100,0.22);
+      color: #fff7e2;
+    }
+
+    .program-feature-title {
+      color: #fff;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      max-width: 15ch;
+    }
+
+    .program-feature-subtitle {
+      margin-top: 14px;
       color: var(--accent);
-      font-size: 0.88rem;
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      max-width: 16ch;
+    }
+
+    .speaker-list {
+      display: grid;
+      gap: 14px;
+      padding-left: 0;
+      margin-top: 6px;
+    }
+
+    .speaker-item {
+      padding-left: 16px;
+      border-left: 2px solid rgba(249,196,100,0.20);
+    }
+
+    .speaker-name {
+      margin-top: 5px;
+      color: #c7d2e5;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.84rem;
+      line-height: 1.34;
+    }
+
+    .single-speaker {
+      margin-top: 10px;
+    }
+
+    .single-speaker .speaker-item {
+      padding-left: 0;
+      border-left: none;
+    }
+
+    .single-speaker .speaker-name {
+      margin-top: 0;
+      color: #eef3fb;
+      font-size: 0.86rem;
+      font-style: italic;
+    }
+
+    .ticket-callout {
+      margin: 24px 0 22px;
+      text-align: center;
+      color: var(--accent);
+      padding: 14px 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ticket-callout-line {
+      display: block;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      font-size: 1.02rem;
+    }
+
+    .ticket-callout-line + .ticket-callout-line {
+      margin-top: 4px;
+    }
+
+    .ticket-callout-free {
+      display: block;
+      margin-top: 6px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.05;
+      font-size: 1.28rem;
+    }
+
+    .share-callout {
+      margin: 6px 0 14px;
+      text-align: center;
+      color: var(--accent);
+    }
+
+    .share-callout-text {
+      font-size: 0.98rem;
+      line-height: 1.3;
+      font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 10px;
     }
 
-    .program-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      color: #dbe3f1;
-      font-size: 0.89rem;
-      line-height: 1.5;
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 12px;
+      flex-wrap: wrap;
     }
 
-    .program-list li {
-      position: relative;
-      padding-left: 16px;
-      margin-bottom: 8px;
-    }
-
-    .program-list li:last-child {
-      margin-bottom: 0;
-    }
-
-    .program-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.72em;
-      width: 6px;
-      height: 6px;
+    .share-icon {
+      width: 46px;
+      height: 46px;
       border-radius: 999px;
-      background: var(--accent);
-      transform: translateY(-50%);
-      opacity: 0.95;
+      border: 1px solid rgba(249,196,100,0.22);
+      background: rgba(249,196,100,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(249,196,100,0.04) inset;
     }
 
-    .selection-result {
-      margin-top: 4px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: #dfe6f3;
-      font-size: 0.84rem;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    .selection-result strong {
-      color: #fff;
+    .share-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
     }
 
     .field {
@@ -256,13 +407,6 @@
       box-shadow: 0 0 0 3px rgba(249, 196, 100, 0.14);
     }
 
-    .help {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 8px;
-      line-height: 1.45;
-    }
-
     .textarea-wrap {
       position: relative;
     }
@@ -276,7 +420,7 @@
 
     .actions {
       display: grid;
-      gap: 10px;
+      gap: 12px;
       margin-top: 22px;
     }
 
@@ -304,17 +448,6 @@
       color: #101010;
     }
 
-    .secondary {
-      background: #1a2644;
-      color: #ffffff;
-    }
-
-    .ghost {
-      background: transparent;
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
     .preview {
       padding: 18px;
       overflow: auto;
@@ -325,6 +458,11 @@
 
     .canvas-wrap {
       width: min(100%, 560px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
     }
 
     canvas {
@@ -335,6 +473,30 @@
       background: transparent;
     }
 
+    .fallback-download {
+      width: 100%;
+      display: none;
+      background: rgba(7, 17, 38, 0.88);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 12px 14px;
+      text-align: center;
+      color: #fff;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      backdrop-filter: blur(6px);
+    }
+
+    .fallback-download a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .fallback-download.show {
+      display: block;
+    }
+
     .status {
       margin-top: 18px;
       padding: 14px 16px;
@@ -343,33 +505,22 @@
       border: 1px solid rgba(255,255,255,0.06);
       color: var(--muted);
       font-size: 0.92rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .status strong {
       color: #fff;
     }
 
-    .organizers {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+    .collaborators-line {
+      margin-top: 8px;
+      color: #d7dfec;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      font-family: 'Montserrat', Arial, sans-serif;
     }
 
-    .organizers-title {
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .organizers-list {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-
-    @media (max-width: 980px) {
+    @media (max-width: 1180px) {
       .wrap {
         grid-template-columns: 1fr;
       }
@@ -377,9 +528,62 @@
       .panel {
         position: static;
       }
+    }
 
+    @media (max-width: 980px) {
       .canvas-wrap {
         width: min(100%, 520px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .panel {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 1.48rem;
+      }
+
+      .program-item,
+      .program-feature-top {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .program-time-wrap {
+        padding-top: 0;
+      }
+
+      .program-time {
+        min-width: 0;
+      }
+
+      .program-feature-title,
+      .program-feature-subtitle {
+        max-width: none;
+      }
+
+      .ticket-callout-line {
+        font-size: 0.92rem;
+      }
+
+      .ticket-callout-free {
+        font-size: 1.14rem;
+      }
+
+      .share-callout-text {
+        font-size: 0.9rem;
+      }
+
+      .share-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+      .share-icon svg {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -388,43 +592,90 @@
   <div class="wrap">
     <section class="panel">
       <div class="event-header">
-        <div class="event-kicker">DÍA DE LA TIERRA</div>
-        <h1>22 DE ABRIL · Huaraz</h1>
+        <div class="event-kicker">Semana de la Tierra</div>
+        <div class="origin-line">— El Origen —</div>
+
+        <div class="title-lines">
+          <h1>
+            <span class="title-line">DE LA CORDILLERA BLANCA</span>
+            <span class="title-line">Y LA CORDILLERA NEGRA</span>
+          </h1>
+        </div>
 
         <div class="event-meta">
-          <div><strong>UNASAM</strong> · Campus Shancayán</div>
-          <div><strong>Auditorio Principal</strong> · "Sabio Santiago Antúnez de Mayolo"</div>
+          <div class="event-meta-main">25 DE ABRIL · 5:30 PM</div>
+          <div class="event-meta-place">Centro Cultural de Huaraz</div>
         </div>
 
         <div class="program-box">
-          <div class="program-title">PROGRAMACIÓN</div>
-          <div class="program-guide">Toca uno o ambos segmentos según tu interés. Puedes activarlos y desactivarlos.</div>
+          <div class="program-title">Programación</div>
 
-          <div class="program-block selected" id="afternoonBlock">
-            <div class="program-time">3:00 PM – 6:00 PM</div>
-            <div class="program-subtitle">Tarde científico cultural</div>
-            <ul class="program-list">
-              <li>Stands: ESAT · La Base · Cumbres Blancas · Youth Peruvian Leaders</li>
-              <li>5:00 PM · Entrevista: Chismes de la Antártida</li>
-              <li>5:45 PM · Lanzamiento de la revista de Cumbres Blancas</li>
-            </ul>
-          </div>
+          <div class="program-shell">
+            <div class="program-item">
+              <div class="program-time-wrap">
+                <div class="program-time">5:30 PM</div>
+              </div>
+              <div class="program-content-wrap">
+                <div class="program-main">Cortometraje Misión Huaytapayana</div>
+                <div class="program-credit">Chasing Glaciers</div>
+              </div>
+            </div>
 
-          <div class="program-block selected" id="conferenceBlock">
-            <div class="program-time">6:00 PM – 7:15 PM</div>
-            <div class="program-subtitle">Conferencia / Documental</div>
-            <ul class="program-list">
-              <li>6:00 PM · Número de danza</li>
-              <li>6:10 PM · El origen de la Cordillera Blanca y la Cordillera Negra</li>
-              <li>7:20 PM · Cierre y foto grupal</li>
-            </ul>
-          </div>
+            <div class="program-item">
+              <div class="program-time-wrap">
+                <div class="program-time">6:00 PM</div>
+              </div>
+              <div class="program-content-wrap">
+                <div class="program-main">Presentación musical de Aine Gunn</div>
+                <div class="program-credit">Peace Corps</div>
+              </div>
+            </div>
 
-          <div class="selection-result">
-            <strong>Elegiste:</strong>
-            <div id="selectedProgramLabel">LA PROGRAMACIÓN COMPLETA</div>
+            <div class="program-item">
+              <div class="program-time-wrap">
+                <div class="program-time">6:10 PM</div>
+              </div>
+              <div class="program-content-wrap">
+                <div class="program-main">Introducción en Quechua de la Conferencia</div>
+                <div class="program-credit">Paqi.Yaku</div>
+              </div>
+            </div>
+
+            <div class="program-feature">
+              <div class="program-feature-top">
+                <div class="program-time-wrap">
+                  <div class="program-time">6:20 PM</div>
+                </div>
+                <div>
+                  <div class="program-feature-title">El Origen de la Cordillera Blanca y la Cordillera Negra</div>
+                  <div class="program-feature-subtitle">Bloque central de la noche</div>
+                </div>
+              </div>
+
+              <div class="speaker-list single-speaker">
+                <div class="speaker-item">
+                  <div class="speaker-name">Meverick Jeampiere - Cumbres Blancas</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="program-item">
+              <div class="program-time-wrap">
+                <div class="program-time">7:50 PM</div>
+              </div>
+              <div class="program-content-wrap">
+                <div class="program-main">Presentación Musical de Betzabé Macedo</div>
+                <div class="program-credit">Cumbres Blancas</div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div class="ticket-callout">
+        <span class="ticket-callout-line">ESCRIBE TU NOMBRE</span>
+        <span class="ticket-callout-line">Y GENERA TU TICKET</span>
+        <span class="ticket-callout-free">¡GRATIS!</span>
       </div>
 
       <div class="field">
@@ -446,7 +697,11 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <div class="help">El tipo de pase cambiará automáticamente según la cantidad de personas.</div>
+      </div>
+
+      <div class="field">
+        <label for="emailInput">Correo electrónico (opcional)</label>
+        <input id="emailInput" type="email" maxlength="120" placeholder="Ej.: nombre@correo.com" />
       </div>
 
       <div class="field">
@@ -457,26 +712,43 @@
         <div class="char-counter"><span id="charCount">0</span>/300</div>
       </div>
 
+      <div class="share-callout">
+        <div class="share-callout-text">¡COMPARTE TU TICKET EN TUS HISTORIAS!</div>
+        <div class="share-icons">
+          <div class="share-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6H16.7V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.3H8v3h2.6v8h2.9z"/>
+            </svg>
+          </div>
+          <div class="share-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+            </svg>
+          </div>
+          <div class="share-icon" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.5 3.5A11 11 0 0 0 3.3 16.7L2 22l5.4-1.3A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A9 9 0 1 1 12 20zm4.9-6.7c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.1l-.6.8c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.2-.3 0-.4.1-.6l.5-.6c.1-.2.2-.3.3-.5a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-1-2.2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.7.1.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.5.3-.8.3-1.4.2-1.5 0-.1-.2-.2-.5-.3z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
       <div class="actions">
-        <button class="primary" id="generateBtn">Generar ticket</button>
-        <button class="secondary" id="saveBtn" disabled>Guardar ticket</button>
-        <button class="ghost" id="shareBtn" disabled>Compartir ticket</button>
+        <button class="primary" id="actionBtn">Descargar / compartir ticket</button>
       </div>
 
       <div class="status" id="statusBox">
-        <strong>Listo para generar.</strong><br>
-        Cuando generes el ticket, aparecerá en la vista previa y podrás guardarlo o compartirlo.
-      </div>
-
-      <div class="organizers">
-        <div class="organizers-title">Organizadores</div>
-        <div class="organizers-list">Cumbres Blancas · La Base · ESAT-FCAM · UNASAM</div>
+        <strong>Gracias a:</strong>
+        <div class="collaborators-line">Cumbres Blancas · Paqi.Yaku · Peace Corps · Chasing Glaciers · La Base · ESAT-FCAM · YPL</div>
       </div>
     </section>
 
     <section class="preview">
       <div class="canvas-wrap">
         <canvas id="ticketCanvas" width="1080" height="1920"></canvas>
+        <div class="fallback-download" id="fallbackDownload">
+          Si no se generó tu ticket, <a id="baseImageLink" href="INGRESO SOLO CONFERENCIA.png" download>presiona y descarga la imagen base</a>.
+        </div>
       </div>
     </section>
   </div>
@@ -488,17 +760,15 @@
     const firstNameInput = document.getElementById('firstName');
     const lastNameInput = document.getElementById('lastName');
     const guestCountSelect = document.getElementById('guestCount');
+    const emailInput = document.getElementById('emailInput');
     const orgMessageInput = document.getElementById('orgMessage');
     const charCount = document.getElementById('charCount');
 
-    const generateBtn = document.getElementById('generateBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const shareBtn = document.getElementById('shareBtn');
+    const actionBtn = document.getElementById('actionBtn');
     const statusBox = document.getElementById('statusBox');
 
-    const afternoonBlock = document.getElementById('afternoonBlock');
-    const conferenceBlock = document.getElementById('conferenceBlock');
-    const selectedProgramLabel = document.getElementById('selectedProgramLabel');
+    const fallbackDownload = document.getElementById('fallbackDownload');
+    const baseImageLink = document.getElementById('baseImageLink');
 
     const NAME_COLOR = '#F9C464';
     const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
@@ -508,11 +778,6 @@
     let generatedFileName = 'ticket.png';
     let registrationNumber = null;
 
-    let selectedSegments = {
-      afternoon: false,
-      conference: false
-    };
-
     const passLabels = {
       '1': 'PASE PERSONAL',
       '2': 'PASE DOBLE',
@@ -521,69 +786,36 @@
       '5': 'PASE X5'
     };
 
-    const templates = {
-      sin_seleccion: {
-        src: 'INGRESO SIN SELECCION.png',
-        image: new Image()
-      },
-      conferencia: {
-        src: 'INGRESO SOLO CONFERENCIA.png',
-        image: new Image()
-      },
-      tarde: {
-        src: 'INGRESO SOLO TARDE.png',
-        image: new Image()
-      },
-      tarde_conferencia: {
-        src: 'INGRESO TARDE + CONFERENCIA.png',
-        image: new Image()
-      }
+    const template = {
+      src: 'INGRESO SOLO CONFERENCIA.png',
+      image: new Image()
     };
 
-    Object.values(templates).forEach((item) => {
-      item.image.src = item.src;
-    });
+    template.image.src = template.src;
+    baseImageLink.href = template.src;
+    baseImageLink.setAttribute('download', template.src);
 
     function setStatus(html) {
       statusBox.innerHTML = html;
+    }
+
+    function defaultStatus() {
+      setStatus(`
+        <strong>Gracias a:</strong>
+        <div class="collaborators-line">Cumbres Blancas · Paqi.Yaku · Peace Corps · Chasing Glaciers · La Base · ESAT-FCAM · YPL</div>
+      `);
     }
 
     function getPassLabel() {
       return passLabels[guestCountSelect.value] || 'PASE PERSONAL';
     }
 
-    function getSelectedTicketType() {
-      if (selectedSegments.afternoon && selectedSegments.conference) return 'tarde_conferencia';
-      if (selectedSegments.afternoon) return 'tarde';
-      if (selectedSegments.conference) return 'conferencia';
-      return 'sin_seleccion';
+    function showFallback() {
+      fallbackDownload.classList.add('show');
     }
 
-    function getTicketTypeLabel() {
-      const type = getSelectedTicketType();
-      if (type === 'tarde_conferencia') return 'LA PROGRAMACIÓN COMPLETA';
-      if (type === 'tarde') return 'LA TARDE CIENTÍFICO CULTURAL';
-      if (type === 'conferencia') return 'LA CONFERENCIA';
-      return 'NINGÚN SEGMENTO SELECCIONADO';
-    }
-
-    function updateProgramSelectionUI() {
-      afternoonBlock.classList.toggle('selected', selectedSegments.afternoon);
-      afternoonBlock.classList.toggle('unselected', !selectedSegments.afternoon);
-
-      conferenceBlock.classList.toggle('selected', selectedSegments.conference);
-      conferenceBlock.classList.toggle('unselected', !selectedSegments.conference);
-
-      selectedProgramLabel.textContent = getTicketTypeLabel();
-
-      const hasSelection = getSelectedTicketType() !== 'sin_seleccion';
-      generateBtn.disabled = !hasSelection;
-
-      if (!hasSelection) {
-        setStatus('<strong>Selecciona al menos un segmento.</strong><br>La vista previa muestra el estado sin selección, pero no se puede generar ese ticket.');
-      } else {
-        setStatus('<strong>Listo para generar.</strong><br>Cuando generes el ticket, aparecerá en la vista previa y podrás guardarlo o compartirlo.');
-      }
+    function hideFallback() {
+      fallbackDownload.classList.remove('show');
     }
 
     function drawFallback() {
@@ -602,6 +834,7 @@
       ctx.fillText('PLANTILLA NO ENCONTRADA', canvas.width / 2, 180);
       ctx.font = '600 28px Poppins, Arial, sans-serif';
       ctx.fillText('Verifica nombre y extensión del archivo', canvas.width / 2, 245);
+      showFallback();
     }
 
     function fitText(text, maxWidth, baseSize, minSize = 66) {
@@ -681,21 +914,16 @@
     }
 
     function drawTicket() {
-      const ticketType = getSelectedTicketType();
-      const template = templates[ticketType];
       const cfg = getTicketConfig();
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (template.image.complete && template.image.naturalWidth > 0) {
         drawCoverImage(template.image);
+        hideFallback();
       } else {
         drawFallback();
         return false;
-      }
-
-      if (ticketType === 'sin_seleccion') {
-        return true;
       }
 
       const firstName = normalizeText(firstNameInput.value, 'MARÍA');
@@ -756,9 +984,8 @@
 
           const firstName = slugify(firstNameInput.value || 'maria');
           const lastName = slugify(lastNameInput.value || 'gonzalez');
-          const type = getSelectedTicketType();
 
-          generatedFileName = `ticket-${type}-${firstName}-${lastName}.png`;
+          generatedFileName = `ticket-conferencia-${firstName}-${lastName}.png`;
           generatedFile = new File([blob], generatedFileName, { type: 'image/png' });
 
           resolve(generatedFile);
@@ -766,31 +993,21 @@
       });
     }
 
-    function enableActionButtons() {
-      saveBtn.disabled = false;
-      shareBtn.disabled = false;
-    }
-
     async function registerInSheet() {
       if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT') {
-        return { ok: true, registrationNumber: null, skipped: true };
+        throw new Error('Falta pegar la URL del Web App de Google Apps Script.');
       }
 
-      const ticketType = getSelectedTicketType();
       const payload = {
         firstName: firstNameInput.value.trim(),
         lastName: lastNameInput.value.trim(),
         fullName: `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`.trim(),
         guestCount: Number(guestCountSelect.value),
         passType: getPassLabel(),
-        ticketType,
-        ticketTypeLabel:
-          ticketType === 'tarde_conferencia'
-            ? 'Tarde científica-cultural + conferencia'
-            : ticketType === 'tarde'
-              ? 'Solo tarde científica-cultural'
-              : 'Solo conferencia',
+        ticketType: 'conferencia',
+        ticketTypeLabel: 'Ingreso solo conferencia',
         organizationMessage: orgMessageInput.value.trim(),
+        email: emailInput.value.trim(),
         createdAt: new Date().toISOString(),
         userAgent: navigator.userAgent
       };
@@ -807,7 +1024,7 @@
       try {
         data = JSON.parse(text);
       } catch {
-        data = { ok: response.ok };
+        throw new Error('La respuesta del servidor no fue JSON válido.');
       }
 
       if (!response.ok || data.ok === false) {
@@ -817,25 +1034,63 @@
       return data;
     }
 
-    async function generateTicket() {
+    function downloadTicket() {
+      return new Promise((resolve, reject) => {
+        if (!generatedBlob || !generatedFileName) {
+          reject(new Error('No hay ticket generado.'));
+          return;
+        }
+
+        const link = document.createElement('a');
+        link.download = generatedFileName;
+        link.href = URL.createObjectURL(generatedBlob);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        resolve();
+      });
+    }
+
+    async function shareTicket() {
+      if (!generatedFile) return false;
+
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [generatedFile] })) {
+          await navigator.share({
+            files: [generatedFile],
+            title: 'Mi ticket del evento',
+            text: 'Aquí está mi ticket del evento.'
+          });
+          return true;
+        }
+
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Mi ticket del evento',
+            text: 'Aquí está mi ticket del evento.'
+          });
+          return true;
+        }
+
+        return false;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function generateAndDeliverTicket() {
       const firstName = firstNameInput.value.trim();
       const lastName = lastNameInput.value.trim();
-      const ticketType = getSelectedTicketType();
-
-      if (ticketType === 'sin_seleccion') {
-        setStatus('<strong>Falta seleccionar programación.</strong><br>Activa al menos un segmento antes de generar el ticket.');
-        return;
-      }
 
       if (!firstName || !lastName) {
         setStatus('<strong>Faltan datos.</strong><br>Completa el primer nombre y el primer apellido.');
         return;
       }
 
-      generateBtn.disabled = true;
-      saveBtn.disabled = true;
-      shareBtn.disabled = true;
-      setStatus('<strong>Generando ticket…</strong><br>Estamos registrando tus datos y preparando tu pase.');
+      actionBtn.disabled = true;
+      setStatus('<strong>Registrando datos y generando ticket…</strong>');
 
       try {
         const sheetResult = await registerInSheet();
@@ -847,102 +1102,50 @@
         }
 
         await buildGeneratedFile();
-        enableActionButtons();
+        await downloadTicket();
 
-        if (registrationNumber) {
-          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. Ya puedes guardarlo o compartirlo.`);
+        const shared = await shareTicket();
+
+        if (registrationNumber && shared) {
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. El ticket se guardó en la planilla, se descargó y se abrió el menú de compartir.`);
+        } else if (registrationNumber) {
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${registrationNumber}</strong>. Los datos se guardaron en la planilla y el ticket se descargó correctamente.`);
         } else {
-          setStatus('<strong>Ticket generado.</strong><br>Ya puedes guardarlo o compartirlo desde tu dispositivo.');
+          setStatus('<strong>Ticket generado.</strong><br>Los datos se registraron y el ticket se descargó correctamente.');
         }
       } catch (error) {
         setStatus(`<strong>Ocurrió un problema.</strong><br>${error.message}`);
       } finally {
-        generateBtn.disabled = false;
-        updateProgramSelectionUI();
-      }
-    }
-
-    function saveTicket() {
-      if (!generatedBlob || !generatedFileName) return;
-
-      const link = document.createElement('a');
-      link.download = generatedFileName;
-      link.href = URL.createObjectURL(generatedBlob);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-      setStatus('<strong>Ticket listo para guardar.</strong><br>Según tu celular, puede ir a Descargas o Archivos. También puedes usar Compartir.');
-    }
-
-    async function shareTicket() {
-      if (!generatedFile) return;
-
-      try {
-        if (navigator.canShare && navigator.canShare({ files: [generatedFile] })) {
-          await navigator.share({
-            files: [generatedFile],
-            title: 'Mi ticket del evento',
-            text: 'Aquí está mi ticket del evento.'
-          });
-          setStatus('<strong>Ticket compartido.</strong><br>Si quieres subirlo a Stories, también puedes guardarlo y publicarlo desde tu app.');
-          return;
-        }
-
-        if (navigator.share) {
-          await navigator.share({
-            title: 'Mi ticket del evento',
-            text: 'Aquí está mi ticket del evento.'
-          });
-          setStatus('<strong>Se abrió el menú de compartir.</strong><br>Tu navegador no permitió compartir el archivo directamente, pero aún puedes guardarlo.');
-          return;
-        }
-
-        setStatus('<strong>Tu navegador no soporta compartir directamente.</strong><br>Usa el botón Guardar ticket.');
-      } catch (error) {
-        setStatus('<strong>Compartir cancelado o no disponible.</strong><br>Puedes guardar el ticket manualmente.');
+        actionBtn.disabled = false;
       }
     }
 
     function updatePreviewOnly() {
       registrationNumber = null;
       drawTicket();
-      saveBtn.disabled = true;
-      shareBtn.disabled = true;
-      updateProgramSelectionUI();
+      defaultStatus();
     }
 
     function updateCharCounter() {
       charCount.textContent = orgMessageInput.value.length;
     }
 
-    function toggleSegment(segment) {
-      selectedSegments[segment] = !selectedSegments[segment];
-      updatePreviewOnly();
-    }
-
-    generateBtn.addEventListener('click', generateTicket);
-    saveBtn.addEventListener('click', saveTicket);
-    shareBtn.addEventListener('click', shareTicket);
-
-    afternoonBlock.addEventListener('click', () => toggleSegment('afternoon'));
-    conferenceBlock.addEventListener('click', () => toggleSegment('conference'));
+    actionBtn.addEventListener('click', generateAndDeliverTicket);
 
     guestCountSelect.addEventListener('change', updatePreviewOnly);
     firstNameInput.addEventListener('input', updatePreviewOnly);
     lastNameInput.addEventListener('input', updatePreviewOnly);
+    emailInput.addEventListener('input', updatePreviewOnly);
     orgMessageInput.addEventListener('input', updateCharCounter);
 
-    Object.values(templates).forEach((item) => {
-      item.image.onload = () => drawTicket();
-      item.image.onerror = () => drawTicket();
-    });
+    template.image.onload = () => drawTicket();
+    template.image.onerror = () => drawTicket();
 
     window.addEventListener('load', () => {
       updateCharCounter();
-      updateProgramSelectionUI();
       drawTicket();
+      showFallback();
+      defaultStatus();
     });
   </script>
 </body>
