@@ -1,0 +1,3864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema Generador de Tickets para Rifas y Eventos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f2fb;
+      --card:#ffffff;
+      --line:#e8e1f5;
+      --text:#111735;
+      --muted:#6f7291;
+      --purple:#6d38f5;
+      --purple-2:#8a5bff;
+      --purple-deep:#24105f;
+      --purple-soft:#f2ecff;
+      --gold:#f4c64d;
+      --green:#23a55a;
+      --orange:#ef9f2b;
+      --shadow:0 18px 44px rgba(58, 30, 118, .08);
+      --shadow-soft:0 10px 24px rgba(58, 30, 118, .05);
+      --container:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(109,56,245,.05), transparent 28%),
+        radial-gradient(circle at top right, rgba(109,56,245,.04), transparent 22%),
+        linear-gradient(180deg,#f6f3fb 0%, #f4f1f9 100%);
+      overflow-x:hidden;
+    }
+
+    img{max-width:100%;display:block}
+    button,input,textarea{font:inherit}
+    h1,h2,h3,p{margin:0}
+
+    .container{
+      width:min(var(--container), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .section{padding:42px 0}
+
+    .section-card{
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      border:1px solid var(--line);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      padding:40px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .section-card::before{
+      content:"";
+      position:absolute;
+      width:120px;
+      height:76px;
+      right:26px;
+      top:26px;
+      background-image:radial-gradient(circle, rgba(109,56,245,.22) 1.5px, transparent 1.6px);
+      background-size:14px 14px;
+      opacity:.6;
+      pointer-events:none;
+    }
+
+    .section-card::after{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:120px;
+      left:-34px;
+      bottom:-36px;
+      border-radius:120px;
+      background:radial-gradient(circle at 75% 30%, rgba(109,56,245,.10), rgba(109,56,245,.03) 58%, transparent 59%);
+      opacity:.6;
+      pointer-events:none;
+    }
+
+    .hero{padding:54px 0 28px}
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center}
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+      color:var(--purple);
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
+    .kicker-icon{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      background:var(--purple-soft);
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(109,56,245,.12);
+      box-shadow:var(--shadow-soft);
+      font-size:22px;
+    }
+
+    .kicker-line{
+      width:100px;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--purple),rgba(109,56,245,.18));
+    }
+
+    .hero-title{
+      font-size:clamp(40px, 6vw, 68px);
+      line-height:.96;
+      letter-spacing:-.05em;
+      max-width:620px;
+      margin-bottom:16px;
+    }
+
+    .hero-title .accent{color:var(--purple)}
+
+    .hero-sub{
+      font-size:clamp(17px, 2vw, 22px);
+      color:#2d335a;
+      line-height:1.45;
+      max-width:560px;
+      margin-bottom:26px;
+    }
+
+    .hero-sub strong{color:var(--purple)}
+
+    .feature-list{display:grid;gap:14px;max-width:460px}
+
+    .feature-item{
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:14px;
+      align-items:center;
+      padding:10px 0;
+    }
+
+    .feature-icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      background:var(--purple-soft);
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      border:1px solid rgba(109,56,245,.12);
+    }
+
+    .feature-item strong{
+      display:block;
+      font-size:17px;
+      margin-bottom:2px;
+    }
+
+    .feature-item span{
+      color:var(--muted);
+      line-height:1.35;
+      font-size:15px;
+    }
+
+    .hero-media{position:relative;min-height:520px}
+
+    .hero-laptop{
+      width:100%;
+      padding:20px;
+      border:1px solid rgba(21,23,53,.08);
+      border-radius:24px;
+      background:#fff;
+      box-shadow:0 30px 60px rgba(23,19,44,.16);
+      animation:floatSoft 7s ease-in-out infinite;
+    }
+
+    .hero-screen{
+      background:linear-gradient(180deg,#fff 0%, #fbfaff 100%);
+      border-radius:18px;
+      border:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:180px 1fr;
+      min-height:360px;
+    }
+
+    .sidebar{
+      background:linear-gradient(180deg,#f7f3ff 0%, #f3effd 100%);
+      color:#2a2f55;
+      padding:16px 14px;
+      display:grid;
+      align-content:start;
+      gap:10px;
+      border-right:1px solid #ece4fb;
+    }
+
+    .sidebar-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--purple),#8b5cff);
+      color:#fff;
+      font-size:14px;
+      font-weight:700;
+      box-shadow:0 10px 18px rgba(109,56,245,.18);
+      width:fit-content;
+    }
+
+    .sidebar-item{
+      font-size:13px;
+      color:#43486b;
+      padding:9px 10px;
+      border-radius:10px;
+      transition:.2s ease;
+    }
+
+    .sidebar-item:hover{
+      background:#ede6ff;
+      color:var(--purple);
+    }
+
+    .dashboard-content{padding:18px;display:grid;gap:16px}
+
+    .panel-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      gap:12px;
+    }
+
+    .panel-title{font-size:22px;font-weight:900}
+    .hint{font-size:12px;color:var(--muted)}
+
+    .mini-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+    .mini-card{
+      border:1px solid #e9e2f8;
+      border-radius:16px;
+      padding:16px 14px;
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      min-height:98px;
+      box-shadow:0 8px 18px rgba(36,19,114,.04);
+    }
+
+    .mini-card .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+      display:block;
+    }
+
+    .mini-card .value{
+      font-weight:800;
+      font-size:28px;
+      line-height:1;
+      color:var(--purple);
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .mini-card .subvalue{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .chart-row{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+
+    .panel-card{
+      border:1px solid #e9e2f8;
+      border-radius:18px;
+      background:#fff;
+      padding:18px;
+      box-shadow:0 10px 20px rgba(36,19,114,.04);
+    }
+
+    .table-list{display:grid;gap:10px}
+
+    .table-row{
+      display:grid;
+      grid-template-columns:1.1fr .8fr .8fr;
+      gap:8px;
+      font-size:12px;
+      color:#38406a;
+      padding-bottom:8px;
+      border-bottom:1px solid #f0ecfa;
+    }
+
+    .status-paid{color:var(--green);font-weight:700}
+    .status-pending{color:var(--orange);font-weight:700}
+
+    .graph{
+      height:180px;
+      border-radius:14px;
+      background:
+        linear-gradient(180deg, rgba(109,56,245,.03), transparent 55%),
+        repeating-linear-gradient(180deg, #f3eefc 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(90deg, #f5f1fd 0 1px, transparent 1px 48px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .graph svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      shape-rendering:geometricPrecision;
+    }
+
+    /* HERO TICKET */
+    .hero-ticket-float{
+      width:380px;
+      position:absolute;
+      left:6px;
+      bottom:8px;
+      z-index:3;
+      transform:scale(.58);
+      transform-origin:left bottom;
+      animation:floatY 6.5s ease-in-out infinite reverse;
+    }
+
+    .ticket-shell{
+      border-radius:36px;
+      background:linear-gradient(180deg, #2f118f 0%, #18064a 100%);
+      padding:12px;
+      box-shadow:
+        0 34px 64px rgba(18,10,45,.30),
+        0 14px 26px rgba(18,10,45,.14);
+    }
+
+    .ticket-card{
+      min-height:540px;
+      border-radius:28px;
+      padding:20px 20px 16px;
+      color:#fff;
+      display:grid;
+      gap:14px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,224,120,.08), transparent 18%),
+        radial-gradient(circle at 50% 38%, rgba(255,255,255,.05), transparent 46%),
+        linear-gradient(180deg, #2a0f8f 0%, #1e0d73 52%, #17095d 100%);
+      border:2px solid rgba(120,87,255,.92);
+    }
+
+    .ticket-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1.2px);
+      background-size:22px 22px;
+      opacity:.11;
+      pointer-events:none;
+    }
+
+    .ticket-card::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:94px;
+      transform:translateX(-50%);
+      width:420px;
+      height:260px;
+      background:radial-gradient(ellipse at center, rgba(133,90,255,.22) 0%, rgba(133,90,255,.08) 38%, transparent 72%);
+      pointer-events:none;
+    }
+
+    .ticket-inner-line{
+      position:absolute;
+      inset:14px;
+      border-radius:22px;
+      border:1px solid rgba(157,124,255,.45);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .ticket-top{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:10px;
+      justify-items:center;
+      text-align:center;
+    }
+
+    .ticket-starline{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#ffd867;
+      font-weight:800;
+      font-size:14px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .ticket-starline .star{
+      font-size:14px;
+      line-height:1;
+    }
+
+    .ticket-ticket-icon{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      color:#a97cff;
+      font-size:28px;
+      margin-bottom:2px;
+    }
+
+    .ticket-main{
+      text-align:center;
+      font-size:66px;
+      line-height:.82;
+      font-weight:900;
+      letter-spacing:-.06em;
+      color:#ffffff;
+      text-shadow:0 10px 26px rgba(0,0,0,.16);
+    }
+
+    .ticket-main .gold{color:#ffd867}
+
+    .ticket-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      min-height:58px;
+      padding:0 24px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #ffd95d 0%, #f4c73f 100%);
+      color:#2f2205;
+      font-weight:900;
+      font-size:16px;
+      box-shadow:
+        0 12px 20px rgba(255,212,77,.18),
+        inset 0 -2px 0 rgba(0,0,0,.08);
+    }
+
+    .ticket-pill-icon{
+      font-size:24px;
+      line-height:1;
+    }
+
+    .ticket-code-wrap{
+      position:relative;
+      z-index:1;
+      margin-top:2px;
+    }
+
+    .ticket-notch{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:26px;
+      height:60px;
+      background:#240c77;
+      border-radius:999px;
+      z-index:2;
+    }
+
+    .ticket-notch.left{left:-13px}
+    .ticket-notch.right{right:-13px}
+
+    .ticket-code{
+      position:relative;
+      background:linear-gradient(180deg, #ffffff 0%, #f5f3fb 100%);
+      color:#232756;
+      border-radius:24px;
+      padding:18px 18px 20px;
+      text-align:center;
+      box-shadow:
+        inset 0 -2px 0 rgba(0,0,0,.05),
+        0 10px 24px rgba(11,13,32,.10);
+      border:1px solid rgba(178,164,230,.55);
+    }
+
+    .ticket-code::before,
+    .ticket-code::after{
+      content:"✦";
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      color:#6d38f5;
+      font-size:22px;
+      opacity:.95;
+    }
+
+    .ticket-code::before{left:24px}
+    .ticket-code::after{right:24px}
+
+    .ticket-code-label{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#6b69a0;
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    .ticket-code-number{
+      font-weight:900;
+      font-size:60px;
+      line-height:.92;
+      letter-spacing:-.07em;
+    }
+
+    .ticket-details{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:0;
+      padding:6px 0 0;
+      border-radius:20px;
+      background:rgba(14,7,70,.34);
+      border:1px solid rgba(124,92,229,.26);
+      overflow:hidden;
+    }
+
+    .ticket-row{
+      display:grid;
+      grid-template-columns:50px 100px 1fr;
+      gap:12px;
+      align-items:center;
+      min-height:64px;
+      padding:0 16px;
+      border-bottom:1px solid rgba(134,109,225,.24);
+    }
+
+    .ticket-row:last-child{border-bottom:none}
+
+    .ticket-row-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(108,56,245,.20);
+      color:#d9cbff;
+      font-size:20px;
+    }
+
+    .ticket-row-label{
+      font-weight:800;
+      color:#9f7cff;
+      font-size:16px;
+    }
+
+    .ticket-row-value{
+      color:#ffffff;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .ticket-price{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      background:linear-gradient(180deg, #ffffff 0%, #f6f4fb 100%);
+      border-radius:20px;
+      padding:16px 18px;
+      color:#252754;
+      box-shadow:
+        inset 0 -2px 0 rgba(0,0,0,.05),
+        0 10px 22px rgba(11,13,32,.08);
+      border:1px solid rgba(178,164,230,.5);
+    }
+
+    .ticket-price-col{display:grid;gap:10px}
+
+    .ticket-price-col + .ticket-price-col{
+      border-left:1px solid rgba(109,56,245,.14);
+      padding-left:24px;
+      margin-left:24px;
+    }
+
+    .ticket-mini-label{
+      font-size:12px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#6a6998;
+    }
+
+    .ticket-big-value{
+      font-size:30px;
+      line-height:.95;
+      font-weight:900;
+      letter-spacing:-.05em;
+      color:#232756;
+    }
+
+    .status-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:fit-content;
+      min-height:42px;
+      padding:0 14px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #e7f6ea 0%, #d8f0dd 100%);
+      color:var(--green);
+      font-weight:900;
+      font-size:14px;
+    }
+
+    .status-dot{
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:var(--green);
+      color:#fff;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+
+    /* TITLES + TEXT */
+    .section-title-wrap{text-align:center;margin-bottom:28px}
+
+    .section-title{
+      font-size:clamp(30px,4vw,54px);
+      line-height:1;
+      letter-spacing:-.04em;
+      margin-bottom:10px;
+    }
+
+    .section-title .accent{color:var(--purple)}
+
+    .title-divider{
+      width:220px;
+      height:2px;
+      margin:0 auto 16px;
+      background:linear-gradient(90deg, rgba(109,56,245,.15), var(--purple), rgba(109,56,245,.15));
+      position:relative;
+      border-radius:999px;
+    }
+
+    .title-divider::after{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:var(--purple);
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      box-shadow:0 0 0 6px rgba(109,56,245,.08);
+    }
+
+    .section-desc{
+      color:var(--muted);
+      max-width:760px;
+      margin:0 auto;
+      line-height:1.55;
+      font-size:16px;
+    }
+
+    .section-desc strong{color:var(--purple)}
+
+    /* GRID BLOCKS */
+    .split-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .phone-feature-layout{
+      display:grid;
+      grid-template-columns:1fr 220px;
+      gap:16px;
+      align-items:center;
+    }
+
+    .text-list{display:grid;gap:16px}
+
+    .text-list-item{
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .text-list-item .circle{
+      width:50px;
+      height:50px;
+      border-radius:16px;
+      background:var(--purple-soft);
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      border:1px solid rgba(109,56,245,.12);
+    }
+
+    .text-list-item strong{
+      font-size:17px;
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .text-list-item span{
+      color:var(--muted);
+      line-height:1.45;
+      font-size:15px;
+    }
+
+    /* PHONE */
+    .phone-showcase{
+      width:258px;
+      margin:0 auto;
+      border-radius:30px;
+      background:linear-gradient(180deg, #0d0d10 0%, #030304 100%);
+      padding:7px;
+      overflow:hidden;
+      animation:floatSoft 7.5s ease-in-out infinite;
+      box-shadow:
+        0 20px 34px rgba(23,19,44,.14),
+        0 8px 16px rgba(23,19,44,.10);
+      position:relative;
+    }
+
+    .phone-showcase::before{
+      content:"";
+      position:absolute;
+      inset:3px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      pointer-events:none;
+    }
+
+    .phone-notch{
+      width:38%;
+      height:17px;
+      background:linear-gradient(180deg, #070709 0%, #0b0b0d 100%);
+      border-radius:0 0 12px 12px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+      box-shadow:0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .phone-notch::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:4px;
+      transform:translateX(-50%);
+      width:34%;
+      height:5px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+    }
+
+    .phone-screen{
+      background:#fff;
+      border-radius:24px;
+      padding:12px 12px 12px;
+      min-height:auto;
+    }
+
+    .numbers-head{
+      font-size:18px;
+      font-weight:800;
+      color:var(--purple);
+      text-align:center;
+      margin-bottom:14px;
+      letter-spacing:-.02em;
+    }
+
+    .phone-section-title{
+      font-size:13px;
+      font-weight:800;
+      color:#1f2340;
+      margin-bottom:4px;
+    }
+
+    .phone-section-sub{
+      font-size:12px;
+      color:#6d7190;
+      margin-bottom:16px;
+      line-height:1.35;
+    }
+
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .legend span::before{
+      content:"";
+      width:12px;
+      height:12px;
+      border-radius:999px;
+      display:inline-block;
+      margin-right:8px;
+      vertical-align:middle;
+    }
+
+    .legend .l-1::before{background:#efedf5}
+    .legend .l-2::before{background:var(--purple)}
+    .legend .l-3::before{background:#f8dede}
+
+    .numbers-grid{
+      display:grid;
+      grid-template-columns:repeat(5, 1fr);
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .num-btn{
+      height:39px;
+      border-radius:13px;
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      font-size:14px;
+      background:#f5f4f8;
+      color:#262b4a;
+      transition:.22s ease;
+      animation:pulseIn .55s ease both;
+      border:1px solid #efedf5;
+      box-shadow:inset 0 -1px 0 rgba(0,0,0,.02);
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .num-btn.sel{
+      background:linear-gradient(180deg, #7c46ff 0%, #612ef1 100%);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 8px 18px rgba(109,56,245,.18);
+    }
+
+    .num-btn.off{
+      background:#fdeeee;
+      color:#ce6d6d;
+      border-color:#f8e1e1;
+      cursor:not-allowed;
+    }
+
+    .selected-box{
+      background:#fbf9ff;
+      border:1px solid #ece4fb;
+      border-radius:16px;
+      padding:14px 14px 12px;
+      margin-bottom:14px;
+      color:#434866;
+      display:grid;
+      grid-template-columns:42px 1fr;
+      gap:10px;
+      align-items:start;
+      text-align:left;
+      min-height:102px;
+    }
+
+    .selected-box-icon{
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      background:#f2ecff;
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      font-size:17px;
+      margin-top:2px;
+    }
+
+    .selected-box-text{
+      min-width:0;
+      display:grid;
+      gap:4px;
+      overflow:hidden;
+    }
+
+    .selected-box-label{
+      font-size:13px;
+      line-height:1.2;
+      color:#3f4568;
+      font-weight:600;
+    }
+
+    .selected-box strong{
+      display:block;
+      color:var(--purple);
+      font-size:13px;
+      line-height:1.3;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+      max-height:52px;
+      overflow-y:auto;
+    }
+
+    .selected-box strong::-webkit-scrollbar{
+      width:6px;
+    }
+
+    .selected-box strong::-webkit-scrollbar-thumb{
+      background:rgba(109,56,245,.25);
+      border-radius:999px;
+    }
+
+    .selected-box-total{
+      font-size:13px;
+      line-height:1.2;
+      color:#3f4568;
+    }
+
+    .primary-btn{
+      border:none;
+      width:100%;
+      background:linear-gradient(180deg,var(--purple-2),var(--purple));
+      color:#fff;
+      border-radius:15px;
+      padding:14px 16px;
+      font-weight:800;
+      font-size:14px;
+      box-shadow:0 10px 18px rgba(109,56,245,.16);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .primary-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .secondary-btn{
+      margin-top:10px;
+      display:block;
+      text-align:center;
+      font-size:13px;
+      color:var(--purple);
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .callout-stack{
+      display:grid;
+      gap:16px;
+      align-content:center;
+    }
+
+    .callout{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:16px;
+      padding:16px;
+      box-shadow:var(--shadow-soft);
+      transition:.25s ease;
+    }
+
+    .callout:hover{transform:translateY(-2px)}
+
+    .callout strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .callout span{
+      color:var(--muted);
+      line-height:1.45;
+      font-size:14px;
+    }
+
+    /* OTHER SECTIONS */
+    .benefits-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:18px}
+
+    .benefit-card{
+      position:relative;
+      display:grid;
+      grid-template-columns:92px 1fr;
+      gap:16px;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#fff;
+      padding:22px;
+      box-shadow:var(--shadow-soft);
+      transition:.25s ease;
+    }
+
+    .benefit-card:hover{transform:translateY(-3px)}
+
+    .benefit-num{
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:36px;
+      height:36px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:var(--purple);
+      color:#fff;
+      font-weight:800;
+      font-size:14px;
+      box-shadow:0 10px 22px rgba(109,56,245,.22);
+    }
+
+    .benefit-icon{
+      width:84px;
+      height:84px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#f7f3ff 0%, #efe7ff 100%);
+      border:1px solid rgba(109,56,245,.10);
+      display:grid;
+      place-items:center;
+      color:var(--purple);
+      font-size:40px;
+      margin-left:10px;
+    }
+
+    .benefit-card h3{font-size:18px;line-height:1.15;margin-bottom:8px}
+    .benefit-card p{color:var(--muted);line-height:1.5;font-size:15px}
+
+    .organizer-layout{
+      display:grid;
+      grid-template-columns:.74fr 1.26fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .organizer-dashboard-wrap{min-width:0}
+
+    .organizer-scroll{
+      overflow-x:auto;
+      overflow-y:hidden;
+      padding-bottom:10px;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(109,56,245,.55) rgba(109,56,245,.10);
+    }
+
+    .organizer-scroll::-webkit-scrollbar{height:10px}
+    .organizer-scroll::-webkit-scrollbar-track{background:rgba(109,56,245,.10);border-radius:999px}
+    .organizer-scroll::-webkit-scrollbar-thumb{background:rgba(109,56,245,.55);border-radius:999px}
+
+    .organizer-dashboard{
+      border:1px solid #e7dff8;
+      border-radius:28px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      box-shadow:
+        0 24px 48px rgba(35,28,67,.08),
+        0 10px 22px rgba(35,28,67,.05);
+      min-width:980px;
+    }
+
+    .organizer-benefits{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      padding:14px;
+      background:linear-gradient(180deg,#fbf9ff,#f6f1fe);
+      border:1px solid var(--line);
+      border-radius:18px;
+    }
+
+    .benefit-pill{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+      text-align:center;
+      font-size:13px;
+      font-weight:700;
+      color:#45496f;
+    }
+
+    .benefit-pill .dot{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:16px;
+      flex:0 0 auto;
+    }
+
+    .cards-6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+
+    .what-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:20px;
+      padding:22px 18px;
+      display:grid;
+      grid-template-columns:74px 1fr;
+      gap:14px;
+      align-items:start;
+      box-shadow:var(--shadow-soft);
+      transition:.25s ease;
+    }
+
+    .what-card:hover{transform:translateY(-3px)}
+
+    .what-icon{
+      width:68px;
+      height:68px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#f7f3ff, #efe7ff);
+      display:grid;
+      place-items:center;
+      font-size:30px;
+      color:var(--purple);
+      border:1px solid rgba(109,56,245,.10);
+    }
+
+    .what-card h3{font-size:22px;line-height:1.08;margin-bottom:8px}
+    .what-card p{font-size:15px;line-height:1.52;color:var(--muted)}
+
+    .ideal-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:0;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:#fff;
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .ideal-card{
+      padding:22px 18px;
+      text-align:center;
+      border-right:1px dashed #e4dbf8;
+    }
+
+    .ideal-card:last-child{border-right:none}
+
+    .ideal-icon{
+      width:72px;
+      height:72px;
+      border-radius:999px;
+      margin:0 auto 12px;
+      background:linear-gradient(180deg,#f7f3ff,#efe7ff);
+      display:grid;
+      place-items:center;
+      color:var(--purple);
+      font-size:32px;
+      border:1px solid rgba(109,56,245,.10);
+    }
+
+    .ideal-card h3{font-size:20px;line-height:1.08;margin-bottom:10px;min-height:48px}
+    .ideal-card p{font-size:14px;line-height:1.5;color:var(--muted)}
+
+    .dark-banner{
+      margin-top:18px;
+      border-radius:22px;
+      overflow:hidden;
+      padding:20px 24px;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(160,105,255,.22), transparent 18%),
+        radial-gradient(circle at 82% 50%, rgba(255,209,96,.12), transparent 12%),
+        linear-gradient(135deg,#1e0a67 0%, #25148d 40%, #090f4c 100%);
+      color:#fff;
+      display:grid;
+      grid-template-columns:180px 1fr;
+      gap:20px;
+      align-items:center;
+      box-shadow:0 22px 44px rgba(36,19,114,.22);
+      position:relative;
+    }
+
+    .dark-banner::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,.18) 1.3px, transparent 1.4px);
+      background-size:30px 30px;
+      opacity:.15;
+      pointer-events:none;
+    }
+
+    .dark-art{position:relative;min-height:120px;z-index:1}
+
+    .dark-art .screen{
+      width:120px;
+      height:88px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#2b2f88 0%, #3b239f 100%);
+      border:1px solid rgba(255,255,255,.10);
+      position:absolute;
+      left:0;
+      top:12px;
+      box-shadow:0 18px 34px rgba(0,0,0,.18);
+    }
+
+    .dark-art .screen::after{
+      content:"";
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:18px;
+      top:18px;
+      border-radius:10px;
+      background:
+        linear-gradient(180deg, transparent 0 70%, rgba(255,255,255,.16) 70% 71%, transparent 71%),
+        linear-gradient(135deg, transparent 0 38%, #9b7bff 38% 40%, transparent 40%),
+        linear-gradient(180deg,#f1e8ff 0%, #d8c8ff 100%);
+    }
+
+    .dark-art .ticket{
+      width:84px;
+      height:48px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#8d51ff,#b97dff);
+      position:absolute;
+      right:8px;
+      bottom:4px;
+      transform:rotate(-14deg);
+      box-shadow:0 16px 28px rgba(0,0,0,.2);
+    }
+
+    .dark-art .ticket::before{
+      content:"★";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .dark-copy{position:relative;z-index:1}
+    .dark-copy h3{font-size:34px;line-height:1.02;margin-bottom:8px;letter-spacing:-.03em}
+    .dark-copy h3 .gold{color:var(--gold)}
+    .dark-copy p{font-size:18px;line-height:1.5;color:rgba(255,255,255,.92)}
+    .dark-copy strong{color:#b88cff}
+
+    .form-layout{margin-top:8px}
+    .form-grid{display:grid;grid-template-columns:155px 1fr;gap:14px;align-items:stretch;margin-top:14px}
+    .side-step,.content-box{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-soft)}
+
+    .side-step{
+      padding:18px 14px;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      position:relative;
+      min-height:134px;
+    }
+
+    .num{
+      position:absolute;
+      top:12px;
+      left:12px;
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      background:var(--purple);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:800;
+      box-shadow:0 8px 18px rgba(109,56,245,.22);
+    }
+
+    .side-icon{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:28px;
+      margin-top:6px;
+    }
+
+    .side-title{
+      font-size:14px;
+      line-height:1.15;
+      font-weight:800;
+      color:var(--purple);
+      text-transform:uppercase;
+    }
+
+    .side-text{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+      max-width:110px;
+    }
+
+    .content-box{
+      padding:18px 20px;
+      display:grid;
+      gap:14px;
+    }
+
+    .fields{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px 18px;
+    }
+
+    .fields.triple{
+      grid-template-columns:repeat(3, minmax(0,1fr));
+    }
+
+    .field{display:grid;gap:8px}
+    .field.full{grid-column:1/-1}
+
+    label{
+      font-size:13px;
+      font-weight:700;
+      color:#2f3357;
+    }
+
+    input,textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:#fcfbff;
+      border-radius:12px;
+      padding:14px 15px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+      transition:.2s ease;
+    }
+
+    textarea{
+      min-height:92px;
+      resize:vertical;
+    }
+
+    input:focus,textarea:focus{
+      border-color:rgba(109,56,245,.45);
+      box-shadow:0 0 0 4px rgba(109,56,245,.08);
+      background:#fff;
+    }
+
+    .upload-box{
+      min-height:92px;
+      border:1.5px dashed #d7caef;
+      border-radius:14px;
+      background:#fcfbff;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      padding:12px;
+    }
+
+    .radio-row{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+    }
+
+    .radio-card{
+      border:1.5px solid var(--line);
+      border-radius:14px;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#fff;
+      cursor:pointer;
+      transition:.2s ease;
+      user-select:none;
+    }
+
+    .radio-card input{display:none}
+
+    .radio-dot{
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      border:2px solid #c9b8ef;
+      position:relative;
+      flex:0 0 auto;
+    }
+
+    .radio-dot::after{
+      content:"";
+      position:absolute;
+      inset:3px;
+      border-radius:999px;
+      background:var(--purple);
+      opacity:0;
+      transform:scale(.6);
+      transition:.2s ease;
+    }
+
+    .radio-card input:checked + .radio-dot{border-color:var(--purple)}
+    .radio-card input:checked + .radio-dot::after{opacity:1;transform:scale(1)}
+    .radio-card:has(input:checked){
+      border-color:rgba(109,56,245,.52);
+      box-shadow:0 0 0 4px rgba(109,56,245,.07);
+      background:#fcfbff;
+    }
+
+    .choice-text{
+      font-size:14px;
+      font-weight:600;
+      color:#3d4164;
+    }
+
+    .toggle-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .toggle-chip{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:48px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1.5px solid var(--line);
+      background:#fff;
+      color:#3c4165;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      transition:.2s ease;
+      user-select:none;
+    }
+
+    .toggle-chip input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .toggle-chip .mini-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#d6c9f0;
+      transition:.2s ease;
+      flex:0 0 auto;
+    }
+
+    .toggle-chip:has(input:checked){
+      border-color:rgba(109,56,245,.56);
+      background:var(--purple-soft);
+      color:var(--purple);
+      box-shadow:0 0 0 4px rgba(109,56,245,.07);
+    }
+
+    .toggle-chip:has(input:checked) .mini-dot{
+      background:var(--purple);
+      box-shadow:0 0 0 5px rgba(109,56,245,.10);
+    }
+
+    .final-note{
+      margin-top:16px;
+      background:linear-gradient(180deg, #faf7ff, #f3ecff);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:#5b5f82;
+      font-size:14px;
+    }
+
+    .final-note .lamp{
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      background:#fff;
+      display:grid;
+      place-items:center;
+      color:var(--purple);
+      font-size:18px;
+      flex:0 0 auto;
+      border:1px solid rgba(109,56,245,.12);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s ease, transform .7s ease;
+      will-change:opacity, transform;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:none;
+    }
+
+    .reveal.delay-1{transition-delay:.08s}
+    .reveal.delay-2{transition-delay:.16s}
+    .reveal.delay-3{transition-delay:.24s}
+    .reveal.delay-4{transition-delay:.32s}
+
+    @keyframes floatSoft{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+
+    @keyframes pulseIn{
+      from{opacity:0; transform:scale(.94)}
+      to{opacity:1; transform:scale(1)}
+    }
+
+    @keyframes floatY{
+      0%,100%{translate:0 0}
+      50%{translate:0 -10px}
+    }
+
+    /* ====== VENTAJAS DE TRABAJAR CON NOSOTROS ====== */
+    .work-section{
+      overflow:hidden;
+    }
+
+    .work-advantages-grid{
+      display:grid;
+      grid-template-columns:minmax(260px,1fr) minmax(420px,620px) minmax(260px,1fr);
+      gap:34px;
+      align-items:center;
+      margin-top:12px;
+    }
+
+    .work-column{
+      display:grid;
+      gap:30px;
+    }
+
+    .work-item{
+      display:grid;
+      grid-template-columns:76px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .work-item-icon{
+      width:68px;
+      height:68px;
+      border-radius:22px;
+      background:linear-gradient(180deg,#f8f4ff 0%, #efe8ff 100%);
+      border:1px solid rgba(109,56,245,.12);
+      display:grid;
+      place-items:center;
+      font-size:30px;
+      box-shadow:0 10px 22px rgba(109,56,245,.08);
+    }
+
+    .work-item-copy h3{
+      font-size:clamp(17px,1.45vw,22px);
+      line-height:1.08;
+      margin:0 0 8px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .work-item-copy p{
+      font-size:clamp(14px,1.02vw,16px);
+      line-height:1.55;
+      color:var(--muted);
+      margin:0;
+      max-width:290px;
+    }
+
+    .work-visual{
+      position:relative;
+      min-height:520px;
+      display:grid;
+      place-items:center;
+    }
+
+    .work-visual::before{
+      content:"";
+      position:absolute;
+      inset:12% 10%;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(109,56,245,.12) 0%, rgba(109,56,245,.06) 34%, transparent 72%);
+      filter:blur(10px);
+      z-index:0;
+    }
+
+    .work-ring{
+      position:absolute;
+      width:470px;
+      height:470px;
+      border-radius:999px;
+      border:1.5px solid rgba(109,56,245,.10);
+      z-index:0;
+    }
+
+    .work-ring::before,
+    .work-ring::after{
+      content:"";
+      position:absolute;
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      background:#fff;
+      border:3px solid rgba(109,56,245,.35);
+      box-shadow:0 0 0 8px rgba(109,56,245,.05);
+    }
+
+    .work-ring::before{
+      top:84px;
+      right:-7px;
+    }
+
+    .work-ring::after{
+      bottom:58px;
+      left:-7px;
+    }
+
+    .work-ring-inner{
+      position:absolute;
+      width:382px;
+      height:382px;
+      border-radius:999px;
+      border:1px dashed rgba(109,56,245,.12);
+      z-index:0;
+    }
+
+    .work-device-stage{
+      position:relative;
+      width:min(100%, 600px);
+      min-height:470px;
+      z-index:2;
+    }
+
+    .work-laptop-wrap{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-52%,-50%);
+      width:430px;
+    }
+
+    .work-laptop-shadow{
+      position:absolute;
+      left:50%;
+      bottom:-22px;
+      transform:translateX(-50%);
+      width:82%;
+      height:34px;
+      border-radius:999px;
+      background:radial-gradient(ellipse at center, rgba(29,21,72,.18) 0%, rgba(29,21,72,.08) 44%, transparent 74%);
+      filter:blur(8px);
+    }
+
+    .work-laptop{
+      position:relative;
+      perspective:1200px;
+    }
+
+    .work-laptop-screen{
+      position:relative;
+      border-radius:24px 24px 18px 18px;
+      background:linear-gradient(135deg,#24106b 0%, #3a18a8 44%, #20106b 100%);
+      padding:12px;
+      box-shadow:
+        0 28px 50px rgba(36,19,114,.26),
+        0 10px 20px rgba(36,19,114,.12);
+      transform:rotate(-7deg);
+      transform-origin:center bottom;
+    }
+
+    .work-laptop-screen::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:24px 24px 18px 18px;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,.10), transparent 18%),
+        radial-gradient(circle at 78% 78%, rgba(162,120,255,.10), transparent 26%);
+      pointer-events:none;
+    }
+
+    .work-laptop-bezel{
+      position:relative;
+      border-radius:18px 18px 12px 12px;
+      background:linear-gradient(180deg,#fcfbff 0%, #f2effb 100%);
+      min-height:250px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.28);
+    }
+
+    .work-laptop-side{
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:86px;
+      background:linear-gradient(180deg,#6733ff 0%, #4821cb 100%);
+      padding:18px 14px;
+      color:#fff;
+    }
+
+    .work-laptop-side .ticket-ico{
+      font-size:22px;
+      margin-bottom:20px;
+      display:block;
+    }
+
+    .work-laptop-side .dot{
+      display:block;
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:rgba(255,255,255,.45);
+      margin:10px 0;
+    }
+
+    .work-laptop-ui{
+      margin-left:86px;
+      padding:18px 18px 16px;
+    }
+
+    .work-laptop-topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .work-laptop-pills{
+      display:flex;
+      gap:8px;
+    }
+
+    .work-laptop-pills span{
+      display:block;
+      width:42px;
+      height:8px;
+      border-radius:999px;
+      background:#e8e1f7;
+    }
+
+    .work-laptop-pills span:last-child{
+      width:26px;
+    }
+
+    .work-laptop-action{
+      width:26px;
+      height:8px;
+      border-radius:999px;
+      background:#ddd4f4;
+    }
+
+    .work-laptop-chart{
+      position:relative;
+      height:98px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#ffffff 0%, #f7f3ff 100%);
+      overflow:hidden;
+      border:1px solid #eee7fb;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .work-laptop-chart::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        repeating-linear-gradient(180deg, rgba(109,56,245,.05) 0 1px, transparent 1px 28px),
+        repeating-linear-gradient(90deg, rgba(109,56,245,.05) 0 1px, transparent 1px 40px);
+      pointer-events:none;
+    }
+
+    .work-laptop-chart svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+
+    .work-laptop-stats{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .work-stat{
+      background:#fff;
+      border:1px solid #eee7fb;
+      border-radius:14px;
+      padding:10px 10px 9px;
+      box-shadow:0 8px 16px rgba(36,19,114,.05);
+    }
+
+    .work-stat .label{
+      display:block;
+      font-size:10px;
+      color:#7b7ca0;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+
+    .work-stat .value{
+      display:block;
+      font-size:16px;
+      font-weight:900;
+      color:#1e2147;
+      line-height:1;
+    }
+
+    .work-stat .mini{
+      display:block;
+      margin-top:5px;
+      font-size:10px;
+      color:#22a45c;
+      font-weight:700;
+    }
+
+    .work-laptop-base{
+      position:relative;
+      width:94%;
+      height:18px;
+      margin:-2px auto 0;
+      border-radius:0 0 24px 24px;
+      background:linear-gradient(180deg,#dfd9ee 0%, #beb7d3 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.7),
+        0 8px 18px rgba(28,19,62,.10);
+    }
+
+    .work-laptop-base::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:6px;
+      transform:translateX(-50%);
+      width:110px;
+      height:4px;
+      border-radius:999px;
+      background:rgba(45,41,86,.16);
+    }
+
+    .work-phone{
+      position:absolute;
+      right:78px;
+      top:132px;
+      width:160px;
+      height:278px;
+      border-radius:30px;
+      background:#17172a;
+      box-shadow:
+        0 24px 42px rgba(20,16,50,.24),
+        0 10px 18px rgba(20,16,50,.10);
+      transform:rotate(10deg);
+      z-index:4;
+      padding:6px;
+    }
+
+    .work-phone-frame{
+      position:relative;
+      height:100%;
+      border-radius:24px;
+      background:linear-gradient(180deg,#ffffff 0%, #f5f1ff 100%);
+      overflow:hidden;
+    }
+
+    .work-phone-notch{
+      position:absolute;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:42%;
+      height:16px;
+      background:#0e1020;
+      border-radius:0 0 12px 12px;
+      z-index:2;
+    }
+
+    .work-phone-screen{
+      padding:26px 14px 14px;
+    }
+
+    .work-phone-ticket-code{
+      font-size:12px;
+      color:#7c75a4;
+      text-align:center;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .work-phone-ticket-number{
+      font-size:18px;
+      font-weight:900;
+      color:#6d38f5;
+      text-align:center;
+      margin-bottom:12px;
+      line-height:1;
+    }
+
+    .work-phone-pass{
+      width:86px;
+      margin:0 auto 12px;
+      padding:10px 8px 9px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#ffffff 0%, #f6f1ff 100%);
+      border:1px solid #ece5fb;
+      box-shadow:
+        0 10px 22px rgba(23,15,58,.10),
+        inset 0 1px 0 rgba(255,255,255,.9);
+      text-align:center;
+    }
+
+    .work-phone-pass-icon{
+      width:44px;
+      height:44px;
+      margin:0 auto 8px;
+      border-radius:12px;
+      background:#111;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:4px;
+      padding:6px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    .work-phone-pass-icon span{
+      display:block;
+      border-radius:2px;
+      background:#fff;
+    }
+
+    .work-phone-pass-icon span:nth-child(2),
+    .work-phone-pass-icon span:nth-child(4),
+    .work-phone-pass-icon span:nth-child(6),
+    .work-phone-pass-icon span:nth-child(8){
+      opacity:.18;
+    }
+
+    .work-phone-pass-code{
+      font-size:9px;
+      line-height:1.1;
+      font-weight:800;
+      letter-spacing:.08em;
+      color:#7a74a5;
+      margin-bottom:4px;
+    }
+
+    .work-phone-pass-id{
+      font-size:12px;
+      line-height:1;
+      font-weight:900;
+      color:#1e2147;
+      letter-spacing:-.02em;
+    }
+
+    .work-phone-valid{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      margin-top:2px;
+      color:#22a45c;
+      font-size:12px;
+      font-weight:800;
+      width:100%;
+    }
+
+    .work-phone-valid::before{
+      content:"✓";
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:#22a45c;
+      color:#fff;
+      font-size:11px;
+    }
+
+    .work-ticket-card{
+      position:absolute;
+      left:52px;
+      bottom:48px;
+      width:118px;
+      border-radius:20px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#8b5cff 0%, #5b2af2 100%);
+      box-shadow:
+        0 22px 36px rgba(109,56,245,.24),
+        0 10px 18px rgba(109,56,245,.10);
+      transform:rotate(-18deg);
+      z-index:4;
+    }
+
+    .work-ticket-card::before,
+    .work-ticket-card::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:18px;
+      height:9px;
+      border-radius:0 0 10px 10px;
+      background:#fff;
+      z-index:2;
+    }
+
+    .work-ticket-card::before{
+      top:-1px;
+      border-radius:0 0 10px 10px;
+    }
+
+    .work-ticket-card::after{
+      bottom:-1px;
+      transform:translateX(-50%) rotate(180deg);
+    }
+
+    .work-ticket-top{
+      padding:16px 14px 10px;
+      color:#fff;
+      text-align:center;
+    }
+
+    .work-ticket-top .mini{
+      display:block;
+      font-size:11px;
+      opacity:.85;
+      margin-bottom:6px;
+    }
+
+    .work-ticket-top .big{
+      display:block;
+      font-size:20px;
+      font-weight:900;
+      line-height:1;
+    }
+
+    .work-ticket-bottom{
+      background:#fff;
+      padding:10px 12px 12px;
+    }
+
+    .work-ticket-bar{
+      height:20px;
+      border-radius:4px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #111 0 3px,
+          transparent 3px 5px
+        );
+      opacity:.85;
+    }
+
+    .work-donut{
+      position:absolute;
+      left:208px;
+      bottom:18px;
+      width:118px;
+      height:118px;
+      border-radius:999px;
+      background:conic-gradient(#6d38f5 0 38%, #b594ff 38% 100%);
+      box-shadow:0 20px 34px rgba(109,56,245,.18);
+      z-index:3;
+    }
+
+    .work-donut::after{
+      content:"";
+      position:absolute;
+      inset:23px;
+      border-radius:999px;
+      background:#fff;
+      box-shadow:inset 0 1px 0 rgba(0,0,0,.03);
+    }
+
+    /* ====== SECCIÓN DISEÑO Y SISTEMA NUEVA ====== */
+    .services-layout-v2{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(560px, 1.03fr);
+      gap:26px;
+      align-items:start;
+      margin-bottom:18px;
+    }
+
+    .service-copy{
+      display:grid;
+      gap:18px;
+      align-self:start;
+    }
+
+    .service-title-fix{
+      max-width:640px;
+    }
+
+    .service-sub-fix{
+      max-width:620px;
+    }
+
+    .service-right-stack{
+      display:grid;
+      grid-template-rows:auto auto;
+      gap:18px;
+    }
+
+    .service-copy .mini-highlight{
+      border:1px solid #e8e1f5;
+      background:linear-gradient(180deg,#fcfbff 0%, #f9f6ff 100%);
+      border-radius:22px;
+      padding:18px;
+      color:#4f5477;
+      line-height:1.6;
+      font-size:15px;
+      box-shadow:0 8px 20px rgba(58,30,118,.04);
+    }
+
+    .service-copy .mini-highlight strong{
+      color:var(--purple);
+    }
+
+    .icon-row{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+      border:1px solid #e8e1f5;
+      background:#fff;
+      border-radius:22px;
+      padding:18px 14px;
+      box-shadow:0 8px 20px rgba(58,30,118,.04);
+    }
+
+    .icon-box{
+      text-align:center;
+      padding:8px 4px;
+    }
+
+    .icon-box .ico{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      margin:0 auto 10px;
+      background:linear-gradient(180deg,#f6f1ff 0%, #efe7ff 100%);
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      border:1px solid rgba(109,56,245,.08);
+    }
+
+    .icon-box span{
+      font-size:12px;
+      color:#42476c;
+      line-height:1.35;
+      font-weight:700;
+      display:block;
+    }
+
+    .service-proof{
+      border:1px solid #e8e1f5;
+      border-radius:28px;
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      padding:18px;
+      box-shadow:0 14px 28px rgba(58,30,118,.05);
+    }
+
+    .service-proof-head{
+      text-align:center;
+      margin-bottom:16px;
+    }
+
+    .proof-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 28px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--purple),var(--purple-2));
+      color:#fff;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      box-shadow:0 10px 20px rgba(109,56,245,.18);
+    }
+
+    .proof-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      align-items:stretch;
+    }
+
+    .proof-card{
+      background:linear-gradient(180deg,#ffffff 0%, #fbfaff 100%);
+      border:1px solid #e8e1f5;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 8px 18px rgba(58,30,118,.04);
+      display:grid;
+      grid-template-rows:auto 1fr;
+    }
+
+    .proof-card .tag{
+      min-height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      font-size:11px;
+      font-weight:900;
+      color:#2a315b;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      border-bottom:1px solid #ece5f8;
+      background:#fcfbff;
+      text-align:center;
+    }
+
+    .proof-art{
+      min-height:430px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:18px 14px 16px;
+      background:#f7f5fb;
+    }
+
+    .design-story{
+      width:100%;
+      max-width:154px;
+      aspect-ratio:9 / 16;
+      border:1px solid #e7def8;
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 16px 30px rgba(32,24,66,.10);
+    }
+
+    .design-story img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+      display:block;
+    }
+
+    .service-importance{
+      border:1px solid #e8e1f5;
+      border-radius:24px;
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      padding:22px;
+      display:grid;
+      grid-template-columns:1fr 92px;
+      gap:16px;
+      align-items:center;
+      box-shadow:0 10px 22px rgba(58,30,118,.04);
+    }
+
+    .service-importance-copy h3{
+      font-size:18px;
+      line-height:1.1;
+      color:var(--purple);
+      margin-bottom:10px;
+      font-weight:900;
+    }
+
+    .service-importance-copy p{
+      font-size:15px;
+      line-height:1.7;
+      color:#4d547a;
+    }
+
+    .service-importance-icon{
+      width:78px;
+      height:78px;
+      border-radius:999px;
+      margin-left:auto;
+      background:linear-gradient(180deg,#f3ebff 0%, #e8dbff 100%);
+      display:grid;
+      place-items:center;
+      font-size:38px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        0 10px 18px rgba(109,56,245,.12);
+    }
+
+    .service-points{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:0;
+      margin-top:22px;
+      padding:0;
+      border:1px solid #e8e1f5;
+      background:#fff;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 10px 22px rgba(58,30,118,.04);
+    }
+
+    .service-points .point{
+      text-align:left;
+      padding:20px 18px;
+      border-right:1px dashed #e4dbf8;
+      min-height:112px;
+    }
+
+    .service-points .point:last-child{
+      border-right:none;
+    }
+
+    .service-points strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:8px;
+      color:#20264d;
+    }
+
+    .service-points span{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      display:block;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1180px){
+      .services-layout-v2{
+        grid-template-columns:1fr;
+      }
+
+      .service-right-stack{
+        order:2;
+      }
+
+      .service-copy{
+        order:1;
+      }
+    }
+
+    @media (max-width: 1120px){
+      .hero-grid,
+      .split-grid,
+      .organizer-layout{
+        grid-template-columns:1fr;
+      }
+
+      .hero-media{
+        min-height:auto;
+        padding-top:12px;
+      }
+
+      .mini-cards{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .cards-6{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .ideal-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .service-points{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .hero-ticket-float{
+        position:relative;
+        left:auto;
+        bottom:auto;
+        margin:20px auto 0;
+        width:380px;
+        transform:scale(.52);
+        transform-origin:center top;
+      }
+
+      .phone-feature-layout{
+        grid-template-columns:1fr;
+      }
+
+      .work-advantages-grid{
+        grid-template-columns:1fr;
+        gap:30px;
+      }
+
+      .work-visual{
+        order:-1;
+        min-height:520px;
+        margin:4px auto 8px;
+      }
+
+      .work-column{
+        gap:18px;
+      }
+
+      .work-item-copy p{
+        max-width:none;
+      }
+    }
+
+    @media (max-width: 820px){
+      .section-card{
+        padding:22px;
+      }
+
+      .benefits-grid,
+      .cards-6,
+      .chart-row,
+      .radio-row,
+      .mini-cards,
+      .form-grid,
+      .fields,
+      .fields.triple{
+        grid-template-columns:1fr;
+      }
+
+      .dashboard-grid{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        grid-auto-flow:column;
+        grid-auto-columns:max-content;
+        overflow:auto;
+      }
+
+      .ideal-grid{
+        grid-template-columns:1fr;
+      }
+
+      .dark-banner{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+
+      .dark-art{
+        margin:0 auto;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .organizer-dashboard{
+        min-width:760px;
+      }
+
+      .phone-showcase{
+        width:260px;
+        border-radius:28px;
+      }
+
+      .phone-screen{
+        min-height:auto;
+        padding:14px 12px 14px;
+      }
+
+      .numbers-grid{
+        gap:8px;
+      }
+
+      .num-btn{
+        height:38px;
+        font-size:13px;
+        border-radius:11px;
+      }
+
+      .hero-ticket-float{
+        width:360px;
+        transform:scale(.46);
+        transform-origin:center top;
+        margin:8px auto 0;
+      }
+
+      .work-visual{
+        min-height:470px;
+      }
+
+      .work-ring{
+        width:390px;
+        height:390px;
+      }
+
+      .work-ring-inner{
+        width:320px;
+        height:320px;
+      }
+
+      .work-laptop-wrap{
+        width:360px;
+      }
+
+      .work-phone{
+        right:44px;
+        top:150px;
+        width:142px;
+        height:248px;
+      }
+
+      .work-ticket-card{
+        left:40px;
+        bottom:54px;
+        width:106px;
+      }
+
+      .work-donut{
+        left:170px;
+        bottom:12px;
+        width:104px;
+        height:104px;
+      }
+
+      .proof-grid{
+        grid-template-columns:1fr;
+      }
+
+      .proof-art{
+        min-height:auto;
+        padding:16px 14px 20px;
+      }
+
+      .design-story{
+        max-width:190px;
+      }
+
+      .service-importance{
+        grid-template-columns:1fr;
+        text-align:left;
+      }
+
+      .service-importance-icon{
+        margin-left:0;
+      }
+
+      .service-points{
+        grid-template-columns:1fr;
+      }
+
+      .service-points .point{
+        border-right:none;
+        border-bottom:1px dashed #e4dbf8;
+      }
+
+      .service-points .point:last-child{
+        border-bottom:none;
+      }
+
+      .icon-row{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 640px){
+      .hero{
+        padding-top:28px;
+      }
+
+      .container{
+        width:min(var(--container), calc(100% - 20px));
+      }
+
+      .section{
+        padding:18px 0;
+      }
+
+      .hero-title,
+      .section-title{
+        letter-spacing:-.04em;
+      }
+
+      .feature-item,
+      .text-list-item,
+      .what-card,
+      .benefit-card{
+        grid-template-columns:1fr;
+      }
+
+      .benefit-icon,
+      .what-icon{
+        margin:0 auto;
+      }
+
+      .benefit-card,
+      .what-card{
+        text-align:center;
+      }
+
+      .kicker-line{
+        width:54px;
+      }
+
+      .organizer-dashboard{
+        min-width:620px;
+      }
+
+      .phone-showcase{
+        width:min(100%, 248px);
+      }
+
+      .numbers-head{
+        font-size:16px;
+        margin-bottom:12px;
+      }
+
+      .phone-section-title{
+        font-size:12px;
+      }
+
+      .phone-section-sub{
+        font-size:11px;
+        margin-bottom:12px;
+      }
+
+      .legend{
+        gap:10px;
+        font-size:11px;
+        margin-bottom:14px;
+      }
+
+      .num-btn{
+        height:34px;
+        font-size:12px;
+        border-radius:10px;
+      }
+
+      .selected-box{
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+
+      .selected-box-icon{
+        display:none;
+      }
+
+      .primary-btn{
+        padding:12px 14px;
+        font-size:13px;
+      }
+
+      .secondary-btn{
+        font-size:12px;
+      }
+
+      .hero-ticket-float{
+        width:min(100%, 420px);
+        max-width:94vw;
+        transform:scale(1);
+        transform-origin:center top;
+        margin:14px auto 0;
+      }
+
+      .ticket-shell{
+        padding:10px;
+        border-radius:32px;
+      }
+
+      .ticket-card{
+        min-height:auto;
+        padding:18px 16px 16px;
+      }
+
+      .ticket-main{
+        font-size:58px;
+      }
+
+      .ticket-code-number{
+        font-size:54px;
+      }
+
+      .ticket-row{
+        grid-template-columns:1fr;
+        gap:6px;
+        padding:14px 16px;
+        min-height:auto;
+      }
+
+      .ticket-row-icon{
+        display:none;
+      }
+
+      .ticket-price{
+        grid-template-columns:1fr;
+        gap:16px;
+      }
+
+      .ticket-price-col + .ticket-price-col{
+        border-left:none;
+        border-top:1px solid rgba(109,56,245,.14);
+        padding-left:0;
+        padding-top:16px;
+        margin-left:0;
+      }
+
+      .work-item{
+        grid-template-columns:56px 1fr;
+        gap:12px;
+      }
+
+      .work-item-icon{
+        width:54px;
+        height:54px;
+        border-radius:16px;
+        font-size:24px;
+      }
+
+      .work-item-copy h3{
+        font-size:18px;
+        line-height:1.14;
+      }
+
+      .work-item-copy p{
+        font-size:14px;
+        line-height:1.5;
+      }
+
+      .work-visual{
+        min-height:390px;
+      }
+
+      .work-ring{
+        width:300px;
+        height:300px;
+      }
+
+      .work-ring-inner{
+        width:240px;
+        height:240px;
+      }
+
+      .work-laptop-wrap{
+        width:285px;
+      }
+
+      .work-laptop-side{
+        width:64px;
+        padding:14px 10px;
+      }
+
+      .work-laptop-ui{
+        margin-left:64px;
+        padding:14px 14px 12px;
+      }
+
+      .work-laptop-chart{
+        height:78px;
+      }
+
+      .work-laptop-stats{
+        gap:8px;
+      }
+
+      .work-stat{
+        padding:8px;
+      }
+
+      .work-stat .value{
+        font-size:13px;
+      }
+
+      .work-phone{
+        width:112px;
+        height:196px;
+        right:18px;
+        top:136px;
+        border-radius:22px;
+      }
+
+      .work-phone-frame{
+        border-radius:17px;
+      }
+
+      .work-phone-screen{
+        padding:18px 8px 10px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+        text-align:center;
+      }
+
+      .work-phone-ticket-code{
+        font-size:10px;
+        margin-bottom:6px;
+        text-align:center;
+        width:100%;
+      }
+
+      .work-phone-ticket-number{
+        font-size:14px;
+        margin-bottom:8px;
+        text-align:center;
+        width:100%;
+      }
+
+      .work-phone-valid{
+        margin-top:6px;
+        font-size:10px;
+        justify-content:center;
+        width:100%;
+      }
+
+      .work-phone-pass{
+        width:72px;
+        padding:8px 6px 7px;
+        border-radius:13px;
+        margin:0 auto 8px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+      }
+
+      .work-phone-pass-icon{
+        width:36px;
+        height:36px;
+        padding:5px;
+        gap:3px;
+        border-radius:10px;
+        margin:0 auto 6px;
+      }
+
+      .work-phone-pass-code{
+        font-size:8px;
+        text-align:center;
+        line-height:1.05;
+        width:100%;
+      }
+
+      .work-phone-pass-id{
+        font-size:10px;
+        text-align:center;
+        width:100%;
+      }
+
+      .work-ticket-card{
+        width:84px;
+        left:18px;
+        bottom:42px;
+      }
+
+      .work-ticket-top .big{
+        font-size:16px;
+      }
+
+      .work-donut{
+        width:78px;
+        height:78px;
+        left:128px;
+        bottom:8px;
+      }
+
+      .work-donut::after{
+        inset:16px;
+      }
+
+      .proof-badge{
+        width:100%;
+        padding:12px 18px;
+        min-height:auto;
+        font-size:11px;
+        line-height:1.3;
+      }
+
+      .icon-row{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .service-importance-copy p{
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <section class="section-card reveal show">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">
+              <div class="kicker-icon">🎟️</div>
+              <div class="kicker-line"></div>
+            </div>
+
+            <h1 class="hero-title">Sistema Generador de <span class="accent">Tickets para Rifas y Eventos</span></h1>
+            <p class="hero-sub">Vende, organiza y controla tu evento de forma <strong>profesional</strong>, clara y <strong>en tiempo real</strong>.</p>
+
+            <div class="feature-list">
+              <div class="feature-item reveal delay-1 show">
+                <div class="feature-icon">🎫</div>
+                <div><strong>Tickets digitales automáticos</strong><span>Genera tickets listos para compartir, registrar y controlar.</span></div>
+              </div>
+              <div class="feature-item reveal delay-2 show">
+                <div class="feature-icon">👤</div>
+                <div><strong>Inscripción automática</strong><span>Los participantes se registran y sus datos quedan organizados al instante.</span></div>
+              </div>
+              <div class="feature-item reveal delay-3 show">
+                <div class="feature-icon">💳</div>
+                <div><strong>Control de pagos</strong><span>Visualiza pagados, pendientes, montos y avances sin confusiones.</span></div>
+              </div>
+              <div class="feature-item reveal delay-4 show">
+                <div class="feature-icon">📊</div>
+                <div><strong>Panel privado con reportes</strong><span>Monitorea la operación general desde un solo lugar.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <div class="hero-laptop">
+              <div class="hero-screen">
+                <div class="dashboard-grid">
+                  <div class="sidebar">
+                    <div class="sidebar-badge">⚡ Mi Rifa</div>
+                    <div class="sidebar-item">Resumen</div>
+                    <div class="sidebar-item">Participantes</div>
+                    <div class="sidebar-item">Tickets</div>
+                    <div class="sidebar-item">Pagos</div>
+                    <div class="sidebar-item">Reportes</div>
+                    <div class="sidebar-item">Configuración</div>
+                  </div>
+
+                  <div class="dashboard-content">
+                    <div class="panel-head">
+                      <div class="panel-title">Resumen general</div>
+                      <div class="hint">30 Jun 2024</div>
+                    </div>
+
+                    <div class="mini-cards">
+                      <div class="mini-card"><span class="label">Total de tickets</span><span class="value">1,250</span><span class="subvalue">registrados</span></div>
+                      <div class="mini-card"><span class="label">Vendidos</span><span class="value" style="color:var(--green)">950</span><span class="subvalue">confirmados</span></div>
+                      <div class="mini-card"><span class="label">Pagados</span><span class="value">780</span><span class="subvalue">en regla</span></div>
+                      <div class="mini-card"><span class="label">Por pagar</span><span class="value" style="color:var(--orange)">170</span><span class="subvalue">pendientes</span></div>
+                    </div>
+
+                    <div class="chart-row">
+                      <div class="panel-card">
+                        <div class="panel-head">
+                          <div class="panel-title">Ingresos</div>
+                          <div class="hint">S/ 7,800</div>
+                        </div>
+                        <div class="graph">
+                          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                            <polyline
+                              fill="none"
+                              stroke="#7a4fff"
+                              stroke-width="4"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              points="18,140 58,126 98,122 138,104 178,90 218,74 258,60 298,44"
+                            />
+                            <circle cx="298" cy="44" r="6" fill="#7a4fff"/>
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div class="panel-card">
+                        <div class="panel-head">
+                          <div class="panel-title">Estado de pagos</div>
+                          <div class="hint">Actualizado</div>
+                        </div>
+                        <div class="graph" style="display:grid;place-items:center;background:#fff;">
+                          <svg viewBox="0 0 220 180" aria-hidden="true">
+                            <circle cx="110" cy="88" r="46" fill="none" stroke="#efe7ff" stroke-width="22"/>
+                            <circle cx="110" cy="88" r="46" fill="none" stroke="#6d38f5" stroke-width="22" stroke-dasharray="170 290" stroke-linecap="round" transform="rotate(-90 110 88)"/>
+                            <circle cx="110" cy="88" r="46" fill="none" stroke="#21a45b" stroke-width="22" stroke-dasharray="85 290" stroke-linecap="round" transform="rotate(15 110 88)"/>
+                            <text x="110" y="95" text-anchor="middle" font-size="16" font-weight="800" fill="#2f3357">47.5%</text>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-ticket-float">
+              <div class="ticket-shell">
+                <div class="ticket-card">
+                  <div class="ticket-inner-line"></div>
+
+                  <div class="ticket-top">
+                    <div class="ticket-ticket-icon">🎟️</div>
+
+                    <div class="ticket-starline">
+                      <span class="star">✦</span>
+                      <span>¡Gracias por participar!</span>
+                      <span class="star">✦</span>
+                    </div>
+
+                    <div class="ticket-main">
+                      GRAN<br><span class="gold">RIFA</span>
+                    </div>
+
+                    <div class="ticket-pill">
+                      <span class="ticket-pill-icon">🎁</span>
+                      <span>Tu ticket ha sido generado</span>
+                    </div>
+                  </div>
+
+                  <div class="ticket-code-wrap">
+                    <div class="ticket-notch left"></div>
+                    <div class="ticket-notch right"></div>
+
+                    <div class="ticket-code">
+                      <div class="ticket-code-label">Número de ticket</div>
+                      <div class="ticket-code-number">000123</div>
+                    </div>
+                  </div>
+
+                  <div class="ticket-details">
+                    <div class="ticket-row">
+                      <div class="ticket-row-icon">👤</div>
+                      <div class="ticket-row-label">Nombre</div>
+                      <div class="ticket-row-value">María Pérez</div>
+                    </div>
+
+                    <div class="ticket-row">
+                      <div class="ticket-row-icon">📞</div>
+                      <div class="ticket-row-label">Celular</div>
+                      <div class="ticket-row-value">987 654 321</div>
+                    </div>
+
+                    <div class="ticket-row">
+                      <div class="ticket-row-icon">📅</div>
+                      <div class="ticket-row-label">Fecha</div>
+                      <div class="ticket-row-value">25/06/2024</div>
+                    </div>
+                  </div>
+
+                  <div class="ticket-price">
+                    <div class="ticket-price-col">
+                      <div class="ticket-mini-label">Precio</div>
+                      <div class="ticket-big-value">S/ 10.00</div>
+                    </div>
+
+                    <div class="ticket-price-col">
+                      <div class="ticket-mini-label">Estado</div>
+                      <div class="status-badge">
+                        <span class="status-dot">✓</span>
+                        <span>Pagado</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- hero-media -->
+        </div><!-- hero-grid -->
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="split-grid">
+            <div>
+              <div class="kicker">
+                <div class="kicker-icon">🔢</div>
+                <div class="kicker-line"></div>
+              </div>
+
+              <h2 class="hero-title" style="font-size:clamp(34px,5vw,58px);margin-bottom:14px;">Elección <span class="accent">interactiva de números</span></h2>
+              <p class="hero-sub" style="margin-bottom:20px;">El participante elige sus números de forma <strong>fácil</strong>, rápida y <strong>100% digital</strong>.</p>
+
+              <div class="text-list">
+                <div class="text-list-item reveal delay-1"><div class="circle">☝️</div><div><strong>Selección sencilla</strong><span>Elige tus números disponibles con un solo clic.</span></div></div>
+                <div class="text-list-item reveal delay-2"><div class="circle">⏱️</div><div><strong>Disponibilidad en tiempo real</strong><span>Los números reservados se actualizan al instante.</span></div></div>
+                <div class="text-list-item reveal delay-3"><div class="circle">🎟️</div><div><strong>Control total</strong><span>Puedes revisar la selección antes de confirmar.</span></div></div>
+                <div class="text-list-item reveal delay-4"><div class="circle">🔒</div><div><strong>Proceso seguro</strong><span>La reserva queda claramente asociada al participante.</span></div></div>
+              </div>
+            </div>
+
+            <div class="split-grid phone-feature-layout">
+              <div class="phone-showcase reveal">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="numbers-head">Gran Rifa de Aniversario</div>
+                  <div class="phone-section-title">Elige tus números</div>
+                  <div class="phone-section-sub">Selecciona tus números favoritos</div>
+
+                  <div class="legend">
+                    <span class="l-1">Disponible</span>
+                    <span class="l-2">Seleccionado</span>
+                    <span class="l-3">No disponible</span>
+                  </div>
+
+                  <div class="numbers-grid">
+                    <div class="num-btn">01</div><div class="num-btn">02</div><div class="num-btn">03</div><div class="num-btn">04</div><div class="num-btn">05</div>
+                    <div class="num-btn">06</div><div class="num-btn sel">07</div><div class="num-btn">08</div><div class="num-btn">09</div><div class="num-btn">10</div>
+                    <div class="num-btn">11</div><div class="num-btn sel">12</div><div class="num-btn sel">13</div><div class="num-btn">14</div><div class="num-btn">15</div>
+                    <div class="num-btn">16</div><div class="num-btn">17</div><div class="num-btn sel">18</div><div class="num-btn">19</div><div class="num-btn">20</div>
+                    <div class="num-btn">21</div><div class="num-btn sel">22</div><div class="num-btn off">23</div><div class="num-btn">24</div><div class="num-btn sel">25</div>
+                  </div>
+
+                  <div class="selected-box">
+                    <div class="selected-box-icon">🎟️</div>
+                    <div class="selected-box-text">
+                      <div class="selected-box-label">Tus números seleccionados</div>
+                      <strong id="selectedNumbersText">07, 12, 13, 18, 22, 25</strong>
+                      <div class="selected-box-total" id="selectedNumbersTotal">Total: 6 números</div>
+                    </div>
+                  </div>
+
+                  <button class="primary-btn">Confirmar selección</button>
+                  <a class="secondary-btn" href="#">Volver</a>
+                </div>
+              </div>
+
+              <div class="callout-stack">
+                <div class="callout reveal delay-1"><strong>Selecciona</strong><span>Elige los números que más te gusten.</span></div>
+                <div class="callout reveal delay-2"><strong>Confirma</strong><span>Revisa la selección y confirma tu ticket.</span></div>
+                <div class="callout reveal delay-3" style="background:linear-gradient(180deg,#f8f4ff,#f0e8ff);"><strong>Transparente y confiable</strong><span>Cada número seleccionado queda reservado exclusivamente para ti.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Ventajas <span class="accent">principales</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">Un sistema diseñado para darte más <strong>control, orden y profesionalismo</strong> en tu evento.</p>
+          </div>
+
+          <div class="benefits-grid">
+            <article class="benefit-card reveal delay-1"><div class="benefit-num">01</div><div class="benefit-icon">🏅</div><div><h3>Posicionamiento de tu marca</h3><p>Tu evento proyecta una presencia más seria, moderna y confiable.</p></div></article>
+            <article class="benefit-card reveal delay-2"><div class="benefit-num">02</div><div class="benefit-icon">📈</div><div><h3>Control Automático</h3><p>Puedes ver —cuando gustes— quién se registró, los pagos, saldos pendientes y el total recaudado.</p></div></article>
+            <article class="benefit-card reveal delay-3"><div class="benefit-num">03</div><div class="benefit-icon">🗂️</div><div><h3>Más orden</h3><p>Toda la información queda centralizada, reduciendo errores, confusiones y registros dispersos.</p></div></article>
+            <article class="benefit-card reveal delay-4"><div class="benefit-num">04</div><div class="benefit-icon">🕒</div><div><h3>Seguimiento en tiempo real</h3><p>El organizador monitorea el estado general del evento desde una planilla de acceso exclusivo.</p></div></article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal work-section">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Ventajas de <span class="accent">trabajar con nosotros</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">Te acompañamos para que tu rifa o evento sea un éxito, de principio a fin.</p>
+          </div>
+
+          <div class="work-advantages-grid">
+            <div class="work-column">
+              <article class="work-item reveal delay-1">
+                <div class="work-item-icon">🎯</div>
+                <div class="work-item-copy">
+                  <h3>Solución a medida</h3>
+                  <p>Una herramienta diseñada según tu negocio y tu forma de trabajar.</p>
+                </div>
+              </article>
+
+              <article class="work-item reveal delay-2">
+                <div class="work-item-icon">📅</div>
+                <div class="work-item-copy">
+                  <h3>Actualizaciones ilimitadas por 1 año</h3>
+                  <p>Mejoras y correcciones sin frenar la evolución del proyecto.</p>
+                </div>
+              </article>
+
+              <article class="work-item reveal delay-3">
+                <div class="work-item-icon">🖥️</div>
+                <div class="work-item-copy">
+                  <h3>Personalización visual y funcional</h3>
+                  <p>Diseño, textos y flujo adaptados a la identidad real de tu marca.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="work-visual reveal">
+              <div class="work-ring"></div>
+              <div class="work-ring-inner"></div>
+
+              <div class="work-device-stage">
+                <div class="work-laptop-wrap">
+                  <div class="work-laptop-shadow"></div>
+
+                  <div class="work-laptop">
+                    <div class="work-laptop-screen">
+                      <div class="work-laptop-bezel">
+                        <div class="work-laptop-side">
+                          <span class="ticket-ico">🎟️</span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+
+                        <div class="work-laptop-ui">
+                          <div class="work-laptop-topbar">
+                            <div class="work-laptop-pills">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </div>
+                            <div class="work-laptop-action"></div>
+                          </div>
+
+                          <div class="work-laptop-chart">
+                            <svg viewBox="0 0 320 160" preserveAspectRatio="none" aria-hidden="true">
+                              <defs>
+                                <linearGradient id="workChartLine" x1="0" x2="1">
+                                  <stop offset="0%" stop-color="#8d63ff"/>
+                                  <stop offset="100%" stop-color="#6d38f5"/>
+                                </linearGradient>
+                              </defs>
+                              <path
+                                d="M16 126 C42 122, 62 114, 82 96 C100 82, 118 78, 138 90 C158 102, 180 110, 202 96 C224 82, 246 56, 270 40 C288 28, 300 24, 316 22"
+                                fill="none"
+                                stroke="url(#workChartLine)"
+                                stroke-width="5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+
+                          <div class="work-laptop-stats">
+                            <div class="work-stat">
+                              <span class="label">Ventas totales</span>
+                              <span class="value">1,248</span>
+                              <span class="mini">+12%</span>
+                            </div>
+                            <div class="work-stat">
+                              <span class="label">Entradas vendidas</span>
+                              <span class="value">853</span>
+                              <span class="mini">+8%</span>
+                            </div>
+                            <div class="work-stat">
+                              <span class="label">Ingresos</span>
+                              <span class="value">$24,850</span>
+                              <span class="mini">+15%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="work-laptop-base"></div>
+                  </div>
+                </div>
+
+                <div class="work-phone">
+                  <div class="work-phone-frame">
+                    <div class="work-phone-notch"></div>
+
+                    <div class="work-phone-screen">
+                      <div class="work-phone-ticket-code">Ticket</div>
+                      <div class="work-phone-ticket-number">#00124</div>
+
+                      <div class="work-phone-pass">
+                        <div class="work-phone-pass-icon">
+                          <span></span><span></span><span></span>
+                          <span></span><span></span><span></span>
+                          <span></span><span></span><span></span>
+                        </div>
+
+                        <div class="work-phone-pass-code">ACCESO DIGITAL</div>
+                        <div class="work-phone-pass-id">ID-24853</div>
+                      </div>
+
+                      <div class="work-phone-valid">Válido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="work-ticket-card">
+                  <div class="work-ticket-top">
+                    <span class="mini">Entradas vendidas</span>
+                    <span class="big">853</span>
+                  </div>
+                  <div class="work-ticket-bottom">
+                    <div class="work-ticket-bar"></div>
+                  </div>
+                </div>
+
+                <div class="work-donut"></div>
+              </div>
+            </div>
+
+            <div class="work-column">
+              <article class="work-item reveal delay-1">
+                <div class="work-item-icon">🎧</div>
+                <div class="work-item-copy">
+                  <h3>Soporte continuo</h3>
+                  <p>Acompañamiento directo para resolver dudas, hacer ajustes y optimizar el sistema.</p>
+                </div>
+              </article>
+
+              <article class="work-item reveal delay-2">
+                <div class="work-item-icon">🔄</div>
+                <div class="work-item-copy">
+                  <h3>Adaptación para otros eventos</h3>
+                  <p>El sistema puede reutilizarse en sorteos, campañas, reservas o venta de entradas.</p>
+                </div>
+              </article>
+
+              <article class="work-item reveal delay-3">
+                <div class="work-item-icon">💬</div>
+                <div class="work-item-copy">
+                  <h3>Comunicación directa y escalabilidad</h3>
+                  <p>Proceso ágil, claro y flexible, con posibilidad de crecer según la necesidad del negocio.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="organizer-layout">
+            <div>
+              <div class="kicker">
+                <div class="kicker-icon">🖥️</div>
+                <div class="kicker-line"></div>
+              </div>
+              <h2 class="hero-title" style="font-size:clamp(34px,5vw,56px);margin-bottom:14px;">Qué puede ver <span class="accent">el organizador</span></h2>
+              <p class="hero-sub" style="margin-bottom:20px;">Todo el control de tu rifa o evento en un solo lugar y <strong>en tiempo real</strong>.</p>
+
+              <div class="text-list">
+                <div class="text-list-item reveal delay-1"><div class="circle">👥</div><div><strong>Participantes y pagos</strong><span>Consulta quién participa y cuál es su estado de pago.</span></div></div>
+                <div class="text-list-item reveal delay-2"><div class="circle">💵</div><div><strong>Montos registrados</strong><span>Visualiza los ingresos totales y el detalle de lo recaudado.</span></div></div>
+                <div class="text-list-item reveal delay-3"><div class="circle">⏳</div><div><strong>Pagos pendientes</strong><span>Identifica rápidamente los pagos que aún están por cerrarse.</span></div></div>
+                <div class="text-list-item reveal delay-4"><div class="circle">📈</div><div><strong>Gráficas de avance</strong><span>Monitorea ventas e inscripciones para tomar mejores decisiones.</span></div></div>
+              </div>
+            </div>
+
+            <div class="organizer-dashboard-wrap reveal">
+              <div class="organizer-scroll">
+                <div class="organizer-dashboard">
+                  <div class="dashboard-grid">
+                    <div class="sidebar">
+                      <div class="sidebar-badge">🏠 Inicio</div>
+                      <div class="sidebar-item">Participantes</div>
+                      <div class="sidebar-item">Tickets</div>
+                      <div class="sidebar-item">Pagos</div>
+                      <div class="sidebar-item">Reportes</div>
+                      <div class="sidebar-item">Gráficas</div>
+                      <div class="sidebar-item">Configuración</div>
+                    </div>
+
+                    <div class="dashboard-content">
+                      <div class="panel-head"><div class="panel-title">Resumen general</div><div class="hint">Este mes</div></div>
+
+                      <div class="mini-cards">
+                        <div class="mini-card"><span class="label">Participantes</span><span class="value">1,250</span><span class="subvalue">registrados</span></div>
+                        <div class="mini-card"><span class="label">Total recaudado</span><span class="value" style="color:var(--green)">S/ 12,500</span><span class="subvalue">en total</span></div>
+                        <div class="mini-card"><span class="label">Pagos pendientes</span><span class="value" style="color:var(--orange)">120</span><span class="subvalue">por cerrar</span></div>
+                        <div class="mini-card"><span class="label">Tickets vendidos</span><span class="value">950</span><span class="subvalue">confirmados</span></div>
+                      </div>
+
+                      <div class="chart-row">
+                        <div class="panel-card">
+                          <div class="panel-head"><div class="panel-title">Últimos participantes</div><div class="hint">Ver todos</div></div>
+                          <div class="table-list">
+                            <div class="table-row"><span>María Pérez</span><span>000123</span><span class="status-paid">Pagado</span></div>
+                            <div class="table-row"><span>Juan García</span><span>000124</span><span class="status-paid">Pagado</span></div>
+                            <div class="table-row"><span>Ana Rodríguez</span><span>000126</span><span class="status-pending">Pendiente</span></div>
+                            <div class="table-row"><span>Carlos Luján</span><span>000127</span><span class="status-paid">Pagado</span></div>
+                          </div>
+                        </div>
+
+                        <div class="panel-card">
+                          <div class="panel-head"><div class="panel-title">Inscripciones y ventas</div><div class="hint">Actual</div></div>
+                          <div class="graph">
+                            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                              <polyline fill="none" stroke="#7a4fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="20,134 58,124 96,96 134,78 172,70 210,52 248,36 300,28"/>
+                              <polyline fill="none" stroke="#2ca95e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="20,146 58,142 96,128 134,108 172,102 210,94 248,76 300,68"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="panel-card">
+                        <div class="panel-head"><div class="panel-title">Estado de pagos</div><div class="hint">Meta del evento</div></div>
+                        <div style="height:28px;border-radius:999px;background:#eef0f7;overflow:hidden;display:flex;">
+                          <div style="width:68%;background:var(--green)"></div>
+                          <div style="width:18%;background:var(--orange)"></div>
+                          <div style="width:14%;background:#93a0c3"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="organizer-benefits">
+                <div class="benefit-pill"><div class="dot">🛡️</div><span>Información centralizada</span></div>
+                <div class="benefit-pill"><div class="dot">⚡</div><span>Decisiones más rápidas</span></div>
+                <div class="benefit-pill"><div class="dot">🔐</div><span>Seguridad y privacidad</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="services-layout-v2">
+
+            <div class="service-copy">
+              <div>
+                <div class="kicker">
+                  <div class="kicker-icon">🖌️</div>
+                  <div class="kicker-line"></div>
+                </div>
+
+                <h2 class="hero-title service-title-fix" style="font-size:clamp(34px,5vw,56px);margin-bottom:14px;">
+                  Diseño y sistema <span class="accent">en una sola solución</span>
+                </h2>
+
+                <p class="hero-sub service-sub-fix" style="margin-bottom:10px;">
+                  No necesitas buscar por separado a un diseñador gráfico, un creador de artes y luego a un desarrollador para unirlo todo.
+                </p>
+              </div>
+
+              <div class="mini-highlight reveal delay-1">
+                <strong>La elaboración del sistema</strong> ya incluye la adaptación visual de la plataforma y de los tickets según la identidad de tu evento, negocio o campaña.
+              </div>
+
+              <div class="icon-row reveal delay-2">
+                <div class="icon-box"><div class="ico">✅</div><span>Sistema funcional</span></div>
+                <div class="icon-box"><div class="ico">🎨</div><span>Diseño visual coherente</span></div>
+                <div class="icon-box"><div class="ico">🎟️</div><span>Tickets personalizados</span></div>
+                <div class="icon-box"><div class="ico">🖼️</div><span>Artes para el evento</span></div>
+                <div class="icon-box"><div class="ico">🏅</div><span>Presentación profesional</span></div>
+              </div>
+
+              <div class="mini-highlight reveal delay-3">
+                A partir de la identidad visual de tu marca o evento, desarrollamos tickets, interfaces y piezas gráficas que mantienen una misma línea estética.
+                <strong>Así, el sistema no solo funciona bien: también se ve profesional, atractivo y alineado con la imagen que deseas proyectar.</strong>
+              </div>
+            </div>
+
+            <div class="service-right-stack">
+
+              <div class="service-proof reveal">
+                <div class="service-proof-head">
+                  <span class="proof-badge">Ejemplos de diseño y artes personalizadas</span>
+                </div>
+
+                <div class="proof-grid">
+                  <div class="proof-card">
+                    <div class="tag">Ticket personalizado</div>
+                    <div class="proof-art">
+                      <div class="design-story">
+                        <img src="ticket-01.png" alt="Ticket personalizado">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="proof-card">
+                    <div class="tag">Pases con nombre</div>
+                    <div class="proof-art">
+                      <div class="design-story">
+                        <img src="ticket-02.png" alt="Pase con nombre">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="proof-card">
+                    <div class="tag">Para compartir en redes</div>
+                    <div class="proof-art">
+                      <div class="design-story">
+                        <img src="ticket-03.png" alt="Ticket para compartir en redes">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="service-importance reveal delay-3">
+                <div class="service-importance-copy">
+                  <h3>¿Por qué es importante?</h3>
+                  <p>
+                    Un sistema bien diseñado genera confianza, mejora la experiencia del usuario y proyecta profesionalismo en cada punto de contacto con tu audiencia.
+                  </p>
+                </div>
+
+                <div class="service-importance-icon">🎯</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-points reveal">
+            <div class="point">
+              <strong>Ahorras tiempo</strong>
+              <span>Todo en un solo lugar, sin procesos separados.</span>
+            </div>
+            <div class="point">
+              <strong>Evitas múltiples proveedores</strong>
+              <span>Menos coordinación, más eficiencia.</span>
+            </div>
+            <div class="point">
+              <strong>Coherencia total</strong>
+              <span>Misma identidad visual en el sistema y piezas gráficas.</span>
+            </div>
+            <div class="point">
+              <strong>Imagen profesional</strong>
+              <span>Transmites confianza y credibilidad desde el primer clic.</span>
+            </div>
+            <div class="point">
+              <strong>Mayor impacto</strong>
+              <span>Un diseño atractivo que conecta y deja huella.</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">¿Qué hace <span class="accent">el sistema?</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">Todo lo que necesitas para vender, organizar y controlar tu rifa o evento en un solo lugar.</p>
+          </div>
+
+          <div class="cards-6">
+            <article class="what-card reveal delay-1"><div class="what-icon">🎫</div><div><h3>Genera tickets digitales</h3><p>Automáticamente y con una presentación profesional.</p></div></article>
+            <article class="what-card reveal delay-2"><div class="what-icon">🧾</div><div><h3>Registra participantes en tiempo real</h3><p>Y mantiene tu lista siempre actualizada.</p></div></article>
+            <article class="what-card reveal delay-3"><div class="what-icon">💳</div><div><h3>Controla pagos realizados y pendientes</h3><p>De forma clara, ordenada y fácil de revisar.</p></div></article>
+            <article class="what-card reveal delay-1"><div class="what-icon">🔐</div><div><h3>Centraliza la información</h3><p>En una planilla segura y privada, accesible solo para el organizador.</p></div></article>
+            <article class="what-card reveal delay-2"><div class="what-icon">📊</div><div><h3>Muestra gráficos y resúmenes</h3><p>Para que tomes decisiones con información real.</p></div></article>
+            <article class="what-card reveal delay-3"><div class="what-icon">🗂️</div><div><h3>Ordena la operación</h3><p>Evita errores, registros dispersos y seguimiento desordenado.</p></div></article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Ideal <span class="accent">para</span></h2>
+            <div class="title-divider"></div>
+          </div>
+
+          <div class="ideal-grid reveal">
+            <article class="ideal-card"><div class="ideal-icon">🎟️</div><h3>Rifas</h3><p>Perfecto para todo tipo de rifas, con más control y mejor presentación.</p></article>
+            <article class="ideal-card"><div class="ideal-icon">🎁</div><h3>Sorteos promocionales</h3><p>Impulsa tu marca y premia a tu audiencia con un sistema ordenado.</p></article>
+            <article class="ideal-card"><div class="ideal-icon">📣</div><h3>Campañas de recaudación</h3><p>Recauda fondos de forma transparente y organizada.</p></article>
+            <article class="ideal-card"><div class="ideal-icon">👥</div><h3>Eventos pequeños y medianos</h3><p>Ideal para eventos de cualquier tamaño que necesiten trazabilidad.</p></article>
+            <article class="ideal-card"><div class="ideal-icon">🏪</div><h3>Negocios que quieren vender y controlar tickets</h3><p>Más control, menos errores y mejores resultados.</p></article>
+          </div>
+
+          <div class="dark-banner reveal">
+            <div class="dark-art">
+              <div class="screen"></div>
+              <div class="ticket"></div>
+            </div>
+            <div class="dark-copy">
+              <h3>No es solo un <span class="gold">generador de tickets</span></h3>
+              <p>Es una herramienta para vender, organizar y controlar tu evento con mayor inteligencia, <strong>profesionalismo</strong> y <strong>personalización</strong>.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="formulario">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="kicker" style="margin-bottom:10px;">
+            <div class="kicker-icon">📋</div>
+            <div class="kicker-line"></div>
+          </div>
+
+          <h2 class="hero-title" style="font-size:clamp(36px,5vw,58px);margin-bottom:0;">Guía para personalizar <span class="accent">su sistema de rifa</span></h2>
+          <div class="title-divider" style="margin:16px 0 14px;"></div>
+          <p class="section-desc" style="margin:0;max-width:none;">Para crear su sistema, <strong>solo necesito</strong> la siguiente información:</p>
+
+          <div class="form-layout">
+  <div class="form-grid">
+    <aside class="side-step">
+      <div class="num">01</div>
+      <div class="side-icon">🏪</div>
+      <div class="side-title">Datos básicos</div>
+      <div class="side-text">Información general de tu rifa o evento.</div>
+    </aside>
+    <div class="content-box">
+      <div class="fields">
+        <div class="field"><label>Nombre de la rifa</label><input id="nombreRifa" /></div>
+        <div class="field"><label>Nombre del negocio o marca</label><input id="nombreMarca" /></div>
+        <div class="field"><label>Fecha del sorteo</label><input id="fechaSorteo" type="date" /></div>
+        <div class="field"><label>Premio o premios</label><textarea id="premios"></textarea></div>
+      </div>
+    </div>
+
+    <aside class="side-step">
+      <div class="num">02</div>
+      <div class="side-icon">🎟️</div>
+      <div class="side-title">Datos del ticket</div>
+      <div class="side-text">Personalización visual del ticket.</div>
+    </aside>
+    <div class="content-box">
+      <div class="fields triple">
+        <div class="field"><label>Título principal</label><input id="tituloPrincipal" /></div>
+        <div class="field">
+  <label for="logoImagen">Logo o imagen</label>
+  <input id="logoImagen" type="file" accept=".jpg,.jpeg,.png,.webp" />
+  <small style="color:#6f7291;font-size:12px;">Formatos permitidos: JPG, PNG, WEBP</small>
+</div>
+        <div class="field"><label>Colores o estilo deseado</label><textarea id="coloresEstilo"></textarea></div>
+      </div>
+    </div>
+
+    <aside class="side-step">
+      <div class="num">03</div>
+      <div class="side-icon">💳</div>
+      <div class="side-title">Datos de venta</div>
+      <div class="side-text">Información sobre la venta de tickets.</div>
+    </aside>
+    <div class="content-box">
+      <div class="fields triple">
+        <div class="field"><label>Precio por ticket</label><input id="precioTicket" placeholder="S/." /></div>
+        <div class="field"><label>Cantidad de tickets</label><input id="cantidadTickets" /></div>
+        <div class="field"><label>Método de pago</label><input id="metodoPago" /></div>
+        <div class="field full"><label>Nombre y número para Yape, Plin o cuenta</label><input id="datosPago" /></div>
+      </div>
+    </div>
+
+    <aside class="side-step">
+      <div class="num">04</div>
+      <div class="side-icon">👤</div>
+      <div class="side-title">Datos del participante</div>
+      <div class="side-text">Información que deseas solicitar al participante.</div>
+    </aside>
+    <div class="content-box">
+      <div class="field full">
+        <label>¿Qué información deseas pedir?</label>
+        <div class="toggle-grid">
+          <label class="toggle-chip"><input type="checkbox" value="Nombre completo" checked><span class="mini-dot"></span>Nombre completo</label>
+          <label class="toggle-chip"><input type="checkbox" value="Celular" checked><span class="mini-dot"></span>Celular</label>
+          <label class="toggle-chip"><input type="checkbox" value="Correo" checked><span class="mini-dot"></span>Correo</label>
+          <label class="toggle-chip"><input type="checkbox" value="Ciudad"><span class="mini-dot"></span>Ciudad</label>
+          <label class="toggle-chip"><input type="checkbox" value="Instagram"><span class="mini-dot"></span>Instagram</label>
+          <label class="toggle-chip"><input type="checkbox" value="DNI"><span class="mini-dot"></span>DNI</label>
+          <label class="toggle-chip"><input type="checkbox" value="Edad"><span class="mini-dot"></span>Edad</label>
+          <label class="toggle-chip"><input type="checkbox" value="Dirección"><span class="mini-dot"></span>Dirección</label>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side-step">
+      <div class="num">05</div>
+      <div class="side-icon">📊</div>
+      <div class="side-title">Control del organizador</div>
+      <div class="side-text">Define el nivel de control y reportes que deseas.</div>
+    </aside>
+    <div class="content-box">
+      <div class="field full">
+        <label>¿Deseas ver pagos, pendientes, total recaudado y gráficos del avance?</label>
+        <div class="radio-row">
+          <label class="radio-card">
+            <input type="radio" name="control" value="Sí, deseo tener control completo" checked>
+            <span class="radio-dot"></span>
+            <span class="choice-text">Sí, deseo tener control completo</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="control" value="No, solo necesito lo básico">
+            <span class="radio-dot"></span>
+            <span class="choice-text">No, solo necesito lo básico</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side-step">
+      <div class="num">06</div>
+      <div class="side-icon">🎁</div>
+      <div class="side-title">Extras opcionales</div>
+      <div class="side-text">Funciones adicionales que pueden ayudarte.</div>
+    </aside>
+    <div class="content-box">
+      <div class="field full">
+        <label>Selecciona los extras que te interesen (puedes elegir más de uno)</label>
+        <div class="toggle-grid">
+          <label class="toggle-chip"><input type="checkbox" value="Confirmación por WhatsApp"><span class="mini-dot"></span>Confirmación por WhatsApp</label>
+          <label class="toggle-chip"><input type="checkbox" value="Códigos automáticos"><span class="mini-dot"></span>Códigos automáticos</label>
+          <label class="toggle-chip"><input type="checkbox" value="Adaptación para otros eventos"><span class="mini-dot"></span>Adaptación para otros eventos</label>
+          <label class="toggle-chip"><input type="checkbox" value="Otros"><span class="mini-dot"></span>Otros</label>
+        </div>
+      </div>
+      <div class="field full">
+        <label>Especifica otros extras que necesites</label>
+        <input id="otrosExtras" />
+      </div>
+    </div>
+  </div>
+
+  <div class="final-note reveal">
+    <div class="lamp">💡</div>
+    <div>Con esta información podremos crear un sistema <strong style="color:var(--purple)">100% personalizado</strong>, pensado para que tu rifa o evento sea un éxito.</div>
+  </div>
+
+  <div style="margin-top:18px;display:grid;gap:10px;">
+    <button type="button" class="primary-btn" id="submitBriefBtn">Enviar solicitud</button>
+    <p id="formMessage" style="margin:0;font-weight:600;color:#5b5f82;"></p>
+  </div>
+</div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxc_rXmUeZNQNhwq62zP7bjVmRTgPmOHuW_AX6u-O_zcauxy5o3wnEKYBGnlky6j-VX6A/exec";
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll('.reveal:not(.show)').forEach((el) => observer.observe(el));
+
+  document.querySelectorAll('.num-btn:not(.off)').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('sel');
+      updateSelectedNumbers();
+    });
+  });
+
+  function updateSelectedNumbers() {
+    const selected = [...document.querySelectorAll('.phone-showcase .num-btn.sel')].map(el => el.textContent.trim());
+    const selectedText = document.getElementById('selectedNumbersText');
+    const selectedTotal = document.getElementById('selectedNumbersTotal');
+
+    if (!selectedText || !selectedTotal) return;
+
+    selectedText.textContent = selected.length ? selected.join(', ') : 'Ninguno';
+    selectedTotal.textContent = `Total: ${selected.length} número${selected.length === 1 ? '' : 's'}`;
+  }
+
+  function getCheckedValues(selector) {
+    return [...document.querySelectorAll(selector)]
+      .filter(el => el.checked)
+      .map(el => el.value);
+  }
+
+  async function enviarFormulario() {
+    const btn = document.getElementById("submitBriefBtn");
+    const msg = document.getElementById("formMessage");
+
+    const data = {
+      nombreRifa: document.getElementById("nombreRifa")?.value.trim() || "",
+      nombreMarca: document.getElementById("nombreMarca")?.value.trim() || "",
+      fechaSorteo: document.getElementById("fechaSorteo")?.value || "",
+      premios: document.getElementById("premios")?.value.trim() || "",
+
+      tituloPrincipal: document.getElementById("tituloPrincipal")?.value.trim() || "",
+      coloresEstilo: document.getElementById("coloresEstilo")?.value.trim() || "",
+
+      precioTicket: document.getElementById("precioTicket")?.value.trim() || "",
+      cantidadTickets: document.getElementById("cantidadTickets")?.value.trim() || "",
+      metodoPago: document.getElementById("metodoPago")?.value.trim() || "",
+      datosPago: document.getElementById("datosPago")?.value.trim() || "",
+
+      datosParticipante: getCheckedValues('.content-box input[type="checkbox"][value]').filter(v =>
+        ["Nombre completo","Celular","Correo","Ciudad","Instagram","DNI","Edad","Dirección"].includes(v)
+      ),
+
+      controlOrganizador: document.querySelector('input[name="control"]:checked')?.value || "",
+
+      extras: getCheckedValues('.content-box input[type="checkbox"][value]').filter(v =>
+        ["Confirmación por WhatsApp","Códigos automáticos","Adaptación para otros eventos","Otros"].includes(v)
+      ),
+
+      otrosExtras: document.getElementById("otrosExtras")?.value.trim() || ""
+    };
+
+    if (!data.nombreRifa && !data.nombreMarca) {
+      msg.textContent = "Completa al menos el nombre de la rifa o el nombre del negocio.";
+      msg.style.color = "#d46a2f";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+    msg.textContent = "Enviando solicitud...";
+    msg.style.color = "#5b5f82";
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.result === "success") {
+        msg.textContent = "Solicitud enviada correctamente.";
+        msg.style.color = "#23a55a";
+      } else {
+        msg.textContent = "Hubo un problema al enviar la solicitud.";
+        msg.style.color = "#d46a2f";
+      }
+    } catch (error) {
+      msg.textContent = "No se pudo conectar con Google Sheets.";
+      msg.style.color = "#d46a2f";
+      console.error(error);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enviar solicitud";
+    }
+  }
+
+  document.getElementById("submitBriefBtn")?.addEventListener("click", enviarFormulario);
+</script>
+</body>
+</html>
