@@ -3465,8 +3465,7 @@ Los libros se planean lanzar en 2026 y 2027.
 <button class="participant" data-name="Heydei">Heidey</button>
 <button class="participant" data-name="Andrea">Andrea</button>
 <button class="participant" data-name="Luz">Luz</button>
-<button class="participant" data-name="Andrea">Andrea</button>
-<button class="participant" data-name="Andrea">Wilmer</button>
+<button class="participant" data-name="Wilmer">Wilmer</button>
               </div>
             </div>
 
@@ -3516,62 +3515,105 @@ Los libros se planean lanzar en 2026 y 2027.
       </div>
     </section>
   </main>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14 });
-
-    document.querySelectorAll('.reveal:not(.show)').forEach((el) => observer.observe(el));
-
-    const participantButtons = document.querySelectorAll('.participant');
-    const selectedName = document.getElementById('selectedName');
-    const selectedStatus = document.getElementById('selectedStatus');
-    const confirmMessage = document.getElementById('confirmMessage');
-    const confirmBtn = document.getElementById('confirmBtn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    let currentParticipant = 'Aine';
-    let isConfirmed = false;
-
-    function updateUI() {
-      selectedName.textContent = currentParticipant;
-
-      if (isConfirmed) {
-        selectedStatus.textContent = 'Confirmado';
-        confirmMessage.textContent = `${currentParticipant} ha confirmado su participación en la reunión especial del equipo.`;
-      } else {
-        selectedStatus.textContent = 'Pendiente';
-        confirmMessage.textContent = `Seleccionad@: ${currentParticipant}. Confirma tu participación 😁`;
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
       }
+    });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll('.reveal:not(.show)').forEach((el) => observer.observe(el));
+
+  const participantButtons = document.querySelectorAll('.participant');
+  const selectedName = document.getElementById('selectedName');
+  const selectedStatus = document.getElementById('selectedStatus');
+  const confirmMessage = document.getElementById('confirmMessage');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const participantMessage = document.getElementById('participantMessage');
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbZYsq63YKL0SvosSPLxhyYoonjsCVXqLRuf2EKBaJTWFPH_U77JqkADt6vzUWy0Iutz/exec';
+
+  let currentParticipant = 'Aine';
+  let isConfirmed = false;
+
+  function updateUI() {
+    selectedName.textContent = currentParticipant;
+
+    if (isConfirmed) {
+      selectedStatus.textContent = 'Confirmado';
+      confirmMessage.textContent = `${currentParticipant} ha confirmado su participación en la reunión especial del equipo.`;
+    } else {
+      selectedStatus.textContent = 'Pendiente';
+      confirmMessage.textContent = `Seleccionad@: ${currentParticipant}. Confirma tu participación 😁`;
     }
+  }
 
-    participantButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        participantButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentParticipant = btn.dataset.name;
-        isConfirmed = false;
-        updateUI();
-      });
-    });
-
-    confirmBtn.addEventListener('click', () => {
-      isConfirmed = true;
-      updateUI();
-    });
-
-    resetBtn.addEventListener('click', () => {
+  participantButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      participantButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentParticipant = btn.dataset.name;
       isConfirmed = false;
       updateUI();
     });
+  });
+
+  confirmBtn.addEventListener('click', async () => {
+    const mensaje = participantMessage.value.trim();
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify({
+          participante: currentParticipant,
+          actividad: 'Reunión especial del equipo – 11/05',
+          proyecto: 'Cordillera Blanca y Cordillera Negra',
+          estado: 'Confirmado',
+          mensaje: mensaje,
+          fechaHora: new Date().toISOString()
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        isConfirmed = true;
+        updateUI();
+        confirmMessage.textContent = `${currentParticipant} ha confirmado su participación correctamente.`;
+        participantMessage.value = '';
+      } else {
+        confirmMessage.textContent = 'Hubo un problema al guardar la confirmación.';
+      }
+
+    } catch (error) {
+      confirmMessage.textContent = 'Error de conexión con Google Sheets.';
+      console.error(error);
+    } finally {
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = '✅ Confirmar participación';
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    isConfirmed = false;
+    participantMessage.value = '';
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = '✅ Confirmar participación';
+    updateUI();
+  });
 
     updateUI();
-  </script>
+</script>
 </body>
 </html>
