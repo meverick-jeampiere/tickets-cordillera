@@ -1,0 +1,3577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reunión especial del equipo – El Origen de la Cordillera Blanca y la Cordillera Negra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f5f2fb;
+      --card:#ffffff;
+      --line:#e8e1f5;
+      --text:#111735;
+      --muted:#6f7291;
+      --purple:#6d38f5;
+      --purple-2:#8a5bff;
+      --purple-deep:#24105f;
+      --purple-soft:#f2ecff;
+      --gold:#f4c64d;
+      --green:#23a55a;
+      --shadow:0 18px 44px rgba(58, 30, 118, .08);
+      --shadow-soft:0 10px 24px rgba(58, 30, 118, .05);
+      --container:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(109,56,245,.06), transparent 28%),
+        radial-gradient(circle at top right, rgba(109,56,245,.04), transparent 22%),
+        linear-gradient(180deg,#f6f3fb 0%, #f4f1f9 100%);
+      overflow-x:hidden;
+    }
+
+    h1,h2,h3,h4,p{margin:0}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    button{font:inherit}
+
+    .container{
+      width:min(var(--container), calc(100% - 28px));
+      margin:0 auto;
+    }
+
+    .section{padding:26px 0}
+    .hero{padding:22px 0 20px}
+
+    .section-card{
+      background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+      border:1px solid var(--line);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .section-card::before{
+      content:"";
+      position:absolute;
+      width:130px;
+      height:84px;
+      right:26px;
+      top:22px;
+      background-image:radial-gradient(circle, rgba(109,56,245,.18) 1.5px, transparent 1.6px);
+      background-size:14px 14px;
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .section-card::after{
+      content:"";
+      position:absolute;
+      width:210px;
+      height:140px;
+      left:-48px;
+      bottom:-42px;
+      border-radius:140px;
+      background:radial-gradient(circle at 75% 30%, rgba(109,56,245,.10), rgba(109,56,245,.03) 58%, transparent 59%);
+      opacity:.65;
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      color:var(--purple);
+      font-weight:800;
+      letter-spacing:.02em;
+      margin-bottom:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .kicker-icon{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      border:1px solid rgba(109,56,245,.12);
+      box-shadow:var(--shadow-soft);
+      font-size:22px;
+    }
+
+    .kicker-line{
+      width:94px;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--purple),rgba(109,56,245,.18));
+    }
+
+    .hero-card-upgraded{
+      padding:42px;
+    }
+
+    .hero-top-title{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      margin-bottom:34px;
+    }
+
+
+  .hero-grid-upgraded{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(520px, 620px);
+  gap:34px;
+  align-items:start;
+  position:relative;
+  z-index:2;
+}
+
+    .hero-copy-upgraded{
+      max-width:760px;
+    }
+
+    .hero-lead-upgraded{
+      font-size:clamp(18px, 2vw, 24px);
+      line-height:1.55;
+      color:#2d335a;
+      max-width:760px;
+      margin-bottom:20px;
+    }
+
+    .hero-lead-upgraded strong{
+      color:var(--purple);
+    }
+
+    .hero-note-upgraded{
+      border-radius:24px;
+      padding:20px 22px;
+      background:linear-gradient(180deg,#faf7ff,#f2ebff);
+      border:1px solid #e8dbff;
+      color:#52587b;
+      font-size:15px;
+      line-height:1.68;
+      max-width:760px;
+      margin-bottom:20px;
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .meta-pill{
+      min-height:44px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid #e6dff6;
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:#394064;
+      font-size:14px;
+      font-weight:700;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .meta-pill b{color:var(--purple)}
+
+    .hero-points-upgraded{
+      display:grid;
+      gap:14px;
+      max-width:610px;
+    }
+
+    .point{
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .point-icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      background:var(--purple-soft);
+      display:grid;
+      place-items:center;
+      color:var(--purple);
+      border:1px solid rgba(109,56,245,.12);
+      font-size:22px;
+    }
+
+    .point strong{
+      display:block;
+      font-size:17px;
+      margin-bottom:4px;
+    }
+
+    .point span{
+      display:block;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    .hero-visual-upgraded{
+  min-width:0;
+  width:100%;
+}
+
+.hero-visual-frame{
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-areas:
+    "poster"
+    "card";
+  gap:18px;
+  align-items:start;
+  width:100%;
+}
+
+.hero-vertical-image{
+  grid-area:poster;
+  width:100%;
+  max-width:330px;
+  aspect-ratio:9 / 16;
+  border-radius:30px;
+  overflow:hidden;
+  border:1px solid rgba(36,16,95,.16);
+  background:#120a2f;
+  box-shadow:
+    0 20px 42px rgba(20,14,49,.18),
+    0 8px 18px rgba(20,14,49,.10);
+  position:relative;
+  margin:0 auto;
+}
+
+.hero-vertical-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  background:#120a2f;
+}
+
+.hero-visual-card-upgraded{
+  grid-area:card;
+  width:100%;
+  max-width:none;
+  border-radius:30px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top left, rgba(150,108,255,.18), transparent 24%),
+    radial-gradient(circle at top right, rgba(255,255,255,.07), transparent 18%),
+    linear-gradient(135deg,#24117b 0%, #2e1aa0 42%, #1a1170 100%);
+  padding:24px 24px 22px;
+  box-shadow:
+    0 24px 52px rgba(20,14,49,.24),
+    0 10px 24px rgba(20,14,49,.12);
+  color:#fff;
+  position:relative;
+}
+
+    .hero-visual-card-upgraded::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,.18) 1.2px, transparent 1.3px);
+      background-size:28px 28px;
+      opacity:.12;
+      pointer-events:none;
+    }
+
+    .hero-visual-card-upgraded > *{
+      position:relative;
+      z-index:2;
+    }
+
+    .visual-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+   .visual-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:40px;
+  padding:0 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:13px;
+  font-weight:800;
+  color:#f5efff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+ .visual-main-upgraded{
+  font-size:clamp(34px, 2.6vw, 46px);
+  line-height:1.02;
+  letter-spacing:-.04em;
+  font-weight:900;
+  margin-bottom:14px;
+  max-width:760px;
+}
+
+    .visual-main-upgraded .gold{color:#ffd867}
+    .visual-main-upgraded .violet{color:#cbb3ff}
+
+.visual-copy-upgraded{
+  color:rgba(255,255,255,.92);
+  font-size:16px;
+  line-height:1.65;
+  max-width:880px;
+  margin-bottom:20px;
+}
+
+ .visual-panels{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:14px;
+  align-content:start;
+}
+
+ .visual-panel{
+  border-radius:18px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.11);
+  padding:16px 16px 18px;
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+    .visual-panel strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:8px;
+  color:#fff;
+  line-height:1.15;
+}
+
+    .visual-panel span{
+  display:block;
+  color:rgba(255,255,255,.84);
+  font-size:13px;
+  line-height:1.55;
+}
+.visual-kicker-line{
+  display:block;
+  width:72px;
+  height:3px;
+  border-radius:999px;
+  margin:0 0 12px;
+  background:linear-gradient(90deg,#ffd867,rgba(255,216,103,.12));
+}
+.hero-visual-card-horizontal{
+  width:100%;
+}
+
+@media (max-width: 980px){
+  .visual-panels{
+    grid-template-columns:1fr;
+  }
+}
+
+    .quick-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:sticky;
+      top:10px;
+      z-index:20;
+    }
+
+    .nav-chip{
+      padding:12px 16px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      font-size:14px;
+      font-weight:800;
+      color:#3f4568;
+      transition:.2s ease;
+    }
+
+    .nav-chip:hover{
+      color:var(--purple);
+      border-color:#dcccff;
+      transform:translateY(-1px);
+    }
+
+    .section-title-wrap{
+      text-align:center;
+      margin-bottom:26px;
+      position:relative;
+      z-index:2;
+    }
+
+    .section-title{
+      font-size:clamp(28px,4vw,52px);
+      line-height:1;
+      letter-spacing:-.04em;
+      margin-bottom:10px;
+    }
+
+    .section-title .accent{color:var(--purple)}
+
+    .title-divider{
+      width:220px;
+      height:2px;
+      margin:0 auto 16px;
+      background:linear-gradient(90deg, rgba(109,56,245,.15), var(--purple), rgba(109,56,245,.15));
+      position:relative;
+      border-radius:999px;
+    }
+
+    .title-divider::after{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:var(--purple);
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      box-shadow:0 0 0 6px rgba(109,56,245,.08);
+    }
+
+    .section-desc{
+      color:var(--muted);
+      max-width:850px;
+      margin:0 auto;
+      line-height:1.55;
+      font-size:16px;
+    }
+
+    .cards-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .info-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:22px;
+      padding:22px 18px;
+      box-shadow:var(--shadow-soft);
+      transition:.22s ease;
+    }
+
+    .info-card:hover{transform:translateY(-3px)}
+
+    .info-icon{
+      width:64px;
+      height:64px;
+      border-radius:20px;
+      background:linear-gradient(180deg,#f7f3ff,#efe7ff);
+      display:grid;
+      place-items:center;
+      color:var(--purple);
+      font-size:28px;
+      border:1px solid rgba(109,56,245,.10);
+      margin-bottom:14px;
+    }
+
+    .info-card h3{
+      font-size:20px;
+      line-height:1.08;
+      margin-bottom:8px;
+    }
+
+    .info-card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .info-card ul{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .focus-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .focus-card h3{
+      font-size:24px;
+      line-height:1.05;
+      margin-bottom:10px;
+    }
+
+    .focus-card p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+      margin-bottom:14px;
+    }
+.world-text{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:12px;
+}
+
+.world-text:last-of-type{
+  margin-bottom:22px;
+}
+
+    .tag-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+/* ===== PROYECCIÓN ESQUEMATIZADA ===== */
+.projection-card{
+  padding:30px 34px 34px;
+  overflow:hidden;
+}
+
+.projection-card h3{
+  margin-bottom:18px;
+}
+
+.projection-stage{
+  border-radius:28px;
+  padding:26px 26px 22px;
+  background:
+    radial-gradient(circle at top right, rgba(109,56,245,.08), transparent 18%),
+    linear-gradient(180deg,#fcfbff 0%, #f8f4ff 100%);
+  border:1px solid #ece3fb;
+  position:relative;
+}
+
+.projection-stage::after{
+  content:"";
+  position:absolute;
+  right:18px;
+  top:18px;
+  width:90px;
+  height:60px;
+  background-image:radial-gradient(circle, rgba(109,56,245,.16) 1.4px, transparent 1.5px);
+  background-size:12px 12px;
+  opacity:.45;
+  pointer-events:none;
+}
+
+.projection-intro{
+  text-align:center;
+  font-size:clamp(18px, 1.6vw, 28px);
+  line-height:1.25;
+  font-weight:500;
+  color:#262d53;
+  margin:0 0 22px;
+  letter-spacing:-.01em;
+}
+
+.projection-flow{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.projection-side{
+  font-size:clamp(10px, 1.1vw, 18px);
+  line-height:1.02;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  color:#111735;
+}
+
+.projection-left{
+  text-align:right;
+}
+
+.projection-right{
+  text-align:left;
+}
+.projection-left,
+.projection-right,
+.projection-word{
+  white-space:nowrap;
+}
+.projection-center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:max-content;
+}
+
+.projection-word{
+  font-size:clamp(14px, 1.45vw, 24px);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--purple);
+  white-space:nowrap;
+}
+
+.projection-line{
+  position:relative;
+  width:44px;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#7f4cff,#6232f2);
+  box-shadow:0 3px 8px rgba(109,56,245,.12);
+}
+
+.projection-line::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:0;
+  height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+}
+
+.projection-line-left::after{
+  left:-1px;
+  border-right:10px solid #7f4cff;
+}
+
+.projection-line-right::after{
+  right:-1px;
+  border-left:10px solid #6232f2;
+}
+
+.projection-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 14px;
+  justify-content:center;
+}
+
+.projection-tags .tag{
+  background:#ebe3fb;
+  border:1px solid #dbcdf9;
+  color:#6d38f5;
+  font-size:clamp(11px, .82vw, 13px);
+  min-height:36px;
+  padding:0 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:none;
+}
+
+@media (max-width: 980px){
+  .projection-flow{
+    grid-template-columns:1fr;
+    gap:18px;
+    text-align:center;
+  }
+
+  .projection-left,
+  .projection-right{
+    text-align:center;
+  }
+
+  .projection-center{
+    order:2;
+    flex-wrap:nowrap;
+  }
+
+  .projection-left{
+    order:1;
+  }
+
+  .projection-right{
+    order:3;
+  }
+}
+
+@media (max-width: 640px){
+  .projection-card{
+    padding:22px;
+  }
+
+  .projection-stage{
+    padding:20px 16px 18px;
+    border-radius:22px;
+  }
+
+  .projection-intro{
+    font-size:20px;
+    margin-bottom:18px;
+  }
+
+  .projection-side{
+    font-size:22px;
+  }
+
+  .projection-word{
+    font-size:22px;
+  }
+
+  .projection-line{
+    width:52px;
+    height:5px;
+  }
+
+  .projection-line::after{
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+  }
+
+  .projection-line-left::after{
+    border-right:12px solid #7f4cff;
+  }
+
+  .projection-line-right::after{
+    border-left:12px solid #6232f2;
+  }
+
+  .projection-tags{
+    justify-content:flex-start;
+  }
+
+  .projection-tags .tag{
+    min-height:42px;
+    padding:0 14px;
+  }
+}
+
+    .tag{
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:13px;
+      font-weight:800;
+      border:1px solid rgba(109,56,245,.10);
+    }
+
+    .timeline{
+      display:grid;
+      gap:16px;
+      position:relative;
+      z-index:2;
+    }
+
+   .timeline-card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:24px;
+  padding:28px 28px 30px;
+  box-shadow:var(--shadow-soft);
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+    .timeline-number{
+  width:82px;
+  height:82px;
+  border-radius:24px;
+  background:linear-gradient(180deg,#8a5bff 0%, #612ef1 100%);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:36px;
+  font-weight:900;
+  box-shadow:0 14px 26px rgba(109,56,245,.22);
+}
+
+    .timeline-card h3{
+  font-size:clamp(34px, 3.2vw, 48px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  margin-bottom:12px;
+  color:#111735;
+}
+
+.timeline-card p{
+  color:#63698c;
+  font-size:18px;
+  line-height:1.62;
+  margin-bottom:18px;
+  max-width:760px;
+}
+
+.timeline-card ul{
+  margin:0;
+  padding-left:24px;
+  color:#4d547a;
+  font-size:18px;
+  line-height:1.72;
+  max-width:860px;
+}
+.festival-layout .timeline-card{
+  align-content:start;
+}
+
+.festival-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1.22fr) minmax(300px, 360px);
+  gap:22px;
+  align-items:stretch;
+}
+
+.festival-layout .timeline-card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow-soft);
+  height:100%;
+  align-content:start;
+}
+
+.festival-layout .timeline-card > div:last-child{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-height:100%;
+}
+
+.festival-list{
+  display:grid;
+  gap:12px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.festival-list li{
+  position:relative;
+  padding-left:24px;
+  color:#4d547a;
+  font-size:18px;
+  line-height:1.68;
+}
+
+.festival-list li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:var(--purple);
+  font-weight:900;
+}
+
+.festival-image-card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  height:100%;
+  min-height:0;
+  max-height:720px;
+  align-self:stretch;
+  display:flex;
+}
+
+.festival-image-card img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center top;
+  flex:1;
+}
+
+@media (min-width: 1161px){
+  .festival-layout{
+    grid-template-columns:minmax(0, 1fr) minmax(340px, 390px);
+  }
+
+  .festival-layout .timeline-card{
+    height:100%;
+  }
+
+  .festival-image-card{
+    height:100%;
+    max-height:720px;
+  }
+}
+
+@media (max-width: 1160px){
+  .festival-layout{
+    grid-template-columns:1fr;
+  }
+
+  .festival-image-card{
+    max-height:none;
+    min-height:520px;
+  }
+}
+
+    .accordion{
+      display:grid;
+      gap:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    details.trip{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:#fff;
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      transition:.2s ease;
+    }
+
+    details.trip[open]{
+      border-color:#d8c7ff;
+    }
+
+    .trip summary{
+      list-style:none;
+      cursor:pointer;
+      padding:22px;
+      display:grid;
+      grid-template-columns:70px 1fr auto;
+      gap:18px;
+      align-items:center;
+    }
+
+    .trip summary::-webkit-details-marker{display:none}
+
+    .trip-icon{
+      width:64px;
+      height:64px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#f7f3ff,#efe7ff);
+      color:var(--purple);
+      display:grid;
+      place-items:center;
+      font-size:28px;
+      border:1px solid rgba(109,56,245,.10);
+    }
+
+    .trip h3{
+      font-size:28px;
+      line-height:1.02;
+      margin-bottom:6px;
+      letter-spacing:-.03em;
+    }
+
+    .trip small{
+      display:block;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.5;
+    }
+
+   .trip-toggle{
+  min-width:110px;
+  height:44px;
+  padding:0 16px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:var(--purple-soft);
+  color:var(--purple);
+  font-size:16px;
+  font-weight:900;
+  transition:.2s ease;
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+.trip-plus{
+  line-height:1;
+  font-size:20px;
+}
+
+.trip-toggle-text{
+  line-height:1;
+}
+
+   details[open] .trip-toggle{
+  background:#ede4ff;
+}
+
+    .trip-body{
+      padding:0 22px 22px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .trip-copy h4{
+      font-size:18px;
+      line-height:1.2;
+      margin-bottom:10px;
+    }
+
+    .trip-text{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+      margin-bottom:16px;
+    }
+
+    .trip-bullets{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .trip-bullet{
+      display:grid;
+      grid-template-columns:34px 1fr;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#fbf9ff;
+      border:1px solid #eee7fb;
+    }
+
+    .trip-bullet .dot{
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:15px;
+      font-weight:900;
+    }
+
+    .trip-bullet span{
+      color:#4d547a;
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .trip-note{
+      border-radius:18px;
+      padding:16px 18px;
+      background:linear-gradient(180deg,#f8f4ff 0%, #f0e8ff 100%);
+      border:1px solid #e9dcff;
+      color:#4f5477;
+      line-height:1.6;
+      font-size:15px;
+      margin-bottom:14px;
+    }
+
+    .trip-location{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .map-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ded3fa;
+      color:var(--purple);
+      font-size:14px;
+      font-weight:800;
+      box-shadow:var(--shadow-soft);
+      transition:.2s ease;
+    }
+
+    .map-link:hover{
+      transform:translateY(-1px);
+      border-color:#cdb9ff;
+    }
+
+    .trip-media{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+
+    .photo-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .photo-box{
+      min-height:170px;
+      border-radius:22px;
+      border:1px dashed #d8caef;
+      background:
+        linear-gradient(180deg, rgba(109,56,245,.04), rgba(109,56,245,.02)),
+        #faf8ff;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:#7b7fa0;
+      padding:16px;
+      font-size:13px;
+      line-height:1.5;
+      font-weight:700;
+    }
+
+    .photo-box.large{
+      min-height:250px;
+      grid-column:1/-1;
+      border-style:solid;
+      border-color:#e8e1f5;
+      background:
+        radial-gradient(circle at top left, rgba(109,56,245,.08), transparent 28%),
+        linear-gradient(180deg,#fdfcff 0%, #f7f3ff 100%);
+    }
+.photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:20px;
+  display:block;
+}
+
+    .media-note{
+      border-radius:18px;
+      padding:14px 16px;
+      background:#fff;
+      border:1px solid #eee7fb;
+      color:#646b8f;
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-box{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow-soft);
+    }
+.publicaciones-gallery{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+  position:relative;
+  z-index:2;
+}
+
+.publicacion-img-box{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:22px;
+  padding:12px;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+}
+
+.publicacion-img-box img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  object-position:center;
+  border-radius:16px;
+  display:block;
+}
+
+    .mini-box h3{
+      font-size:22px;
+      line-height:1.08;
+      margin-bottom:10px;
+    }
+
+    .mini-box p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+
+    .event-banner{
+      margin-top:18px;
+      border-radius:24px;
+      overflow:hidden;
+      padding:22px 24px;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(160,105,255,.22), transparent 18%),
+        radial-gradient(circle at 82% 50%, rgba(255,209,96,.12), transparent 12%),
+        linear-gradient(135deg,#1e0a67 0%, #25148d 40%, #090f4c 100%);
+      color:#fff;
+      box-shadow:0 22px 44px rgba(36,19,114,.22);
+      position:relative;
+      z-index:2;
+    }
+
+    .event-banner::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,.18) 1.3px, transparent 1.4px);
+      background-size:30px 30px;
+      opacity:.15;
+      pointer-events:none;
+    }
+
+    .event-banner-grid{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:24px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .event-banner h3{
+      font-size:clamp(30px,4vw,50px);
+      line-height:.98;
+      letter-spacing:-.04em;
+      margin-bottom:10px;
+    }
+
+    .event-banner p{
+      color:rgba(255,255,255,.92);
+      font-size:17px;
+      line-height:1.6;
+      max-width:760px;
+    }
+
+    .event-stats{
+      display:grid;
+      gap:12px;
+      min-width:220px;
+    }
+
+    .event-stat{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(4px);
+    }
+
+    .event-stat .label{
+      display:block;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#dbcfff;
+      margin-bottom:6px;
+      font-weight:800;
+    }
+
+    .event-stat .value{
+      display:block;
+      font-size:22px;
+      font-weight:900;
+      line-height:1.05;
+    }
+
+    .confirm-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .participants-box,
+    .confirm-box{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .participants-box h3,
+    .confirm-box h3{
+      font-size:26px;
+      line-height:1.05;
+      margin-bottom:10px;
+    }
+
+    .participants-box p,
+    .confirm-box p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+
+    .participants{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .participant{
+      min-height:66px;
+      border-radius:18px;
+      border:1.5px solid #e5def4;
+      background:#fff;
+      color:#3c4165;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .participant:hover{
+      border-color:#d2c0ff;
+      transform:translateY(-1px);
+    }
+
+    .participant.active{
+      border-color:rgba(109,56,245,.56);
+      background:#fbf8ff;
+      color:#6037f4;
+      box-shadow:0 0 0 4px rgba(109,56,245,.07);
+    }
+
+    .confirm-preview{
+      border-radius:22px;
+      padding:18px;
+      background:linear-gradient(180deg,#faf7ff,#f2ebff);
+      border:1px solid #e9dcff;
+      display:grid;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .preview-line{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding-bottom:10px;
+      border-bottom:1px solid #e6ddf8;
+    }
+
+    .preview-line:last-child{border-bottom:none;padding-bottom:0}
+
+    .preview-line b{
+      color:#2d335a;
+      font-size:15px;
+    }
+
+    .preview-line span{
+      color:#6f7291;
+      font-size:15px;
+      text-align:right;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .primary-btn{
+      border:none;
+      min-height:58px;
+      padding:0 22px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#9d72ff 0%, #7a49ff 38%, #6d38f5 68%, #5f2eea 100%);
+      color:#fff;
+      font-weight:900;
+      font-size:15px;
+      box-shadow:
+        0 16px 30px rgba(109,56,245,.22),
+        inset 0 1px 0 rgba(255,255,255,.22);
+      cursor:pointer;
+      transition:.22s ease;
+    }
+
+    .primary-btn:hover{transform:translateY(-2px)}
+
+    .secondary-btn{
+      border:none;
+      min-height:58px;
+      padding:0 20px;
+      border-radius:18px;
+      background:#fff;
+      color:var(--purple);
+      border:1px solid #ded3fa;
+      font-weight:800;
+      font-size:15px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .secondary-btn:hover{transform:translateY(-1px)}
+
+    .confirm-message{
+      margin-top:14px;
+      border-radius:18px;
+      padding:15px 16px;
+      background:#f7f4ff;
+      border:1px solid #e5ddf6;
+      color:#565c81;
+      font-size:14px;
+      line-height:1.5;
+      min-height:56px;
+      display:flex;
+      align-items:center;
+    }
+
+.message-box-wrap{
+  margin-top:16px;
+}
+
+.message-label{
+  display:block;
+  margin-bottom:8px;
+  color:#4e5478;
+  font-size:14px;
+  font-weight:700;
+}
+
+.message-box{
+  width:100%;
+  min-height:120px;
+  border-radius:18px;
+  padding:16px 18px;
+  border:1px solid #e5ddf6;
+  background:linear-gradient(180deg,#fcfaff 0%, #f7f2ff 100%);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  resize:vertical;
+  outline:none;
+  transition:.2s ease;
+  box-shadow:var(--shadow-soft);
+}
+
+.message-box::placeholder{
+  color:#8a8fad;
+}
+
+.message-box:focus{
+  border-color:#cdb7ff;
+  box-shadow:
+    0 0 0 4px rgba(109,56,245,.08),
+    var(--shadow-soft);
+}
+
+   .footer-note{
+  margin-top:28px;
+  text-align:center;
+  color:#5f6588;
+  font-size:18px;
+  line-height:1.6;
+  position:relative;
+  z-index:2;
+  max-width:1050px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.footer-note::before{
+  content:"";
+  display:block;
+  width:90px;
+  height:2px;
+  margin:0 auto 18px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(109,56,245,.12), rgba(109,56,245,.45), rgba(109,56,245,.12));
+}
+
+.footer-note strong{
+  display:block;
+  margin-top:12px;
+  color:var(--purple);
+  font-size:26px;
+  line-height:1.3;
+  font-weight:900;
+}
+
+    .delay-1{transition-delay:.08s}
+    .delay-2{transition-delay:.16s}
+    .delay-3{transition-delay:.24s}
+    .delay-4{transition-delay:.32s}
+.title-stage-card{
+  padding:34px 42px 26px;
+  margin-bottom:18px;
+  overflow:hidden;
+}
+
+.title-stage{
+  position:relative;
+  z-index:2;
+}
+
+.title-stage-top{
+  display:flex;
+  justify-content:center;
+  margin-bottom:14px;
+}
+
+.meeting-label-title{
+  display:inline-block;
+  color:var(--purple);
+  text-transform:uppercase;
+  letter-spacing:.24em;
+  font-size:13px;
+  font-weight:900;
+  text-align:center;
+}
+
+.title-stage-center{
+  text-align:center;
+  position:relative;
+}
+
+.title-stage-star{
+  font-size:26px;
+  color:var(--gold);
+  margin-bottom:10px;
+  line-height:1;
+  text-shadow:0 0 18px rgba(244,198,77,.35);
+}
+
+.title-stage-main{
+  font-size:clamp(50px, 7.2vw, 118px);
+  line-height:.9;
+  letter-spacing:-.08em;
+  max-width:1180px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.title-stage-main .dark{
+  color:var(--text);
+}
+
+.title-stage-main .accent{
+  color:var(--purple);
+}
+
+.title-stage-mountain-wrap{
+  position:relative;
+  max-width:980px;
+  margin:10px auto 0;
+  height:105px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.title-stage-mountain{
+  width:100%;
+  height:100%;
+  display:block;
+  opacity:.98;
+  filter:
+    drop-shadow(0 14px 22px rgba(20, 12, 58, .12))
+    drop-shadow(0 6px 10px rgba(20, 12, 58, .08));
+}
+
+.mountain-back{
+  fill:#4b3c8f;
+}
+
+.mountain-mid{
+  fill:#352a73;
+}
+
+.mountain-front{
+  fill:#241b5f;
+}
+
+.mountain-snow{
+  fill:#f3f1ff;
+  opacity:.92;
+}
+
+.title-stage-star-glow{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:radial-gradient(circle, rgba(255,223,133,1) 0%, rgba(255,223,133,.7) 35%, rgba(255,223,133,0) 75%);
+  box-shadow:
+    0 0 24px rgba(255,223,133,.55),
+    0 0 54px rgba(255,223,133,.28);
+}
+
+.hero-card-lower{
+  padding-top:30px;
+}
+
+.lower-grid{
+  align-items:start;
+}
+.mentores-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  position:relative;
+  z-index:2;
+}
+
+.mentor-card{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+  border-radius:28px;
+  padding:26px;
+  box-shadow:var(--shadow-soft);
+  position:relative;
+  overflow:hidden;
+}
+
+.mentor-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:140px;
+  height:90px;
+  background-image:radial-gradient(circle, rgba(109,56,245,.14) 1.4px, transparent 1.5px);
+  background-size:14px 14px;
+  opacity:.35;
+  pointer-events:none;
+}
+
+.mentor-card-top{
+  display:grid;
+  grid-template-columns:108px 1fr;
+  gap:20px;
+  align-items:center;
+  margin-bottom:20px;
+  position:relative;
+  z-index:2;
+}
+
+.mentor-photo{
+  width:108px;
+  height:108px;
+  border-radius:999px;
+  overflow:hidden;
+  border:4px solid #efe7ff;
+  box-shadow:
+    0 10px 24px rgba(109,56,245,.10),
+    0 0 0 1px rgba(109,56,245,.08);
+  background:linear-gradient(180deg,#faf7ff,#f1ebff);
+  flex:0 0 auto;
+}
+
+.mentor-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.mentor-name{
+  font-size:clamp(24px, 2.2vw, 34px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  color:var(--text);
+  margin-bottom:8px;
+}
+
+.mentor-formacion{
+  color:#52587b;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.mentor-formacion strong{
+  color:var(--purple);
+  font-weight:800;
+}
+
+.mentor-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:12px;
+  position:relative;
+  z-index:2;
+}
+
+.mentor-list li{
+  position:relative;
+  padding-left:22px;
+  color:#4d547a;
+  font-size:16px;
+  line-height:1.65;
+}
+
+.mentor-list li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:var(--purple);
+  font-weight:900;
+  font-size:20px;
+  line-height:1.2;
+}
+
+@media (max-width: 980px){
+  .mentores-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .mentor-card{
+    padding:22px 18px;
+    border-radius:22px;
+  }
+
+  .mentor-card-top{
+    grid-template-columns:84px 1fr;
+    gap:14px;
+    align-items:center;
+  }
+
+  .mentor-photo{
+    width:84px;
+    height:84px;
+  }
+
+  .mentor-name{
+    font-size:28px;
+  }
+
+  .mentor-formacion,
+  .mentor-list li{
+    font-size:15px;
+  }
+}
+    @media (max-width: 1160px){
+      .hero-grid-upgraded,
+      .split,
+      .confirm-grid,
+      .trip-body{
+        grid-template-columns:1fr;
+      }
+
+      .cards-4{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .event-banner-grid{
+        grid-template-columns:1fr;
+      }
+
+      
+    }
+
+@media (max-width: 920px){
+  .title-stage-card{
+    padding:26px 22px 22px;
+  }
+
+  .title-stage-main{
+    font-size:clamp(42px, 11vw, 76px);
+    line-height:.93;
+  }
+
+  .title-stage-mountain-wrap{
+    height:78px;
+    margin-top:8px;
+  }
+
+  .hero-visual-frame{
+    grid-template-columns:1fr;
+  }
+
+  .hero-vertical-image{
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  .hero-image-placeholder{
+    min-height:460px;
+  }
+
+  .hero-visual-card-upgraded{
+    padding:18px;
+  }
+
+  .visual-panels{
+    grid-template-columns:1fr;
+  }
+}
+
+    @media (max-width: 820px){
+  .section-card,
+  .hero-card-upgraded{padding:22px}
+  .cards-4{grid-template-columns:1fr}
+  .timeline-card{grid-template-columns:1fr}
+  .participants{grid-template-columns:repeat(2,1fr)}
+  .photo-grid{grid-template-columns:1fr}
+  .photo-box.large{grid-column:auto}
+  .trip summary{
+    grid-template-columns:64px 1fr 42px;
+    padding:18px;
+    gap:14px;
+  }
+  .trip-toggle{
+    min-width:44px;
+    width:44px;
+    height:44px;
+    padding:0;
+    gap:0;
+    border-radius:999px;
+  }
+
+  .trip-toggle-text{
+    display:none;
+  }
+
+  .trip-plus{
+    font-size:22px;
+  }
+  .trip-body{
+    padding:0 18px 18px;
+  }
+
+  .festival-layout .timeline-card{
+    padding:24px 22px 26px;
+  }
+  .publicaciones-gallery{
+    grid-template-columns:1fr;
+  }
+
+  .publicacion-img-box img{
+    height:220px;
+  }
+
+  .festival-layout .timeline-card h3{
+    font-size:clamp(28px, 8vw, 40px);
+    line-height:1;
+  }
+
+  .festival-layout .timeline-card p{
+    font-size:17px;
+    line-height:1.58;
+  }
+
+  .festival-list li{
+    font-size:17px;
+    line-height:1.6;
+  }
+}
+.festival-highlight-box{
+  margin-top:36px;
+  padding:24px 24px;
+  border-radius:22px;
+  background:linear-gradient(180deg,#faf7ff 0%, #f2ebff 100%);
+  border:1px solid #e6dafd;
+  box-shadow:0 10px 24px rgba(109,56,245,.06);
+  max-width:760px;
+  min-height:150px;
+}
+
+.festival-highlight-label{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:0 12px;
+  margin-bottom:12px;
+  border-radius:999px;
+  background:#ebe3fb;
+  border:1px solid #d9cafa;
+  color:var(--purple);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.festival-highlight-text{
+  margin:0;
+  color:#4d547a;
+  font-size:19px;
+  line-height:1.7;
+}
+
+    @media (max-width: 640px){
+  .title-stage-main{
+    font-size:clamp(34px, 12.5vw, 62px);
+    line-height:.95;
+  }
+
+  .title-stage-star{
+    font-size:20px;
+    margin-bottom:8px;
+  }
+
+  .title-stage-mountain-wrap{
+    height:58px;
+  }
+  .container{
+    width:min(var(--container), calc(100% - 18px));
+  }
+
+  .hero{padding-top:18px}
+  .section{padding:16px 0}
+  .participants{grid-template-columns:1fr}
+  .quick-nav{position:static}
+  .point{grid-template-columns:48px 1fr}
+  .point-icon{width:46px;height:46px}
+  .hero-meta{gap:10px}
+  .meta-pill{font-size:13px}
+  .btn-row{flex-direction:column}
+  .primary-btn,.secondary-btn{width:100%}
+  .visual-main-upgraded{font-size:42px}
+  .trip h3{font-size:24px}
+
+  .festival-layout{
+    gap:16px;
+  }
+
+  .festival-layout .timeline-card{
+    padding:22px 18px 24px;
+  }
+
+  .festival-layout .timeline-card h3{
+    font-size:clamp(24px, 9vw, 34px);
+    line-height:1.02;
+    margin-bottom:10px;
+  }
+
+  .festival-layout .timeline-card p{
+    font-size:16px;
+    line-height:1.56;
+    margin-bottom:14px;
+  }
+
+  .festival-list{
+    gap:10px;
+  }
+
+  .festival-list li{
+    font-size:16px;
+    line-height:1.55;
+    padding-left:20px;
+  }
+
+  .festival-image-card{
+    min-height:420px;
+  }
+}
+/* ===== BLOQUE FECHAS DE LA GIRA ===== */
+.tour-section-wrap{
+  display:grid;
+  gap:22px;
+  position:relative;
+  z-index:2;
+}
+
+.tour-head{
+  text-align:left;
+  max-width:1120px;
+  margin:0 auto;
+  width:100%;
+}
+
+.tour-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:42px;
+  padding:0 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#ffffff;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.18);
+  margin-bottom:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.tour-title{
+  font-size:clamp(25px, 4vw, 55px);
+  line-height:1;
+  letter-spacing:-.04em;
+  font-weight:800;
+  margin-bottom:12px;
+  color:#ffffff;
+}
+
+.tour-subtitle{
+  font-size:clamp(19px, 2vw, 26px);
+  color:rgba(255,255,255,.92);
+  line-height:1.35;
+  margin-bottom:12px;
+  font-weight:500;
+}
+
+.tour-desc{
+  color:#6f7291;
+  font-size:16px;
+  line-height:1.72;
+  max-width:980px;
+}
+
+.tour-board{
+  max-width:940px;
+  width:100%;
+  margin:0 auto;
+  background:linear-gradient(180deg,#fbf9fc 0%, #f5f1f8 100%);
+  border:1px solid #eee6f5;
+  border-radius:28px;
+  padding:42px 30px 40px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.tour-board::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:180px;
+  height:140px;
+  background-image:radial-gradient(circle, rgba(109,56,245,.14) 1.4px, transparent 1.5px);
+  background-size:14px 14px;
+  opacity:.45;
+  pointer-events:none;
+}
+
+.tour-region-title{
+  text-align:center;
+  font-size:clamp(22px, 2.5vw, 34px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  font-weight:800;
+  margin-bottom:26px;
+  color:#161c46;
+}
+
+.tour-map{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 96px 1fr;
+  gap:14px;
+  align-items:start;
+}
+
+.tour-column{
+  display:grid;
+  gap:14px;
+}
+
+.tour-city-title{
+  font-size:clamp(16px, 1.7vw, 26px);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.02em;
+  color:#171d42;
+  text-align:center;
+  margin:4px 0 4px;
+}
+
+.tour-road{
+  position:relative;
+  min-height:1030px;
+  display:flex;
+  justify-content:center;
+}
+
+.tour-road-line{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:34px;
+  border-radius:999px;
+  background:
+    linear-gradient(90deg, #000 0 38%, #fff 38% 45%, #000 45% 55%, #fff 55% 62%, #000 62% 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.tour-stop{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  background:#fff;
+  border:5px solid #222;
+  box-shadow:0 4px 10px rgba(0,0,0,.12);
+  z-index:3;
+}
+
+.tour-stop::after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border-radius:999px;
+  background:#f3f1f6;
+}
+
+.stop-1{top:16%}
+.stop-2{top:29%}
+.stop-3{top:40%}
+.stop-4{top:53%}
+.stop-5{top:72%}
+
+.tour-plane{
+  position:absolute;
+  bottom:-60px;
+  left:50%;
+  transform:translateX(-38%) rotate(90deg);
+  font-size:120px;
+  color:#f1ae32;
+  z-index:3;
+}
+
+.tour-card{
+  background:#f8f6f8;
+  border:1.5px solid #d8d0d7;
+  border-radius:16px;
+  padding:12px 12px 10px;
+  box-shadow:0 3px 10px rgba(0,0,0,.04);
+}
+
+.tour-card.highlight{
+  border-color:#f1ae32;
+  box-shadow:0 0 0 2px rgba(241,174,50,.08);
+}
+
+.tour-card-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.tour-card-place{
+  font-size:12px;
+  font-weight:700;
+  color:#2b2f43;
+  margin-bottom:7px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.tour-card-date{
+  font-size:13px;
+  font-weight:800;
+  color:#111;
+  line-height:1.32;
+}
+
+.tour-card-date .soon{
+  color:#ff503c;
+}
+
+.tour-star{
+  font-size:16px;
+  color:#f1ae32;
+  flex:0 0 auto;
+  line-height:1;
+}
+
+.tour-card-sub{
+  font-size:12px;
+  color:#555b7c;
+  line-height:1.4;
+  margin-bottom:6px;
+}
+
+.tour-card-row{
+  font-size:11.5px;
+  color:#6b708b;
+  line-height:1.4;
+  padding-top:6px;
+  margin-top:6px;
+  border-top:1px solid #ddd5de;
+  display:flex;
+  align-items:flex-start;
+  gap:7px;
+}
+
+.tour-bottom{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.tour-legend{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  align-items:center;
+  justify-content:flex-start;
+  color:#353b5f;
+  font-size:14px;
+  font-weight:700;
+}
+
+.tour-legend-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.legend-line{
+  width:52px;
+  height:4px;
+  border-radius:999px;
+  background:#d2c8cf;
+}
+
+.legend-line.next{
+  background:#f1ae32;
+}
+
+.legend-star{
+  color:#f1ae32;
+  font-size:18px;
+  line-height:1;
+}
+.tour-collapse{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at top left, rgba(170,130,255,.22), transparent 24%),
+    radial-gradient(circle at top right, rgba(255,255,255,.08), transparent 18%),
+    linear-gradient(135deg,#2b1483 0%, #4a22c9 45%, #24105f 100%);
+  box-shadow:0 24px 52px rgba(36,16,95,.22);
+  overflow:hidden;
+}
+
+.tour-collapse[open]{
+  border-color:rgba(255,255,255,.16);
+}
+
+.tour-summary{
+  list-style:none;
+  cursor:pointer;
+  padding:30px 32px 24px;
+  position:relative;
+  user-select:none;
+}
+
+.tour-summary::-webkit-details-marker{
+  display:none;
+}
+
+.tour-summary-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.tour-summary-copy{
+  min-width:0;
+  flex:1;
+}
+
+.tour-summary-copy{
+  min-width:0;
+  flex:1;
+}
+
+.tour-summary-copy p,
+.tour-summary-copy h2{
+  text-wrap:balance;
+}
+
+.tour-toggle{
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.10);
+  color:#ffffff;
+  font-size:22px;
+  font-weight:900;
+  flex:0 0 auto;
+  transition:.22s ease;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+}
+
+.tour-collapse[open] .tour-toggle{
+  transform:rotate(45deg);
+}
+
+.tour-collapse-body{
+  padding:0 32px 125px;
+}
+
+@media (max-width: 680px){
+  .tour-summary{
+    padding:22px 18px 18px;
+  }
+
+  .tour-collapse-body{
+    padding:0 18px 54px;
+  }
+
+  .tour-toggle{
+    width:42px;
+    height:42px;
+    font-size:20px;
+  }
+}
+@media (max-width: 1100px){
+  .tour-map{
+    grid-template-columns:1fr;
+  }
+
+  .tour-road{
+    display:none;
+  }
+
+  .tour-bottom{
+    grid-template-columns:1fr;
+  }
+
+  .tour-city-title{
+    text-align:left;
+    margin-top:10px;
+  }
+}
+
+@media (max-width: 680px){
+  .tour-board{
+    padding:24px 16px 24px;
+    border-radius:22px;
+  }
+
+  .tour-card{
+    padding:11px;
+  }
+
+    .tour-title{
+    font-size:clamp(36px, 9vw, 52px);
+    line-height:.95;
+  }
+
+  .tour-subtitle{
+    font-size:18px;
+  }
+
+  .tour-region-title{
+    margin-bottom:22px;
+  }
+}
+  </style>
+</head>
+<body>
+
+ <header class="hero">
+  <div class="container">
+
+    <!-- BLOQUE SUPERIOR SOLO PARA EL TÍTULO -->
+    <section class="section-card reveal show title-stage-card">
+      <div class="title-stage">
+
+        <div class="title-stage-top">
+          <div class="meeting-label meeting-label-title">REUNIÓN</div>
+        </div>
+
+        <div class="title-stage-center">
+          <div class="title-stage-star">✦</div>
+
+          <h1 class="title-stage-main">
+            <span class="dark">El Origen de la</span><br>
+            <span class="accent">Cordillera Blanca</span><br>
+            <span class="dark">y la</span> <span class="accent">Cordillera Negra</span>
+          </h1>
+
+          <div class="title-stage-mountain-wrap">
+  <svg class="title-stage-mountain" viewBox="0 0 1200 260" aria-hidden="true">
+    
+    <!-- capa de fondo -->
+    <path class="mountain-back"
+      d="M0 210
+         L90 205 L170 190 L250 198 L340 168
+         L430 182 L520 142 L610 170 L700 126
+         L790 165 L885 138 L980 184 L1080 198 L1200 205
+         L1200 260 L0 260 Z"></path>
+
+    <!-- capa media -->
+    <path class="mountain-mid"
+      d="M0 220
+         L120 214 L210 205 L300 182 L390 192
+         L470 150 L560 168 L650 108 L735 156
+         L820 122 L905 165 L1000 190 L1095 205 L1200 214
+         L1200 260 L0 260 Z"></path>
+
+    <!-- capa frontal -->
+    <path class="mountain-front"
+      d="M0 230
+         L110 226 L220 220 L310 198 L390 206
+         L470 160 L535 172 L620 118 L700 158
+         L775 104 L860 155 L940 132 L1030 196 L1120 212 L1200 218
+         L1200 260 L0 260 Z"></path>
+
+    <!-- nieve -->
+    <path class="mountain-snow"
+      d="M585 138
+         L620 118
+         L650 140
+         L675 120
+         L705 156
+         L675 146
+         L650 132
+         L620 145 Z"></path>
+
+    <path class="mountain-snow"
+      d="M740 122
+         L775 104
+         L805 128
+         L828 116
+         L860 155
+         L828 145
+         L800 132
+         L770 142 Z"></path>
+  </svg>
+
+  <div class="title-stage-star-glow"></div>
+</div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE INFERIOR YA SOLO CON DETALLES -->
+    <section class="section-card reveal show hero-card-upgraded hero-card-lower">
+      <div class="hero-grid-upgraded lower-grid">
+
+        <div class="hero-copy-upgraded">
+          <p class="hero-lead-upgraded">
+            <strong>Reunión especial del equipo – 11/05.</strong>
+
+            Felicidades por haber sido seleccionad@s para formar parte de esta gran historia.
+          </p>
+
+          <div class="hero-note-upgraded">
+            Esta no solo será una reunión informativa. Es una invitación a entrar en un proyecto que busca unir ciencia, territorio, memoria, arte, tecnología y divulgación, formando a nuevos portavoces de la Cordillera Blanca y la Cordillera Negra.
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-pill">📅 <b>11/05</b></div>
+            <div class="meta-pill">👥 Nuev@s seleccionad@s</div>
+            <div class="meta-pill">🌎 Proyección nacional e internacional</div>
+          </div>
+
+          <div class="hero-points-upgraded">
+            <div class="point reveal delay-1 show">
+              <div class="point-icon">🤝</div>
+              <div>
+                <strong>Conocernos e integrar al equipo</strong>
+                <span>Compartir valores, ideas y maneras de trabajar en grupo.</span>
+              </div>
+            </div>
+
+            <div class="point reveal delay-2 show">
+              <div class="point-icon">🎤</div>
+              <div>
+                <strong>Formar nuevos presentadores e investigadores</strong>
+                <span>El proyecto busca que cada integrante crezca y pueda representar esta actividad en distintos contextos e idiomas.</span>
+              </div>
+            </div>
+
+            <div class="point reveal delay-3 show">
+              <div class="point-icon">🧭</div>
+              <div>
+                <strong>Compartir y proyectar lo que viene</strong>
+                <span>Festival de los Glaciares, salidas de campo, publicaciones, tecnología, expansión y próxima fecha.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <div class="hero-visual-upgraded">
+  <div class="hero-visual-frame">
+
+    
+
+    <div class="hero-visual-card-upgraded">
+  <div class="visual-top">
+    <div class="visual-badge">✨ reunión especial del equipo</div>
+    <div class="visual-badge">11/05</div>
+  </div>
+
+  <span class="visual-kicker-line"></span>
+
+  <div class="visual-main-upgraded">
+    Una historia de <span class="gold">millones de años</span> contada por <span class="violet">nuevas voces</span>
+  </div>
+
+  <div class="visual-copy-upgraded">
+    Queremos que esta reunión muestre con claridad el tipo de proyecto al que están entrando: una experiencia que nace en el Callejón de Huaylas, pero que aspira a llegar al Perú y al mundo.
+  </div>
+
+  <div class="visual-panels">
+    <div class="visual-panel">
+      <strong>Territorio</strong>
+      <span>Huaylas, Mancos, Caraz, Laguna Parón, Yungay y Refugio Huascarán.</span>
+    </div>
+
+    <div class="visual-panel">
+      <strong>Expansión</strong>
+      <span>Quechuahablantes, niños, regiones del país, Lima y primera salida internacional a São Paulo.</span>
+    </div>
+
+    <div class="visual-panel">
+      <strong>Proyección</strong>
+      <span>Festival, publicaciones, certificados automáticos y línea de trabajo tecnológica.</span>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      <div class="quick-nav">
+<a class="nav-chip" href="#fechas-gira">Fechas de la gira</a>
+        <a class="nav-chip" href="#agenda">Agenda</a>
+        <a class="nav-chip" href="#proyeccion">Proyección</a>
+        <a class="nav-chip" href="#salidas">Salidas de campo</a>
+        <a class="nav-chip" href="#publicaciones">Publicaciones</a>
+        <a class="nav-chip" href="#proxima-fecha">Próxima fecha</a>
+        <a class="nav-chip" href="#confirmacion">Confirmación</a>
+      </div>
+    </section>
+  </div>
+</header>
+
+  <main>
+<section class="section" id="fechas-gira">
+  <div class="container">
+    <details class="tour-collapse reveal">
+      <summary class="tour-summary">
+        <div class="tour-summary-head">
+          <div class="tour-summary-copy">
+            <div class="tour-kicker">✦ CONOCE TODAS LAS FECHAS PREVIAS ✦</div>
+            <h2 class="tour-title">Uniendo a todo un valle</h2>
+            <p class="tour-subtitle">El Origen de la Cordillera Negra y la Cordillera Blanca</p>
+          </div>
+          <div class="tour-toggle">＋</div>
+        </div>
+      </summary>
+
+      <div class="tour-collapse-body">
+        <div class="tour-section-wrap">
+
+          
+
+          <div class="tour-board">
+            <h3 class="tour-region-title">Desde el Callejón de Huaylas - Perú</h3>
+
+            <div class="tour-map">
+              <!-- COLUMNA IZQUIERDA -->
+              <div class="tour-column">
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Municipalidad Prov. de Huaylas</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">29 NOV 2025 &nbsp;|&nbsp; Caraz</div>
+                  </div>
+                  <div class="tour-card-sub">Primera fecha pública</div>
+                  <div class="tour-card-row">🎤 Organizado por Caraz Cultura</div>
+                  <div class="tour-card-row">👥 ~120 personas</div>
+                </div>
+
+                <div class="tour-city-title">CARAZ</div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Casona Lara</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">30 DIC 2025 &nbsp;|&nbsp; Caraz</div>
+                  </div>
+                  <div class="tour-card-sub">En alianza con Aqará</div>
+                  <div class="tour-card-row">🎤 Presentación a cielo abierto</div>
+                  <div class="tour-card-row">👥 ~60 personas</div>
+                </div>
+
+                <div class="tour-city-title">MANCOS</div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Municipalidad de Mancos</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date">30 ENE 2026 &nbsp;|&nbsp; Mancos</div>
+                      <div class="tour-card-sub">Salón Consistorial</div>
+                    </div>
+                    <div class="tour-star">★</div>
+                  </div>
+                  <div class="tour-card-row">🎤 Organizado por HDC</div>
+                  <div class="tour-card-row">👥 ~50 personas</div>
+                </div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Auditorio Huascarán</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date">18 DIC 2025 &nbsp;|&nbsp; Huaraz</div>
+                      <div class="tour-card-sub">Cámara de Comercio</div>
+                    </div>
+                    <div class="tour-star">★</div>
+                  </div>
+                  <div class="tour-card-row">🎤 Día Internacional de las Montañas</div>
+                  <div class="tour-card-row">👥 ~60 personas</div>
+                </div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Explorandes</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">17 ABR 2025 &nbsp;|&nbsp; Huaraz</div>
+                  </div>
+                  <div class="tour-card-sub">Local Institucional</div>
+                  <div class="tour-card-row">🎤 Curso de Capacitación</div>
+                  <div class="tour-card-row">👥 ~50 personas</div>
+                </div>
+
+                <div class="tour-card highlight">
+                  <div class="tour-card-place">📍 Centro Cultural de Huaraz</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date">25 ABRIL 2026 &nbsp;|&nbsp; Huaraz</div>
+                      <div class="tour-card-sub" style="color:#ff3e2e;font-weight:800;">Cumbres Blancas - UNASAM - La Base</div>
+                    </div>
+                    <div class="tour-star">★</div>
+                  </div>
+                  <div class="tour-card-row">🎤 Semana de la Tierra</div>
+                  <div class="tour-card-row">👥 ~150 personas</div>
+                </div>
+
+              </div>
+
+              <!-- RUTA CENTRAL -->
+              <div class="tour-road">
+                <div class="tour-road-line"></div>
+                <div class="tour-stop stop-1"></div>
+                <div class="tour-stop stop-2"></div>
+                <div class="tour-stop stop-3"></div>
+                <div class="tour-stop stop-4"></div>
+                <div class="tour-stop stop-5"></div>
+                <div class="tour-plane">✈</div>
+              </div>
+
+              <!-- COLUMNA DERECHA -->
+              <div class="tour-column">
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Tumshukayko</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date">9 NOV 2025 &nbsp;|&nbsp; Caraz</div>
+                      <div class="tour-card-sub">Sitio Arqueológico</div>
+                    </div>
+                    <div class="tour-star">★</div>
+                  </div>
+                  <div class="tour-card-row">🎤 Jornada piloto</div>
+                  <div class="tour-card-row">👥 ~15 personas</div>
+                </div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 D'Chary</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">13 DIC 2025 &nbsp;|&nbsp; Caraz</div>
+                  </div>
+                  <div class="tour-card-sub">Club Unión Caraz</div>
+                  <div class="tour-card-row">🎤 Velada en una pizzería</div>
+                  <div class="tour-card-row">👥 ~20 personas</div>
+                </div>
+
+                <div class="tour-city-title">YUNGAY</div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Auditorio Huáscar y Huandoy</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date">16 ENE 2026 &nbsp;|&nbsp; Yungay</div>
+                      <div class="tour-card-sub">Centro Cultural</div>
+                    </div>
+                    <div class="tour-star">★</div>
+                  </div>
+                  <div class="tour-card-row">🎤 Foro con INAIGEM</div>
+                  <div class="tour-card-row">👥 ~50 personas</div>
+                </div>
+
+                <div class="tour-city-title">CARHUAZ</div>
+
+                <div class="tour-card highlight">
+                  <div class="tour-card-place">📍 Municipalidad de Carhuaz</div>
+                  <div class="tour-card-header">
+                    <div>
+                      <div class="tour-card-date"><span class="soon">JUNIO 2026</span> &nbsp;|&nbsp; Carhuaz</div>
+                      <div class="tour-card-sub"><span class="soon">Próximamente</span></div>
+                    </div>
+                  </div>
+                  <div class="tour-card-row">🎤 Organizado por Cumbres Blancas</div>
+                  <div class="tour-card-row">👥 ~70 personas</div>
+                </div>
+
+                <div class="tour-city-title">HUARAZ</div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 DDC Áncash</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">07 ENE 2026 &nbsp;|&nbsp; Huaraz</div>
+                  </div>
+                  <div class="tour-card-sub">Auditorio de la DDC - Áncash</div>
+                  <div class="tour-card-row">🎤 Cumbres Blancas</div>
+                  <div class="tour-card-row">👥 ~200 personas</div>
+                </div>
+
+                <div class="tour-card">
+                  <div class="tour-card-place">📍 Tecnológico de Huaraz</div>
+                  <div class="tour-card-header">
+                    <div class="tour-card-date">19 ABR 2026 &nbsp;|&nbsp; Huaraz</div>
+                  </div>
+                  <div class="tour-card-sub">Auditorio Principal</div>
+                  <div class="tour-card-row">🎤 Cumbres Blancas</div>
+                  <div class="tour-card-row">👥 ~150 personas</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="tour-bottom">
+              <div class="tour-card highlight">
+                <div class="tour-card-place">📍 Lima - Perú</div>
+                <div class="tour-card-header">
+                  <div>
+                    <div class="tour-card-date"><span class="soon">JUNIO 2026</span> &nbsp;|&nbsp; Lima</div>
+                    <div class="tour-card-sub"><span class="soon">Próximamente</span></div>
+                  </div>
+                  <div class="tour-star">★</div>
+                </div>
+                <div class="tour-card-row">🎤 Universidades e Instituciones</div>
+                <div class="tour-card-row">👥 ~3000 personas</div>
+              </div>
+
+              <div class="tour-card highlight">
+                <div class="tour-card-place">📍 São Paulo - Brasil</div>
+                <div class="tour-card-header">
+                  <div>
+                    <div class="tour-card-date"><span class="soon">SEPT 2026</span> &nbsp;|&nbsp; São Paulo SP</div>
+                    <div class="tour-card-sub"><span class="soon">Próximamente</span></div>
+                  </div>
+                  <div class="tour-star">★</div>
+                </div>
+                <div class="tour-card-row">🎤 Universidades e Instituciones</div>
+                <div class="tour-card-row">👥 ~4000 personas</div>
+              </div>
+
+              <div class="tour-card highlight">
+                <div class="tour-card-place">📍 Chavín de Huántar - Áncash</div>
+                <div class="tour-card-header">
+                  <div>
+                    <div class="tour-card-date"><span class="soon">JUNIO 2026</span> &nbsp;|&nbsp; Huari</div>
+                    <div class="tour-card-sub"><span class="soon">Próximamente</span></div>
+                  </div>
+                  <div class="tour-star">★</div>
+                </div>
+                <div class="tour-card-row">🎤 Organizado por Cumbres Blancas</div>
+                <div class="tour-card-row">👥 ~100 personas</div>
+              </div>
+            </div>
+
+            <div class="tour-legend">
+              <div class="tour-legend-item">
+                <span class="legend-line"></span>
+                <span>Realizada</span>
+              </div>
+              <div class="tour-legend-item">
+                <span class="legend-line next"></span>
+                <span>Próxima</span>
+              </div>
+              <div class="tour-legend-item">
+                <span class="legend-star">★</span>
+                <span>Hito</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+    <section class="section" id="agenda">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">¿Qué veremos en la <span class="accent">reunión?</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">
+              Un recorrido breve pero importante por la visión del proyecto, la experiencia reciente, las ideas a futuro y el papel que cada uno puede tener dentro de esta nueva etapa.
+            </p>
+          </div>
+
+          <div class="cards-4">
+            <article class="info-card reveal delay-1">
+              <div class="info-icon">🤝</div>
+              <h3>1. Conocernos como equipo</h3>
+              <p>Queremos abrir una conversación sencilla pero importante:</p>
+              <ul>
+                <li>¿Qué valoramos del trabajo en equipo?</li>
+                <li>¿Qué cosas nos incomodan más al trabajar en grupo?</li>
+              </ul>
+            </article>
+
+            <article class="info-card reveal delay-2">
+              <div class="info-icon">🎤</div>
+              <h3>2. Hacia dónde va el proyecto</h3>
+              <p>
+                Uno de los objetivos es que cada integrante pueda formarse como investigador(a) y presentador(a) de la conferencia, incluso en distintos idiomas.
+              </p>
+            </article>
+
+            <article class="info-card reveal delay-3">
+              <div class="info-icon">🧠</div>
+              <h3>3. Aprendizajes del 25 de abril</h3>
+              <p>
+                Retomaremos lo que dejó esa fecha: introducción en quechua, participación de Vangie como inventora, Adrián como investigador y Aine en la parte técnica, y todo lo que eso abrió para el futuro.
+              </p>
+            </article>
+
+            <article class="info-card reveal delay-4">
+              <div class="info-icon">💡</div>
+              <h3>4. Ideas y nuevos formatos</h3>
+              <p>
+                Queremos escuchar qué podrían aportar en la difusión, construcción o presentación de la actividad, a dónde podría llegar y qué ideas nuevas o incluso “locas” podrían impulsarla.
+              </p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="proyeccion">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="split">
+          <div class="focus-card reveal delay-1 projection-card">
+  <h3>Proyección del proyecto</h3>
+
+  <div class="projection-stage">
+    <p class="projection-intro">
+      Hacia dos horizontes
+    </p>
+
+    <div class="projection-flow">
+      <div class="projection-side projection-left">Rural y local</div>
+
+      <div class="projection-center">
+        <span class="projection-line projection-line-left"></span>
+        <span class="projection-word">💡</span>
+        <span class="projection-line projection-line-right"></span>
+      </div>
+
+      <div class="projection-side projection-right">Internacional</div>
+    </div>
+
+    <div class="projection-tags">
+      <span class="tag">Poblaciones rurales</span>
+      <span class="tag">Niños</span>
+      <span class="tag">Lima</span>
+      <span class="tag">Brasil</span>
+      <span class="tag">EE. UU.</span>
+      <span class="tag">Suiza</span>
+      <span class="tag">Alemania</span>
+    </div>
+  </div>
+</div>
+
+            <div class="focus-card reveal delay-2">
+              <h3>Hacia el Mundo y el Perú profundo</h3>
+              <p class="world-text">
+  Este año, en setiembre, sucederá la primera presentación internacional de la actividad en <strong>São Paulo, Brasil</strong>.
+</p>
+
+<p class="world-text">
+  <strong>Además, hay propuestas valiosas, como la de Aine, que plantea llevar actividades a niños y poblaciones rurales.</strong>
+</p>
+
+<p class="world-text">
+  Esta actividad tiene por objetivo reconectar a todo un valle con su entorno y fomentar conversaciones informadas sobre el futuro.
+</p>
+
+              <div class="tag-list">
+                <span class="tag">São Paulo 2026</span>
+                <span class="tag">Internacionalización</span>
+                <span class="tag">Territorio y educación</span>
+              </div>
+            </div>
+          </div>
+
+         <div class="timeline festival-layout" style="margin-top:18px;">
+  <article class="timeline-card reveal delay-3">
+  <div class="timeline-number">❄️</div>
+  <div>
+    <h3>Festival de los Glaciares</h3>
+    <p>
+      Seremos uno de los principales atractivos del festival y queremos reimaginar la actividad para este día especial:
+    </p>
+    <ul class="festival-list">
+  <li>Renovación visual, narrativa y de contenido</li>
+  <li>Introducción musical internacional</li>
+  <li>Número de danza antes de la presentación</li>
+  <li>Cierre musical local que hará bailar a todo el auditorio</li>
+</ul>
+
+<div class="festival-highlight-box">
+  <div class="festival-highlight-label">Experiencia clave</div>
+  <p class="festival-highlight-text">
+    Aprenderás cómo diseñar una experiencia inmersiva que resume en minutos una historia de millones de años.
+  </p>
+</div>
+</div>
+</article>
+
+  <div class="festival-image-card reveal delay-4">
+  <img src="festival.jpg" alt="Afiche del Festival de los Glaciares">
+</div>
+</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="salidas">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Próximas salidas de <span class="accent">campo</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">
+              Estas rutas muestran una parte esencial del proyecto: salir al territorio, ver la historia en el paisaje, leer el valle desde sus rocas, sus glaciares, sus huellas humanas y sus posibilidades futuras.
+            </p>
+          </div>
+
+          <div class="accordion">
+
+            <details class="trip reveal delay-1">
+              <summary>
+                <div class="trip-icon">🌿</div>
+                <div>
+                  <h3>Huaylas</h3>
+                  <small>Experiencia de campo enfocada en la formación de la Cordillera Negra.</small>
+                </div>
+                <div class="trip-toggle">
+  <span class="trip-plus">＋</span>
+  <span class="trip-toggle-text">DETALLES</span>
+</div>
+              </summary>
+
+              <div class="trip-body">
+                <div class="trip-copy">
+                  <div class="trip-text">
+                    Más allá de ser un lugar verde y acogedor, Huaylas será escenario de una experiencia de campo enfocada en la formación de la Cordillera Negra.
+                  </div>
+
+                  <div class="trip-bullets">
+                    <div class="trip-bullet"><div class="dot">•</div><span>Búsqueda de fósiles</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Interpretación geológica de procesos tectónicos</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Observación de rastros de antiguos glaciares en la Cordillera Negra</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Reconocimiento de morrenas y lagunas de origen glaciar que hasta hoy irrigan la ciudad</span></div>
+                  </div>
+
+                  <div class="trip-note">
+                    <strong>Cobertura:</strong> el alojamiento y la alimentación estarán cubiertos.
+                    <br><br>
+                    <strong>Fecha:</strong> a definir en la reunión.
+                  </div>
+
+                  <div class="trip-location">
+                    <a class="map-link" href="https://maps.app.goo.gl/to6afJiSPtyDGULz9" target="_blank" rel="noopener noreferrer">
+                      📍 Cantera de fósiles de Huaylas
+                    </a>
+                  </div>
+                </div>
+
+ <div class="trip-media">
+  <div class="photo-grid">
+    <div class="photo-box large">
+      <img src="huaylas-principal.png" alt="Vista principal de Huaylas">
+    </div>
+    <div class="photo-box">
+      <img src="huaylas-fosiles.png" alt="Fósiles en Huaylas">
+    </div>
+    <div class="photo-box">
+      <img src="huaylas-paisaje.png" alt="Paisaje glaciar y morrenas en Huaylas">
+    </div>
+  </div>
+
+  <div class="media-note">
+    Un recorrido especial donde la Cordillera Blanca y la Cordillera Negra se unen y nos muestran su pasado a través sus rocas y fósiles.
+  </div>
+</div>
+              </div>
+            </details>
+
+            <details class="trip reveal delay-2">
+              <summary>
+                <div class="trip-icon">🏛️</div>
+                <div>
+                  <h3>Mancos</h3>
+                  <small>Inmersión al pasado cultural del Callejón de Huaylas.</small>
+                </div>
+                <div class="trip-toggle">
+  <span class="trip-plus">＋</span>
+  <span class="trip-toggle-text">DETALLES</span>
+</div>
+              </summary>
+
+              <div class="trip-body">
+                <div class="trip-copy">
+                  <div class="trip-text">
+                    Será una inmersión al pasado cultural del Callejón de Huaylas, con la visita a espacios que resguardan piezas inéditas recolectadas durante 50 años por el señor Walter Méndez.
+                  </div>
+
+                  <div class="trip-bullets">
+                    <div class="trip-bullet"><div class="dot">•</div><span>Visita al museo y lounge <strong>La Casita de mi Abuela</strong></span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Colección de rocas y fósiles que ayudan a comprender distintas etapas de la formación de la Cordillera Blanca y la Cordillera Negra</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Vista privilegiada hacia el Huascarán</span></div>
+                  </div>
+
+                  <div class="trip-note">
+                    <strong>Cobertura:</strong> el alojamiento y el desayuno estarán cubiertos.
+                    <br><br>
+                    <strong>Fecha:</strong> a definir en la reunión.
+                  </div>
+
+                  <div class="trip-location">
+                    <a class="map-link" href="https://maps.app.goo.gl/2VmemhBH6QZfnSEX8" target="_blank" rel="noopener noreferrer">
+                      📍 La Casita de mi Abuela – Mancos
+                    </a>
+                  </div>
+                </div>
+
+  <div class="trip-media">
+  <div class="photo-grid">
+    <div class="photo-box large">
+      <img src="mancos-principal.png" alt="Vista principal de Mancos">
+    </div>
+    <div class="photo-box">
+      <img src="mancos-coleccion.png" alt="Colección cultural en Mancos">
+    </div>
+    <div class="photo-box">
+      <img src="mancos-rocas-fosiles.png" alt="Rocas y fósiles en Mancos">
+    </div>
+  </div>
+
+  <div class="media-note">
+    Con el Huascarán de fondo tendrás acceso a toda la colección de 4 salas llenas de piezas históricas.
+  </div>
+</div>
+               
+              </div>
+            </details>
+
+            <details class="trip reveal delay-3">
+              <summary>
+                <div class="trip-icon">🌕</div>
+                <div>
+                  <h3>Caraz</h3>
+                  <small>Geología, patrimonio y Laguna Parón en luna llena.</small>
+                </div>
+                <div class="trip-toggle">
+  <span class="trip-plus">＋</span>
+  <span class="trip-toggle-text">DETALLES</span>
+</div>
+              </summary>
+
+              <div class="trip-body">
+                <div class="trip-copy">
+                  <div class="trip-text">
+                    Se realizará un tour geológico en el río Santa para observar en campo evidencias de antiguos aluviones, el gran lago que alguna vez fue Caraz y cómo desapareció tras un gigantesco aluvión procedente del Huandoy.
+                  </div>
+
+                  <div class="trip-bullets">
+                    <div class="trip-bullet"><div class="dot">•</div><span>Conoceremos en cerca a la Plaza de Armas el pasado de la culturas preínca y la llamada “momia más pequeña del mundo”</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Tumshukayco y sus muros de granito y roca volcánica, capaces de narrar cómo esta zona ha resistido sismos y aluviones</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Conversación con investigadores de la misión italiana Antonio Raimondi de la Universidad de Milán</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span><strong>30/05:</strong> visita a la Laguna Parón en luna llena, con navegación nocturna y amanecer con la salida del lucero del amanecer</span></div>
+                  </div>
+
+                  <div class="trip-note">
+                    Esta experiencia le dio vida a la actividad, y será un inmenso gusto compartir con ustedes esta noche mágica para que puedan sentir, en carne propia, lo que las cordilleras tienen para decir a través de ustedes.
+                    <br><br>
+                    <strong>Cobertura:</strong> una noche de alojamiento y desayuno en la ciudad. Posibilidad de contar con 1 carro, cuatrimotos y equipos de camping.
+                  </div>
+
+                  <div class="trip-location">
+                    <a class="map-link" href="https://maps.app.goo.gl/ZrnaHHzCTzwuBktc8" target="_blank" rel="noopener noreferrer">
+                      📍 Recorrido geológico en Caraz
+                    </a>
+                    <a class="map-link" href="https://maps.app.goo.gl/ssTzLNEf61zMVQtC9" target="_blank" rel="noopener noreferrer">
+                      📍 Laguna Parón
+                    </a>
+                  </div>
+                </div>
+
+                <div class="trip-media">
+  <div class="photo-grid">
+    <div class="photo-box large">
+      <img src="caraz-principal.png" alt="Vista principal de Caraz">
+    </div>
+    <div class="photo-box">
+      <img src="caraz-tumshukayco.png" alt="Tumshukayco en Caraz">
+    </div>
+    <div class="photo-box">
+      <img src="caraz-paron.png" alt="Laguna Parón">
+    </div>
+  </div>
+
+  <div class="media-note">
+    Pensada para revivir los momentos que hicieron posible la creación de este proyecto: geología, patrimonio humano y una experiencia nocturna única en Parón.
+  </div>
+</div>
+                
+              </div>
+            </details>
+
+            <details class="trip reveal delay-4">
+              <summary>
+                <div class="trip-icon">⛰️</div>
+                <div>
+                  <h3>Yungay</h3>
+                  <small>Historia, desastre, prevención y Refugio Huascarán.</small>
+                </div>
+                <div class="trip-toggle">
+  <span class="trip-plus">＋</span>
+  <span class="trip-toggle-text">DETALLES</span>
+</div>
+              </summary>
+
+              <div class="trip-body">
+                <div class="trip-copy">
+                  <div class="trip-text">
+                    En Yungay se plantea una experiencia profundamente histórica, cultural y científica.
+                  </div>
+
+                  <div class="trip-bullets">
+                    <div class="trip-bullet"><div class="dot">•</div><span>Visita a la Casa de la Cultura, donde se observarán puntas de lanza y cerámicas de los primeros pobladores del Callejón</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Reconstrucción en primera persona del alud de 1970, a cargo del profesor Javier</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Visita a las laderas del río Santa para reconocer rastros de un súper aluvión ocurrido hace aproximadamente 5000 años</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Línea de trabajo orientada a la prevención de desastres: software para modelar nevados en 3D y prever su comportamiento mediante tecnologías emergentes</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Estadía en el Refugio Huascarán, lugar clave para la expedición que extrajo núcleos de hielo del collado y de la cumbre del Huascarán</span></div>
+                  </div>
+
+                  <div class="trip-note">
+                    Aquí el alojamiento corre por cuenta de cada uno. La estadía en el refugio incluye todas las comidas.
+                    <br><br>
+                    Este lugar es espectacular.
+                    <br><br>
+                    <strong>Fecha:</strong> a definir en la reunión.
+                  </div>
+
+                  <div class="trip-location">
+                    <a class="map-link" href="https://maps.app.goo.gl/ofor4ic4KnoVSkAcA" target="_blank" rel="noopener noreferrer">
+                      📍 Refugio Huascarán
+                    </a>
+                  </div>
+                </div>
+
+              <div class="trip-media">
+  <div class="photo-grid">
+    <div class="photo-box large">
+      <img src="yungay-principal.png" alt="Vista principal de Yungay">
+    </div>
+    <div class="photo-box">
+      <img src="yungay-casa-cultura.png" alt="Casa de la Cultura de Yungay">
+    </div>
+    <div class="photo-box">
+      <img src="yungay-refugio.jpg" alt="Refugio Huascarán">
+    </div>
+  </div>
+
+  <div class="media-note">
+    <strong>En esta visita aprenderemos sobre la glaciología y paleoclimatología teniendo al Huascarán como mentor.</strong>
+    </div>
+<div class="media-note">
+En esta experiencia contaremos con la guía de Wilmer Sánchez, explorador e investigador que ascendió a la cumbre y al collado para extraer núcleos de hielo junto a Lonnie Thompson en 2019. 
+  </div>
+</div>
+              </div>
+            </details>
+
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="publicaciones">
+  <div class="container">
+    <section class="section-card reveal">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Publicaciones, certificados y <span class="accent">aprendizaje</span></h2>
+        <div class="title-divider"></div>
+        <p class="section-desc">
+          El proyecto no solo crece en presentaciones y salidas de campo. También se expande a través de publicaciones, herramientas digitales y nuevas líneas de aprendizaje.
+        </p>
+      </div>
+
+      <div class="mini-grid">
+        <article class="mini-box reveal delay-1">
+          <h3>Publicaciones</h3>
+          <p>
+            <strong>Todos están invitados</strong> a sumarse a distintas etapas de la elaboración de la revista y los libros: 
+ <br><br>
+<em><strong>La Memoria del Huascarán</strong> y <strong>El Origen de la Cordillera Blanca y la Cordillera Negra</strong></em>.
+
+ <br><br>
+Los libros se planean lanzar en 2026 y 2027.
+          </p>
+        </article>
+
+        <article class="mini-box reveal delay-2">
+          <h3>Primeras en su tipo</h3>
+          <p>
+            <strong>La Memoria del Huascarán</strong> apunta a ser el primer libro de glaciología del Perú.
+            <br><br>
+            <strong>El Origen de la Cordillera Blanca y la Cordillera Negra</strong> apunta a ser el primer libro de geología conectado a un sistema interdisciplinario que alcanza las fibras culturales y sociales del Callejón de Huaylas.
+          </p>
+        </article>
+
+        <article class="mini-box reveal delay-3">
+          <h3>Certificados y software</h3>
+          <p>
+            Se entregarán certificados a los participantes de las dos últimas fechas. Por ello, se está preparando un sistema automático de verificación de DNI y generación de certificados.
+            <br><br>
+            Quienes tengan interés en la programación y desarrollo de software también están invitados a sumarse.
+          </p>
+        </article>
+      </div>
+
+      <div class="publicaciones-gallery">
+        <div class="publicacion-img-box">
+          <img src="libro-cbcn.png" alt="Libro El Origen de la Cordillera Blanca y la Cordillera Negra">
+        </div>
+
+        <div class="publicacion-img-box">
+          <img src="libro-mh.png" alt="Libro La Memoria del Huascarán">
+        </div>
+
+        <div class="publicacion-img-box">
+          <img src="revista-cb.png" alt="Revista del proyecto">
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+    <section class="section" id="proxima-fecha">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="event-banner">
+            <div class="event-banner-grid">
+              <div>
+                <h3>Próxima fecha importante: <span style="color:#ffd867;">Yungay – fin de mayo</span></h3>
+                <p>
+                  Lugar: <strong>Auditorio Huascar y Huandy</strong>. Se sumarán colegios, instituciones públicas y el instituto de Yungay.
+                  <br><br>
+                  <strong>Programa tentativo:</strong> 🎵 Aine: presentación musical &nbsp;&nbsp;|&nbsp;&nbsp; 🎤 Meverick: conferencia
+                </p>
+              </div>
+
+              <div class="event-stats">
+                <div class="event-stat">
+                  <span class="label">Asistencia estimada</span>
+                  <span class="value">600 personas</span>
+                </div>
+                <div class="event-stat">
+                  <span class="label">Sede</span>
+                  <span class="value">Yungay</span>
+                </div>
+                <div class="event-stat">
+                  <span class="label">Alcance</span>
+                  <span class="value">Colegios e instituciones</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer-note">
+            Este proyecto nació para darle voz a cada roca, río, montaña y glaciar de este valle.
+            <br>
+            <strong>Ustedes serán los siguientes portavoces de la Cordillera Blanca y la Cordillera Negra por el Perú y el Mundo.</strong>
+          </p>
+        </section>
+      </div>
+    </section>
+<section class="section" id="mentores">
+  <div class="container">
+    <section class="section-card reveal">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Tus guías<span class="accent"> en el tiempo profundo</span></h2>
+        <div class="title-divider"></div>
+        <p class="section-desc">
+          Las cordilleras nos unieron y ese lazo también es para ti.
+        </p>
+      </div>
+
+      <div class="mentores-grid">
+        <article class="mentor-card reveal delay-1">
+          <div class="mentor-card-top">
+            <div class="mentor-photo">
+              <img src="meverick.jpg" alt="Meverick Jeampiere">
+            </div>
+
+            <div>
+              <h3 class="mentor-name">Meverick Jeampiere</h3>
+              <div class="mentor-formacion">
+                Formado en <strong>Ingeniería Biomédica</strong><br>
+                Universidad Federal de São Paulo (Brasil).
+              </div>
+            </div>
+          </div>
+
+          <ul class="mentor-list">
+            <li>Creador de <strong>El Origen de la Cordillera Blanca y la Cordillera Negra</strong>.</li>
+            <li>Investigador y desarrollador de software de la <strong>Misión Italiana Antonio Raimondi</strong>.</li>
+            <li>Especialista en <strong>biónica</strong> y <strong>diseño anatómico 3D</strong>.</li>
+          </ul>
+        </article>
+
+        <article class="mentor-card reveal delay-2">
+          <div class="mentor-card-top">
+            <div class="mentor-photo">
+              <img src="denisse.jpg" alt="Denisse Castillo">
+            </div>
+
+            <div>
+              <h3 class="mentor-name">Denisse Castillo</h3>
+              <div class="mentor-formacion">
+                Formada en <strong>Ciencias Políticas</strong><br>
+                Pontificia Universidad Católica del Perú.
+              </div>
+            </div>
+          </div>
+
+          <ul class="mentor-list">
+            <li>Representante de <strong>Cumbres Blancas</strong> y de <strong>El Origen de la Cordillera Blanca y la Cordillera Negra</strong>.</li>
+            <li>Promotora de la <strong>Ley y la Política Nacional de los Glaciares</strong>.</li>
+            <li>Interesada en <strong>Gestión Pública</strong> e investigación en educación, interculturalidad y género.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>
+    <section class="section" id="confirmacion">
+      <div class="container">
+        <section class="section-card reveal">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Confirmación de <span class="accent">participación</span></h2>
+            <div class="title-divider"></div>
+            <p class="section-desc">
+              Selecciona tu nombre y confirma tu participación en esta reunión especial del equipo.
+            </p>
+          </div>
+
+          <div class="confirm-grid">
+            <div class="participants-box reveal delay-1">
+              <h3>Selecciona tu nombre</h3>
+              <p>La confirmación se ha pensado simple, directa y limpia.</p>
+
+              <div class="participants" id="participantsList">
+                <button class="participant active" data-name="Aine">Aine</button>
+                <button class="participant" data-name="Albert">Albert</button>
+                <button class="participant" data-name="Carolay">Carolay</button>
+                <button class="participant" data-name="Vangie">Vangie</button>
+                <button class="participant" data-name="Denisse">Denisse</button>
+                <button class="participant" data-name="Adrián">Adrián</button>
+<button class="participant" data-name="Luis">Luis</button>
+<button class="participant" data-name="Carlos">Carlos</button>
+<button class="participant" data-name="Marilia">Marilia</button>
+<button class="participant" data-name="Ariana">Ariana</button>
+<button class="participant" data-name="Belén">Belén</button>
+<button class="participant" data-name="Heydei">Heidey</button>
+<button class="participant" data-name="Andrea">Andrea</button>
+<button class="participant" data-name="Luz">Luz</button>
+<button class="participant" data-name="Andrea">Andrea</button>
+<button class="participant" data-name="Andrea">Wilmer</button>
+              </div>
+            </div>
+
+            <div class="confirm-box reveal delay-2">
+              <h3>Tu confirmación</h3>
+              <p>Confírmanos tu participación y si gustas envíanos un mensaje.</p>
+
+              <div class="confirm-preview">
+                <div class="preview-line">
+                  <b>Participante</b>
+                  <span id="selectedName">Aine</span>
+                </div>
+                <div class="preview-line">
+                  <b>Actividad</b>
+                  <span>Reunión especial del equipo – 11/05</span>
+                </div>
+                <div class="preview-line">
+                  <b>Proyecto</b>
+                  <span>Cordillera Blanca y Cordillera Negra</span>
+                </div>
+                <div class="preview-line">
+                  <b>Estado</b>
+                  <span id="selectedStatus">Pendiente</span>
+                </div>
+              </div>
+
+              <div class="btn-row">
+  <button class="primary-btn" id="confirmBtn">✅ Confirmar participación</button>
+  <button class="secondary-btn" id="resetBtn">↺ Reiniciar estado</button>
+</div>
+
+<div class="message-box-wrap">
+  <label class="message-label" for="participantMessage">Tu mensaje</label>
+  <textarea
+    id="participantMessage"
+    class="message-box"
+    placeholder="Escribe aquí un mensaje opcional..."
+  ></textarea>
+</div>
+
+<div class="confirm-message" id="confirmMessage">
+  Selecciona tu nombre y confirma tu participación.
+</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal:not(.show)').forEach((el) => observer.observe(el));
+
+    const participantButtons = document.querySelectorAll('.participant');
+    const selectedName = document.getElementById('selectedName');
+    const selectedStatus = document.getElementById('selectedStatus');
+    const confirmMessage = document.getElementById('confirmMessage');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let currentParticipant = 'Aine';
+    let isConfirmed = false;
+
+    function updateUI() {
+      selectedName.textContent = currentParticipant;
+
+      if (isConfirmed) {
+        selectedStatus.textContent = 'Confirmado';
+        confirmMessage.textContent = `${currentParticipant} ha confirmado su participación en la reunión especial del equipo.`;
+      } else {
+        selectedStatus.textContent = 'Pendiente';
+        confirmMessage.textContent = `Seleccionad@: ${currentParticipant}. Confirma tu participación 😁`;
+      }
+    }
+
+    participantButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        participantButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentParticipant = btn.dataset.name;
+        isConfirmed = false;
+        updateUI();
+      });
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      isConfirmed = true;
+      updateUI();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      isConfirmed = false;
+      updateUI();
+    });
+
+    updateUI();
+  </script>
+</body>
+</html>
