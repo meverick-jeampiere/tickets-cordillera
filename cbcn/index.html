@@ -3515,7 +3515,8 @@ Los libros se planean lanzar en 2026 y 2027.
       </div>
     </section>
   </main>
-<script>
+
+  <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -3569,11 +3570,11 @@ Los libros se planean lanzar en 2026 y 2027.
     confirmBtn.textContent = 'Enviando...';
 
     try {
-      const response = await fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
+          'Content-Type': 'text/plain;charset=utf-8'
         },
         body: JSON.stringify({
           participante: currentParticipant,
@@ -3585,19 +3586,13 @@ Los libros se planean lanzar en 2026 y 2027.
         })
       });
 
-      const result = await response.json();
-
-      if (result.ok) {
-        isConfirmed = true;
-        updateUI();
-        confirmMessage.textContent = `${currentParticipant} ha confirmado su participación correctamente.`;
-        participantMessage.value = '';
-      } else {
-        confirmMessage.textContent = 'Hubo un problema al guardar la confirmación.';
-      }
+      isConfirmed = true;
+      updateUI();
+      confirmMessage.textContent = `${currentParticipant} ha enviado su confirmación.`;
+      participantMessage.value = '';
 
     } catch (error) {
-      confirmMessage.textContent = 'Error de conexión con Google Sheets.';
+      confirmMessage.textContent = 'No se pudo enviar la confirmación.';
       console.error(error);
     } finally {
       confirmBtn.disabled = false;
@@ -3613,7 +3608,8 @@ Los libros se planean lanzar en 2026 y 2027.
     updateUI();
   });
 
-    updateUI();
+  updateUI();
 </script>
+
 </body>
 </html>
