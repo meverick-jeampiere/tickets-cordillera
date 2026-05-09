@@ -2435,6 +2435,120 @@
     margin-bottom:22px;
   }
 }
+.confirm-collapse{
+  border:1px solid var(--line);
+  border-radius:32px;
+  background:linear-gradient(180deg,#ffffff 0%, #fcfbff 100%);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+
+.confirm-collapse[open]{
+  border-color:#d8c7ff;
+}
+
+.confirm-summary{
+  list-style:none;
+  cursor:pointer;
+  padding:34px;
+  position:relative;
+}
+
+.confirm-summary::-webkit-details-marker{
+  display:none;
+}
+
+.confirm-summary-head{
+  display:flex;
+  justify-content:center;
+}
+
+.confirm-summary-copy{
+  width:100%;
+  max-width:900px;
+}
+
+.confirm-summary-copy .section-title-wrap{
+  margin-bottom:0;
+  text-align:center;
+}
+
+.confirm-summary-subtoggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  min-height:64px;
+  padding:0 22px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#f3edff 0%, #ebe2ff 100%);
+  border:1px solid #dacbff;
+  color:var(--purple);
+  box-shadow:var(--shadow-soft);
+  margin:18px auto 0;
+  max-width:560px;
+  width:auto;
+}
+
+.confirm-summary-subtext{
+  color:var(--purple);
+  font-size:18px;
+  font-weight:800;
+  line-height:1.2;
+  text-align:center;
+}
+
+.confirm-summary-toggle{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:rgba(109,56,245,.08);
+  color:var(--purple);
+  font-size:28px;
+  font-weight:900;
+  flex:0 0 auto;
+  border:1px solid rgba(109,56,245,.10);
+  transition:.22s ease;
+}
+
+.confirm-collapse[open] .confirm-summary-toggle{
+  transform:rotate(45deg);
+}
+
+.confirm-collapse-body{
+  padding:0 34px 34px;
+}
+
+@media (max-width: 820px){
+  .confirm-summary{
+    padding:22px;
+  }
+
+  .confirm-collapse-body{
+    padding:0 22px 22px;
+  }
+
+  .confirm-summary-subtoggle{
+    min-height:58px;
+    padding:0 16px;
+    gap:10px;
+    width:100%;
+    max-width:420px;
+  }
+
+  .confirm-summary-subtext{
+    font-size:16px;
+  }
+
+  .confirm-summary-toggle{
+    width:38px;
+    height:38px;
+    font-size:24px;
+  }
+}
   </style>
 </head>
 <body>
@@ -2522,7 +2636,7 @@
           <p class="hero-lead-upgraded">
             <strong>Reunión especial del equipo – 11/05.</strong>
 
-            Felicidades por haber sido seleccionad@s para formar parte de esta gran historia.
+            Felicidades por haber sido seleccionad@ para formar parte de esta gran historia.
           </p>
 
           <div class="hero-note-upgraded">
@@ -2547,7 +2661,7 @@
             <div class="point reveal delay-2 show">
               <div class="point-icon">🎤</div>
               <div>
-                <strong>Formar nuevos presentadores e investigadores</strong>
+                <strong>Formar nuevos presentadores, innovadores e investigadores</strong>
                 <span>El proyecto busca que cada integrante crezca y pueda representar esta actividad en distintos contextos e idiomas.</span>
               </div>
             </div>
@@ -2626,7 +2740,7 @@
           <div class="tour-summary-copy">
             <div class="tour-kicker">✦ CONOCE TODAS LAS FECHAS PREVIAS ✦</div>
             <h2 class="tour-title">Uniendo a todo un valle</h2>
-            <p class="tour-subtitle">El Origen de la Cordillera Negra y la Cordillera Blanca</p>
+            <p class="tour-subtitle">El Origen de la Cordillera Blanca y la Cordillera Negra</p>
           </div>
           <div class="tour-toggle">＋</div>
         </div>
@@ -2697,7 +2811,7 @@
                 <div class="tour-card">
                   <div class="tour-card-place">📍 Explorandes</div>
                   <div class="tour-card-header">
-                    <div class="tour-card-date">17 ABR 2025 &nbsp;|&nbsp; Huaraz</div>
+                    <div class="tour-card-date">18 ABR 2026 &nbsp;|&nbsp; Huaraz</div>
                   </div>
                   <div class="tour-card-sub">Local Institucional</div>
                   <div class="tour-card-row">🎤 Curso de Capacitación</div>
@@ -2800,9 +2914,9 @@
                 <div class="tour-card">
                   <div class="tour-card-place">📍 Tecnológico de Huaraz</div>
                   <div class="tour-card-header">
-                    <div class="tour-card-date">19 ABR 2026 &nbsp;|&nbsp; Huaraz</div>
+                    <div class="tour-card-date">21 ABR 2026 &nbsp;|&nbsp; Huaraz</div>
                   </div>
-                  <div class="tour-card-sub">Auditorio Principal</div>
+                  <div class="tour-card-sub">Auditorio Eleazar Guzmán Barrón</div>
                   <div class="tour-card-row">🎤 Cumbres Blancas</div>
                   <div class="tour-card-row">👥 ~150 personas</div>
                 </div>
@@ -3047,8 +3161,10 @@
                   <div class="trip-bullets">
                     <div class="trip-bullet"><div class="dot">•</div><span>Búsqueda de fósiles</span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span>Interpretación geológica de procesos tectónicos</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span>Reconocimiento de tipos de rocas de origen volcánico (basaltos, andesitas, riolitas, tobas) y rocas sedimentarias del cretácico  </span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span>Observación de rastros de antiguos glaciares en la Cordillera Negra</span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span>Reconocimiento de morrenas y lagunas de origen glaciar que hasta hoy irrigan la ciudad</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span><strong>Curiosidad:</strong> Huaylas fue la capital histórica de la cultura del mismo nombre (fue también conocida como el Señorío de Huaylas), que actualmente corresponde a los distritos de Huaylas y Santo Toribio.</span></div>
                   </div>
 
                   <div class="trip-note">
@@ -3105,7 +3221,12 @@
 
                   <div class="trip-bullets">
                     <div class="trip-bullet"><div class="dot">•</div><span>Visita al museo y lounge <strong>La Casita de mi Abuela</strong></span></div>
-                    <div class="trip-bullet"><div class="dot">•</div><span>Colección de rocas y fósiles que ayudan a comprender distintas etapas de la formación de la Cordillera Blanca y la Cordillera Negra</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span><strong>Sala de pinturas:</strong> Walter Méndez ha mandado a realizar a artistas pinturas con motivos religiosos y recreaciones del pasado del Callejón de Huaylas. Un ejemplo: una pintura que muestra a los primeros habitantes de la Cueva de Guitarrero</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span><strong>Sala de cerámicas:</strong> Colectadas en labores de guiado de alta montaña. En esta sala podrán ver piezas de las culturas: Inca, Huaylas, Recuay, Chavín y Huari</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span><strong>Sala de rocas y fósiles:</strong> Colectadas por décadas recorriendo la Cordillera Blanca y la Cordillera de Huayhuash. Aquí podrán apreciar una diversa variedad de rocas, minerales y fósiles de animales marinos del jurásico y del cretácico</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span><strong>Sala de expediciones:</strong> El padre del Sr. Walter fue de los primeros peruanos en ascender a la cumbre del Huascarán. En esta sala están recogidas una cantidad abrumadora de libros, mapas y fotografías de expediciones históricas en la Cordillera Blanca</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span><strong>Curiosidad:</strong> El Sr. Walter, a sus 71 años, es una gran admirador de nuestro proyecto. Disfrutó cada minuto de la presentación y luego de la misma tuvo interrogantes por resolver. En una visita pasada nos ofreció la posibilidad de prestarnos parte de su colección de fósiles para exponerlos en el Festival de los Glaciares 2026</span></div>
+<div class="trip-bullet"><div class="dot">•</div><span>La colección de rocas y fósiles de este lugar, nos ayudarán a comprender y datar distintas etapas de la formación de la Cordillera Blanca y la Cordillera Negra</span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span>Vista privilegiada hacia el Huascarán</span></div>
                   </div>
 
@@ -3159,12 +3280,12 @@
               <div class="trip-body">
                 <div class="trip-copy">
                   <div class="trip-text">
-                    Se realizará un tour geológico en el río Santa para observar en campo evidencias de antiguos aluviones, el gran lago que alguna vez fue Caraz y cómo desapareció tras un gigantesco aluvión procedente del Huandoy.
+                    Se realizará un tour geológico en el río Santa para observar en campo evidencias de antiguos aluviones, el gran lago que alguna vez fue Caraz y cómo desapareció tras un gigantesco aluvión procedente del Huandoy hace aproximadamente 10000 años.
                   </div>
 
                   <div class="trip-bullets">
-                    <div class="trip-bullet"><div class="dot">•</div><span>Conoceremos en cerca a la Plaza de Armas el pasado de la culturas preínca y la llamada “momia más pequeña del mundo”</span></div>
-                    <div class="trip-bullet"><div class="dot">•</div><span>Tumshukayco y sus muros de granito y roca volcánica, capaces de narrar cómo esta zona ha resistido sismos y aluviones</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Conoceremos cerca a la Plaza de Armas el pasado de la culturas preínca y la llamada “momia más pequeña del mundo”</span></div>
+                    <div class="trip-bullet"><div class="dot">•</div><span>Tumshukayco y sus muros de granito y roca volcánica, capaces de narrar cómo esta zona ha resistido sismos y aluviones en los últimos 5500 años</span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span>Conversación con investigadores de la misión italiana Antonio Raimondi de la Universidad de Milán</span></div>
                     <div class="trip-bullet"><div class="dot">•</div><span><strong>30/05:</strong> visita a la Laguna Parón en luna llena, con navegación nocturna y amanecer con la salida del lucero del amanecer</span></div>
                   </div>
@@ -3236,7 +3357,7 @@
                   <div class="trip-note">
                     Aquí el alojamiento corre por cuenta de cada uno. La estadía en el refugio incluye todas las comidas.
                     <br><br>
-                    Este lugar es espectacular.
+                    Este lugar está a metros de la línea de glaciares del Huascarán (Ej: Glaciar Raimondi) y ofrece vistas impresionantes al valle en todo momento del día (principalmente en el atardecer).
                     <br><br>
                     <strong>Fecha:</strong> a definir en la reunión.
                   </div>
@@ -3342,12 +3463,15 @@ Los libros se planean lanzar en 2026 y 2027.
           <div class="event-banner">
             <div class="event-banner-grid">
               <div>
-                <h3>Próxima fecha importante: <span style="color:#ffd867;">Yungay – fin de mayo</span></h3>
+                <h3>Próxima fecha importante: <span style="color:#ffd867;">Yungay – 56 años del alud de 1970</span></h3>
                 <p>
-                  Lugar: <strong>Auditorio Huascar y Huandy</strong>. Se sumarán colegios, instituciones públicas y el instituto de Yungay.
-                  <br><br>
-                  <strong>Programa tentativo:</strong> 🎵 Aine: presentación musical &nbsp;&nbsp;|&nbsp;&nbsp; 🎤 Meverick: conferencia
-                </p>
+  Lugar: <strong>Auditorio Huáscar y Huandy.</strong>
+</p>
+<p style="margin-top: 14px;">
+  Se sumarán colegios, instituciones públicas, el instituto IARO y sobrevivientes del sismo.
+  <br><br>
+  <strong>Programa tentativo:</strong> 🎵 Aine: presentación musical &nbsp;&nbsp;|&nbsp;&nbsp; 🎤 Meverick: conferencia
+</p>
               </div>
 
               <div class="event-stats">
@@ -3434,86 +3558,97 @@ Los libros se planean lanzar en 2026 y 2027.
     </section>
   </div>
 </section>
-    <section class="section" id="confirmacion">
-      <div class="container">
-        <section class="section-card reveal">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Confirmación de <span class="accent">participación</span></h2>
-            <div class="title-divider"></div>
-            <p class="section-desc">
-              Selecciona tu nombre y confirma tu participación en esta reunión especial del equipo.
-            </p>
-          </div>
+<section class="section" id="confirmacion">
+  <div class="container">
+    <details class="confirm-collapse reveal">
+      <summary class="confirm-summary">
+        <div class="confirm-summary-head">
+  <div class="confirm-summary-copy">
+    <div class="section-title-wrap">
+      <h2 class="section-title">• ¡Confirma tu <span class="accent">participación!</span> •</h2>
+      <div class="title-divider"></div>
 
-          <div class="confirm-grid">
-            <div class="participants-box reveal delay-1">
-              <h3>Selecciona tu nombre</h3>
-              <p>La confirmación se ha pensado simple, directa y limpia.</p>
-
-              <div class="participants" id="participantsList">
-                <button class="participant active" data-name="Aine">Aine</button>
-                <button class="participant" data-name="Albert">Albert</button>
-                <button class="participant" data-name="Carolay">Carolay</button>
-                <button class="participant" data-name="Vangie">Vangie</button>
-                <button class="participant" data-name="Denisse">Denisse</button>
-                <button class="participant" data-name="Adrián">Adrián</button>
-<button class="participant" data-name="Luis">Luis</button>
-<button class="participant" data-name="Carlos">Carlos</button>
-<button class="participant" data-name="Marilia">Marilia</button>
-<button class="participant" data-name="Ariana">Ariana</button>
-<button class="participant" data-name="Belén">Belén</button>
-<button class="participant" data-name="Heydei">Heidey</button>
-<button class="participant" data-name="Andrea">Andrea</button>
-<button class="participant" data-name="Luz">Luz</button>
-<button class="participant" data-name="Wilmer">Wilmer</button>
-              </div>
-            </div>
-
-            <div class="confirm-box reveal delay-2">
-              <h3>Tu confirmación</h3>
-              <p>Confírmanos tu participación y si gustas envíanos un mensaje.</p>
-
-              <div class="confirm-preview">
-                <div class="preview-line">
-                  <b>Participante</b>
-                  <span id="selectedName">Aine</span>
-                </div>
-                <div class="preview-line">
-                  <b>Actividad</b>
-                  <span>Reunión especial del equipo – 11/05</span>
-                </div>
-                <div class="preview-line">
-                  <b>Proyecto</b>
-                  <span>Cordillera Blanca y Cordillera Negra</span>
-                </div>
-                <div class="preview-line">
-                  <b>Estado</b>
-                  <span id="selectedStatus">Pendiente</span>
-                </div>
-              </div>
-
-              <div class="btn-row">
-  <button class="primary-btn" id="confirmBtn">✅ Confirmar participación</button>
-  <button class="secondary-btn" id="resetBtn">↺ Reiniciar estado</button>
-</div>
-
-<div class="message-box-wrap">
-  <label class="message-label" for="participantMessage">Tu mensaje</label>
-  <textarea
-    id="participantMessage"
-    class="message-box"
-    placeholder="Escribe aquí un mensaje opcional..."
-  ></textarea>
-</div>
-
-<div class="confirm-message" id="confirmMessage">
-  Selecciona tu nombre y confirma tu participación.
-</div>
-            </div>
-          </div>
-        </section>
+      <div class="confirm-summary-subtoggle">
+        <span class="confirm-summary-subtext">Selecciona tu nombre a continuación</span>
+        <span class="confirm-summary-toggle">＋</span>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
+      </summary>
+
+      <div class="confirm-collapse-body">
+        <div class="confirm-grid">
+          <div class="participants-box reveal delay-1">
+            <h3>Selecciona tu nombre</h3>
+            <p>La confirmación se ha pensado simple, directa y limpia.</p>
+
+            <div class="participants" id="participantsList">
+             <button class="participant" data-name="Aine">Aine</button>
+              <button class="participant" data-name="Albert">Albert</button>
+              <button class="participant" data-name="Carolay">Carolay</button>
+              <button class="participant" data-name="Vangie">Vangie</button>
+              <button class="participant" data-name="Denisse">Denisse</button>
+              <button class="participant" data-name="Adrián">Adrián</button>
+              <button class="participant" data-name="Luis">Luis</button>
+              <button class="participant" data-name="Carlos">Carlos</button>
+              <button class="participant" data-name="Marilia">Marilia</button>
+              <button class="participant" data-name="Ariana">Ariana</button>
+              <button class="participant" data-name="Belén">Belén</button>
+              <button class="participant" data-name="Heydei">Heidey</button>
+              <button class="participant" data-name="Andrea">Andrea</button>
+              <button class="participant" data-name="Luz">Luz</button>
+              <button class="participant" data-name="Wilmer">Wilmer</button>
+              <button class="participant" data-name="Juli">Juli</button>
+            </div>
+          </div>
+
+          <div class="confirm-box reveal delay-2">
+            <h3>Tu confirmación</h3>
+            <p>Confírmanos tu participación y si gustas envíanos un mensaje.</p>
+
+            <div class="confirm-preview">
+              <div class="preview-line">
+                <b>Participante</b>
+                <span id="selectedName">Ninguno</span>
+              </div>
+              <div class="preview-line">
+                <b>Actividad</b>
+                <span>Reunión especial del equipo – 11/05</span>
+              </div>
+              <div class="preview-line">
+                <b>Proyecto</b>
+                <span>Cordillera Blanca y Cordillera Negra</span>
+              </div>
+              <div class="preview-line">
+                <b>Estado</b>
+                <span id="selectedStatus">Pendiente</span>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <button class="primary-btn" id="confirmBtn">✅ Confirmar participación</button>
+              <button class="secondary-btn" id="resetBtn">↺ Reiniciar estado</button>
+            </div>
+
+            <div class="message-box-wrap">
+              <label class="message-label" for="participantMessage">Tu mensaje</label>
+              <textarea
+                id="participantMessage"
+                class="message-box"
+                placeholder="Escribe aquí un mensaje opcional..."
+              ></textarea>
+            </div>
+
+            <div class="confirm-message" id="confirmMessage">
+              Selecciona tu nombre y confirma tu participación.
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
   </main>
 
   <script>
@@ -3538,20 +3673,26 @@ Los libros se planean lanzar en 2026 y 2027.
 
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybzZCy6cRDSvenGtw7ayxt_XsXNoUu90KCBEbd8SXqlEOHg9HiFH-fhSWTcJTNp7iD/exec';
 
-  let currentParticipant = 'Aine';
-  let isConfirmed = false;
+  let currentParticipant = '';
+let isConfirmed = false;
 
-  function updateUI() {
-    selectedName.textContent = currentParticipant;
+function updateUI() {
+  selectedName.textContent = currentParticipant || 'Ninguno';
 
-    if (isConfirmed) {
-      selectedStatus.textContent = 'Confirmado';
-      confirmMessage.textContent = `${currentParticipant} ha confirmado su participación en la reunión especial del equipo.`;
-    } else {
-      selectedStatus.textContent = 'Pendiente';
-      confirmMessage.textContent = `Seleccionad@: ${currentParticipant}. Confirma tu participación 😁`;
-    }
+  if (!currentParticipant) {
+    selectedStatus.textContent = 'Pendiente';
+    confirmMessage.textContent = 'Selecciona tu nombre para continuar.';
+    return;
   }
+
+  if (isConfirmed) {
+    selectedStatus.textContent = 'Confirmado';
+    confirmMessage.textContent = `${currentParticipant} ha confirmado su participación en la reunión especial del equipo.`;
+  } else {
+    selectedStatus.textContent = 'Pendiente';
+    confirmMessage.textContent = `Seleccionad@: ${currentParticipant}. Confirma tu participación 😁`;
+  }
+}
 
   participantButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3564,7 +3705,12 @@ Los libros se planean lanzar en 2026 y 2027.
   });
 
   confirmBtn.addEventListener('click', async () => {
-    const mensaje = participantMessage.value.trim();
+  if (!currentParticipant) {
+    confirmMessage.textContent = 'Primero selecciona tu nombre.';
+    return;
+  }
+
+  const mensaje = participantMessage.value.trim();
 
     confirmBtn.disabled = true;
     confirmBtn.textContent = 'Enviando...';
@@ -3600,13 +3746,15 @@ Los libros se planean lanzar en 2026 y 2027.
     }
   });
 
-  resetBtn.addEventListener('click', () => {
-    isConfirmed = false;
-    participantMessage.value = '';
-    confirmBtn.disabled = false;
-    confirmBtn.textContent = '✅ Confirmar participación';
-    updateUI();
-  });
+ resetBtn.addEventListener('click', () => {
+  isConfirmed = false;
+  currentParticipant = '';
+  participantMessage.value = '';
+  confirmBtn.disabled = false;
+  confirmBtn.textContent = '✅ Confirmar participación';
+  participantButtons.forEach(b => b.classList.remove('active'));
+  updateUI();
+});
 
   updateUI();
 </script>
