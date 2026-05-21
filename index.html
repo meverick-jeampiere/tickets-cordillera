@@ -828,7 +828,18 @@
       .preview{min-height:auto;padding:28px}
       .canvas-wrap{width:min(100%,440px)}
     }
-
+.event-card-plus{
+  width:32px;
+  height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#ffdb55;
+  font-size:2rem;
+  line-height:1;
+  font-weight:900;
+  flex:0 0 auto;
+}
     @media (max-width:720px){
       html,body{width:100%;max-width:100%;overflow-x:hidden}
 
@@ -1589,6 +1600,21 @@
   object-position:center;
   border-radius:999px;
 }
+    @media (max-width:720px){
+  .event-card-plus{
+    width:22px;
+    height:22px;
+    font-size:1.45rem;
+  }
+}
+
+@media (max-width:430px){
+  .event-card-plus{
+    width:19px;
+    height:19px;
+    font-size:1.25rem;
+  }
+}
     /* =========================================================
    BLOQUEAR INTERACCIÓN DIRECTA CON FOTOGRAFÍAS
    Evita arrastrar, seleccionar o abrir menú contextual fácilmente
@@ -1814,9 +1840,7 @@
 </h2>
 
                 <div class="event-card-kicker-row">
-                  <svg class="event-card-mountain" viewBox="0 0 64 42" aria-hidden="true">
-                    <path d="M5 38 24 6l8 14 5-8 22 26H42l-8-11-6 11H5Zm20-18-7 12h9l4-7-6-5Zm20 5-6 7h11l-5-7Z"/>
-                  </svg>
+                  <span class="event-card-plus">+</span>
                   <span class="event-card-kicker-divider"></span>
                   <div class="event-card-kicker">+"La Memoria del Huascarán"</div>
                 </div>
