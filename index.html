@@ -1590,6 +1590,21 @@
   object-position:center;
   border-radius:999px;
 }
+    /* =========================================================
+   BLOQUEAR INTERACCIÓN DIRECTA CON FOTOGRAFÍAS
+   Evita arrastrar, seleccionar o abrir menú contextual fácilmente
+   ========================================================= */
+
+.program-photo,
+.event-card-photo-avatar img,
+.title-stage-mountain-img{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+  user-drag:none;
+  -webkit-touch-callout:none;
+  pointer-events:none;
+}
   </style>
 </head>
 <body>
@@ -2227,12 +2242,24 @@
     template.image.onload = () => drawTicket();
     template.image.onerror = () => drawTicket();
 
-    window.addEventListener('load', () => {
+   window.addEventListener('load', () => {
   initRevealAnimations();
   updateCharCounter();
+  protectImagesFromDownload();
   drawTicket();
   defaultStatus();
 });
+    function protectImagesFromDownload() {
+  const protectedImages = document.querySelectorAll(
+    '.program-photo, .event-card-photo-avatar img, .title-stage-mountain-img'
+  );
+
+  protectedImages.forEach(img => {
+    img.setAttribute('draggable', 'false');
+    img.addEventListener('contextmenu', event => event.preventDefault());
+    img.addEventListener('dragstart', event => event.preventDefault());
+  });
+}
   </script>
 </body>
 </html>
