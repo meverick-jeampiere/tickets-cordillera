@@ -2342,13 +2342,14 @@ setStatus('<strong>Registrando datos y generando ticket…</strong>');
         } else {
           setStatus('<strong>Ticket generado.</strong><br>Los datos se registraron y el ticket se descargó correctamente.');
         }
-      } catch (error) {
-        setStatus(`<strong>Ocurrió un problema.</strong><br>${error.message}`);
-      } finally {
         completeTicketProgress();
-actionBtn.disabled = false;
-actionBtn.textContent = 'Descargar / compartir ticket';
-      }
+      } catch (error) {
+  setStatus(`<strong>Ocurrió un problema.</strong><br>${error.message}`);
+  hideTicketProgress();
+} finally {
+  actionBtn.disabled = false;
+  actionBtn.textContent = 'Descargar / compartir ticket';
+}
     }
 
     function updatePreviewOnly() {
