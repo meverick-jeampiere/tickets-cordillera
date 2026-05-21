@@ -2335,9 +2335,9 @@ setStatus('<strong>Registrando datos y generando ticket…</strong>');
         const shared = await shareTicket();
 
         if (registrationNumber && shared) {
-          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>. El ticket se guardó en la planilla, se descargó y se abrió el menú de compartir.`);
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>.¡Felicidades!.`);
         } else if (registrationNumber) {
-          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>. Los datos se guardaron en la planilla y el ticket se descargó correctamente.`);
+          setStatus(`<strong>Ticket generado.</strong><br>Tu número de inscripción es <strong>#${String(registrationNumber).padStart(3, '0')}</strong>.¡Te esperamos!.`);
         } else {
           setStatus('<strong>Ticket generado.</strong><br>Los datos se registraron y el ticket se descargó correctamente.');
         }
