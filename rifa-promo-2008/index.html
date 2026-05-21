@@ -654,9 +654,12 @@ function openLoading(title = 'Preparando tus tickets', text = 'Registrando reser
   loadingOverlay.setAttribute('aria-hidden', 'false');
 }
 
-async function closeLoading() {
-  setLoadingProgress(100, 'Tickets listos', 'Descarga iniciada');
-  await sleep(450);
+async function closeLoading(success = true) {
+  if (success) {
+    setLoadingProgress(100, 'Tickets listos', 'Descarga iniciada');
+    await sleep(450);
+  }
+
   loadingOverlay.classList.remove('show');
   loadingOverlay.setAttribute('aria-hidden', 'true');
 
@@ -665,11 +668,17 @@ async function closeLoading() {
 }
 
     function updateSummary() {
-      const nums = [...selectedNumbers].sort((a, b) => a - b);
-      selectedCount.textContent = nums.length;
-      pickedList.textContent = nums.length ? nums.map(formatNumber).join(', ') : 'Aún no elegiste boletos.';
-      confirmBtn.disabled = nums.length < MIN_REQUIRED;
-    }
+  const nums = [...selectedNumbers].sort((a, b) => a - b);
+  const firstName = normalizePersonText(firstNameInput.value);
+  const lastName = normalizePersonText(lastNameInput.value);
+
+  selectedCount.textContent = nums.length;
+  pickedList.textContent = nums.length 
+    ? nums.map(formatNumber).join(', ') 
+    : 'Aún no elegiste boletos.';
+
+  confirmBtn.disabled = nums.length < MIN_REQUIRED || !firstName || !lastName;
+}
 
     function createGrid() {
       ticketGrid.innerHTML = '';
@@ -923,12 +932,10 @@ async function closeLoading() {
     await sleep(500);
     await closeLoading();
 
-    alert(`Elegiste ${numbers.length} tickets. El PDF se descargó correctamente.`);
-
     await fetchReservedNumbers();
   } catch (error) {
-    await closeLoading();
-    alert(`Ocurrió un problema: ${error.message}`);
+    await closeLoading(false);
+alert(`Ocurrió un problema: ${error.message}`);
   } finally {
     reloadBtn.disabled = false;
     confirmBtn.disabled = false;
@@ -938,6 +945,8 @@ async function closeLoading() {
 
     confirmBtn.addEventListener('click', reserveAndDownloadPDF);
     reloadBtn.addEventListener('click', fetchReservedNumbers);
+    firstNameInput.addEventListener('input', updateSummary);
+lastNameInput.addEventListener('input', updateSummary);
 
     window.addEventListener('load', () => {
       createGrid();
