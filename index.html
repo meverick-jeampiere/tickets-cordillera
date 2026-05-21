@@ -1605,6 +1605,93 @@
   -webkit-touch-callout:none;
   pointer-events:none;
 }
+    /* =========================================================
+   LOADER CIRCULAR — GENERANDO TICKET
+   ========================================================= */
+
+.ticket-progress{
+  display:none;
+  margin-top:22px;
+  text-align:center;
+  animation:progressFadeIn .35s ease both;
+}
+
+.ticket-progress.show{
+  display:block;
+}
+
+.progress-circle{
+  width:118px;
+  height:118px;
+  margin:0 auto 12px;
+  position:relative;
+}
+
+.progress-circle svg{
+  width:118px;
+  height:118px;
+  transform:rotate(-90deg);
+  display:block;
+}
+
+.progress-bg,
+.progress-ring{
+  fill:none;
+  stroke-width:10;
+  cx:60;
+  cy:60;
+  r:50;
+}
+
+.progress-bg{
+  stroke:#e5d8ff;
+}
+
+.progress-ring{
+  stroke:#6d38f5;
+  stroke-linecap:round;
+  stroke-dasharray:314;
+  stroke-dashoffset:314;
+  filter:drop-shadow(0 6px 12px rgba(109,56,245,.25));
+  transition:stroke-dashoffset .18s ease;
+}
+
+.progress-percent{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6d38f5;
+  font-size:2rem;
+  font-weight:900;
+  letter-spacing:-.05em;
+}
+
+.progress-title{
+  color:#111735;
+  font-size:1rem;
+  font-weight:900;
+  letter-spacing:-.035em;
+}
+
+.progress-subtitle{
+  margin-top:4px;
+  color:#4b3a91;
+  font-size:.86rem;
+  font-weight:500;
+}
+
+@keyframes progressFadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
   </style>
 </head>
 <body>
@@ -1820,8 +1907,22 @@
         </div>
 
         <div class="actions reveal">
-          <button class="primary" id="actionBtn">Descargar / compartir ticket</button>
-        </div>
+  <button class="primary" id="actionBtn">Descargar / compartir ticket</button>
+
+  <div class="ticket-progress" id="ticketProgress">
+    <div class="progress-circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="progress-bg" cx="60" cy="60" r="50"></circle>
+        <circle class="progress-ring" cx="60" cy="60" r="50"></circle>
+      </svg>
+
+      <div class="progress-percent" id="progressPercent">0%</div>
+    </div>
+
+    <div class="progress-title">Generando tu ticket...</div>
+    <div class="progress-subtitle">Por favor, espera un momento</div>
+  </div>
+</div>
       </div>
 
       <div class="status" id="statusBox">
@@ -1853,6 +1954,9 @@
 
     const actionBtn = document.getElementById('actionBtn');
     const statusBox = document.getElementById('statusBox');
+    const ticketProgress = document.getElementById('ticketProgress');
+const progressPercent = document.getElementById('progressPercent');
+const progressRing = document.querySelector('.progress-ring');
 
     const fallbackDownload = document.getElementById('fallbackDownload');
     const baseImageLink = document.getElementById('baseImageLink');
@@ -2160,7 +2264,47 @@
         return false;
       }
     }
+let progressInterval = null;
+let currentProgress = 0;
 
+function setTicketProgress(value) {
+  currentProgress = Math.max(0, Math.min(100, value));
+
+  const circumference = 314;
+  const offset = circumference - (currentProgress / 100) * circumference;
+
+  progressRing.style.strokeDashoffset = offset;
+  progressPercent.textContent = `${Math.round(currentProgress)}%`;
+}
+
+function showTicketProgress() {
+  ticketProgress.classList.add('show');
+  setTicketProgress(0);
+
+  progressInterval = setInterval(() => {
+    if (currentProgress < 78) {
+      setTicketProgress(currentProgress + Math.random() * 8);
+    } else if (currentProgress < 92) {
+      setTicketProgress(currentProgress + Math.random() * 2);
+    }
+  }, 180);
+}
+
+function completeTicketProgress() {
+  clearInterval(progressInterval);
+  setTicketProgress(100);
+
+  setTimeout(() => {
+    ticketProgress.classList.remove('show');
+    setTicketProgress(0);
+  }, 700);
+}
+
+function hideTicketProgress() {
+  clearInterval(progressInterval);
+  ticketProgress.classList.remove('show');
+  setTicketProgress(0);
+}
     async function generateAndDeliverTicket() {
       const firstName = firstNameInput.value.trim();
       const lastName = lastNameInput.value.trim();
@@ -2170,8 +2314,10 @@
         return;
       }
 
-      actionBtn.disabled = true;
-      setStatus('<strong>Registrando datos y generando ticket…</strong>');
+     actionBtn.disabled = true;
+actionBtn.textContent = 'Generando ticket...';
+showTicketProgress();
+setStatus('<strong>Registrando datos y generando ticket…</strong>');
 
       try {
         const sheetResult = await registerInSheet();
@@ -2183,7 +2329,9 @@
         }
 
         await buildGeneratedFile();
+        setTicketProgress(96);
         await downloadTicket();
+        setTicketProgress(100);
 
         const shared = await shareTicket();
 
@@ -2197,7 +2345,9 @@
       } catch (error) {
         setStatus(`<strong>Ocurrió un problema.</strong><br>${error.message}`);
       } finally {
-        actionBtn.disabled = false;
+        completeTicketProgress();
+actionBtn.disabled = false;
+actionBtn.textContent = 'Descargar / compartir ticket';
       }
     }
 
