@@ -380,6 +380,122 @@
         grid-template-columns: repeat(6, minmax(42px, 1fr));
       }
     }
+    /* =========================================================
+   LOADING CIRCULAR CON PORCENTAJE
+   ========================================================= */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(3, 6, 14, 0.72);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+}
+
+.loading-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-card {
+  width: min(92vw, 340px);
+  padding: 28px 24px 24px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(17,22,37,.98), rgba(8,12,24,.98));
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 28px 80px rgba(0,0,0,.42);
+  text-align: center;
+  transform: translateY(12px) scale(.98);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1);
+}
+
+.loading-overlay.show .loading-card {
+  transform: translateY(0) scale(1);
+}
+
+.loading-ring {
+  --progress: 0deg;
+  width: 138px;
+  height: 138px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background:
+    conic-gradient(var(--gold) var(--progress), rgba(255,255,255,.10) 0deg);
+  box-shadow:
+    0 0 0 1px rgba(241,195,93,.18),
+    0 18px 36px rgba(0,0,0,.28),
+    0 0 34px rgba(241,195,93,.10);
+  position: relative;
+}
+
+.loading-ring::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border-radius: 999px;
+  background: #0b1020;
+  border: 1px solid rgba(255,255,255,.07);
+}
+
+.loading-percent {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.loading-title {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.loading-text {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.45;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 3px;
+}
+
+.loading-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+  opacity: .35;
+  animation: loadingDot 1s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: .16s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: .32s;
+}
+
+@keyframes loadingDot {
+  0%, 100% { opacity: .25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
   </style>
 </head>
 <body>
@@ -452,7 +568,22 @@
       <div class="grid" id="ticketGrid"></div>
     </main>
   </div>
+<div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+  <div class="loading-card">
+    <div class="loading-ring" id="loadingRing">
+      <div class="loading-percent" id="loadingPercent">0%</div>
+    </div>
 
+    <div class="loading-title" id="loadingTitle">Preparando tus tickets</div>
+
+    <div class="loading-text" id="loadingText">
+      Registrando reserva
+      <span class="loading-dots">
+        <span></span><span></span><span></span>
+      </span>
+    </div>
+  </div>
+</div>
   <script>
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-STp51Kx7qnvmEAcUljrch4wwQDdq_zM-Hpmkrw6QCKQ0l3IvNbfLcBvJCU0C3673Vg/exec';
     const TICKET_TEMPLATE_SRC = 'boleto.jpeg';
@@ -472,7 +603,13 @@
     const ticketGrid = document.getElementById('ticketGrid');
     const selectedCount = document.getElementById('selectedCount');
     const pickedList = document.getElementById('pickedList');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const loadingRing = document.getElementById('loadingRing');
+const loadingPercent = document.getElementById('loadingPercent');
+const loadingTitle = document.getElementById('loadingTitle');
+const loadingText = document.getElementById('loadingText');
 
+let currentLoadingProgress = 0;
     let reservedNumbers = new Set();
     let selectedNumbers = new Set();
 
@@ -486,6 +623,46 @@
     function normalizePersonText(text) {
       return text.trim().replace(/\s+/g, ' ');
     }
+    function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function setLoadingProgress(percent, title, text) {
+  const safePercent = Math.max(0, Math.min(100, Math.round(percent)));
+  currentLoadingProgress = safePercent;
+
+  const degrees = (safePercent / 100) * 360;
+  loadingRing.style.setProperty('--progress', `${degrees}deg`);
+  loadingPercent.textContent = `${safePercent}%`;
+
+  if (title) loadingTitle.textContent = title;
+
+  if (text) {
+    loadingText.innerHTML = `
+      ${text}
+      <span class="loading-dots">
+        <span></span><span></span><span></span>
+      </span>
+    `;
+  }
+}
+
+function openLoading(title = 'Preparando tus tickets', text = 'Registrando reserva') {
+  currentLoadingProgress = 0;
+  setLoadingProgress(0, title, text);
+  loadingOverlay.classList.add('show');
+  loadingOverlay.setAttribute('aria-hidden', 'false');
+}
+
+async function closeLoading() {
+  setLoadingProgress(100, 'Tickets listos', 'Descarga iniciada');
+  await sleep(450);
+  loadingOverlay.classList.remove('show');
+  loadingOverlay.setAttribute('aria-hidden', 'true');
+
+  await sleep(250);
+  setLoadingProgress(0, 'Preparando tus tickets', 'Registrando reserva');
+}
 
     function updateSummary() {
       const nums = [...selectedNumbers].sort((a, b) => a - b);
@@ -555,10 +732,11 @@
       }
 
       try {
-        const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=list`, {
-          method: 'GET',
-          redirect: 'follow'
-        });
+        const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=list&t=${Date.now()}`, {
+  method: 'GET',
+  redirect: 'follow',
+  cache: 'no-store'
+});
 
         if (!response.ok) {
           throw new Error(`Error HTTP ${response.status}`);
@@ -615,124 +793,148 @@
       return canvas;
     }
 
-    async function reserveAndDownloadPDF() {
-      const firstName = normalizePersonText(firstNameInput.value);
-      const lastName = normalizePersonText(lastNameInput.value);
-      const numbers = [...selectedNumbers].sort((a, b) => a - b);
+   async function reserveAndDownloadPDF() {
+  const firstName = normalizePersonText(firstNameInput.value);
+  const lastName = normalizePersonText(lastNameInput.value);
+  const numbers = [...selectedNumbers].sort((a, b) => a - b);
 
-      if (!firstName || !lastName) {
-        alert('Completa el primer nombre y el primer apellido.');
-        return;
-      }
+  if (!firstName || !lastName) {
+    alert('Completa el primer nombre y el primer apellido.');
+    return;
+  }
 
-      if (numbers.length < MIN_REQUIRED) {
-        alert(`Debes seleccionar al menos ${MIN_REQUIRED} boletos.`);
-        return;
-      }
+  if (numbers.length < MIN_REQUIRED) {
+    alert(`Debes seleccionar al menos ${MIN_REQUIRED} boletos.`);
+    return;
+  }
 
-      if (!ticketTemplate.complete || !ticketTemplate.naturalWidth) {
-        alert('No se pudo cargar la plantilla boleto.jpeg');
-        return;
-      }
+  if (!ticketTemplate.complete || !ticketTemplate.naturalWidth) {
+    alert('No se pudo cargar la plantilla boleto.jpeg');
+    return;
+  }
 
-      confirmBtn.disabled = true;
-      reloadBtn.disabled = true;
+  confirmBtn.disabled = true;
+  reloadBtn.disabled = true;
 
-      try {
-        if (!GOOGLE_SCRIPT_URL) {
-          throw new Error('Falta pegar la URL del Google Apps Script.');
-        }
+  openLoading('Preparando tus tickets', 'Validando selección');
+  await sleep(250);
 
-        const payload = {
-          action: 'reserve',
-          firstName,
-          lastName,
-          fullName: `${firstName} ${lastName}`.trim(),
-          ticketNumbers: numbers,
-          quantity: numbers.length,
-          createdAt: new Date().toISOString()
-        };
-
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error HTTP ${response.status}`);
-        }
-
-        const rawText = await response.text();
-
-        let data;
-        try {
-          data = JSON.parse(rawText);
-        } catch {
-          throw new Error(`La respuesta no fue JSON. Respuesta recibida: ${rawText.slice(0, 200)}`);
-        }
-
-      if (!data.ok) {
-  alert('Backend respondió error: ' + JSON.stringify(data));
-  throw new Error(data.error || 'No se pudieron reservar los boletos.');
-}
-
-alert('Backend respondió OK: ' + JSON.stringify(data));
-
-        numbers.forEach(n => reservedNumbers.add(n));
-        selectedNumbers.clear();
-        refreshGridState();
-        updateSummary();
-
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'mm',
-          format: 'a4'
-        });
-
-        for (let i = 0; i < numbers.length; i++) {
-          const ticketCanvas = drawTicketCanvas(numbers[i]);
-          const imgData = ticketCanvas.toDataURL('image/jpeg', 1.0);
-
-          if (i > 0) pdf.addPage();
-
-          const pageWidth = pdf.internal.pageSize.getWidth();
-          const pageHeight = pdf.internal.pageSize.getHeight();
-
-          const margin = 10;
-          const maxWidth = pageWidth - margin * 2;
-          const maxHeight = pageHeight - margin * 2;
-
-          let drawWidth = maxWidth;
-          let drawHeight = (ticketCanvas.height * drawWidth) / ticketCanvas.width;
-
-          if (drawHeight > maxHeight) {
-            drawHeight = maxHeight;
-            drawWidth = (ticketCanvas.width * drawHeight) / ticketCanvas.height;
-          }
-
-          const x = (pageWidth - drawWidth) / 2;
-          const y = (pageHeight - drawHeight) / 2;
-
-          pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
-        }
-
-        const fileSeed = numbers[0] ? formatNumber(numbers[0]) : '000';
-        const baseName = `${slugify(firstName)}-${slugify(lastName)}-${fileSeed}`;
-        pdf.save(`tickets-rifa-${baseName}.pdf`);
-
-        alert(`Elegiste ${numbers.length} tickets. El PDF se descargó correctamente.`);
-
-        await fetchReservedNumbers();
-      } catch (error) {
-        alert(`Ocurrió un problema: ${error.message}`);
-      } finally {
-        reloadBtn.disabled = false;
-        confirmBtn.disabled = false;
-        updateSummary();
-      }
+  try {
+    if (!GOOGLE_SCRIPT_URL) {
+      throw new Error('Falta pegar la URL del Google Apps Script.');
     }
+
+    setLoadingProgress(12, 'Preparando tus tickets', 'Organizando tus datos');
+    await sleep(220);
+
+    const payload = {
+      action: 'reserve',
+      firstName,
+      lastName,
+      fullName: `${firstName} ${lastName}`.trim(),
+      ticketNumbers: numbers,
+      quantity: numbers.length,
+      createdAt: new Date().toISOString()
+    };
+
+    setLoadingProgress(25, 'Registrando reserva', 'Conectando con la planilla');
+
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP ${response.status}`);
+    }
+
+    setLoadingProgress(42, 'Registrando reserva', 'Confirmando disponibilidad');
+
+    const rawText = await response.text();
+
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      throw new Error(`La respuesta no fue JSON. Respuesta recibida: ${rawText.slice(0, 200)}`);
+    }
+
+    if (!data.ok) {
+      throw new Error(data.error || 'No se pudieron reservar los boletos.');
+    }
+
+    setLoadingProgress(58, 'Reserva confirmada', 'Generando PDF');
+
+    numbers.forEach(n => reservedNumbers.add(n));
+    selectedNumbers.clear();
+    refreshGridState();
+    updateSummary();
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    for (let i = 0; i < numbers.length; i++) {
+      const ticketCanvas = drawTicketCanvas(numbers[i]);
+      const imgData = ticketCanvas.toDataURL('image/jpeg', 1.0);
+
+      if (i > 0) pdf.addPage();
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const margin = 10;
+      const maxWidth = pageWidth - margin * 2;
+      const maxHeight = pageHeight - margin * 2;
+
+      let drawWidth = maxWidth;
+      let drawHeight = (ticketCanvas.height * drawWidth) / ticketCanvas.width;
+
+      if (drawHeight > maxHeight) {
+        drawHeight = maxHeight;
+        drawWidth = (ticketCanvas.width * drawHeight) / ticketCanvas.height;
+      }
+
+      const x = (pageWidth - drawWidth) / 2;
+      const y = (pageHeight - drawHeight) / 2;
+
+      pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
+
+      const pdfProgress = 58 + Math.round(((i + 1) / numbers.length) * 32);
+      setLoadingProgress(pdfProgress, 'Generando PDF', `Preparando boleto ${i + 1} de ${numbers.length}`);
+      await sleep(120);
+    }
+
+    setLoadingProgress(94, 'Finalizando', 'Preparando descarga');
+
+    const fileSeed = numbers[0] ? formatNumber(numbers[0]) : '000';
+    const baseName = `${slugify(firstName)}-${slugify(lastName)}-${fileSeed}`;
+
+    await sleep(250);
+
+    pdf.save(`tickets-rifa-${baseName}.pdf`);
+
+    setLoadingProgress(100, 'Tickets listos', 'Descarga iniciada');
+
+    await sleep(500);
+    await closeLoading();
+
+    alert(`Elegiste ${numbers.length} tickets. El PDF se descargó correctamente.`);
+
+    await fetchReservedNumbers();
+  } catch (error) {
+    await closeLoading();
+    alert(`Ocurrió un problema: ${error.message}`);
+  } finally {
+    reloadBtn.disabled = false;
+    confirmBtn.disabled = false;
+    updateSummary();
+  }
+}
 
     confirmBtn.addEventListener('click', reserveAndDownloadPDF);
     reloadBtn.addEventListener('click', fetchReservedNumbers);
