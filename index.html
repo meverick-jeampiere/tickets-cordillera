@@ -7,8 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#f5f2fb;
@@ -2021,9 +2020,9 @@ const progressRing = document.querySelector('.progress-ring');
       ctx.fillStyle = NAME_COLOR;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.font = '600 52px Inter, sans-serif';
+      ctx.font = '600 52px Poppins, sans-serif';
       ctx.fillText('PLANTILLA NO ENCONTRADA', canvas.width / 2, 180);
-      ctx.font = '600 28px Inter, sans-serif';
+      ctx.font = '600 28px Poppins, sans-serif';
       ctx.fillText('Verifica nombre y extensión del archivo', canvas.width / 2, 245);
       showFallback();
     }
@@ -2031,14 +2030,14 @@ const progressRing = document.querySelector('.progress-ring');
     function fitText(text, maxWidth, baseSize, minSize = 66) {
       let size = baseSize;
       while (size >= minSize) {
-        ctx.font = `600 ${size}px Inter, sans-serif`;
+        ctx.font = `600 ${size}px Poppins, sans-serif`;
         if (ctx.measureText(text).width <= maxWidth) return size;
         size -= 1;
       }
       return minSize;
     }
 
-    function fitSmallText(text, maxWidth, baseSize, minSize = 24, fontFamily = 'Inter, sans-serif', fontWeight = 600) {
+    function fitSmallText(text, maxWidth, baseSize, minSize = 24, fontFamily = 'Poppins, sans-serif', fontWeight = 600) {
       let size = baseSize;
       while (size >= minSize) {
         ctx.font = `${fontWeight} ${size}px ${fontFamily}`;
@@ -2074,7 +2073,7 @@ const progressRing = document.querySelector('.progress-ring');
         canvas.width / 2,
         cfg.passY,
         cfg.passLetterSpacing,
-        `500 ${passSize}px Inter, sans-serif`,
+        `500 ${passSize}px Poppins, sans-serif`,
         '#FFFFFF'
       );
     }
@@ -2127,7 +2126,7 @@ const progressRing = document.querySelector('.progress-ring');
 
       const firstNameSize = fitText(firstName, cfg.maxWidth, cfg.baseSize, 66);
       const lastNameSize = fitText(lastName, cfg.maxWidth, cfg.baseSize, 66);
-      const passSize = fitSmallText(passLabel, cfg.passMaxWidth, cfg.passSize, 14, 'Inter, sans-serif', 500);
+      const passSize = fitSmallText(passLabel, cfg.passMaxWidth, cfg.passSize, 14, 'Poppins, sans-serif', 500);
       const numberSize = fitSmallText(ticketNumberText, cfg.numberMaxWidth, cfg.numberSize, 22);
 
       ctx.textAlign = 'center';
@@ -2136,13 +2135,13 @@ const progressRing = document.querySelector('.progress-ring');
       drawPassLabel(passLabel, cfg, passSize);
 
       ctx.fillStyle = cfg.color;
-      ctx.font = `600 ${firstNameSize}px Inter, sans-serif`;
+      ctx.font = `600 ${firstNameSize}px Poppins, sans-serif`;
       ctx.fillText(firstName, canvas.width / 2, cfg.nameY1);
 
-      ctx.font = `600 ${lastNameSize}px Inter, sans-serif`;
+      ctx.font = `600 ${lastNameSize}px Poppins, sans-serif`;
       ctx.fillText(lastName, canvas.width / 2, cfg.nameY2);
 
-      ctx.font = `600 ${numberSize}px Inter, sans-serif`;
+      ctx.font = `600 ${numberSize}px Poppins, sans-serif`;
       ctx.fillText(ticketNumberText, cfg.numberX, cfg.numberY);
 
       return true;
