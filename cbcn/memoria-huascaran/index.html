@@ -7739,19 +7739,23 @@ function updateFullscreenButton(){
 }
 
 async function toggleFullscreen(){
-  try{
-    const isFullscreen =
-      document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      document.msFullscreenElement;
+  const fullscreenElement =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement;
 
-    if(!isFullscreen){
-      if(stageElement.requestFullscreen){
-        await stageElement.requestFullscreen();
-      }else if(stageElement.webkitRequestFullscreen){
-        stageElement.webkitRequestFullscreen();
-      }else if(stageElement.msRequestFullscreen){
-        stageElement.msRequestFullscreen();
+  try{
+    if(!fullscreenElement){
+      const target = stageElement;
+
+      if(target.requestFullscreen){
+        await target.requestFullscreen();
+      }else if(target.webkitRequestFullscreen){
+        target.webkitRequestFullscreen();
+      }else if(target.msRequestFullscreen){
+        target.msRequestFullscreen();
+      }else{
+        console.warn('Este navegador no soporta fullscreen API en este contexto.');
       }
     }else{
       if(document.exitFullscreen){
@@ -7764,9 +7768,17 @@ async function toggleFullscreen(){
     }
   }catch(error){
     console.warn('No se pudo cambiar a pantalla completa:', error);
-  }finally{
-    updateFullscreenButton();
   }
+
+  updateFullscreenButton();
+}
+
+if(fullscreenBtn){
+  fullscreenBtn.addEventListener('click', async (event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    await toggleFullscreen();
+  });
 }
 
     function initReader(startPage=0){
@@ -7824,13 +7836,7 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .th
     goToPageByKey(targetKey);
     return;
   }
-if(fullscreenBtn){
-  fullscreenBtn.addEventListener('click',(event)=>{
-    event.preventDefault();
-    event.stopPropagation();
-    toggleFullscreen();
-  });
-}
+
   const trigger = event.target.closest('#openBookTrigger, #mobileOpenBookTrigger');
 
   if(trigger){
