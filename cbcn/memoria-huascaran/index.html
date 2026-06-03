@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -87,23 +86,78 @@
     .hint{opacity:.7;text-align:right;}
 
     .stage{
-      width:100%;
-      max-width:1780px;
-      height:100%;
-      min-height:0;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      padding:6px;
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.62);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.80), transparent 38%),
-        linear-gradient(180deg, rgba(255,255,255,.50), rgba(255,255,255,.14));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.76), var(--shadow);
-    }
+  position:relative;
+  width:100%;
+  max-width:1780px;
+  height:100%;
+  min-height:0;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:6px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.62);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.80), transparent 38%),
+    linear-gradient(180deg, rgba(255,255,255,.50), rgba(255,255,255,.14));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.76), var(--shadow);
+}
+.fullscreen-btn{
+  position:absolute;
+  top:40px;
+  right:30px;
+  z-index:30;
+
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:999px;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,255,255,.78);
+  color:#1b2433;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  box-shadow:
+    0 10px 24px rgba(20,13,6,.16),
+    inset 0 1px 0 rgba(255,255,255,.72);
+
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+
+  transition:
+    transform .22s ease,
+    background .22s ease,
+    box-shadow .22s ease,
+    opacity .22s ease;
+}
+
+.fullscreen-btn:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.9);
+  box-shadow:
+    0 14px 30px rgba(20,13,6,.20),
+    inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.fullscreen-btn:active{
+  transform:translateY(0);
+}
+
+.fullscreen-btn.is-visible{
+  display:flex;
+}
+
+.fullscreen-btn.is-fullscreen{
+  font-size:16px;
+}
 
     #book{
       margin:auto;
@@ -5898,10 +5952,12 @@ mask:
       <div class="hint">Usa ← → o toca los lados para pasar página</div>
     </header>
 
-    <main class="stage">
-      <div id="book"></div>
-    </main>
-
+   <main class="stage">
+  <button id="fullscreenBtn" class="fullscreen-btn" type="button" aria-label="Ver en pantalla completa" title="Pantalla completa">
+    ⛶
+  </button>
+  <div id="book"></div>
+</main>
     <footer class="footer-reader" id="pageCounter">Página 1 / 2</footer>
   </div>
 
@@ -7596,10 +7652,11 @@ mask:
 </template>
   <script>
     const bookElement = document.getElementById('book');
-    const pageCounter = document.getElementById('pageCounter');
-    const stageElement = document.querySelector('.stage');
-    let pageFlip;
-    let isFlipping = false;
+const pageCounter = document.getElementById('pageCounter');
+const stageElement = document.querySelector('.stage');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+let pageFlip;
+let isFlipping = false;
 
     function getPageSize(){
       const stage = stageElement.getBoundingClientRect();
@@ -7650,11 +7707,67 @@ mask:
 }
 
     function updateCounter(){
-      if(!pageFlip) return;
-      const current = pageFlip.getCurrentPageIndex() + 1;
-      const total = pageFlip.getPageCount();
-      pageCounter.textContent = `Página ${current} / ${total}`;
+  if(!pageFlip) return;
+  const current = pageFlip.getCurrentPageIndex() + 1;
+  const total = pageFlip.getPageCount();
+  pageCounter.textContent = `Página ${current} / ${total}`;
+  updateFullscreenButton();
+}
+function updateFullscreenButton(){
+  if(!pageFlip || !fullscreenBtn) return;
+
+  const current = pageFlip.getCurrentPageIndex();
+  const isFirstPage = current === 0;
+
+  fullscreenBtn.classList.toggle('is-visible', isFirstPage);
+
+  const isFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement;
+
+  fullscreenBtn.classList.toggle('is-fullscreen', !!isFullscreen);
+  fullscreenBtn.textContent = isFullscreen ? '×' : '⛶';
+  fullscreenBtn.setAttribute(
+    'aria-label',
+    isFullscreen ? 'Salir de pantalla completa' : 'Ver en pantalla completa'
+  );
+  fullscreenBtn.setAttribute(
+    'title',
+    isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'
+  );
+}
+
+async function toggleFullscreen(){
+  try{
+    const isFullscreen =
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement;
+
+    if(!isFullscreen){
+      if(stageElement.requestFullscreen){
+        await stageElement.requestFullscreen();
+      }else if(stageElement.webkitRequestFullscreen){
+        stageElement.webkitRequestFullscreen();
+      }else if(stageElement.msRequestFullscreen){
+        stageElement.msRequestFullscreen();
+      }
+    }else{
+      if(document.exitFullscreen){
+        await document.exitFullscreen();
+      }else if(document.webkitExitFullscreen){
+        document.webkitExitFullscreen();
+      }else if(document.msExitFullscreen){
+        document.msExitFullscreen();
+      }
     }
+  }catch(error){
+    console.warn('No se pudo cambiar a pantalla completa:', error);
+  }finally{
+    updateFullscreenButton();
+  }
+}
 
     function initReader(startPage=0){
       populatePages();
@@ -7680,8 +7793,9 @@ mask:
       pageFlip.loadFromHTML(bookElement.querySelectorAll('.page'));
       pageFlip.turnToPage(Math.min(startPage,pageFlip.getPageCount()-1));
       pageFlip.on('flip',()=>{isFlipping=false;updateCounter();});
-      pageFlip.on('changeState',(e)=>{isFlipping=e.data==='flipping';});
-      updateCounter();
+pageFlip.on('changeState',(e)=>{isFlipping=e.data==='flipping';});
+updateCounter();
+updateFullscreenButton();
     }
 
     function goNext(){if(!pageFlip||isFlipping)return;pageFlip.flipNext();}
@@ -7710,7 +7824,13 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .th
     goToPageByKey(targetKey);
     return;
   }
-
+if(fullscreenBtn){
+  fullscreenBtn.addEventListener('click',(event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    toggleFullscreen();
+  });
+}
   const trigger = event.target.closest('#openBookTrigger, #mobileOpenBookTrigger');
 
   if(trigger){
@@ -7739,7 +7859,9 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .th
         initReader(current);
       },220);
     });
-
+document.addEventListener('fullscreenchange', updateFullscreenButton);
+document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+document.addEventListener('msfullscreenchange', updateFullscreenButton);
     window.addEventListener('load',()=>initReader(0));
   </script>
 </body>
