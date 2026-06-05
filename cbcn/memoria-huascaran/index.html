@@ -3488,7 +3488,34 @@ mask:
   max-width:92%;
   margin:0 0 4.3%;
 }
+.formula-line{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(20px,1.45vw,32px);
+  line-height:1.1;
+  font-weight:700;
+  color:rgba(229,184,118,.92);
+  margin:1.2% 0 3%;
+}
 
+.formula-list{
+  margin:0 0 4%;
+  padding-left:1.2em;
+  color:rgba(244,249,252,.90);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1.02vw,20px);
+  line-height:1.15;
+  font-weight:600;
+}
+
+.formula-list li{
+  margin:4px 0;
+}
+
+.formula-key{
+  color:rgba(229,184,118,.92);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-weight:700;
+}
 .ice-science-note{
   margin-top:4%;
   padding:4.2% 5.2%;
@@ -5943,6 +5970,2394 @@ mask:
     border-radius:22px;
   }
 }
+.risk-label,
+.risk-line{
+  display:none !important;
+}
+/* =========================================================
+   PÁGINA ESPECIAL — EVENTO FOTOGRÁFICO
+   La visita del presidente del Perú
+   ========================================================= */
+
+.event-photo-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.event-photo-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:88px 1fr;
+  gap:0;
+  background:var(--paper);
+}
+
+/* Franja vertical lateral */
+.event-photo-sidebar{
+  position:relative;
+  padding:18px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  overflow:hidden;
+
+  background:
+    linear-gradient(180deg, #f7f1e7 0%, #efe6d8 100%);
+  border-right:1px solid rgba(20,18,14,.10);
+}
+
+.event-photo-sidebar::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:1px;
+  height:100%;
+  background:linear-gradient(180deg, rgba(167,101,32,.12), rgba(167,101,32,.28), rgba(167,101,32,.12));
+}
+
+.event-photo-kicker{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:Inter, sans-serif;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  opacity:.95;
+}
+
+.event-photo-note{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:18px;
+  line-height:1.05;
+  font-weight:700;
+  font-style:italic;
+  color:#2a241e;
+  text-align:left;
+  max-height:78%;
+}
+
+/* Área principal */
+.event-photo-main{
+  position:relative;
+  padding:3.2%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.62), transparent 42%),
+    #f8f5ef;
+}
+
+.event-photo-frame{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:26px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24)),
+    url('visita-presidente.jpg') center/cover no-repeat,
+    #d8d2c7;
+
+  box-shadow:
+    0 28px 70px rgba(22,16,10,.22),
+    0 0 0 1px rgba(20,18,14,.12),
+    inset 0 0 0 1px rgba(255,255,255,.14);
+}
+
+.event-photo-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255,255,255,.18), transparent 32%),
+    linear-gradient(180deg, rgba(0,0,0,.02), transparent 35%, rgba(0,0,0,.36));
+}
+
+/* Título y pie sobre la foto */
+.event-photo-caption{
+  position:absolute;
+  left:4.2%;
+  right:4.2%;
+  bottom:4%;
+  z-index:2;
+  color:#fff;
+}
+
+.event-photo-caption h2{
+  margin:0 0 8px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px, 2.6vw, 58px);
+  line-height:.95;
+  font-weight:700;
+  letter-spacing:-.03em;
+  color:#fffdf9;
+  text-shadow:0 4px 18px rgba(0,0,0,.28);
+}
+
+.event-photo-caption p{
+  margin:0;
+  max-width:72%;
+  font-family:Inter, sans-serif;
+  font-size:clamp(10px, .72vw, 13px);
+  line-height:1.45;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.88);
+}
+
+/* Folio opcional */
+.event-photo-folio{
+  position:absolute;
+  right:2.6%;
+  bottom:2.3%;
+  z-index:3;
+  color:#fff;
+  opacity:.9;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+/* Móvil */
+@media (orientation: portrait){
+  .event-photo-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:74px 1fr;
+  }
+
+  .event-photo-sidebar{
+    padding:12px 16px;
+    border-right:none;
+    border-bottom:1px solid rgba(20,18,14,.10);
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .event-photo-sidebar::after{
+    top:auto;
+    bottom:0;
+    right:auto;
+    width:100%;
+    height:1px;
+    background:linear-gradient(90deg, rgba(167,101,32,.12), rgba(167,101,32,.28), rgba(167,101,32,.12));
+  }
+
+  .event-photo-kicker,
+  .event-photo-note{
+    writing-mode:horizontal-tb;
+    transform:none;
+  }
+
+  .event-photo-kicker{
+    font-size:10px;
+  }
+
+  .event-photo-note{
+    font-size:18px;
+    max-height:none;
+    max-width:70%;
+    text-align:right;
+  }
+
+  .event-photo-main{
+    padding:4.8% 5.2% 6.5%;
+  }
+
+  .event-photo-frame{
+    border-radius:22px;
+  }
+
+  .event-photo-caption h2{
+    font-size:clamp(28px, 7vw, 42px);
+  }
+
+  .event-photo-caption p{
+    max-width:100%;
+    font-size:clamp(10px, 2.5vw, 12px);
+    line-height:1.35;
+  }
+}
+/* =========================================================
+   PÁGINA GUÍA — SEXTA PARTE
+   Perforar la memoria
+   ========================================================= */
+
+.sixth-guide-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.sixth-guide-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.50fr .50fr;
+  background:var(--paper);
+}
+
+.sixth-guide-left{
+  position:relative;
+  padding:6.8% 7.8% 6.2%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.sixth-guide-kicker{
+  font-family:Inter, sans-serif;
+  color:var(--gold);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.2%;
+}
+
+.sixth-guide-left h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(38px,4vw,76px);
+  line-height:.88;
+  letter-spacing:-.045em;
+  color:#18202d;
+  margin:0 0 3.8%;
+  font-weight:700;
+}
+
+.sixth-guide-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:var(--gold);
+  font-size:clamp(15px,1.05vw,21px);
+  line-height:1.12;
+  font-weight:600;
+  margin:0 0 4.8%;
+}
+
+.sixth-guide-left .gold-line{
+  display:block;
+  width:48px;
+  height:2px;
+  background:var(--gold);
+  margin:0 0 5.6%;
+  flex-shrink:0;
+}
+
+.sixth-guide-list{
+  --marker-size:38px;
+  --marker-left:16px;
+  --content-left:76px;
+
+  position:relative;
+  display:grid;
+  gap:0;
+  margin-top:1%;
+  padding-left:var(--content-left);
+  max-width:96%;
+}
+
+.sixth-guide-item{
+  position:relative;
+  display:block;
+  padding:1.55% 0 1.85%;
+  border-bottom:1px solid rgba(20,18,14,.105);
+}
+
+.sixth-guide-number{
+  position:absolute;
+  left:calc(-1 * var(--content-left) + var(--marker-left) - var(--marker-size) / 2);
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--marker-size);
+  height:var(--marker-size);
+  border-radius:50%;
+  background:var(--gold);
+  color:#fffdf7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Inter, sans-serif;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.05em;
+  box-shadow:0 8px 18px rgba(167,101,32,.16);
+  z-index:4;
+}
+
+.sixth-guide-item h2{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.28vw,27px);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:#111827;
+  margin:0 0 5px;
+  font-weight:700;
+}
+
+.sixth-guide-item p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(12px,.84vw,16px);
+  line-height:1.15;
+  color:#231f1b;
+  font-weight:600;
+  margin:0;
+  max-width:96%;
+}
+
+.sixth-tech-card{
+  --cut:6px;
+  --cut2:12px;
+  --ice-text:#174d6c;
+  --ice-border:rgba(23,77,108,.34);
+  --card-border:var(--ice-border);
+
+  position:relative;
+  width:100%;
+  min-height:54px;
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  margin:1.25% 0 1.35%;
+  padding:0 3.8% 0 6.4%;
+  color:var(--ice-text);
+  cursor:pointer;
+  text-align:left;
+  overflow:visible;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.sixth-tech-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(23,77,108,.075), rgba(255,253,247,.86)),
+    rgba(214,237,247,.20);
+
+  -webkit-mask:
+    radial-gradient(circle var(--cut) at 0 0, transparent calc(var(--cut) - .5px), #000 var(--cut)) top left / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 100% 0, transparent calc(var(--cut) - .5px), #000 var(--cut)) top right / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 0 100%, transparent calc(var(--cut) - .5px), #000 var(--cut)) bottom left / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 100% 100%, transparent calc(var(--cut) - .5px), #000 var(--cut)) bottom right / 50% 50% no-repeat;
+
+  mask:
+    radial-gradient(circle var(--cut) at 0 0, transparent calc(var(--cut) - .5px), #000 var(--cut)) top left / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 100% 0, transparent calc(var(--cut) - .5px), #000 var(--cut)) top right / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 0 100%, transparent calc(var(--cut) - .5px), #000 var(--cut)) bottom left / 50% 50% no-repeat,
+    radial-gradient(circle var(--cut) at 100% 100%, transparent calc(var(--cut) - .5px), #000 var(--cut)) bottom right / 50% 50% no-repeat;
+}
+
+.sixth-tech-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(var(--card-border), var(--card-border))
+      left var(--cut) top / calc(100% - var(--cut2)) 1px no-repeat,
+    linear-gradient(var(--card-border), var(--card-border))
+      left var(--cut) bottom / calc(100% - var(--cut2)) 1px no-repeat,
+    linear-gradient(var(--card-border), var(--card-border))
+      left top var(--cut) / 1px calc(100% - var(--cut2)) no-repeat,
+    linear-gradient(var(--card-border), var(--card-border))
+      right top var(--cut) / 1px calc(100% - var(--cut2)) no-repeat,
+    radial-gradient(circle var(--cut) at 0 0, transparent calc(var(--cut) - 1px), var(--card-border) calc(var(--cut) - .5px), var(--card-border) calc(var(--cut) + .5px), transparent calc(var(--cut) + 1px)) top left / var(--cut2) var(--cut2) no-repeat,
+    radial-gradient(circle var(--cut) at 100% 0, transparent calc(var(--cut) - 1px), var(--card-border) calc(var(--cut) - .5px), var(--card-border) calc(var(--cut) + .5px), transparent calc(var(--cut) + 1px)) top right / var(--cut2) var(--cut2) no-repeat,
+    radial-gradient(circle var(--cut) at 0 100%, transparent calc(var(--cut) - 1px), var(--card-border) calc(var(--cut) - .5px), var(--card-border) calc(var(--cut) + .5px), transparent calc(var(--cut) + 1px)) bottom left / var(--cut2) var(--cut2) no-repeat,
+    radial-gradient(circle var(--cut) at 100% 100%, transparent calc(var(--cut) - 1px), var(--card-border) calc(var(--cut) - .5px), var(--card-border) calc(var(--cut) + .5px), transparent calc(var(--cut) + 1px)) bottom right / var(--cut2) var(--cut2) no-repeat;
+}
+
+.sixth-tech-card:hover{
+  transform:translateX(3px);
+}
+
+.sixth-tech-icon{
+  position:absolute;
+  left:calc(-1 * var(--content-left) + var(--marker-left) - 46px / 2);
+  top:50%;
+  transform:translateY(-50%);
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#2b6f92;
+  color:#fffdf7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  line-height:1;
+  font-family:Inter, sans-serif;
+  box-shadow:
+    0 10px 22px rgba(47,127,166,.22),
+    0 0 14px rgba(130,205,238,.20),
+    inset 0 0 0 1px rgba(255,255,255,.32);
+  z-index:5;
+}
+
+.sixth-tech-icon::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1px dashed rgba(75,151,190,.34);
+  pointer-events:none;
+}
+
+.sixth-tech-icon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-42px;
+  transform:translateX(-50%);
+  width:1px;
+  height:calc(100% + 84px);
+  border-left:1px dashed rgba(75,151,190,.26);
+  z-index:-1;
+}
+
+.sixth-tech-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  min-height:54px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.sixth-tech-content strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.18vw,24px);
+  line-height:1.05;
+  font-weight:700;
+  color:#174d6c;
+  margin:0 0 4px;
+}
+
+.sixth-tech-content span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(12px,.82vw,16px);
+  line-height:1.12;
+  font-style:italic;
+  font-weight:600;
+  color:#174d6c;
+  opacity:.9;
+}
+
+.sixth-guide-right{
+  position:relative;
+  padding:5.5%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.72), transparent 38%),
+    #f5efe5;
+}
+
+.sixth-guide-image{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.34)),
+    url('sexta-parte-guia.jpg') center/cover no-repeat;
+  box-shadow:
+    0 32px 76px rgba(22,16,10,.22),
+    0 0 0 1px rgba(20,18,14,.12);
+}
+
+.sixth-guide-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.24), transparent 36%),
+    linear-gradient(180deg, transparent 46%, rgba(0,0,0,.62));
+  pointer-events:none;
+}
+
+.sixth-guide-caption{
+  position:absolute;
+  left:8%;
+  right:8%;
+  bottom:7%;
+  z-index:3;
+  color:#fff;
+  font-family:"Cormorant Garamond", Georgia, serif;
+}
+
+.sixth-guide-caption strong{
+  display:block;
+  font-size:clamp(24px,2vw,40px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.sixth-guide-caption span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+/* =========================================================
+   XVII — CÓMO SE EXTRAE EL TIEMPO
+   Layout distinto: secuencia vertical + ventana técnica
+   ========================================================= */
+
+.memory-drill-page{
+  background:
+    radial-gradient(circle at 8% 0%, rgba(215,242,255,.30), transparent 28%),
+    radial-gradient(circle at 88% 6%, rgba(125,190,225,.18), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(1,12,24,.70), transparent 62%),
+    linear-gradient(135deg,#2f6f91 0%, #1d5576 34%, #123d5b 62%, #08263e 100%);
+}
+
+.memory-drill-page::after{
+  background-image:radial-gradient(rgba(215,238,250,.045) .56px, transparent .56px);
+  background-size:13px 13px;
+  opacity:.16;
+  mix-blend-mode:screen;
+}
+
+.memory-drill-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.47fr .53fr;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(225,248,255,.17), transparent 30%),
+    radial-gradient(circle at 78% 6%, rgba(135,200,235,.13), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(0,12,24,.38), transparent 62%),
+    linear-gradient(135deg,#2b6687 0%, #1b5577 35%, #104060 66%, #082940 100%);
+}
+
+.memory-drill-text,
+.memory-drill-visual{
+  position:relative;
+  overflow:hidden;
+}
+
+.memory-drill-text{
+  padding:7.8% 7.8% 6.5%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 10% 6%, rgba(238,252,255,.16), transparent 24%),
+    linear-gradient(145deg, #357493 0%, #286789 30%, #1a5073 60%, #0c324d 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(238,252,255,.28),
+    inset 0 -48px 92px rgba(2,14,24,.24);
+}
+
+.memory-drill-text::before,
+.memory-drill-visual::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.30);
+  pointer-events:none;
+}
+
+.memory-drill-kicker,
+.memory-drill-text h1,
+.memory-drill-subtitle,
+.memory-drill-text p,
+.memory-drill-line,
+.drill-sequence,
+.memory-drill-note{
+  position:relative;
+  z-index:1;
+}
+
+.memory-drill-kicker{
+  font-family:Inter,sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  font-weight:900;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:4%;
+}
+
+.memory-drill-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(36px,3.8vw,72px);
+  line-height:.9;
+  letter-spacing:-.04em;
+  color:rgba(246,250,252,.94);
+  margin:0 0 4.2%;
+  font-weight:700;
+}
+
+.memory-drill-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.88);
+  font-size:clamp(18px,1.35vw,27px);
+  line-height:1.08;
+  font-weight:600;
+  font-style:italic;
+  margin:0 0 4.5%;
+}
+
+.memory-drill-line{
+  width:54px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  margin:0 0 4.5%;
+}
+
+.memory-drill-text p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1.02vw,20px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+  margin:0 0 4%;
+  max-width:92%;
+}
+
+.drill-sequence{
+  display:grid;
+  gap:10px;
+  margin:2% 0 4%;
+}
+
+.drill-step{
+  position:relative;
+  padding:12px 14px 12px 54px;
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.drill-step strong{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.56vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:5px;
+}
+
+.drill-step span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.92vw,18px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+}
+
+.drill-step::before{
+  content:attr(data-step);
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(229,184,118,.88);
+  color:#0f2234;
+  font-family:Inter,sans-serif;
+  font-size:11px;
+  font-weight:900;
+}
+
+.memory-drill-note{
+  padding:4.2% 5.2%;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,19px);
+  line-height:1.16;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+.memory-drill-visual{
+  padding:5.2%;
+  background:
+    radial-gradient(circle at 12% 7%, rgba(238,252,255,.13), transparent 28%),
+    linear-gradient(145deg, #316f91 0%, #245f82 34%, #174967 65%, #0b2f49 100%);
+}
+
+.memory-drill-card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.26)),
+    url('extraccion-tiempo.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 32px 76px rgba(2,14,24,.36),
+    0 0 0 1px rgba(235,250,255,.34),
+    inset 0 0 0 1px rgba(255,255,255,.17);
+}
+
+.memory-drill-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(238,252,255,.16), transparent 28%),
+    linear-gradient(180deg, transparent 44%, rgba(0,0,0,.48));
+  pointer-events:none;
+}
+
+.memory-drill-caption{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:6%;
+  z-index:2;
+  color:#fff;
+}
+
+.memory-drill-caption strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(26px,2vw,42px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.memory-drill-caption span{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+/* =========================================================
+   XVIII — LA OFICINA SOBRE EL HIELO
+   Layout distinto: panel de trabajo y tarjetas de laboratorio
+   ========================================================= */
+
+.ice-office-page{
+  background:
+    radial-gradient(circle at 12% 0%, rgba(215,242,255,.24), transparent 28%),
+    radial-gradient(circle at 88% 0%, rgba(180,225,248,.16), transparent 32%),
+    linear-gradient(135deg,#264d67 0%, #17364f 48%, #0b2237 100%);
+}
+
+.ice-office-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.55fr .45fr;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 30%),
+    linear-gradient(135deg,#214a65 0%, #15364f 48%, #0b2438 100%);
+}
+
+.ice-office-visual,
+.ice-office-text{
+  position:relative;
+  overflow:hidden;
+}
+
+.ice-office-visual{
+  padding:5.2%;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(238,252,255,.10), transparent 26%),
+    linear-gradient(145deg, #2b5c7b 0%, #1d4763 34%, #11334b 100%);
+}
+
+.ice-office-board{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:3.5%;
+}
+
+.ice-office-main{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.08), rgba(2,14,24,.24)),
+    url('oficina-hielo.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 28px 66px rgba(2,14,24,.34),
+    0 0 0 1px rgba(235,250,255,.28),
+    inset 0 0 0 1px rgba(255,255,255,.14);
+}
+
+.ice-office-main::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(0,0,0,.54)),
+    radial-gradient(circle at 22% 10%, rgba(238,252,255,.14), transparent 28%);
+  pointer-events:none;
+}
+
+.ice-office-caption{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:6%;
+  z-index:2;
+  color:#fff;
+}
+
+.ice-office-caption strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(26px,2vw,42px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.ice-office-caption span{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+.ice-office-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3.5%;
+}
+
+.ice-office-chip{
+  padding:6.5%;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.ice-office-chip strong{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.58vw,11px);
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:5px;
+}
+
+.ice-office-chip span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.95vw,18px);
+  line-height:1.1;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+.ice-office-text{
+  padding:7.8% 7.8% 6.5%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 10% 6%, rgba(238,252,255,.10), transparent 24%),
+    linear-gradient(145deg, #2d5b77 0%, #1e4760 34%, #102f45 100%);
+  box-shadow:inset 0 0 0 1px rgba(238,252,255,.18);
+}
+
+.ice-office-kicker,
+.ice-office-text h1,
+.ice-office-subtitle,
+.ice-office-text p,
+.ice-office-line,
+.ice-office-note{
+  position:relative;
+  z-index:1;
+}
+
+.ice-office-kicker{
+  font-family:Inter,sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  font-weight:900;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:4%;
+}
+
+.ice-office-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(36px,3.8vw,70px);
+  line-height:.9;
+  letter-spacing:-.04em;
+  color:rgba(246,250,252,.94);
+  margin:0 0 4.2%;
+  font-weight:700;
+}
+
+.ice-office-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.88);
+  font-size:clamp(18px,1.35vw,27px);
+  line-height:1.08;
+  font-weight:600;
+  font-style:italic;
+  margin:0 0 4.5%;
+}
+
+.ice-office-line{
+  width:54px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  margin:0 0 4.5%;
+}
+
+.ice-office-text p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1.02vw,20px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+  margin:0 0 4%;
+  max-width:92%;
+}
+
+.ice-office-note{
+  padding:4.2% 5.2%;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,19px);
+  line-height:1.16;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+/* =========================================================
+   XIX — CUANDO EL HIELO TOCA LA ROCA
+   Layout distinto: cierre más dramático
+   ========================================================= */
+
+.bedrock-page{
+  background:
+    radial-gradient(circle at 20% 0%, rgba(180,218,240,.16), transparent 28%),
+    radial-gradient(circle at 80% 8%, rgba(100,155,190,.10), transparent 30%),
+    linear-gradient(135deg,#1b2d3d 0%, #101d2a 52%, #08131d 100%);
+}
+
+.bedrock-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.52fr .48fr;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.03), transparent 20%, transparent 80%, rgba(0,0,0,.16)),
+    linear-gradient(135deg,#1b3245 0%, #122536 52%, #0a1723 100%);
+}
+
+.bedrock-visual{
+  position:relative;
+  padding:5.2%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 22% 10%, rgba(225,245,255,.08), transparent 28%),
+    linear-gradient(145deg, #25455d 0%, #173149 42%, #0e2132 100%);
+}
+
+.bedrock-hero{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.08), rgba(2,14,24,.34)),
+    url('hielo-roca.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.34),
+    0 0 0 1px rgba(235,250,255,.18),
+    inset 0 0 0 1px rgba(255,255,255,.10);
+}
+
+.bedrock-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, transparent 42%, rgba(0,0,0,.66)),
+    radial-gradient(circle at 18% 8%, rgba(238,252,255,.10), transparent 26%);
+  pointer-events:none;
+}
+
+.bedrock-caption{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:6%;
+  z-index:2;
+  color:#fff;
+}
+
+.bedrock-caption strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(28px,2.1vw,44px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.bedrock-caption span{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+.bedrock-text{
+  position:relative;
+  padding:7.8% 7.8% 6.5%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 10% 6%, rgba(238,252,255,.07), transparent 24%),
+    linear-gradient(145deg, #203d53 0%, #13293b 42%, #0b1c29 100%);
+}
+
+.bedrock-kicker,
+.bedrock-text h1,
+.bedrock-subtitle,
+.bedrock-text p,
+.bedrock-line,
+.bedrock-final-grid,
+.bedrock-note{
+  position:relative;
+  z-index:1;
+}
+
+.bedrock-kicker{
+  font-family:Inter,sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  font-weight:900;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:4%;
+}
+
+.bedrock-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(36px,3.8vw,70px);
+  line-height:.9;
+  letter-spacing:-.04em;
+  color:rgba(246,250,252,.94);
+  margin:0 0 4.2%;
+  font-weight:700;
+}
+
+.bedrock-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.88);
+  font-size:clamp(18px,1.35vw,27px);
+  line-height:1.08;
+  font-weight:600;
+  font-style:italic;
+  margin:0 0 4.5%;
+}
+
+.bedrock-line{
+  width:54px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  margin:0 0 4.5%;
+}
+
+.bedrock-text p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1.02vw,20px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+  margin:0 0 4%;
+  max-width:92%;
+}
+
+.bedrock-final-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:2% 0 4%;
+}
+
+.bedrock-card{
+  padding:12px 14px;
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.10), rgba(120,178,215,.035)),
+    rgba(255,255,255,.014);
+  border:1px solid rgba(230,248,255,.16);
+}
+
+.bedrock-card strong{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:clamp(8px,.56vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:5px;
+}
+
+.bedrock-card span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.92vw,18px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+}
+
+.bedrock-note{
+  padding:4.2% 5.2%;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,19px);
+  line-height:1.16;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+/* MÓVIL */
+@media (orientation: portrait){
+  .sixth-guide-layout,
+  .memory-drill-layout,
+  .ice-office-layout,
+  .bedrock-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .sixth-guide-left,
+  .memory-drill-text,
+  .ice-office-text,
+  .bedrock-text{
+    padding:10% 8% 5%;
+  }
+
+  .sixth-guide-left h1,
+  .memory-drill-text h1,
+  .ice-office-text h1,
+  .bedrock-text h1{
+    font-size:clamp(34px, 9vw, 58px);
+  }
+
+  .sixth-guide-list{
+    --marker-size:34px;
+    --marker-left:14px;
+    --content-left:58px;
+    max-width:100%;
+  }
+
+  .sixth-tech-card{
+    min-height:58px;
+    padding:3.2% 3.5%;
+  }
+
+  .sixth-tech-icon{
+    font-size:20px;
+  }
+
+  .sixth-tech-content strong{
+    font-size:clamp(17px, 4.2vw, 24px);
+  }
+
+  .sixth-tech-content span{
+    font-size:clamp(12px, 3.2vw, 16px);
+  }
+
+  .sixth-guide-right,
+  .memory-drill-visual,
+  .ice-office-visual,
+  .bedrock-visual{
+    padding:4% 7% 8%;
+  }
+
+  .sixth-guide-image,
+  .memory-drill-card,
+  .ice-office-main,
+  .bedrock-hero{
+    border-radius:22px;
+  }
+
+  .ice-office-row,
+  .bedrock-final-grid{
+    grid-template-columns:1fr;
+  }
+}
+/* =========================================================
+   PÁGINA GUÍA — SÉPTIMA PARTE
+   El conflicto
+   Acabado cálido / amarillo editorial
+   ========================================================= */
+
+.seventh-guide-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.seventh-guide-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.50fr .50fr;
+  background:var(--paper);
+}
+
+.seventh-guide-left{
+  position:relative;
+  padding:6.8% 7.8% 6.2%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.seventh-guide-kicker{
+  font-family:Inter, sans-serif;
+  color:var(--gold);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.2%;
+}
+
+.seventh-guide-left h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(38px,4vw,76px);
+  line-height:.88;
+  letter-spacing:-.045em;
+  color:#18202d;
+  margin:0 0 3.8%;
+  font-weight:700;
+}
+
+.seventh-guide-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:var(--gold);
+  font-size:clamp(15px,1.05vw,21px);
+  line-height:1.12;
+  font-weight:600;
+  margin:0 0 4.8%;
+}
+
+.seventh-guide-left .gold-line{
+  display:block;
+  width:48px;
+  height:2px;
+  background:var(--gold);
+  margin:0 0 5.6%;
+  flex-shrink:0;
+}
+
+.seventh-guide-list{
+  --marker-size:38px;
+  --marker-left:16px;
+  --content-left:76px;
+
+  position:relative;
+  display:grid;
+  gap:0;
+  margin-top:1%;
+  padding-left:var(--content-left);
+  max-width:96%;
+}
+
+.seventh-guide-item{
+  position:relative;
+  display:block;
+  padding:1.55% 0 1.85%;
+  border-bottom:1px solid rgba(20,18,14,.105);
+}
+
+.seventh-guide-number{
+  position:absolute;
+  left:calc(-1 * var(--content-left) + var(--marker-left) - var(--marker-size) / 2);
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--marker-size);
+  height:var(--marker-size);
+  border-radius:50%;
+  background:var(--gold);
+  color:#fffdf7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Inter, sans-serif;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.05em;
+  box-shadow:0 8px 18px rgba(167,101,32,.16);
+  z-index:4;
+}
+
+.seventh-guide-item h2{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.28vw,27px);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:#111827;
+  margin:0 0 5px;
+  font-weight:700;
+}
+
+.seventh-guide-item p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(12px,.84vw,16px);
+  line-height:1.15;
+  color:#231f1b;
+  font-weight:600;
+  margin:0;
+  max-width:96%;
+}
+
+.seventh-guide-right{
+  position:relative;
+  padding:5.5%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.72), transparent 38%),
+    #f5efe5;
+}
+
+.seventh-guide-image{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.36)),
+    url('septima-parte-conflicto.jpg') center/cover no-repeat;
+  box-shadow:
+    0 32px 76px rgba(22,16,10,.22),
+    0 0 0 1px rgba(20,18,14,.12);
+}
+
+.seventh-guide-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.24), transparent 36%),
+    linear-gradient(180deg, transparent 46%, rgba(0,0,0,.62));
+  pointer-events:none;
+}
+
+.seventh-guide-caption{
+  position:absolute;
+  left:8%;
+  right:8%;
+  bottom:7%;
+  z-index:3;
+  color:#fff;
+  font-family:"Cormorant Garamond", Georgia, serif;
+}
+
+.seventh-guide-caption strong{
+  display:block;
+  font-size:clamp(24px,2vw,40px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.seventh-guide-caption span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+/* =========================================================
+   PÁGINA XVII — EL HUASCARÁN Y LA GENTE DEL CALLEJÓN DE HUAYLAS
+   Acabado editorial cálido, similar a tu página 27
+   ========================================================= */
+
+.huascaran-people-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.huascaran-people-page::after{
+  background-image:radial-gradient(rgba(120,90,52,.05) .56px, transparent .56px);
+  background-size:13px 13px;
+  opacity:.14;
+  mix-blend-mode:multiply;
+}
+
+.huascaran-people-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:1fr;
+  background:var(--paper);
+}
+
+.huascaran-people-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  padding:7.2% 8.4% 7%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.huascaran-people-topline{
+  width:100%;
+  height:1px;
+  background:rgba(20,18,14,.42);
+  margin:0 0 5.2%;
+}
+
+.huascaran-people-head{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:start;
+  column-gap:3.2%;
+  margin-bottom:4%;
+}
+
+.huascaran-people-roman{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px,2.9vw,56px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  color:var(--gold);
+  padding-top:.2%;
+}
+
+.huascaran-people-title-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:1.4%;
+}
+
+.huascaran-people-title{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px,2.95vw,56px);
+  line-height:.98;
+  font-weight:700;
+  font-style:italic;
+  letter-spacing:-.02em;
+  color:var(--gold);
+  margin:0;
+}
+
+.huascaran-people-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(22px,1.9vw,36px);
+  line-height:1.02;
+  font-style:italic;
+  font-weight:500;
+  color:var(--orange-main);
+  margin:0 0 2.2%;
+}
+
+.huascaran-people-body{
+  max-width:86%;
+  margin-left:calc(clamp(34px,2.9vw,56px) + 3.2%);
+}
+
+.huascaran-people-intro{
+  font-family:Inter, sans-serif;
+  font-size:clamp(15px,1vw,21px);
+  line-height:1.42;
+  font-weight:500;
+  color:var(--orange-main);
+  margin:0 0 4%;
+  max-width:95%;
+}
+
+.huascaran-people-bullets{
+  margin:0 0 4.4%;
+  padding-left:1.1em;
+  list-style:none;
+}
+
+.huascaran-people-bullets li{
+  position:relative;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.35vw,29px);
+  line-height:1.06;
+  font-style:italic;
+  font-weight:600;
+  color:var(--orange-main);
+  margin:0 0 .75%;
+}
+
+.huascaran-people-bullets li::before{
+  content:"•";
+  position:absolute;
+  left:-.65em;
+  top:0;
+  color:var(--orange-soft);
+  font-style:normal;
+}
+
+.huascaran-people-note{
+  font-family:Inter, sans-serif;
+  font-size:clamp(15px,1vw,21px);
+  line-height:1.42;
+  font-weight:500;
+  color:var(--orange-main);
+  max-width:95%;
+  margin:0;
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .seventh-guide-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .seventh-guide-left{
+    padding:10% 8% 5%;
+  }
+
+  .seventh-guide-left h1{
+    font-size:clamp(34px, 9vw, 58px);
+  }
+
+  .seventh-guide-list{
+    --marker-size:34px;
+    --marker-left:14px;
+    --content-left:58px;
+    max-width:100%;
+  }
+
+  .seventh-guide-right{
+    padding:4% 7% 8%;
+  }
+
+  .seventh-guide-image{
+    border-radius:22px;
+  }
+
+  .huascaran-people-inner{
+    padding:11% 8% 10%;
+    justify-content:flex-start;
+  }
+
+  .huascaran-people-topline{
+    margin-bottom:6.5%;
+  }
+
+  .huascaran-people-head{
+    grid-template-columns:1fr;
+    row-gap:1.8%;
+    margin-bottom:5.2%;
+  }
+
+  .huascaran-people-roman{
+    font-size:clamp(30px,8vw,44px);
+    padding-top:0;
+  }
+
+  .huascaran-people-title{
+    font-size:clamp(30px,8vw,44px);
+    line-height:1.02;
+  }
+
+  .huascaran-people-subtitle{
+    font-size:clamp(20px,5.8vw,30px);
+    margin-bottom:3.4%;
+  }
+
+  .huascaran-people-body{
+    max-width:100%;
+    margin-left:0;
+  }
+
+  .huascaran-people-intro,
+  .huascaran-people-note{
+    font-size:clamp(14px,3.8vw,18px);
+    line-height:1.38;
+    max-width:100%;
+  }
+
+  .huascaran-people-bullets li{
+    font-size:clamp(18px,5vw,24px);
+    line-height:1.08;
+  }
+}
+/* =========================================================
+   PÁGINA XVII — EL HUASCARÁN Y LA GENTE DEL CALLEJÓN DE HUAYLAS
+   Glaciología visual con lógica glaciar → agua → sociedad
+   Acabado hielo / liquid glass
+   ========================================================= */
+
+.glacier-society-page{
+  background:
+    radial-gradient(circle at 8% 0%, rgba(215,242,255,.30), transparent 28%),
+    radial-gradient(circle at 42% 0%, rgba(155,210,238,.16), transparent 38%),
+    radial-gradient(circle at 88% 6%, rgba(125,190,225,.18), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(1,12,24,.70), transparent 62%),
+    linear-gradient(135deg,#2f6f91 0%, #1d5576 34%, #123d5b 62%, #08263e 100%);
+}
+
+.glacier-society-page::after{
+  background-image:radial-gradient(rgba(215,238,250,.045) .56px, transparent .56px);
+  background-size:13px 13px;
+  opacity:.16;
+  mix-blend-mode:screen;
+}
+
+.glacier-society-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.44fr .56fr;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(225,248,255,.17), transparent 30%),
+    radial-gradient(circle at 42% 0%, rgba(170,220,245,.14), transparent 42%),
+    radial-gradient(circle at 78% 6%, rgba(135,200,235,.13), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(0,12,24,.38), transparent 62%),
+    linear-gradient(135deg,#2b6687 0%, #1b5577 35%, #104060 66%, #082940 100%);
+}
+
+/* Columna izquierda */
+.glacier-society-text{
+  position:relative;
+  padding:7.6% 7.8% 6.6%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 10% 6%, rgba(238,252,255,.16), transparent 24%),
+    radial-gradient(circle at 86% 8%, rgba(190,232,252,.11), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(215,242,255,.12), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(1,14,26,.38), transparent 60%),
+    linear-gradient(145deg, #357493 0%, #286789 30%, #1a5073 60%, #0c324d 100%);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(238,252,255,.34),
+    inset 0 2px 0 rgba(255,255,255,.25),
+    inset 0 -48px 92px rgba(2,14,24,.27),
+    inset 44px 0 90px rgba(200,236,252,.06),
+    inset -44px 0 90px rgba(1,13,24,.16),
+    0 26px 76px rgba(2,14,24,.32);
+}
+
+.glacier-society-text::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.36);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), transparent 22%, transparent 78%, rgba(255,255,255,.035)),
+    linear-gradient(90deg, rgba(255,255,255,.075), transparent 16%, transparent 84%, rgba(255,255,255,.045));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.055),
+    inset 0 0 42px rgba(205,237,255,.13),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -26px 48px rgba(2,14,24,.16),
+    0 0 20px rgba(210,238,252,.14),
+    0 0 52px rgba(160,210,238,.08);
+  pointer-events:none;
+}
+
+.glacier-society-text::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), transparent 20%, transparent 78%, rgba(255,255,255,.045)),
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 16%, transparent 84%, rgba(255,255,255,.045)),
+    radial-gradient(circle at 10% 7%, rgba(255,255,255,.11), transparent 22%),
+    radial-gradient(circle at 50% 0%, rgba(215,242,255,.09), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.20), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.58;
+}
+
+.glacier-society-kicker,
+.glacier-society-text h1,
+.glacier-society-subtitle,
+.glacier-society-text p,
+.glacier-society-line,
+.glacier-society-note,
+.glacier-society-tags{
+  position:relative;
+  z-index:1;
+}
+
+.glacier-society-kicker{
+  font-family:Inter, sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.6%;
+}
+
+.glacier-society-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px,3.55vw,68px);
+  line-height:.92;
+  letter-spacing:-.04em;
+  color:rgba(246,250,252,.95);
+  margin:0 0 4%;
+  font-weight:700;
+}
+
+.glacier-society-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.88);
+  font-size:clamp(18px,1.3vw,27px);
+  line-height:1.08;
+  font-weight:600;
+  font-style:italic;
+  margin:0 0 4.8%;
+}
+
+.glacier-society-line{
+  width:56px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  box-shadow:0 0 16px rgba(229,184,118,.16);
+  margin:0 0 5%;
+}
+
+.glacier-society-text p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1vw,19px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+  max-width:92%;
+  margin:0 0 4.2%;
+}
+
+.glacier-society-tags{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin:1% 0 4.5%;
+}
+
+.glacier-society-tag{
+  padding:10px 11px;
+  border-radius:15px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.13);
+}
+
+.glacier-society-tag strong{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.56vw,11px);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:6px;
+}
+
+.glacier-society-tag span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.9vw,18px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+.glacier-society-note{
+  margin-top:1%;
+  padding:4.2% 5.2%;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,19px);
+  line-height:1.16;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+  box-shadow:
+    inset 0 0 0 1px rgba(230,248,255,.21),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -18px 36px rgba(2,14,24,.12),
+    0 0 18px rgba(190,230,250,.10),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+/* Columna derecha */
+.glacier-society-visual{
+  position:relative;
+  padding:5.3%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 12% 7%, rgba(238,252,255,.13), transparent 28%),
+    radial-gradient(circle at 70% 0%, rgba(165,220,248,.12), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(0,12,24,.35), transparent 60%),
+    linear-gradient(145deg, #316f91 0%, #245f82 34%, #174967 65%, #0b2f49 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(235,250,255,.20),
+    inset 0 0 0 1px rgba(235,250,255,.16),
+    inset 0 -42px 84px rgba(2,14,24,.22);
+}
+
+.glacier-society-visual::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.28);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.065), transparent 24%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.052), transparent 16%, transparent 84%, rgba(255,255,255,.040));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.045),
+    inset 0 0 38px rgba(205,237,255,.11),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -24px 46px rgba(2,14,24,.14),
+    0 0 18px rgba(210,238,252,.10),
+    0 0 46px rgba(160,210,238,.055);
+  pointer-events:none;
+  z-index:0;
+}
+
+.glacier-society-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.070), transparent 22%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.045), transparent 18%, transparent 84%, rgba(255,255,255,.032)),
+    radial-gradient(circle at 84% 8%, rgba(255,255,255,.08), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.18), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.52;
+}
+
+.glacier-society-board{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:1fr auto auto;
+  gap:3.4%;
+}
+
+.glacier-society-main{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.24)),
+    url('glaciares-agua-sociedad.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 32px 76px rgba(2,14,24,.36),
+    0 0 0 1px rgba(235,250,255,.34),
+    0 0 28px rgba(180,226,250,.13),
+    inset 0 0 0 1px rgba(255,255,255,.17),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -32px 64px rgba(2,14,24,.18),
+    inset 0 0 48px rgba(180,226,250,.08);
+}
+
+.glacier-society-main::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(238,252,255,.14), transparent 26%),
+    radial-gradient(circle at 60% 0%, rgba(170,220,245,.11), transparent 42%),
+    linear-gradient(180deg, transparent 48%, rgba(0,0,0,.42));
+  pointer-events:none;
+}
+
+.glacier-society-caption{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:6.2%;
+  z-index:2;
+  color:#fff;
+}
+
+.glacier-society-caption strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(25px,2vw,42px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+  color:rgba(250,253,255,.94);
+}
+
+.glacier-society-caption span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(238,244,248,.84);
+  opacity:.86;
+}
+
+.glacier-society-flow{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3.2%;
+}
+
+.glacier-society-step{
+  padding:6.2%;
+  border-radius:17px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.glacier-society-step strong{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.56vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:6px;
+}
+
+.glacier-society-step span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.92vw,18px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+}
+
+.glacier-society-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3.2%;
+}
+
+.glacier-society-mini{
+  padding:6.2%;
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.09), rgba(120,178,215,.04)),
+    rgba(255,255,255,.015);
+  border:1px solid rgba(230,248,255,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.glacier-society-mini strong{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.54vw,10px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:5px;
+}
+
+.glacier-society-mini span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(12px,.84vw,16px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .glacier-society-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .glacier-society-text{
+    padding:12% 8% 5%;
+    justify-content:center;
+  }
+
+  .glacier-society-text h1{
+    font-size:clamp(34px, 9.2vw, 58px);
+  }
+
+  .glacier-society-subtitle{
+    font-size:clamp(17px, 4.4vw, 25px);
+  }
+
+  .glacier-society-text p{
+    font-size:clamp(14px, 3.7vw, 20px);
+    max-width:100%;
+  }
+
+  .glacier-society-tags{
+    grid-template-columns:1fr;
+  }
+
+  .glacier-society-note{
+    font-size:clamp(14px, 3.7vw, 20px);
+    padding:4.5% 5%;
+  }
+
+  .glacier-society-visual{
+    padding:4% 7% 8%;
+  }
+
+  .glacier-society-main{
+    border-radius:22px;
+  }
+
+  .glacier-society-flow,
+  .glacier-society-grid{
+    grid-template-columns:1fr;
+  }
+
+  .glacier-society-caption strong{
+    font-size:clamp(22px, 5.6vw, 32px);
+  }
+}
+/* =========================================================
+   PÁGINA GUÍA — OCTAVA PARTE
+   El rescate de las muestras
+   ========================================================= */
+
+.eighth-guide-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.eighth-guide-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.50fr .50fr;
+  background:var(--paper);
+}
+
+.eighth-guide-left{
+  position:relative;
+  padding:6.8% 7.8% 6.2%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.eighth-guide-kicker{
+  font-family:Inter, sans-serif;
+  color:var(--gold);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.2%;
+}
+
+.eighth-guide-left h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(38px,4vw,76px);
+  line-height:.88;
+  letter-spacing:-.045em;
+  color:#18202d;
+  margin:0 0 3.8%;
+  font-weight:700;
+}
+
+.eighth-guide-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:var(--gold);
+  font-size:clamp(15px,1.05vw,21px);
+  line-height:1.12;
+  font-weight:600;
+  margin:0 0 4.8%;
+}
+
+.eighth-guide-left .gold-line{
+  display:block;
+  width:48px;
+  height:2px;
+  background:var(--gold);
+  margin:0 0 5.6%;
+  flex-shrink:0;
+}
+
+.eighth-guide-list{
+  --marker-size:38px;
+  --marker-left:16px;
+  --content-left:76px;
+
+  position:relative;
+  display:grid;
+  gap:0;
+  margin-top:1%;
+  padding-left:var(--content-left);
+  max-width:96%;
+}
+
+.eighth-guide-item{
+  position:relative;
+  display:block;
+  padding:1.55% 0 1.85%;
+  border-bottom:1px solid rgba(20,18,14,.105);
+}
+
+.eighth-guide-number{
+  position:absolute;
+  left:calc(-1 * var(--content-left) + var(--marker-left) - var(--marker-size) / 2);
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--marker-size);
+  height:var(--marker-size);
+  border-radius:50%;
+  background:var(--gold);
+  color:#fffdf7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Inter, sans-serif;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.05em;
+  box-shadow:0 8px 18px rgba(167,101,32,.16);
+  z-index:4;
+}
+
+.eighth-guide-item h2{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.28vw,27px);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:#111827;
+  margin:0 0 5px;
+  font-weight:700;
+}
+
+.eighth-guide-item p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(12px,.84vw,16px);
+  line-height:1.15;
+  color:#231f1b;
+  font-weight:600;
+  margin:0;
+  max-width:96%;
+}
+
+.eighth-guide-right{
+  position:relative;
+  padding:5.5%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.72), transparent 38%),
+    #f5efe5;
+}
+
+.eighth-guide-image{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.36)),
+    url('octava-parte-rescate-muestras.jpg') center/cover no-repeat;
+  box-shadow:
+    0 32px 76px rgba(22,16,10,.22),
+    0 0 0 1px rgba(20,18,14,.12);
+}
+
+.eighth-guide-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.24), transparent 36%),
+    linear-gradient(180deg, transparent 46%, rgba(0,0,0,.62));
+  pointer-events:none;
+}
+
+.eighth-guide-caption{
+  position:absolute;
+  left:8%;
+  right:8%;
+  bottom:7%;
+  z-index:3;
+  color:#fff;
+  font-family:"Cormorant Garamond", Georgia, serif;
+}
+
+.eighth-guide-caption strong{
+  display:block;
+  font-size:clamp(24px,2vw,40px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.eighth-guide-caption span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .eighth-guide-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .eighth-guide-left{
+    padding:10% 8% 5%;
+  }
+
+  .eighth-guide-left h1{
+    font-size:clamp(34px, 9vw, 58px);
+  }
+
+  .eighth-guide-list{
+    --marker-size:34px;
+    --marker-left:14px;
+    --content-left:58px;
+    max-width:100%;
+  }
+
+  .eighth-guide-right{
+    padding:4% 7% 8%;
+  }
+
+  .eighth-guide-image{
+    border-radius:22px;
+  }
+}
   </style>
 </head>
 <body>
@@ -6805,8 +9220,8 @@ mask:
       <aside class="masters-guide-right">
         <div class="masters-guide-image">
           <div class="masters-guide-caption">
-            <strong>La ciencia se hereda en el campo</strong>
-            <span>Morales · Portocarrero · Zapata · Thompson · glaciología peruana</span>
+            <strong>Referentes de la glaciología peruana</strong>
+            <span>Marco Zapata · Benjamín Morales · César Portocarrero </span>
           </div>
         </div>
       </aside>
@@ -7075,7 +9490,7 @@ mask:
       <aside class="summit-guide-right">
         <div class="summit-guide-image">
           <div class="summit-guide-caption">
-            <strong>Antes de tocar la cumbre</strong>
+            <strong> La Memoria del Quelccaya</strong>
             <span>Quelccaya · ENSO · paleoclima · Cordillera Blanca · Huascarán</span>
           </div>
         </div>
@@ -7395,7 +9810,7 @@ mask:
             <div>
               <h2>Cuatro noches en la cima</h2>
               <p>
-                El amanecer en la cumbre, la calma inesperada, la convivencia y la rutina mínima a 6757 metros.
+                El amanecer en la cumbre, la calma inesperada, la convivencia y la rutina mínima a 6759 metros.
               </p>
             </div>
           </div>
@@ -7406,9 +9821,60 @@ mask:
       <aside class="expedition-guide-right">
         <div class="expedition-guide-image">
           <div class="expedition-guide-caption">
-            <strong>La montaña deja de ser horizonte</strong>
+            <strong>Al rescate de 'los recuerdos' del Huascarán</strong>
             <span>ruta · refugio · collado · cumbre · memoria del hielo</span>
           </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<template data-page>
+  <section class="page event-photo-page">
+    <div class="event-photo-layout">
+
+      <aside class="event-photo-sidebar">
+        <div class="event-photo-kicker">Evento especial</div>
+        <div class="event-photo-note">
+          Un momento breve pero simbólico dentro de la expedición.
+        </div>
+      </aside>
+
+      <aside class="event-photo-main">
+        <div class="event-photo-frame">
+          <div class="event-photo-caption">
+            <h2>La visita del presidente del Perú</h2>
+            <p>Refugio · expedición científica · Cordillera Blanca · 2019</p>
+          </div>
+          <div class="event-photo-folio">22</div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<template data-page>
+  <section class="page event-photo-page">
+    <div class="event-photo-layout">
+
+      <aside class="event-photo-sidebar">
+        <div class="event-photo-kicker">Expedición científica</div>
+        <div class="event-photo-note">
+          El equipo internacional de científicos.
+        </div>
+      </aside>
+
+      <aside class="event-photo-main">
+        <div class="event-photo-frame" style="background:
+          linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24)),
+          url('equipo-internacional-cientificos.jpg') center/cover no-repeat,
+          #d8d2c7;">
+          <div class="event-photo-caption">
+            <h2>El equipo internacional de científicos</h2>
+            <p>Expedición · Huascarán · ciencia · Cordillera Blanca · 2019</p>
+          </div>
+          <div class="event-photo-folio">23</div>
         </div>
       </aside>
 
@@ -7499,6 +9965,65 @@ mask:
     </div>
   </section>
 </template>
+
+
+<template data-page>
+  <section class="page event-photo-page">
+    <div class="event-photo-layout">
+
+      <aside class="event-photo-sidebar">
+        <div class="event-photo-kicker">Un gran equipo al mando de Félix Vicencio</div>
+        <div class="event-photo-note">
+          Los héroes silenciosos pero extremadamente importantes dentro de la expedición.
+        </div>
+      </aside>
+
+      <aside class="event-photo-main">
+        <div class="event-photo-frame" style="background:
+          linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24)),
+          url('equipo-porteadores-guias.jpg') center/cover no-repeat,
+          #d8d2c7;">
+          <div class="event-photo-caption">
+            <h2>El equipo de porteadores y guías de alta montaña</h2>
+            <p>Expedición · Huascarán · guías · porteadores · Cordillera Blanca · 2019</p>
+          </div>
+          <div class="event-photo-folio">25</div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<template data-page>
+  <section class="page event-photo-page">
+    <div class="event-photo-layout">
+
+      <aside class="event-photo-sidebar">
+        <div class="event-photo-kicker">Expedición científica</div>
+        <div class="event-photo-note">
+          La perforadora de hielo.
+        </div>
+      </aside>
+
+      <aside class="event-photo-main">
+        <div class="event-photo-frame" style="background:
+          linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24)),
+          url('perforadora-hielo.jpg') center/cover no-repeat,
+          #d8d2c7;">
+          <div class="event-photo-caption">
+            <h2>La perforadora de hielo</h2>
+            <p>Expedición · Huascarán · núcleo de hielo · perforación · ciencia · 2019</p>
+          </div>
+          <div class="event-photo-folio">26</div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<!-- PÁGINA XV: Midiendo la real altitud del Huascarán desde la cumbre -->
 <!-- PÁGINA XV: Midiendo la real altitud del Huascarán desde la cumbre -->
 <template data-page>
   <section class="page ice-science-page" data-page-key="altitud-huascaran-cumbre">
@@ -7509,25 +10034,25 @@ mask:
 
           <div class="summit-altitude-card">
             <div class="ice-science-caption">
-              <strong>Medir la montaña desde la cumbre</strong>
-              <span>cumbre · triangulación · referencia · altitud</span>
+              <strong>La cumbre sur como punto de referencia geodésica</strong>
+              <span>GNSS · ELIPSOIDE · GEOIDE · ALTITUD</span>
             </div>
           </div>
 
           <div class="summit-altitude-steps">
             <div class="summit-step">
-              <strong>01 · Punto</strong>
-              <span>La cumbre como referencia extrema de medición.</span>
+              <strong>01 · ALTURA ELIPSOIDAL</strong>
+              <span>Medición GNSS en cumbre: 6784.16 m</span>
             </div>
 
             <div class="summit-step">
-              <strong>02 · Ángulo</strong>
-              <span>La triangulación permite relacionar puntos distantes.</span>
+              <strong>02 · CORRECCIÓN GEOIDAL</strong>
+              <span>Modelo EGM2008: 24.9839 m</span>
             </div>
 
             <div class="summit-step">
-              <strong>03 · Altitud</strong>
-              <span>La montaña se convierte en dato topográfico.</span>
+              <strong>ALTITUD ORTOMÉTRICA</strong>
+              <span>Resultado aproximado: 6759.18 m s. n. m.</span>
             </div>
           </div>
 
@@ -7540,21 +10065,40 @@ mask:
         <h1>Midiendo la real altitud del Huascarán desde la cumbre</h1>
 
         <p class="ice-science-subtitle">
-          Reconstrucción del método de triangulación topográfica usado por José Hindle.
+          De la altura elipsoidal GNSS a la altitud ortométrica sobre el nivel del mar.
         </p>
 
         <div class="ice-science-line"></div>
 
-        <p>
-          Medir una montaña exige convertir el paisaje en geometría: puntos de observación, ángulos, distancias, referencias y cálculos que permiten estimar la altura de una cumbre.
-        </p>
+       <p>
+  En la cumbre sur se obtuvo una <strong>altura elipsoidal de 6784.16 m</strong>.
+</p>
 
-        <p>
-          Desde la cima, la altitud deja de ser solo un número. Se vuelve una forma de leer la relación entre territorio, ciencia, ingeniería y exploración.
-        </p>
+<p>
+  Esa cifra no corresponde directamente a la altitud sobre el nivel del mar,
+  porque está referida al <strong>elipsoide terrestre</strong>.
+</p>
+<p>
+  Para obtener la altitud ortométrica se aplica:
+</p>
+
+<p class="formula-line">H = h − N</p>
+
+<ul class="formula-list">
+  <li><span class="formula-key">H</span> = 6759.18 m.s.n.m → altitud sobre el nivel del mar</li>
+  <li><span class="formula-key">h</span> = 6784.16 m → altura elipsoidal GNSS</li>
+  <li><span class="formula-key">N</span> = 24.9839 m → corrección geoidal</li>
+</ul>
+
+<p>
+  Con el modelo <strong>EGM2008</strong>, la altitud ortométrica aproximada
+  del Huascarán sur es:
+</p>
+
+<p><strong>6759.18 m s. n. m.</strong></p>
 
         <div class="ice-science-note">
-          Infografía: cumbre, línea de visión, puntos de referencia, triangulación, medición angular y cálculo altitudinal.
+          Infografía: medición GNSS en cumbre, altura elipsoidal, geoide, corrección geoidal y altitud ortométrica.
         </div>
       </aside>
 
@@ -7644,6 +10188,506 @@ mask:
             </div>
           </div>
 
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<!-- PÁGINA GUÍA: Sexta parte — Perforar la memoria -->
+<template data-page>
+  <section class="page sixth-guide-page">
+    <div class="sixth-guide-layout">
+
+      <aside class="sixth-guide-left">
+        <div class="sixth-guide-kicker">Sexta parte</div>
+
+        <h1>Perforar<br>la memoria</h1>
+
+        <p class="sixth-guide-subtitle">Guía de capítulos</p>
+
+        <div class="gold-line"></div>
+
+        <div class="sixth-guide-list">
+
+       
+
+          <div class="sixth-guide-item">
+            <div class="sixth-guide-number">17</div>
+            <div>
+              <h2>Cómo se extrae el tiempo</h2>
+              <p>
+                Montaje del equipo, elección de puntos, extracción, corte, registro, etiquetado y almacenamiento del núcleo de hielo.
+              </p>
+            </div>
+          </div>
+
+          <div class="sixth-guide-item">
+            <div class="sixth-guide-number">18</div>
+            <div>
+              <h2>La oficina sobre el hielo</h2>
+              <p>
+                El trabajo técnico en altura: observación de capas, polvo, burbujas, marcas visibles y disciplina física y mental.
+              </p>
+            </div>
+          </div>
+
+          <div class="sixth-guide-item">
+            <div class="sixth-guide-number">19</div>
+            <div>
+              <h2>Cuando el hielo toca la roca</h2>
+              <p>
+                El momento en que se alcanza el lecho rocoso y se comprende que se ha llegado al fondo del archivo climático.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <aside class="sixth-guide-right">
+        <div class="sixth-guide-image">
+          <div class="sixth-guide-caption">
+            <strong>Entrar físicamente en la memoria del hielo</strong>
+            <span>perforación · núcleos · registro · profundidad · archivo climático</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<!-- PÁGINA XVII: Cómo se extrae el tiempo -->
+<template data-page>
+  <section class="page memory-drill-page" data-page-key="como-se-extrae-el-tiempo">
+    <div class="memory-drill-layout">
+
+      <aside class="memory-drill-text">
+        <div class="memory-drill-kicker">XVIII · Glaciología especial</div>
+
+        <h1>Cómo se extrae el tiempo</h1>
+
+        <p class="memory-drill-subtitle">
+          Perforar un glaciar es convertir una columna de hielo en una columna de historia.
+        </p>
+
+        <div class="memory-drill-line"></div>
+
+        <p>
+          Extraer un núcleo de hielo no consiste solamente en perforar. Implica elegir el punto, montar el sistema, controlar la verticalidad, recuperar cada tramo y preservar el orden exacto de las capas.
+        </p>
+
+        <div class="drill-sequence">
+          <div class="drill-step" data-step="01">
+            <strong>Montaje</strong>
+            <span>Se instala la perforadora, se estabiliza el sistema y se define el eje de trabajo.</span>
+          </div>
+
+          <div class="drill-step" data-step="02">
+            <strong>Extracción</strong>
+            <span>Cada tramo recuperado conserva una parte distinta del archivo climático.</span>
+          </div>
+
+          <div class="drill-step" data-step="03">
+            <strong>Registro</strong>
+            <span>Se documentan profundidad, orientación, estado del hielo y observaciones de campo.</span>
+          </div>
+
+          <div class="drill-step" data-step="04">
+            <strong>Preservación</strong>
+            <span>El núcleo se corta, etiqueta, embala y almacena sin alterar la secuencia estratigráfica.</span>
+          </div>
+        </div>
+
+        <div class="memory-drill-note">
+          Infografía: perforadora, barril, recuperación por tramos, profundidad, etiquetado, cadena de frío y continuidad estratigráfica.
+        </div>
+      </aside>
+
+      <aside class="memory-drill-visual">
+        <div class="memory-drill-card">
+          <div class="memory-drill-caption">
+            <strong>Perforar el archivo</strong>
+            <span>equipo · profundidad · extracción · núcleos · conservación</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<!-- PÁGINA XVIII: La oficina sobre el hielo -->
+<template data-page>
+  <section class="page ice-office-page" data-page-key="oficina-sobre-el-hielo">
+    <div class="ice-office-layout">
+
+      <aside class="ice-office-visual">
+        <div class="ice-office-board">
+
+          <div class="ice-office-main">
+            <div class="ice-office-caption">
+              <strong>Laboratorio en la cumbre</strong>
+              <span>núcleos · observación · marcas visibles · disciplina técnica</span>
+            </div>
+          </div>
+
+          <div class="ice-office-row">
+            <div class="ice-office-chip">
+              <strong>Capas</strong>
+              <span>Lectura visual de bandas, textura y variaciones del hielo.</span>
+            </div>
+
+            <div class="ice-office-chip">
+              <strong>Partículas</strong>
+              <span>Polvo, ceniza y señales atmosféricas atrapadas en el archivo.</span>
+            </div>
+
+            <div class="ice-office-chip">
+              <strong>Burbujas</strong>
+              <span>Aire antiguo retenido en una estructura frágil y valiosa.</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <aside class="ice-office-text">
+        <div class="ice-office-kicker">XIX · Glaciología especial</div>
+
+        <h1>La oficina sobre el hielo</h1>
+
+        <p class="ice-office-subtitle">
+          Ciencia, oficio y resistencia física trabajando juntos a gran altitud.
+        </p>
+
+        <div class="ice-office-line"></div>
+
+        <p>
+          En la cumbre, la oficina no tiene paredes. El laboratorio se arma sobre el hielo, en un entorno de frío extremo, oxígeno escaso y tiempos de trabajo limitados.
+        </p>
+
+        <p>
+          Allí cada núcleo debe ser observado, descrito y protegido con precisión. Las marcas de polvo, las burbujas, las fracturas y los cambios de color no son detalles menores: son señales del ambiente pasado.
+        </p>
+
+        <p>
+          La perforación no es solo una operación mecánica. También es un trabajo de lectura material, criterio técnico y coordinación humana.
+        </p>
+
+        <div class="ice-office-note">
+          Infografía: espacio de trabajo en cumbre, manipulación de núcleos, observación de capas, partículas, burbujas y registro de señales visibles.
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<!-- PÁGINA XIX: Cuando el hielo toca la roca -->
+<template data-page>
+  <section class="page bedrock-page" data-page-key="cuando-el-hielo-toca-la-roca">
+    <div class="bedrock-layout">
+
+      <aside class="bedrock-visual">
+        <div class="bedrock-hero">
+          <div class="bedrock-caption">
+            <strong>El fondo del archivo</strong>
+            <span>lecho rocoso · cierre estratigráfico · límite del hielo</span>
+          </div>
+        </div>
+      </aside>
+
+      <aside class="bedrock-text">
+        <div class="bedrock-kicker">XX · Glaciología especial</div>
+
+        <h1>Cuando el hielo toca la roca</h1>
+
+        <p class="bedrock-subtitle">
+          El instante en que el archivo llega a su base física y temporal.
+        </p>
+
+        <div class="bedrock-line"></div>
+
+        <p>
+          Alcanzar el lecho rocoso no es solo llegar al fondo de un pozo. Es encontrar el límite entre el hielo acumulado a lo largo del tiempo y la montaña que sostuvo ese archivo durante siglos o milenios.
+        </p>
+
+        <p>
+          Ese momento tiene un valor técnico y simbólico: confirma la profundidad máxima, cierra la secuencia y permite comprender que el registro recuperado contiene casi toda la historia preservada en ese punto.
+        </p>
+
+        <div class="bedrock-final-grid">
+          <div class="bedrock-card">
+            <strong>Contacto</strong>
+            <span>El hielo deja de registrar y aparece la base rocosa del sistema.</span>
+          </div>
+
+          <div class="bedrock-card">
+            <strong>Cierre</strong>
+            <span>La columna extraída adquiere sentido completo como archivo estratificado.</span>
+          </div>
+
+          <div class="bedrock-card">
+            <strong>Profundidad</strong>
+            <span>La cumbre revela cuánta memoria fue capaz de conservar.</span>
+          </div>
+
+          <div class="bedrock-card">
+            <strong>Conciencia</strong>
+            <span>Se entiende que ya no se extrae solo hielo, sino tiempo condensado.</span>
+          </div>
+        </div>
+
+        <div class="bedrock-note">
+          Infografía: terminación del núcleo, contacto hielo-roca, profundidad final, base estratigráfica e interpretación del fondo del archivo.
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<!-- PÁGINA GUÍA: Séptima parte — El conflicto -->
+<template data-page>
+  <section class="page seventh-guide-page">
+    <div class="seventh-guide-layout">
+
+      <aside class="seventh-guide-left">
+        <div class="seventh-guide-kicker">Séptima parte</div>
+
+        <h1>El conflicto</h1>
+
+        <p class="seventh-guide-subtitle">Guía de capítulos</p>
+
+        <div class="gold-line"></div>
+
+        <div class="seventh-guide-list">
+
+          <div class="seventh-guide-item">
+            <div class="seventh-guide-number">20</div>
+            <div>
+              <h2>Los rumores en la montaña</h2>
+              <p>
+                La población desconoce los reales fines de la expedición y desconfía de la visita del presidente Vizcarra. Quizás “los gringos” están extrayendo minerales.
+              </p>
+            </div>
+          </div>
+
+          <div class="seventh-guide-item">
+            <div class="seventh-guide-number">21</div>
+            <div>
+              <h2>Retenidos</h2>
+              <p>
+                Descendiendo con tranquilidad. Acorralados por una multitud armada. La tensión. Las amenazas. La noche en la carretera. La policía. La sensación de estar haciendo ciencia y ser tratados como sospechosos.
+              </p>
+            </div>
+          </div>
+
+          <div class="seventh-guide-item">
+            <div class="seventh-guide-number">22</div>
+            <div>
+              <h2>La historia atrapada en el hielo</h2>
+              <p>
+                Abriendo las cajas y mostrándoles tubos a autoridades y periodistas. El asombro de ver la memoria del Huascarán. El Huascarán pasa de ser mito a hablar en primera persona.
+              </p>
+            </div>
+          </div>
+<button class="sixth-tech-card" type="button" data-go-key="huascaran-gente-callejon">
+  <div class="sixth-tech-icon">❄</div>
+  <div class="sixth-tech-content">
+    <strong>XVII. El Huascarán y la gente del Callejón de Huaylas</strong>
+    <span>Glaciares, agua y sociedad.</span>
+  </div>
+</button>
+        </div>
+      </aside>
+
+      <aside class="seventh-guide-right">
+        <div class="seventh-guide-image">
+          <div class="seventh-guide-caption">
+            <strong>Rumores, tensión y revelación</strong>
+            <span>desconfianza · carretera · policía · núcleos de hielo</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+<!-- PÁGINA XVII: El Huascarán y la gente del Callejón de Huaylas -->
+<template data-page>
+  <section class="page glacier-society-page" data-page-key="glaciares-agua-sociedad">
+    <div class="glacier-society-layout">
+
+      <aside class="glacier-society-text">
+        <div class="glacier-society-kicker">XX · Glaciología visual</div>
+
+        <h1>El Huascarán y la gente del Callejón de Huaylas</h1>
+
+        <p class="glacier-society-subtitle">
+          Glaciares, agua y sociedad.
+        </p>
+
+        <div class="glacier-society-line"></div>
+
+        <p>
+          Este capítulo conecta la glaciología con el territorio. En la Cordillera Blanca, el glaciar no es solo hielo: es agua disponible, energía, agricultura, ciudad, riesgo, memoria y disputa.
+        </p>
+
+        <div class="glacier-society-tags">
+          <div class="glacier-society-tag">
+            <strong>Agua</strong>
+            <span>Abastecimiento hídrico para población, riego y ecosistemas.</span>
+          </div>
+
+          <div class="glacier-society-tag">
+            <strong>Energía</strong>
+            <span>Relación entre caudales de montaña y generación hidroeléctrica.</span>
+          </div>
+
+          <div class="glacier-society-tag">
+            <strong>Agricultura</strong>
+            <span>Dependencia estacional del agua en paisajes andinos productivos.</span>
+          </div>
+
+          <div class="glacier-society-tag">
+            <strong>Ciudades</strong>
+            <span>El agua glaciar sostiene vida urbana, crecimiento y vulnerabilidad.</span>
+          </div>
+        </div>
+
+        <p>
+          En la Cordillera Blanca este cruce entre ciencia y sociedad es especialmente fuerte por la dependencia hídrica, la historia de desastres, los conflictos por el agua y la necesidad de adaptación frente al cambio.
+        </p>
+
+        <div class="glacier-society-note">
+          Infografía: glaciar, deshielo, cuenca, usos del agua, hidroeléctricas, agricultura, ciudades, vulnerabilidad social, justicia hídrica y escalas temporales del cambio.
+        </div>
+      </aside>
+
+      <aside class="glacier-society-visual">
+        <div class="glacier-society-board">
+
+          <div class="glacier-society-main">
+            <div class="glacier-society-caption">
+              <strong>Del glaciar al territorio</strong>
+              <span>hielo · agua · cuenca · sociedad · riesgo · adaptación</span>
+            </div>
+          </div>
+
+          <div class="glacier-society-flow">
+            <div class="glacier-society-step">
+              <strong>01 · Glaciar</strong>
+              <span>Reserva y regulador hídrico de alta montaña.</span>
+            </div>
+
+            <div class="glacier-society-step">
+              <strong>02 · Cuenca</strong>
+              <span>El agua desciende, se distribuye y organiza el territorio.</span>
+            </div>
+
+            <div class="glacier-society-step">
+              <strong>03 · Sociedad</strong>
+              <span>Abastece ciudades, agricultura, energía y también genera tensiones.</span>
+            </div>
+          </div>
+
+          <div class="glacier-society-grid">
+            <div class="glacier-society-mini">
+              <strong>Conflictos</strong>
+              <span>Competencia por acceso, uso y distribución del agua.</span>
+            </div>
+
+            <div class="glacier-society-mini">
+              <strong>Justicia hídrica</strong>
+              <span>Quién recibe el agua, en qué cantidad y con qué prioridad.</span>
+            </div>
+
+            <div class="glacier-society-mini">
+              <strong>Adaptación</strong>
+              <span>Respuestas sociales ante menor hielo y cambio de caudales.</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<!-- PÁGINA GUÍA: Octava parte — El rescate de las muestras -->
+<template data-page>
+  <section class="page eighth-guide-page">
+    <div class="eighth-guide-layout">
+
+      <aside class="eighth-guide-left">
+        <div class="eighth-guide-kicker">Octava parte</div>
+
+        <h1>El rescate<br>de las muestras</h1>
+
+        <p class="eighth-guide-subtitle">Guía de capítulos</p>
+
+        <div class="gold-line"></div>
+
+        <div class="eighth-guide-list">
+
+          <div class="eighth-guide-item">
+            <div class="eighth-guide-number">23</div>
+            <div>
+              <h2>Cinco días para salvar el archivo</h2>
+              <p>
+                La decisión de recuperar todo en tiempo récord. La prohibición de que suban los extranjeros. La responsabilidad está puesta sobre Wilmer.
+              </p>
+            </div>
+          </div>
+
+          <div class="eighth-guide-item">
+            <div class="eighth-guide-number">24</div>
+            <div>
+              <h2>El trabajo heroico de los porteadores y guías del hielo</h2>
+              <p>
+                El esfuerzo sobrehumano de quienes bajaron los tubos. El peso. Las caídas. La prisa. El dolor físico. La dignidad silenciosa de ese trabajo.
+              </p>
+            </div>
+          </div>
+
+          <button class="sixth-tech-card" type="button" data-go-key="tecnicas-guiado-cordillera-blanca">
+            <div class="sixth-tech-icon">❄</div>
+            <div class="sixth-tech-content">
+              <strong>XVIII. Las técnicas de guiado en la Cordillera Blanca</strong>
+              <span>Félix Vicencio.</span>
+            </div>
+          </button>
+
+          <div class="eighth-guide-item">
+            <div class="eighth-guide-number">25</div>
+            <div>
+              <h2>Helicópteros, cajas y camiones frigoríficos</h2>
+              <p>
+                La cadena de conservación. El helipuerto. Los horarios. Los vuelos peligrosos. El traslado a Caraz. Los camiones frigoríficos. La salida hacia Lima y luego a Estados Unidos.
+              </p>
+            </div>
+          </div>
+
+          <button class="sixth-tech-card" type="button" data-go-key="glaciologia-tropical">
+            <div class="sixth-tech-icon">❄</div>
+            <div class="sixth-tech-content">
+              <strong>XIX. Características de la glaciología tropical</strong>
+              <span>Pensar el hielo desde los Andes tropicales.</span>
+            </div>
+          </button>
+
+        </div>
+      </aside>
+
+      <aside class="eighth-guide-right">
+        <div class="eighth-guide-image">
+          <div class="eighth-guide-caption">
+            <strong>El trabajo sobrehumano de los guías y porteadores para rescatar los núcleos de hielo del Huascarán</strong>
+            <span>rescate · tubos · porteadores · helicópteros · cadena de frío</span>
+          </div>
         </div>
       </aside>
 
@@ -7826,7 +10870,7 @@ updateFullscreenButton();
 }
 
 bookElement.addEventListener('click',(event)=>{
-const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .third-tech-card, .fourth-tech-card, .expedition-tech-card');
+const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .summit-tech-card, .expedition-tech-card, .sixth-tech-card');
 
   if(guideButton){
     event.preventDefault();
