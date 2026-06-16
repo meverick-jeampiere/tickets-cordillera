@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -54,14 +55,14 @@
       mix-blend-mode:multiply;
     }
 
-    .app{
-      width:100vw;
-      height:100dvh;
-      display:grid;
-      grid-template-rows:20px minmax(0,1fr) 18px;
-      gap:5px;
-      padding:8px 10px 7px;
-    }
+ .app{
+  width:100vw;
+  height:100dvh;
+  display:grid;
+  grid-template-rows:16px minmax(0,1fr) 42px 22px;
+  gap:2px;
+  padding:4px 8px 0;
+}
 
     .topbar,.footer-reader{
       width:100%;
@@ -85,7 +86,7 @@
 
     .hint{opacity:.7;text-align:right;}
 
-    .stage{
+   .stage{
   position:relative;
   width:100%;
   max-width:1780px;
@@ -96,8 +97,8 @@
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  padding:6px;
-  border-radius:24px;
+  padding:2px;
+  border-radius:20px;
   border:1px solid rgba(255,255,255,.62);
   background:
     radial-gradient(circle at 50% 0%, rgba(255,255,255,.80), transparent 38%),
@@ -743,18 +744,30 @@
   letter-spacing:.22em;
   margin-bottom:3.8%;
 }
-
-.chapter-types-left h1,
-.mobile-chapter-page h1{
-  font-family:"Cormorant Garamond", Georgia, serif;
+.chapter-types-left h1{
+  font-family:"Cormorant Garamond", Georgia, serif !important;
   font-size:clamp(38px,4.2vw,78px);
   line-height:.9;
   letter-spacing:-.04em;
   color:#18202d;
-  margin:0 0 5%;
+  margin:0 0 2.6%;
   font-weight:700;
 }
+.chapter-types-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:var(--gold);
+  font-size:clamp(15px,1.05vw,21px);
+  line-height:1.12;
+  font-weight:600;
+  margin:0 0 4.8%;
+}
+.subtitle-seca{
+  color:#111827;
+}
 
+.subtitle-humeda{
+  color:#174d6c;
+}
 .chapter-type-block{
   position:relative;
   z-index:1;
@@ -763,7 +776,7 @@
 
 .chapter-type-number{
   font-family:Inter, sans-serif;
-  color:#111827;
+  color:var(--gold);
   font-size:clamp(9px,.7vw,13px);
   font-weight:900;
   letter-spacing:.18em;
@@ -776,7 +789,7 @@
   font-size:clamp(26px,2.2vw,43px);
   line-height:1;
   letter-spacing:-.025em;
-  color:#111827;
+  color:var(--gold);
   margin:0 0 3.5%;
   font-weight:700;
 }
@@ -2288,12 +2301,246 @@ mask:
       letter-spacing:.12em;
       text-transform:uppercase;
     }
+.reader-progress-wrap{
+  width:100%;
+  max-width:1780px;
+  margin:0 auto;
+  padding:0 6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
+.reader-progress{
+  --progress:0%;
+  --preview-left:50%;
+  position:relative;
+  width:min(760px, 72vw);
+  height:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  touch-action:none;
+  user-select:none;
+}
+
+.reader-progress-rail{
+  position:absolute;
+  inset:auto 0;
+  height:6px;
+  border-radius:999px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.52), rgba(255,255,255,.16)),
+    rgba(70,58,42,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.52),
+    inset 0 0 0 1px rgba(90,72,46,.06),
+    0 6px 18px rgba(20,13,6,.06);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.reader-progress-fill{
+  position:absolute;
+  left:0;
+  top:50%;
+  height:6px;
+  width:var(--progress);
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:
+    linear-gradient(90deg,
+      rgba(167,101,32,.24) 0%,
+      rgba(167,101,32,.58) 42%,
+      rgba(205,138,56,.88) 100%);
+  box-shadow:
+    0 0 14px rgba(167,101,32,.12),
+    0 0 1px rgba(167,101,32,.22);
+  transition:width .34s cubic-bezier(.22,.8,.22,1);
+}
+
+.reader-progress-fill::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(180deg, rgba(255,255,255,.40), rgba(255,255,255,0) 55%);
+  opacity:.8;
+  pointer-events:none;
+}
+
+.reader-progress-thumb{
+  position:absolute;
+  top:50%;
+  left:var(--progress);
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.98), rgba(255,245,233,.94) 58%, rgba(236,219,203,.92) 100%);
+  border:1px solid rgba(167,101,32,.24);
+  box-shadow:
+    0 10px 24px rgba(20,13,6,.16),
+    0 0 0 5px rgba(255,255,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.86);
+  transition:
+    left .34s cubic-bezier(.22,.8,.22,1),
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.reader-progress:hover .reader-progress-thumb,
+.reader-progress.is-dragging .reader-progress-thumb{
+  transform:translate(-50%,-50%) scale(1.08);
+  box-shadow:
+    0 12px 28px rgba(20,13,6,.18),
+    0 0 0 6px rgba(255,255,255,.14),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.reader-preview{
+  position:absolute;
+  left:var(--preview-left);
+  bottom:28px;
+  transform:translateX(-50%) translateY(8px) scale(.96);
+  width:210px;
+  padding:10px 10px 11px;
+  border-radius:20px;
+  opacity:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.72)),
+    rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:
+    0 24px 60px rgba(20,13,6,.18),
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 0 0 1px rgba(90,72,46,.06);
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    left .08s linear;
+  z-index:40;
+}
+
+.reader-preview::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-8px;
+  width:16px;
+  height:16px;
+  transform:translateX(-50%) rotate(45deg);
+  border-radius:3px;
+  background:rgba(255,255,255,.84);
+  box-shadow:1px 1px 10px rgba(20,13,6,.06);
+}
+
+.reader-progress:hover .reader-preview,
+.reader-progress.is-dragging .reader-preview,
+.reader-preview.is-visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+
+.reader-preview-shell{
+  position:relative;
+  width:100%;
+  height:116px;
+  overflow:hidden;
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.94), transparent 34%),
+    linear-gradient(180deg,#f7f1e7,#efe6d8);
+  box-shadow:
+    inset 0 0 0 1px rgba(20,18,14,.08),
+    0 10px 24px rgba(20,13,6,.08);
+}
+
+.reader-preview-stage{
+  position:absolute;
+  left:0;
+  top:0;
+  width:980px;
+  height:620px;
+  transform-origin:top left;
+  transform:scale(.214);
+  pointer-events:none;
+}
+
+.reader-preview-stage .page{
+  width:980px !important;
+  height:620px !important;
+  margin:0 !important;
+  box-shadow:none !important;
+}
+
+.reader-preview-stage .page::after{
+  opacity:.08;
+}
+
+.reader-preview-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin-top:8px;
+}
+
+.reader-preview-page{
+  font-family:Inter,sans-serif;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#8c5a22;
+}
+
+.reader-preview-title{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:18px;
+  line-height:1;
+  font-weight:700;
+  color:#18202d;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.reader-progress.is-dragging{
+  cursor:grabbing;
+}
+
+@media (orientation: portrait){
+  .reader-progress{
+    width:min(92vw, 520px);
+  }
+
+  .reader-preview{
+    width:180px;
+    bottom:24px;
+    padding:9px 9px 10px;
+  }
+
+  .reader-preview-shell{
+    height:98px;
+  }
+
+  .reader-preview-stage{
+    transform:scale(.184);
+  }
+
+  .reader-preview-title{
+    font-size:16px;
+  }
+}
     @media (orientation: portrait){
-      .app{padding:7px 7px 6px;grid-template-rows:18px minmax(0,1fr) 17px;gap:4px;}
-      .topbar{font-size:13px;}
-      .hint{display:none;}
-      .stage{border-radius:20px;padding:5px;}
+  .app{padding:4px 5px 2px;grid-template-rows:16px minmax(0,1fr) 42px 14px;gap:2px;}
+  .topbar{font-size:13px;}
+  .hint{display:none;}
+  .stage{border-radius:18px;padding:2px;}
 
       .desktop-opening{display:none;}
       .mobile-intro{display:block;height:100%;background:var(--paper);}
@@ -7095,6 +7342,28 @@ mask:
     linear-gradient(145deg, #203d53 0%, #13293b 42%, #0b1c29 100%);
 }
 
+/* Imagen decorativa de rocas en la esquina inferior derecha */
+.bedrock-text::before{
+  content:"";
+  position:absolute;
+  right:-1.5%;
+  bottom:-1.5%;
+  width:48%;
+  height:58%;
+  z-index:0;
+  pointer-events:none;
+
+  background:
+    url('rocas-granito.png') right bottom / contain no-repeat;
+
+  opacity:.98;
+}
+
+/* Desvanecido eliminado */
+.bedrock-text::after{
+  content:none;
+}
+
 .bedrock-kicker,
 .bedrock-text h1,
 .bedrock-subtitle,
@@ -7103,7 +7372,7 @@ mask:
 .bedrock-final-grid,
 .bedrock-note{
   position:relative;
-  z-index:1;
+  z-index:2;
 }
 
 .bedrock-kicker{
@@ -7192,9 +7461,7 @@ mask:
 .bedrock-note{
   padding:4.2% 5.2%;
   border-left:3px solid rgba(235,190,120,.82);
-  background:
-    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
-    rgba(255,255,255,.016);
+  background:transparent;
   font-family:"Cormorant Garamond", Georgia, serif;
   font-size:clamp(14px,.98vw,19px);
   line-height:1.16;
@@ -7297,6 +7564,25 @@ mask:
   flex-direction:column;
   justify-content:center;
   overflow:hidden;
+  z-index:0;
+}
+.seventh-guide-left::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+
+  background:
+    linear-gradient(rgba(255,253,247,.88), rgba(255,253,247,.88)),
+    url('granito-conflicto.jpg') center/cover no-repeat;
+
+  opacity:1;
+  mix-blend-mode:normal;
+}
+.seventh-guide-left > *{
+  position:relative;
+  z-index:1;
 }
 
 .seventh-guide-kicker{
@@ -9353,6 +9639,47 @@ mask:
     0 4px 18px rgba(0,0,0,.22),
     0 10px 34px rgba(0,0,0,.18);
 }
+.epilogue-center-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  max-width:82%;
+  transform:translateY(50px);
+}
+
+.epilogue-event-meta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  text-align:center;
+  margin-top:75px;
+}
+
+.epilogue-event-meta span{
+  font-family:Inter, sans-serif;
+  font-size:clamp(11px, .9vw, 16px);
+  line-height:1.28;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:rgba(255,255,255,.92);
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.26),
+    0 6px 18px rgba(0,0,0,.16);
+}
+
+.epilogue-event-meta .epilogue-event-title{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(20px, 1.55vw, 30px);
+  line-height:1.02;
+  font-style:italic;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:#fffdf9;
+  margin-bottom:4px;
+}
 
 /* Folio opcional */
 .epilogue-photo-folio{
@@ -9427,6 +9754,728 @@ mask:
     line-height:1;
   }
 }
+/* =========================================================
+   PÁGINA 34 — OYENDO LA VOZ DE LA POBLACIÓN LOCAL DE MUSHO
+   Glaciología y sociedad / reconciliación con la comunidad
+   ========================================================= */
+
+.musho-voices-page{
+  background:
+    radial-gradient(circle at 8% 0%, rgba(214,245,222,.28), transparent 28%),
+    radial-gradient(circle at 42% 0%, rgba(146,199,156,.16), transparent 38%),
+    radial-gradient(circle at 88% 6%, rgba(95,160,110,.16), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(8,24,12,.62), transparent 62%),
+    linear-gradient(135deg,#5a9a68 0%, #467f53 34%, #2f5f3c 62%, #193423 100%);
+}
+
+.musho-voices-page::after{
+  background-image:radial-gradient(rgba(215,238,250,.045) .56px, transparent .56px);
+  background-size:13px 13px;
+  opacity:.16;
+  mix-blend-mode:screen;
+}
+
+.musho-voices-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.46fr .54fr;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(232,248,236,.16), transparent 30%),
+    radial-gradient(circle at 42% 0%, rgba(176,220,184,.14), transparent 42%),
+    radial-gradient(circle at 78% 6%, rgba(120,188,132,.12), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(8,22,12,.34), transparent 62%),
+    linear-gradient(135deg,#518d60 0%, #3d744a 35%, #285135 66%, #142b1c 100%);
+}
+
+/* Lado izquierdo */
+.musho-voices-text{
+  position:relative;
+  padding:7.2% 7.8% 6.5%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+
+ background:
+
+    radial-gradient(circle at 10% 6%, rgba(244,252,246,.14), transparent 24%),
+
+    radial-gradient(circle at 86% 8%, rgba(190,226,198,.10), transparent 34%),
+
+    radial-gradient(circle at 50% 0%, rgba(214,242,221,.10), transparent 44%),
+
+    radial-gradient(circle at 50% 100%, rgba(8,20,12,.30), transparent 60%),
+
+    linear-gradient(145deg, #5e966a 0%, #4a8057 30%, #315a3f 60%, #1a3525 100%);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(238,252,255,.34),
+    inset 0 2px 0 rgba(255,255,255,.25),
+    inset 0 -48px 92px rgba(2,14,24,.27),
+    inset 44px 0 90px rgba(200,236,252,.06),
+    inset -44px 0 90px rgba(1,13,24,.16),
+    0 26px 76px rgba(2,14,24,.32);
+}
+
+.musho-voices-text::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.36);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), transparent 22%, transparent 78%, rgba(255,255,255,.035)),
+    linear-gradient(90deg, rgba(255,255,255,.075), transparent 16%, transparent 84%, rgba(255,255,255,.045));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.055),
+    inset 0 0 42px rgba(205,237,255,.13),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -26px 48px rgba(2,14,24,.16),
+    0 0 20px rgba(210,238,252,.14),
+    0 0 52px rgba(160,210,238,.08);
+  pointer-events:none;
+}
+
+.musho-voices-text::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), transparent 20%, transparent 78%, rgba(255,255,255,.045)),
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 16%, transparent 84%, rgba(255,255,255,.045)),
+    radial-gradient(circle at 10% 7%, rgba(255,255,255,.11), transparent 22%),
+    radial-gradient(circle at 50% 0%, rgba(215,242,255,.09), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.20), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.58;
+}
+
+.musho-kicker,
+.musho-voices-text h1,
+.musho-subtitle,
+.musho-voices-text p,
+.musho-line,
+.musho-list,
+.musho-bottom-card{
+  position:relative;
+  z-index:1;
+}
+
+.musho-kicker{
+  font-family:Inter, sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.5%;
+}
+
+.musho-voices-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px,3.65vw,70px);
+  line-height:.9;
+  letter-spacing:-.045em;
+  color:rgba(246,250,252,.95);
+  margin:0 0 3.2%;
+  font-weight:700;
+}
+
+.musho-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(221,239,224,.96);
+  font-size:clamp(18px,1.25vw,25px);
+  line-height:1.08;
+  font-weight:600;
+  margin:0 0 4.2%;
+}
+
+.musho-line{
+  width:54px;
+  height:2px;
+  background:#5aa06a;
+  box-shadow:0 0 16px rgba(90,160,106,.12);
+  margin:0 0 5%;
+}
+
+.musho-voices-text p{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1vw,19px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.92);
+  max-width:93%;
+  margin:0 0 4.2%;
+}
+
+.musho-list{
+  display:grid;
+  gap:0;
+  margin:1% 0 4%;
+}
+
+.musho-item{
+  position:relative;
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:14px;
+  align-items:start;
+  padding:2.2% 0 2.4%;
+  border-bottom:1px solid rgba(230,248,255,.16);
+}
+
+.musho-item-number{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+ background:#5aa06a;
+  color:#fffdf7;
+  font-family:Inter, sans-serif;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:
+    0 10px 22px rgba(47,127,166,.22),
+    inset 0 0 0 1px rgba(255,255,255,.24);
+}
+
+.musho-item h2{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(19px,1.38vw,28px);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:rgba(250,253,255,.96);
+  margin:0 0 4px;
+  font-weight:700;
+}
+
+.musho-item p{
+  margin:0;
+  max-width:100%;
+  font-size:clamp(12px,.82vw,16px);
+  line-height:1.12;
+  color:rgba(232,244,235,.88);
+}
+
+.musho-bottom-card{
+  position:relative;
+  margin-top:1.8%;
+  padding:18px 20px 18px 72px;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(220,239,225,.11), rgba(120,178,130,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(90,160,106,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.musho-bottom-card::before{
+  content:"❄";
+  position:absolute;
+  left:20px;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#5aa06a;
+  color:#fff;
+  font-size:20px;
+  line-height:1;
+  box-shadow:
+    0 8px 18px rgba(47,127,166,.18),
+    inset 0 0 0 1px rgba(255,255,255,.26);
+}
+
+.musho-bottom-card strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.28vw,27px);
+  line-height:1.02;
+  font-weight:700;
+  color:rgba(246,250,252,.96);
+  margin-bottom:4px;
+}
+
+.musho-bottom-card span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.92vw,17px);
+  line-height:1.12;
+  font-weight:600;
+  color:rgba(232,244,250,.88);
+}
+
+/* Lado derecho */
+.musho-voices-visual{
+
+  position:relative;
+
+  padding:5.2%;
+
+  overflow:hidden;
+
+  background:
+
+    radial-gradient(circle at 12% 7%, rgba(240,252,243,.12), transparent 28%),
+
+    radial-gradient(circle at 70% 0%, rgba(174,220,182,.10), transparent 42%),
+
+    radial-gradient(circle at 50% 100%, rgba(7,18,10,.32), transparent 60%),
+
+    linear-gradient(145deg, #567f60 0%, #426b4c 34%, #2c4d35 65%, #173020 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(235,250,255,.20),
+    inset 0 0 0 1px rgba(235,250,255,.16),
+    inset 0 -42px 84px rgba(2,14,24,.22);
+}
+
+.musho-voices-visual::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.28);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.065), transparent 24%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.052), transparent 16%, transparent 84%, rgba(255,255,255,.040));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.045),
+    inset 0 0 38px rgba(205,237,255,.11),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -24px 46px rgba(2,14,24,.14),
+    0 0 18px rgba(210,238,252,.10),
+    0 0 46px rgba(160,210,238,.055);
+  pointer-events:none;
+  z-index:0;
+}
+
+.musho-voices-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.070), transparent 22%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.045), transparent 18%, transparent 84%, rgba(255,255,255,.032)),
+    radial-gradient(circle at 84% 8%, rgba(255,255,255,.08), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.18), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.52;
+}
+
+.musho-board{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:1.1fr .82fr auto;
+  gap:2.8%;
+}
+
+.musho-main-photo{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.08), rgba(2,14,24,.28)),
+    url('musho-reunion-comunidad.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 32px 76px rgba(2,14,24,.36),
+    0 0 0 1px rgba(235,250,255,.34),
+    inset 0 0 0 1px rgba(255,255,255,.17);
+}
+
+.musho-main-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, transparent 40%, rgba(0,0,0,.48)),
+    radial-gradient(circle at 20% 10%, rgba(238,252,255,.10), transparent 28%);
+  pointer-events:none;
+}
+
+.musho-main-quote{
+  position:absolute;
+  right:5.5%;
+  bottom:7%;
+  left:auto;
+  top:auto;
+
+  max-width:34%;
+  z-index:2;
+  color:#fff;
+  Text-align:right;
+}
+
+.musho-main-quote p{
+  margin:0 0 10px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.45vw,30px);
+  line-height:1.08;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.95);
+  text-shadow:0 4px 18px rgba(0,0,0,.30);
+}
+
+.musho-main-quote span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.56vw,10px);
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+}
+
+.musho-photo-row{
+  display:grid;
+  grid-template-columns:.31fr .30fr .39fr;
+  gap:2.4%;
+}
+
+.musho-small-photo,
+.musho-quote-card,
+.musho-ice-photo{
+  min-height:0;
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.musho-small-photo{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.06), rgba(2,14,24,.14)),
+    url('musho-comunero-habla.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 20px 44px rgba(2,14,24,.22),
+    0 0 0 1px rgba(235,250,255,.18);
+}
+
+.musho-ice-photo{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.06), rgba(2,14,24,.14)),
+    url('musho-caja-hielo.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 20px 44px rgba(2,14,24,.22),
+    0 0 0 1px rgba(235,250,255,.18);
+}
+
+.musho-quote-card{
+  padding:9% 10%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:
+    linear-gradient(180deg, rgba(225,242,229,.11), rgba(120,178,130,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(220,240,225,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.musho-quote-card p{
+  margin:0 0 12px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.42vw,28px);
+  line-height:1.12;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(245,250,246,.96);
+}
+
+.musho-quote-card span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.56vw,10px);
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(220,236,223,.88);
+}
+
+.musho-footer-note{
+  position:relative;
+  padding:18px 22px 18px 78px;
+  border-radius:20px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.musho-footer-note::before{
+  content:"❄";
+  position:absolute;
+  left:24px;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#4b8a5b;
+  color:#fff;
+  font-size:22px;
+  line-height:1;
+  box-shadow:
+    0 8px 18px rgba(47,127,166,.18),
+    inset 0 0 0 1px rgba(255,255,255,.26);
+}
+
+.musho-footer-note strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.35vw,29px);
+  line-height:1.02;
+  font-weight:700;
+  color:rgba(246,250,252,.96);
+  margin-bottom:4px;
+}
+
+.musho-footer-note span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.92vw,17px);
+  line-height:1.14;
+  font-weight:600;
+  color:rgba(232,244,250,.88);
+}
+
+/* Móvil */
+@media (orientation: portrait){
+  .musho-voices-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .musho-voices-text{
+    padding:12% 8% 5%;
+    justify-content:center;
+  }
+
+  .musho-voices-text h1{
+    font-size:clamp(34px, 9.1vw, 58px);
+  }
+
+  .musho-subtitle{
+    font-size:clamp(17px, 4.2vw, 24px);
+  }
+
+  .musho-voices-text p{
+    font-size:clamp(14px, 3.7vw, 20px);
+    max-width:100%;
+  }
+
+  .musho-item{
+    grid-template-columns:42px 1fr;
+    gap:12px;
+  }
+
+  .musho-item h2{
+    font-size:clamp(18px, 4.7vw, 26px);
+  }
+
+  .musho-item p{
+    font-size:clamp(12px, 3.2vw, 16px);
+  }
+
+  .musho-bottom-card{
+    padding:18px 18px 18px 64px;
+  }
+
+  .musho-voices-visual{
+    padding:4% 7% 8%;
+  }
+
+  .musho-board{
+    grid-template-rows:auto auto auto;
+  }
+
+  .musho-main-photo{
+    min-height:280px;
+    border-radius:22px;
+  }
+
+  .musho-main-quote{
+    max-width:58%;
+  }
+
+  .musho-main-quote p{
+    font-size:clamp(16px, 4.8vw, 24px);
+  }
+
+  .musho-photo-row{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .musho-small-photo,
+  .musho-quote-card,
+  .musho-ice-photo{
+    min-height:180px;
+    border-radius:18px;
+  }
+
+  .musho-footer-note{
+    padding:18px 18px 18px 68px;
+  }
+
+  .musho-footer-note strong{
+    font-size:clamp(18px, 4.8vw, 26px);
+  }
+
+  .musho-footer-note span{
+    font-size:clamp(12px, 3.3vw, 16px);
+  }
+}
+/* Variante verde solo para el botón XVII de Musho */
+.musho-green-card{
+  --ice-text:#2f6b3f;
+  --ice-border:rgba(47,107,63,.34);
+  --card-border:var(--ice-border);
+}
+
+.musho-green-card::before{
+  background:
+    linear-gradient(90deg, rgba(47,107,63,.08), rgba(255,253,247,.88)),
+    rgba(220,239,225,.22);
+}
+
+.musho-green-card:hover{
+  box-shadow:
+    0 15px 32px rgba(47,107,63,.10),
+    inset 0 0 0 1px rgba(255,255,255,.68);
+}
+
+.musho-green-card .sixth-tech-icon{
+  background:#4b8a5b;
+  box-shadow:
+    0 10px 22px rgba(75,138,91,.22),
+    0 0 14px rgba(146,205,158,.20),
+    inset 0 0 0 1px rgba(255,255,255,.32);
+}
+
+.musho-green-card .sixth-tech-icon::before{
+  border:1px dashed rgba(95,160,110,.34);
+}
+
+.musho-green-card .sixth-tech-icon::after{
+  border-left:1px dashed rgba(95,160,110,.26);
+}
+
+.musho-green-card .sixth-tech-content strong,
+.musho-green-card .sixth-tech-content span{
+  color:#2f6b3f;
+}
+/* Icono de bandera blanca para el botón verde de Musho */
+.musho-green-card .musho-flag-icon{
+  position:absolute;
+  left:calc(-1 * var(--content-left) + var(--marker-left) - 46px / 2);
+  top:50%;
+  transform:translateY(-50%);
+
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#4b8a5b;
+  box-shadow:
+    0 10px 22px rgba(75,138,91,.22),
+    0 0 14px rgba(146,205,158,.20),
+    inset 0 0 0 1px rgba(255,255,255,.32);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+}
+
+.musho-green-card .musho-flag-icon::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1px dashed rgba(95,160,110,.34);
+  pointer-events:none;
+}
+
+.musho-green-card .musho-flag-icon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-42px;
+  transform:translateX(-50%);
+  width:1px;
+  height:calc(100% + 84px);
+  border-left:1px dashed rgba(95,160,110,.26);
+  z-index:-1;
+}
+
+/* asta */
+.musho-green-card .musho-flag-icon .flag-pole{
+  position:absolute;
+  left:18px;
+  top:13px;
+  width:2.4px;
+  height:18px;
+  border-radius:2px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 0 4px rgba(255,255,255,.16);
+}
+
+.musho-green-card .musho-flag-icon .flag-cloth{
+  position:absolute;
+  left:20px;
+  top:13px;
+  width:11px;
+  height:10px;
+  background:rgba(255,255,255,.98);
+
+  clip-path:polygon(0 0, 100% 50%, 0 100%);
+  border-radius:0;
+
+  box-shadow:
+    0 0 4px rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(0,0,0,.06);
+}
+/* Botón verde de Musho con emoji de bandera blanca */
+.musho-green-card .musho-flag-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  line-height:1;
+}
+
+/* Oculta la bandera hecha con CSS */
+.musho-green-card .musho-flag-icon .flag-pole,
+.musho-green-card .musho-flag-icon .flag-cloth{
+  display:none;
+}
   </style>
 </head>
 <body>
@@ -9442,7 +10491,33 @@ mask:
   </button>
   <div id="book"></div>
 </main>
-    <footer class="footer-reader" id="pageCounter">Página 1 / 2</footer>
+<div class="reader-progress-wrap">
+  <div
+    class="reader-progress interactive"
+    id="readerProgress"
+    role="slider"
+    aria-label="Navegación de páginas"
+    aria-valuemin="1"
+    aria-valuemax="1"
+    aria-valuenow="1"
+    tabindex="0"
+  >
+    <div class="reader-progress-rail"></div>
+    <div class="reader-progress-fill" id="readerProgressFill"></div>
+    <div class="reader-progress-thumb" id="readerProgressThumb"></div>
+
+    <div class="reader-preview" id="readerPreview" aria-hidden="true">
+      <div class="reader-preview-shell">
+        <div class="reader-preview-stage" id="readerPreviewStage"></div>
+      </div>
+      <div class="reader-preview-meta">
+        <span class="reader-preview-page" id="readerPreviewPage">Página 1</span>
+        <span class="reader-preview-title" id="readerPreviewTitle">Portada</span>
+      </div>
+    </div>
+  </div>
+</div>
+
   </div>
 
   <!-- PÁGINA 1: horizontal tipo libro abierto / vertical tipo móvil -->
@@ -9576,8 +10651,13 @@ mask:
     <div class="chapter-types-layout">
 
       <aside class="chapter-types-left">
-        <div class="chapter-kicker">Estructura editorial</div>
-        <h1>Tipos de capítulos</h1>
+        <div class="chapter-kicker">Tipos de Capítulos</div>
+        <h1>Un libro construido <br>como un núcleo de hielo</h1>
+        <p class="chapter-types-subtitle">
+          Una arquitectura editorial inspirada en la alternancia de las temporadas
+          <span class="subtitle-seca">seca</span> y
+          <span class="subtitle-humeda">húmeda</span>.
+        </p>
         <div class="gold-line"></div>
 
         <div class="chapter-type-block">
@@ -9601,14 +10681,14 @@ mask:
         <div class="chapter-image-card narrative">
           <div class="chapter-image-label">
             <strong>La expedición vivida desde adentro</strong>
-            <span>Imagen sugerida: ascenso, campamento, collado o equipo científico</span>
+            <span>ascenso, campamento, collado o equipo científico</span>
           </div>
         </div>
 
         <div class="chapter-image-card science">
           <div class="chapter-image-label">
             <strong>El hielo explicado como archivo</strong>
-            <span>Imagen sugerida: núcleo de hielo, glaciar, infografía o laboratorio</span>
+            <span>núcleo de hielo, glaciar, infografía o laboratorio</span>
           </div>
         </div>
       </aside>
@@ -9838,7 +10918,7 @@ mask:
         <div class="altitude-line"></div>
 
         <p>
-          Si bien ya existían estimaciones de la altitud del Huascarán, fueron los trabajos topográficos de José Hindle asociados al ferrocarril Huaraz-Chimbote los que ayudaron indirectamente a medir por primera vez su altitud con una precisión importante para su época.
+          Si bien ya existían estimaciones de la altitud del Huascarán, fueron los trabajos topográficos de José Hindle asociados al proyecto del ferrocarril Huaraz-Chimbote los que ayudaron indirectamente a medir por primera vez su altitud con una precisión importante para su época.
         </p>
 
         <div class="altitude-infographic"></div>
@@ -10637,7 +11717,7 @@ mask:
     <div class="ice-science-layout v12">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XII · Glaciología visual</div>
+        <div class="ice-science-kicker">XI · Glaciología visual</div>
 
         <h1>Paleoclimatología e historia climática a partir del hielo</h1>
 
@@ -10726,7 +11806,7 @@ mask:
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XIII · Glaciología visual</div>
+        <div class="ice-science-kicker">XII · Glaciología visual</div>
 
         <h1>El origen de la Cordillera Blanca y su historia glaciar</h1>
 
@@ -10956,7 +12036,7 @@ mask:
     <div class="ice-science-layout v14">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XIV · Glaciología visual</div>
+        <div class="ice-science-kicker">XIII · Glaciología visual</div>
 
         <h1>Cómo estudiar y vigilar un glaciar en la Cordillera Blanca</h1>
 
@@ -11129,7 +12209,7 @@ mask:
       </aside>
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XV · Glaciología visual</div>
+        <div class="ice-science-kicker">XIV · Glaciología visual</div>
 
         <h1>Midiendo la real altitud del Huascarán desde la cumbre</h1>
 
@@ -11180,7 +12260,7 @@ mask:
     <div class="ice-science-layout v16">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XVI · Glaciología visual</div>
+        <div class="ice-science-kicker">XV · Glaciología visual</div>
 
         <h1>Las heridas del Huascarán y del Callejón de Huaylas</h1>
 
@@ -11333,7 +12413,7 @@ mask:
     <div class="memory-drill-layout">
 
       <aside class="memory-drill-text">
-        <div class="memory-drill-kicker">XVIII · Glaciología especial</div>
+        <div class="memory-drill-kicker">XVI · Glaciología especial</div>
 
         <h1>Cómo se extrae el tiempo</h1>
 
@@ -11423,7 +12503,7 @@ mask:
       </aside>
 
       <aside class="ice-office-text">
-        <div class="ice-office-kicker">XIX · Glaciología especial</div>
+        <div class="ice-office-kicker">XVII · Glaciología Visual</div>
 
         <h1>La oficina sobre el hielo</h1>
 
@@ -11469,7 +12549,7 @@ mask:
       </aside>
 
       <aside class="bedrock-text">
-        <div class="bedrock-kicker">XX · Glaciología especial</div>
+        <div class="bedrock-kicker">XVIII · Glaciología Visual</div>
 
         <h1>Cuando el hielo toca la roca</h1>
 
@@ -11544,28 +12624,36 @@ mask:
           </div>
 
           <div class="seventh-guide-item">
-            <div class="seventh-guide-number">21</div>
-            <div>
-              <h2>Retenidos</h2>
-              <p>
-                Descendiendo con tranquilidad. Acorralados por una multitud armada. La tensión. Las amenazas. La noche en la carretera. La policía. La sensación de estar haciendo ciencia y ser tratados como sospechosos.
-              </p>
-            </div>
-          </div>
+  <div class="seventh-guide-number">21</div>
+  <div>
+    <h2>Retenidos</h2>
+    <p>
+      Descendiendo con tranquilidad. Acorralados por una multitud armada. La tensión. Las amenazas. La noche en la carretera. La policía. La sensación de estar haciendo ciencia y ser tratados como sospechosos.
+    </p>
+  </div>
+</div>
 
-          <div class="seventh-guide-item">
-            <div class="seventh-guide-number">22</div>
-            <div>
-              <h2>Mostrando la memoria</h2>
-              <p>
-                Abriendo las cajas y mostrándoles tubos a autoridades y periodistas. El asombro de ver la memoria del Huascarán. El Huascarán pasa de ser mito a hablar en primera persona.
-              </p>
-            </div>
-          </div> 
+<button class="sixth-tech-card musho-green-card" type="button" data-go-key="voz-poblacion-musho">
+  <div class="sixth-tech-icon musho-flag-icon">🏳️</div>
+  <div class="sixth-tech-content">
+    <strong>XVII. Oyendo la voz local del pueblo de Musho</strong>
+    <span>Desconfianza, diálogo y reconciliación alrededor del Huascarán.</span>
+  </div>
+</button>
+
+<div class="seventh-guide-item">
+  <div class="seventh-guide-number">22</div>
+  <div>
+    <h2>Mostrando la memoria</h2>
+    <p>
+      Abriendo las cajas y mostrándoles tubos a autoridades y periodistas. El asombro de ver la memoria del Huascarán. El Huascarán pasa de ser mito a hablar en primera persona.
+    </p>
+  </div>
+</div>
 <button class="sixth-tech-card" type="button" data-go-key="glaciares-agua-sociedad">
   <div class="sixth-tech-icon">❄</div>
   <div class="sixth-tech-content">
-    <strong>XVII. El Huascarán y la gente del Callejón de Huaylas</strong>
+    <strong>XVIII. El Huascarán y la gente del Callejón de Huaylas</strong>
     <span>Glaciares, agua y sociedad.</span>
   </div>
 </button>
@@ -11584,7 +12672,126 @@ mask:
     </div>
   </section>
 </template>
+<!-- PÁGINA 34: Oyendo la voz de la población local de Musho -->
+<template data-page>
+  <section class="page musho-voices-page" data-page-key="voz-poblacion-musho">
+    <div class="musho-voices-layout">
 
+      <aside class="musho-voices-text">
+        <div class="musho-kicker">XIX ·Glaciología y Sociedad</div>
+
+        <h1>Oyendo la voz de Musho</h1>
+
+        <p class="musho-subtitle">
+          Desconfianza, diálogo y reconciliación alrededor del Huascarán.
+        </p>
+
+        <div class="musho-line"></div>
+
+        <p>
+          Para la población de Musho, el conflicto no empezó cuando la expedición descendió. Comenzó mucho antes: cuando vieron llegar helicópteros, autoridades y científicos extranjeros, y movimientos inusuales sin una explicación clara y abierta.
+        </p>
+
+        <div class="musho-list">
+
+          <div class="musho-item">
+            <div class="musho-item-number">👁️</div>
+            <div>
+              <h2>Cuando la montaña se volvió sospecha</h2>
+              <p>
+                La visita del presidente Martín Vizcarra al refugio marcó un punto decisivo. La población acudió con curiosidad, pero al no participar de las reuniones, la distancia y la desconfianza crecieron.
+              </p>
+            </div>
+          </div>
+
+          <div class="musho-item">
+            <div class="musho-item-number">🔦</div>
+            <div>
+              <h2>Luces en la noche, preguntas sin respuesta</h2>
+              <p>
+                Luces en la ruta a la cumbre, presencia de extranjeros y silencio sobre los objetivos alimentaron los rumores: ¿qué estaban sacando?, ¿por qué tanta reserva?, ¿por qué la comunidad no sabía?
+              </p>
+            </div>
+          </div>
+
+          <div class="musho-item">
+            <div class="musho-item-number">✋</div>
+            <div>
+              <h2>El momento en que la comunidad decidió intervenir</h2>
+              <p>
+                Al saber que la expedición descendería, la población organizó su respuesta. La interceptación no nació solo de la rabia, sino de una exigencia: que se dijera la verdad.
+              </p>
+            </div>
+          </div>
+
+          <div class="musho-item">
+            <div class="musho-item-number">🧊</div>
+            <div>
+              <h2>Cuando el Huascarán habló desde el hielo</h2>
+              <p>
+                Una autoridad local y un periodista subieron al refugio y vieron el contenido de las cajas: no había oro ni minerales, eran núcleos de hielo. La sorpresa fue una revelación: el Huascarán empezaba a alzar su voz desde su memoria.
+              </p>
+            </div>
+          </div>
+
+          <div class="musho-item">
+            <div class="musho-item-number">🤝</div>
+            <div>
+              <h2>Escuchar para no repetir el error</h2>
+              <p>
+                La ciencia no puede llegar a una montaña habitada como si fuera un territorio vacío. Este capítulo propone escuchar a Musho y abrir un espacio de reconciliación.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="musho-bottom-card">
+          <strong>XVIII. Ciencia que escucha, memoria que une</strong>
+          <span>
+            La expedición extrajo hielo, pero también dejó una enseñanza: la memoria del Huascarán vive en sus hielos y en la voz de su gente. Solo juntas pueden hablar.
+          </span>
+        </div>
+      </aside>
+
+      <aside class="musho-voices-visual">
+        <div class="musho-board">
+
+          <div class="musho-main-photo">
+            <div class="musho-main-quote">
+              <p>
+                Desde abajo veíamos luces y nadie nos decía qué estaba pasando. La incertidumbre se volvió temor y luego indignación.
+              </p>
+              <span>Comunero de Musho</span>
+            </div>
+          </div>
+
+          <div class="musho-photo-row">
+            <div class="musho-small-photo"></div>
+
+            <div class="musho-quote-card">
+              <p>
+                No queríamos pelear, solo saber la verdad. El Huascarán es nuestro apu, no permitiremos que lo engañen.
+              </p>
+              <span>Comunera de Musho</span>
+            </div>
+
+            <div class="musho-ice-photo"></div>
+          </div>
+
+          <div class="musho-footer-note">
+            <strong>El Huascarán también habla a través del hielo</strong>
+            <span>
+              Lo que para muchos era sospecha, hoy es conocimiento. Los núcleos de hielo guardan la memoria climática de nuestro apu y nos ayudan a comprender su futuro. La ciencia y la comunidad pueden caminar juntas, con respeto y confianza.
+            </span>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
 <!-- PÁGINA XVII: El Huascarán y la gente del Callejón de Huaylas -->
 <template data-page>
   <section class="page glacier-society-page" data-page-key="glaciares-agua-sociedad">
@@ -12144,14 +13351,14 @@ mask:
       <div>
         <h2>Los deseos de mi padre</h2>
         <p>
-          El impacto de las investigaciones de Lonnie Thompson.<br>
-          El protagonista ya no como estudiante, sino como científico formado.<br>
-          La continuidad entre aprendizaje, responsabilidad y legado.<br><br>
+         
+          El protagonista ya no como estudiante, sino como científico formado.<br><br>
+          La partida de mi padre.<br><br>
 
-          Flashback: las caminatas junto al padre.<br>
+          <strong>Recordando:</strong> 
+<br>Las caminatas.<br>
           Su apoyo.<br>
           El orgullo.<br>
-          Su partida.<br>
           El vacío.
         </p>
       </div>
@@ -12162,13 +13369,13 @@ mask:
       <div>
         <h2>Una nueva aventura junto a mi maestro</h2>
         <p>
-          La invitación de Lonnie a China.<br>
-          El protagonista la siente ligada a su padre.<br>
+        
+La invitación de Lonnie a China.<br>
+          La sensación de que esta nueva historia es gracias a mi padre.<br>
           La ciencia como herencia humana y no solo académica.<br><br>
 
           Los nuevos descubrimientos.<br>
-          La apertura de una nueva etapa.<br>
-          La memoria del hielo proyectada hacia el futuro.
+      
         </p>
       </div>
     </div>
@@ -12288,12 +13495,21 @@ mask:
 
       <aside class="epilogue-photo-main">
         <div class="epilogue-photo-frame">
-          <div class="epilogue-center">
-            <h2>
-              Epílogo:<br>
-              El Callejón de Huaylas se une para escuchar la voz del Huascarán
-            </h2>
-          </div>
+<div class="epilogue-center">
+  <div class="epilogue-center-inner">
+    <h2>
+      Epílogo:<br>
+      El Callejón de Huaylas se une para escuchar la voz del Huascarán
+    </h2>
+
+    <div class="epilogue-event-meta">
+      <span class="epilogue-event-title">“La Memoria del Huascarán”</span>
+      <span>Frente a 600 personas</span>
+      <span>Auditorio Huáscar y Huandy</span>
+      <span>Yungay: 56 años del sismo-alud de 1970</span>
+    </div>
+  </div>
+</div>
           <div class="epilogue-photo-folio">39</div>
         </div>
       </aside>
@@ -12304,40 +13520,54 @@ mask:
 
   <script>
     const bookElement = document.getElementById('book');
-const pageCounter = document.getElementById('pageCounter');
+
 const stageElement = document.querySelector('.stage');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
+const readerProgress = document.getElementById('readerProgress');
+const readerProgressFill = document.getElementById('readerProgressFill');
+const readerProgressThumb = document.getElementById('readerProgressThumb');
+const readerPreview = document.getElementById('readerPreview');
+const readerPreviewStage = document.getElementById('readerPreviewStage');
+const readerPreviewPage = document.getElementById('readerPreviewPage');
+const readerPreviewTitle = document.getElementById('readerPreviewTitle');
+
 let pageFlip;
 let isFlipping = false;
+let isDraggingProgress = false;
+let pendingPreviewIndex = 0;
+let previewHideTimer = null;
 
-    function getPageSize(){
-      const stage = stageElement.getBoundingClientRect();
-      const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-      const availableW = Math.max(300, stage.width - 12);
-      const availableH = Math.max(420, stage.height - 12);
+   function getPageSize(){
+  const stage = stageElement.getBoundingClientRect();
+  const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 
-      if(isPortrait){
-        // Proporción cercana a 2121 x 3000 para móviles: 0.707.
-        const ratio = 2121 / 3000;
-        let h = availableH * 0.992;
-        let w = h * ratio;
-        if(w > availableW * 0.992){
-          w = availableW * 0.992;
-          h = w / ratio;
-        }
-        return { width: Math.round(w), height: Math.round(h) };
-      }
+  const availableW = Math.max(300, stage.width - 4);
+  const availableH = Math.max(420, stage.height - 4);
 
-      // Página horizontal única, tipo revista abierta.
-      const ratio = 1.72;
-      let h = availableH * 0.992;
-      let w = h * ratio;
-      if(w > availableW * 0.992){
-        w = availableW * 0.992;
-        h = w / ratio;
-      }
-      return { width: Math.round(w), height: Math.round(h) };
+  if(isPortrait){
+    const ratio = 2121 / 3000;
+    let h = availableH * 0.998;
+    let w = h * ratio;
+
+    if(w > availableW * 0.998){
+      w = availableW * 0.998;
+      h = w / ratio;
     }
+
+    return { width: Math.round(w), height: Math.round(h) };
+  }
+
+  const ratio = 1.72;
+  let h = availableH * 0.998;
+  let w = h * ratio;
+
+  if(w > availableW * 0.998){
+    w = availableW * 0.998;
+    h = w / ratio;
+  }
+
+  return { width: Math.round(w), height: Math.round(h) };
+}
 
    function populatePages(){
   bookElement.innerHTML = '';
@@ -12358,12 +13588,136 @@ let isFlipping = false;
   });
 }
 
-    function updateCounter(){
+function updateReaderProgress(previewIndex = null){
+  if(!pageFlip || !readerProgress) return;
+
+  const current = pageFlip.getCurrentPageIndex();
+  const total = pageFlip.getPageCount();
+
+  const activeIndex = previewIndex ?? current;
+  const ratio = total <= 1 ? 0 : activeIndex / (total - 1);
+  const progress = `${Math.max(0, Math.min(100, ratio * 100))}%`;
+
+  readerProgress.style.setProperty('--progress', progress);
+
+  if(readerProgressFill){
+    readerProgressFill.style.width = progress;
+  }
+
+  if(readerProgressThumb){
+    readerProgressThumb.style.left = progress;
+  }
+
+  readerProgress.setAttribute('aria-valuemin', '1');
+  readerProgress.setAttribute('aria-valuemax', String(total));
+  readerProgress.setAttribute('aria-valuenow', String(activeIndex + 1));
+}
+function getPageTitleFromElement(pageEl, index){
+  if(!pageEl) return `Página ${index + 1}`;
+
+  const key = pageEl.dataset.pageKey;
+  const heading =
+    pageEl.querySelector('h1') ||
+    pageEl.querySelector('h2') ||
+    pageEl.querySelector('.cover-title') ||
+    pageEl.querySelector('.reader-title');
+
+  if(heading){
+    return heading.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  if(key){
+    return key.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  return `Página ${index + 1}`;
+}
+
+function renderPreviewForPage(index){
+  if(!pageFlip || !readerPreviewStage) return;
+
+  const pages = Array.from(bookElement.querySelectorAll('.page'));
+  const target = pages[index];
+  if(!target) return;
+
+  readerPreviewStage.innerHTML = '';
+  const clone = target.cloneNode(true);
+
+  clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+  readerPreviewStage.appendChild(clone);
+
+  if(readerPreviewPage){
+    readerPreviewPage.textContent = `Página ${index + 1}`;
+  }
+
+  if(readerPreviewTitle){
+    readerPreviewTitle.textContent = getPageTitleFromElement(target, index);
+  }
+}
+
+function showReaderPreview(index, clientX = null){
+  if(!readerPreview || !readerProgress) return;
+
+  const total = pageFlip.getPageCount();
+  const safeIndex = Math.max(0, Math.min(total - 1, index));
+
+  pendingPreviewIndex = safeIndex;
+  renderPreviewForPage(safeIndex);
+
+  const trackRect = readerProgress.getBoundingClientRect();
+  const ratio = total <= 1 ? 0 : safeIndex / (total - 1);
+
+  let leftPx = clientX !== null
+    ? (clientX - trackRect.left)
+    : ratio * trackRect.width;
+
+  leftPx = Math.max(22, Math.min(trackRect.width - 22, leftPx));
+  const leftPercent = (leftPx / trackRect.width) * 100;
+
+  readerProgress.style.setProperty('--preview-left', `${leftPercent}%`);
+  readerPreview.classList.add('is-visible');
+
+  clearTimeout(previewHideTimer);
+  updateReaderProgress(safeIndex);
+}
+
+function hideReaderPreview(delay = 120){
+  if(!readerPreview) return;
+  clearTimeout(previewHideTimer);
+  previewHideTimer = setTimeout(() => {
+    if(!isDraggingProgress){
+      readerPreview.classList.remove('is-visible');
+      updateReaderProgress();
+    }
+  }, delay);
+}
+
+function getIndexFromProgressClientX(clientX){
+  if(!pageFlip || !readerProgress) return 0;
+
+  const rect = readerProgress.getBoundingClientRect();
+  const total = pageFlip.getPageCount();
+
+  const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+  const ratio = rect.width <= 0 ? 0 : x / rect.width;
+
+  return Math.round(ratio * Math.max(0, total - 1));
+}
+
+function updateCounter(){
   if(!pageFlip) return;
+
   const current = pageFlip.getCurrentPageIndex() + 1;
   const total = pageFlip.getPageCount();
-  pageCounter.textContent = `Página ${current} / ${total}`;
+
+  updateReaderProgress();
   updateFullscreenButton();
+
+  if(readerProgress){
+    readerProgress.setAttribute('aria-valuemax', String(total));
+    readerProgress.setAttribute('aria-valuenow', String(current));
+  }
 }
 function updateFullscreenButton(){
   if(!pageFlip || !fullscreenBtn) return;
@@ -12459,6 +13813,7 @@ if(fullscreenBtn){
       pageFlip.on('flip',()=>{isFlipping=false;updateCounter();});
 pageFlip.on('changeState',(e)=>{isFlipping=e.data==='flipping';});
 updateCounter();
+updateReaderProgress();
 updateFullscreenButton();
     }
 
@@ -12476,8 +13831,18 @@ updateFullscreenButton();
     updateCounter();
   }
 }
+function goToPageIndex(index){
+  if(!pageFlip || isFlipping) return;
+
+  const total = pageFlip.getPageCount();
+  const safeIndex = Math.max(0, Math.min(total - 1, index));
+
+  pageFlip.turnToPage(safeIndex);
+  updateCounter();
+}
 
 bookElement.addEventListener('click',(event)=>{
+  if(event.target.closest('#readerProgress')) return;
 const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .summit-tech-card, .expedition-tech-card, .sixth-tech-card');
 
   if(guideButton){
@@ -12520,6 +13885,77 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .su
 document.addEventListener('fullscreenchange', updateFullscreenButton);
 document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 document.addEventListener('msfullscreenchange', updateFullscreenButton);
+if(readerProgress){
+  readerProgress.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+
+    isDraggingProgress = true;
+    readerProgress.classList.add('is-dragging');
+    readerProgress.setPointerCapture?.(event.pointerId);
+
+    const index = getIndexFromProgressClientX(event.clientX);
+    showReaderPreview(index, event.clientX);
+  });
+
+  readerProgress.addEventListener('pointermove', (event) => {
+    if(!pageFlip) return;
+
+    const index = getIndexFromProgressClientX(event.clientX);
+
+    if(isDraggingProgress){
+      showReaderPreview(index, event.clientX);
+    }else{
+      showReaderPreview(index, event.clientX);
+    }
+  });
+
+  readerProgress.addEventListener('pointerup', (event) => {
+    if(!pageFlip) return;
+
+    const index = getIndexFromProgressClientX(event.clientX);
+
+    if(isDraggingProgress){
+      goToPageIndex(index);
+    }
+
+    isDraggingProgress = false;
+    readerProgress.classList.remove('is-dragging');
+    hideReaderPreview(140);
+  });
+
+  readerProgress.addEventListener('pointerleave', () => {
+    if(!isDraggingProgress){
+      hideReaderPreview(80);
+    }
+  });
+
+  readerProgress.addEventListener('keydown', (event) => {
+    if(!pageFlip) return;
+
+    const current = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+
+    if(event.key === 'ArrowRight'){
+      event.preventDefault();
+      goToPageIndex(Math.min(total - 1, current + 1));
+    }
+
+    if(event.key === 'ArrowLeft'){
+      event.preventDefault();
+      goToPageIndex(Math.max(0, current - 1));
+    }
+
+    if(event.key === 'Home'){
+      event.preventDefault();
+      goToPageIndex(0);
+    }
+
+    if(event.key === 'End'){
+      event.preventDefault();
+      goToPageIndex(total - 1);
+    }
+  });
+}
     window.addEventListener('load',()=>initReader(0));
   </script>
 </body>
