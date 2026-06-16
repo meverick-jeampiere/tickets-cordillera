@@ -9890,14 +9890,15 @@ mask:
   font-size:clamp(18px,1.25vw,25px);
   line-height:1.08;
   font-weight:600;
-  margin:0 0 4.2%;
+  font-style:italic;
+  margin:0 0 2.2%;
 }
 
 .musho-line{
   width:54px;
   height:2px;
-  background:#5aa06a;
-  box-shadow:0 0 16px rgba(90,160,106,.12);
+  background:rgba(229,184,118,.82);
+  box-shadow:0 0 16px rgba(229,184,118,.16);
   margin:0 0 5%;
 }
 
@@ -10476,6 +10477,873 @@ mask:
 .musho-green-card .musho-flag-icon .flag-cloth{
   display:none;
 }
+/* =========================================================
+   PÁGINA NUEVA — BIBLIOGRAFÍA FINAL
+   XXV. Cómo se mueve una montaña de hielo
+   Estilo azul hielo / liquid glass
+   ========================================================= */
+
+.glacier-motion-page{
+  background:
+    radial-gradient(circle at 8% 0%, rgba(215,242,255,.30), transparent 28%),
+    radial-gradient(circle at 42% 0%, rgba(155,210,238,.16), transparent 38%),
+    radial-gradient(circle at 88% 6%, rgba(125,190,225,.18), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(1,12,24,.70), transparent 62%),
+    linear-gradient(135deg,#2f6f91 0%, #1d5576 34%, #123d5b 62%, #08263e 100%);
+}
+
+.glacier-motion-page::after{
+  background-image:radial-gradient(rgba(215,238,250,.045) .56px, transparent .56px);
+  background-size:13px 13px;
+  opacity:.16;
+  mix-blend-mode:screen;
+}
+
+.glacier-motion-layout{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:.44fr .56fr;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(225,248,255,.17), transparent 30%),
+    radial-gradient(circle at 42% 0%, rgba(170,220,245,.14), transparent 42%),
+    radial-gradient(circle at 78% 6%, rgba(135,200,235,.13), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(0,12,24,.38), transparent 62%),
+    linear-gradient(135deg,#2b6687 0%, #1b5577 35%, #104060 66%, #082940 100%);
+}
+
+/* Columna izquierda */
+.glacier-motion-text{
+  position:relative;
+  padding:7.4% 7.8% 6.6%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 10% 6%, rgba(238,252,255,.16), transparent 24%),
+    radial-gradient(circle at 86% 8%, rgba(190,232,252,.11), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(215,242,255,.12), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(1,14,26,.38), transparent 60%),
+    linear-gradient(145deg, #357493 0%, #286789 30%, #1a5073 60%, #0c324d 100%);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(238,252,255,.34),
+    inset 0 2px 0 rgba(255,255,255,.25),
+    inset 0 -48px 92px rgba(2,14,24,.27),
+    inset 44px 0 90px rgba(200,236,252,.06),
+    inset -44px 0 90px rgba(1,13,24,.16),
+    0 26px 76px rgba(2,14,24,.32);
+}
+
+.glacier-motion-text::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.36);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), transparent 22%, transparent 78%, rgba(255,255,255,.035)),
+    linear-gradient(90deg, rgba(255,255,255,.075), transparent 16%, transparent 84%, rgba(255,255,255,.045));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.055),
+    inset 0 0 42px rgba(205,237,255,.13),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -26px 48px rgba(2,14,24,.16),
+    0 0 20px rgba(210,238,252,.14),
+    0 0 52px rgba(160,210,238,.08);
+  pointer-events:none;
+}
+
+.glacier-motion-text::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), transparent 20%, transparent 78%, rgba(255,255,255,.045)),
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 16%, transparent 84%, rgba(255,255,255,.045)),
+    radial-gradient(circle at 10% 7%, rgba(255,255,255,.11), transparent 22%),
+    radial-gradient(circle at 50% 0%, rgba(215,242,255,.09), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.20), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.58;
+}
+
+.glacier-motion-kicker,
+.glacier-motion-text h1,
+.glacier-motion-subtitle,
+.glacier-motion-locations,
+.glacier-motion-line,
+.glacier-motion-bullets,
+.glacier-motion-note{
+  position:relative;
+  z-index:1;
+}
+
+.glacier-motion-kicker{
+  font-family:Inter, sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.4%;
+}
+
+.glacier-motion-text h1{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(34px,3.65vw,70px);
+  line-height:.9;
+  letter-spacing:-.045em;
+  color:rgba(246,250,252,.95);
+  margin:0 0 2.2%;
+  font-weight:700;
+}
+
+.glacier-motion-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.90);
+  font-size:clamp(19px,1.4vw,28px);
+  line-height:1.08;
+  font-style:italic;
+  font-weight:600;
+  margin:0 0 3.2%;
+}
+
+.glacier-motion-locations{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(232,244,250,.86);
+  font-size:clamp(15px,1.02vw,20px);
+  line-height:1.12;
+  font-style:italic;
+  font-weight:600;
+  margin:0 0 4.2%;
+}
+
+.glacier-motion-line{
+  width:56px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  box-shadow:0 0 16px rgba(229,184,118,.16);
+  margin:0 0 4.6%;
+}
+
+.glacier-motion-bullets{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 6%;
+  margin:0 0 4.4%;
+  padding:0;
+  list-style:none;
+}
+
+.glacier-motion-bullets li{
+  position:relative;
+  padding-left:18px;
+  margin:0 0 12px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(17px,1.18vw,24px);
+  line-height:1.06;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+}
+
+.glacier-motion-bullets li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:rgba(229,184,118,.88);
+  font-style:normal;
+}
+
+.glacier-motion-note{
+  margin-top:1%;
+  padding:4.2% 5.2%;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1vw,20px);
+  line-height:1.14;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(230,248,255,.21),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -18px 36px rgba(2,14,24,.12),
+    0 0 18px rgba(190,230,250,.10),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+/* Columna derecha */
+.glacier-motion-visual{
+  position:relative;
+  padding:5.3%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 12% 7%, rgba(238,252,255,.13), transparent 28%),
+    radial-gradient(circle at 70% 0%, rgba(165,220,248,.12), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(0,12,24,.35), transparent 60%),
+    linear-gradient(145deg, #316f91 0%, #245f82 34%, #174967 65%, #0b2f49 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(235,250,255,.20),
+    inset 0 0 0 1px rgba(235,250,255,.16),
+    inset 0 -42px 84px rgba(2,14,24,.22);
+}
+
+.glacier-motion-visual::before{
+  content:"";
+  position:absolute;
+  inset:2.1%;
+  border-radius:21px;
+  border:1px solid rgba(238,250,255,.28);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.065), transparent 24%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.052), transparent 16%, transparent 84%, rgba(255,255,255,.040));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.045),
+    inset 0 0 38px rgba(205,237,255,.11),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -24px 46px rgba(2,14,24,.14),
+    0 0 18px rgba(210,238,252,.10),
+    0 0 46px rgba(160,210,238,.055);
+  pointer-events:none;
+  z-index:0;
+}
+
+.glacier-motion-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.070), transparent 22%, transparent 78%, rgba(255,255,255,.032)),
+    linear-gradient(90deg, rgba(255,255,255,.045), transparent 18%, transparent 84%, rgba(255,255,255,.032)),
+    radial-gradient(circle at 84% 8%, rgba(255,255,255,.08), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(0,10,20,.18), transparent 42%);
+  mix-blend-mode:screen;
+  opacity:.52;
+}
+
+.glacier-motion-board{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:3.2%;
+}
+
+.glacier-motion-main{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.24)),
+    url('dinamica-glaciar-main.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 32px 76px rgba(2,14,24,.36),
+    0 0 0 1px rgba(235,250,255,.34),
+    0 0 28px rgba(180,226,250,.13),
+    inset 0 0 0 1px rgba(255,255,255,.17),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -32px 64px rgba(2,14,24,.18),
+    inset 0 0 48px rgba(180,226,250,.08);
+}
+
+.glacier-motion-main::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(238,252,255,.14), transparent 26%),
+    linear-gradient(180deg, transparent 48%, rgba(0,0,0,.42));
+  pointer-events:none;
+}
+
+.glacier-motion-caption{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:6.2%;
+  z-index:2;
+  color:#fff;
+}
+
+.glacier-motion-caption strong{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(25px,2vw,42px);
+  line-height:1;
+  font-style:italic;
+  font-weight:700;
+  margin-bottom:8px;
+  color:rgba(250,253,255,.94);
+}
+
+.glacier-motion-caption span{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.6vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(238,244,248,.84);
+  opacity:.86;
+}
+
+.glacier-motion-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:3%;
+}
+
+.glacier-motion-card{
+  position:relative;
+  min-height:142px;
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.10), rgba(120,178,215,.04)),
+    rgba(255,255,255,.015);
+  border:1px solid rgba(230,248,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.glacier-motion-card.image-a{
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.04), rgba(2,14,24,.20)),
+    url('dinamica-glaciar-1.jpg') center/cover no-repeat,
+    #103852;
+}
+
+.glacier-motion-card.image-b{
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.04), rgba(2,14,24,.20)),
+    url('dinamica-glaciar-2.jpg') center/cover no-repeat,
+    #103852;
+}
+
+.glacier-motion-card.text{
+  padding:8.5% 9%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.glacier-motion-card.text strong{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.56vw,11px);
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:8px;
+}
+
+.glacier-motion-card.text span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.95vw,18px);
+  line-height:1.08;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .glacier-motion-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr;
+  }
+
+  .glacier-motion-text{
+    padding:12% 8% 5%;
+    justify-content:center;
+  }
+
+  .glacier-motion-text h1{
+    font-size:clamp(34px, 9.2vw, 58px);
+  }
+
+  .glacier-motion-subtitle{
+    font-size:clamp(17px, 4.6vw, 24px);
+  }
+
+  .glacier-motion-locations{
+    font-size:clamp(14px, 3.8vw, 18px);
+  }
+
+  .glacier-motion-bullets{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .glacier-motion-bullets li{
+    font-size:clamp(17px, 4.6vw, 22px);
+  }
+
+  .glacier-motion-note{
+    font-size:clamp(14px, 3.7vw, 20px);
+    padding:4.5% 5%;
+  }
+
+  .glacier-motion-visual{
+    padding:4% 7% 8%;
+  }
+
+  .glacier-motion-main{
+    border-radius:22px;
+    min-height:260px;
+  }
+
+  .glacier-motion-bottom{
+    grid-template-columns:1fr;
+  }
+
+  .glacier-motion-card{
+    min-height:160px;
+    border-radius:18px;
+  }
+
+  .glacier-motion-card.text span{
+    font-size:clamp(14px, 3.8vw, 18px);
+  }
+}
+/* =========================================================
+   PÁGINA XXV — CÓMO SE MUEVE UNA MONTAÑA DE HIELO
+   Mejora solo del lado izquierdo
+   ========================================================= */
+
+.glacier-motion-kicker,
+.glacier-motion-subtitle,
+.glacier-motion-location,
+.glacier-motion-line,
+.glacier-motion-lead,
+.glacier-motion-grid,
+.glacier-motion-note{
+  position:relative;
+  z-index:1;
+}
+
+.glacier-motion-kicker{
+  font-family:Inter, sans-serif;
+  color:rgba(232,239,232,.86);
+  font-size:clamp(8px,.62vw,12px);
+  line-height:1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:3.4%;
+}
+
+.glacier-motion-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.92);
+  font-size:clamp(18px,1.34vw,28px);
+  line-height:1.06;
+  font-style:italic;
+  font-weight:600;
+  margin:0 0 1.4%;
+}
+
+.glacier-motion-location{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(232,240,246,.82);
+  font-size:clamp(14px,1vw,20px);
+  line-height:1.1;
+  font-style:italic;
+  font-weight:600;
+  margin:0 0 3.2%;
+}
+
+.glacier-motion-line{
+  width:58px;
+  height:2px;
+  background:rgba(229,184,118,.82);
+  box-shadow:0 0 16px rgba(229,184,118,.16);
+  margin:0 0 4.2%;
+}
+
+.glacier-motion-lead{
+  max-width:92%;
+  margin:0 0 4.4%;
+  padding:0;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(16px,1.02vw,20px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+}
+
+.glacier-motion-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:94%;
+  margin:0 0 4.8%;
+}
+
+.glacier-motion-card{
+  padding:18px 18px 16px;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.10), rgba(120,178,215,.04)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 14px 32px rgba(2,14,24,.12);
+}
+
+.glacier-motion-card strong{
+  display:block;
+  margin-bottom:10px;
+  font-family:Inter, sans-serif;
+  font-size:clamp(10px,.68vw,13px);
+  line-height:1.1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:rgba(235,248,255,.88);
+}
+
+.glacier-motion-card ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.glacier-motion-card li{
+  position:relative;
+  padding-left:16px;
+  margin:0 0 9px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,20px);
+  line-height:1.08;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.94);
+}
+
+.glacier-motion-card li:last-child{
+  margin-bottom:0;
+}
+
+.glacier-motion-card li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:rgba(229,184,118,.88);
+  font-style:normal;
+}
+
+.glacier-motion-note{
+  max-width:94%;
+  padding:18px 20px 18px 22px;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1vw,20px);
+  line-height:1.14;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(230,248,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 14px 32px rgba(2,14,24,.14);
+}
+
+.glacier-motion-note strong{
+  color:rgba(255,255,255,.98);
+  font-style:normal;
+  font-weight:700;
+  margin-right:.2em;
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .glacier-motion-subtitle{
+    font-size:clamp(18px,4.8vw,26px);
+  }
+
+  .glacier-motion-location{
+    font-size:clamp(14px,3.7vw,18px);
+  }
+
+  .glacier-motion-lead{
+    max-width:100%;
+    font-size:clamp(14px,3.7vw,20px);
+    margin-bottom:5%;
+  }
+
+  .glacier-motion-grid{
+    grid-template-columns:1fr;
+    max-width:100%;
+    gap:12px;
+    margin-bottom:5%;
+  }
+
+  .glacier-motion-card li{
+    font-size:clamp(15px,4.1vw,20px);
+  }
+
+  .glacier-motion-note{
+    max-width:100%;
+    font-size:clamp(14px,3.7vw,20px);
+  }
+}
+/* =========================================================
+   PÁGINA XXVI — BALANCE DE ENERGÍA
+   Glaciología visual / azul hielo / liquid glass
+   ========================================================= */
+
+.energy-balance-text .ice-science-kicker,
+.energy-balance-subtitle,
+.energy-balance-lead,
+.energy-balance-grid,
+.energy-balance-note{
+  position:relative;
+  z-index:1;
+}
+
+.energy-balance-subtitle{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  color:rgba(238,228,204,.92);
+  font-size:clamp(18px,1.34vw,28px);
+  line-height:1.08;
+  font-style:italic;
+  font-weight:600;
+  margin:0 0 3.2%;
+}
+
+.energy-balance-lead{
+  max-width:92%;
+  margin:0 0 4.4%;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(16px,1.02vw,20px);
+  line-height:1.18;
+  font-weight:600;
+  color:rgba(244,249,252,.90);
+}
+
+.energy-balance-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:95%;
+  margin:0 0 4.8%;
+}
+
+.energy-balance-card{
+  padding:18px 18px 16px;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.10), rgba(120,178,215,.04)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 14px 32px rgba(2,14,24,.12);
+}
+
+.energy-balance-card strong{
+  display:block;
+  margin-bottom:10px;
+  font-family:Inter, sans-serif;
+  font-size:clamp(10px,.68vw,13px);
+  line-height:1.1;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:rgba(235,248,255,.88);
+}
+
+.energy-balance-card ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.energy-balance-card li{
+  position:relative;
+  padding-left:16px;
+  margin:0 0 9px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,.98vw,20px);
+  line-height:1.08;
+  font-style:italic;
+  font-weight:600;
+  color:rgba(250,253,255,.94);
+}
+
+.energy-balance-card li:last-child{
+  margin-bottom:0;
+}
+
+.energy-balance-card li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:rgba(229,184,118,.88);
+  font-style:normal;
+}
+
+.energy-balance-note{
+  max-width:95%;
+  padding:18px 20px 18px 22px;
+  border-left:3px solid rgba(235,190,120,.82);
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.105), rgba(120,178,215,.042)),
+    rgba(255,255,255,.016);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(15px,1vw,20px);
+  line-height:1.14;
+  font-weight:600;
+  color:rgba(250,253,255,.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(230,248,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 14px 32px rgba(2,14,24,.14);
+}
+
+.energy-balance-note strong{
+  color:rgba(255,255,255,.98);
+  font-style:normal;
+  font-weight:700;
+  margin-right:.2em;
+}
+
+/* Lado derecho */
+.energy-balance-visual{
+  position:relative;
+}
+
+.energy-balance-board{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:3.5%;
+}
+
+.energy-balance-main{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.22)),
+    url('balance-energia-glaciar.jpg') center/cover no-repeat,
+    #082940;
+  box-shadow:
+    0 32px 76px rgba(2,14,24,.36),
+    0 0 0 1px rgba(235,250,255,.34),
+    inset 0 0 0 1px rgba(255,255,255,.17);
+}
+
+.energy-balance-main::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(238,252,255,.14), transparent 26%),
+    linear-gradient(180deg, transparent 48%, rgba(0,0,0,.42));
+  pointer-events:none;
+}
+
+.energy-balance-steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3.5%;
+}
+
+.energy-step{
+  padding:6.5%;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(220,242,255,.11), rgba(120,178,215,.045)),
+    rgba(255,255,255,.018);
+  border:1px solid rgba(230,248,255,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 32px rgba(2,14,24,.16);
+}
+
+.energy-step strong{
+  display:block;
+  font-family:Inter, sans-serif;
+  font-size:clamp(8px,.58vw,11px);
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(235,248,255,.88);
+  margin-bottom:5px;
+}
+
+.energy-step span{
+  display:block;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(13px,.95vw,18px);
+  line-height:1.1;
+  font-weight:600;
+  color:rgba(250,253,255,.90);
+}
+
+/* móvil */
+@media (orientation: portrait){
+  .energy-balance-subtitle{
+    font-size:clamp(18px,4.8vw,26px);
+    margin-bottom:4%;
+  }
+
+  .energy-balance-lead{
+    max-width:100%;
+    font-size:clamp(14px,3.7vw,20px);
+    margin-bottom:5%;
+  }
+
+  .energy-balance-grid{
+    grid-template-columns:1fr;
+    max-width:100%;
+    gap:12px;
+    margin-bottom:5%;
+  }
+
+  .energy-balance-card li{
+    font-size:clamp(15px,4.1vw,20px);
+  }
+
+  .energy-balance-note{
+    max-width:100%;
+    font-size:clamp(14px,3.7vw,20px);
+  }
+
+  .energy-balance-main{
+    border-radius:22px;
+  }
+
+  .energy-balance-steps{
+    grid-template-columns:1fr;
+  }
+}
   </style>
 </head>
 <body>
@@ -10634,7 +11502,7 @@ mask:
         </p>
 
         <p class="opened-quote">
-         “Lo que se extrajo del Huascarán no pertenece solo al pasado, sino también al futuro de la humanidad.”
+         “El primer contacto con la Memoria del Huascarán.”
         </p>
       </aside>
 
@@ -12636,7 +13504,7 @@ mask:
 <button class="sixth-tech-card musho-green-card" type="button" data-go-key="voz-poblacion-musho">
   <div class="sixth-tech-icon musho-flag-icon">🏳️</div>
   <div class="sixth-tech-content">
-    <strong>XVII. Oyendo la voz local del pueblo de Musho</strong>
+    <strong>XIX. Oyendo la voz local del pueblo de Musho</strong>
     <span>Desconfianza, diálogo y reconciliación alrededor del Huascarán.</span>
   </div>
 </button>
@@ -12644,16 +13512,16 @@ mask:
 <div class="seventh-guide-item">
   <div class="seventh-guide-number">22</div>
   <div>
-    <h2>Mostrando la memoria</h2>
+    <h2>El primer contacto de la población local con la memoria</h2>
     <p>
-      Abriendo las cajas y mostrándoles tubos a autoridades y periodistas. El asombro de ver la memoria del Huascarán. El Huascarán pasa de ser mito a hablar en primera persona.
+      Abriendo las cajas y mostrándoles tubos a una autoridad y un periodista. El asombro de ver la memoria del Huascarán. El Huascarán pasa de ser mito a hablar en primera persona.
     </p>
   </div>
 </div>
 <button class="sixth-tech-card" type="button" data-go-key="glaciares-agua-sociedad">
   <div class="sixth-tech-icon">❄</div>
   <div class="sixth-tech-content">
-    <strong>XVIII. El Huascarán y la gente del Callejón de Huaylas</strong>
+    <strong>XX. El Huascarán y la gente del Callejón de Huaylas</strong>
     <span>Glaciares, agua y sociedad.</span>
   </div>
 </button>
@@ -12780,9 +13648,9 @@ mask:
           </div>
 
           <div class="musho-footer-note">
-            <strong>El Huascarán también habla a través del hielo</strong>
+            <strong>El primer contacto con la Memoria del Huascarán</strong>
             <span>
-              Lo que para muchos era sospecha, hoy es conocimiento. Los núcleos de hielo guardan la memoria climática de nuestro apu y nos ayudan a comprender su futuro. La ciencia y la comunidad pueden caminar juntas, con respeto y confianza.
+             Esta expedición transformó nuestra visión del Huascarán. Y este libro busca probar que la ciencia y la comunidad pueden caminar juntas, con respeto y confianza.
             </span>
           </div>
 
@@ -12932,7 +13800,7 @@ mask:
           <button class="sixth-tech-card" type="button" data-go-key="tecnicas-guiado-cordillera-blanca">
             <div class="sixth-tech-icon">❄</div>
             <div class="sixth-tech-content">
-              <strong>XVIII. Las técnicas de guiado en la Cordillera Blanca</strong>
+              <strong>XXI. Las técnicas de guiado en la Cordillera Blanca</strong>
               <span>Félix Vicencio.</span>
             </div>
           </button>
@@ -12950,7 +13818,7 @@ mask:
           <button class="sixth-tech-card" type="button" data-go-key="glaciologia-tropical">
             <div class="sixth-tech-icon">❄</div>
             <div class="sixth-tech-content">
-              <strong>XIX. Características de la glaciología tropical</strong>
+              <strong>XXII. Características de la glaciología tropical</strong>
               <span>Pensar el hielo desde los Andes tropicales.</span>
             </div>
           </button>
@@ -12976,7 +13844,7 @@ mask:
     <div class="ice-science-layout v14">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XVIII · Glaciología visual</div>
+        <div class="ice-science-kicker">XXI · Glaciología visual</div>
 
         <h1>Las técnicas de guiado en la Cordillera Blanca</h1>
 
@@ -13063,7 +13931,7 @@ mask:
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XIX · Glaciología visual</div>
+        <div class="ice-science-kicker">XXII · Glaciología visual</div>
 
         <h1>Características de la glaciología tropical</h1>
 
@@ -13197,7 +14065,7 @@ mask:
           <button class="sixth-tech-card" type="button" data-go-key="huellas-humanas-nieve">
             <div class="sixth-tech-icon">❄</div>
             <div class="sixth-tech-content">
-              <strong>XX. Huellas humanas sobre la nieve</strong>
+              <strong>XXIII. Huellas humanas sobre la nieve</strong>
               <span>La señal humana también puede quedar escrita en el hielo.</span>
             </div>
           </button>
@@ -13241,7 +14109,7 @@ mask:
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XX · Glaciología visual</div>
+        <div class="ice-science-kicker">XXIII · Glaciología visual</div>
 
         <h1>Huellas humanas sobre la nieve</h1>
 
@@ -13341,7 +14209,7 @@ mask:
     <button class="tenth-tech-card" type="button" data-go-key="proyeccion-perdida-glaciar">
       <div class="tenth-tech-icon">❄</div>
       <div class="tenth-tech-content">
-        <strong>XXI. Proyección de la pérdida glaciar</strong>
+        <strong>XXIV. Proyección de la pérdida glaciar</strong>
         <span>El futuro de la Cordillera Blanca</span>
       </div>
     </button>
@@ -13358,8 +14226,8 @@ mask:
           <strong>Recordando:</strong> 
 <br>Las caminatas.<br>
           Su apoyo.<br>
-          El orgullo.<br>
-          El vacío.
+          El orgullo.<br><br>
+          <strong>El vacío.</strong>
         </p>
       </div>
     </div>
@@ -13401,7 +14269,7 @@ La invitación de Lonnie a China.<br>
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
-        <div class="ice-science-kicker">XXI · Glaciología visual</div>
+        <div class="ice-science-kicker">XXIV · Glaciología visual</div>
 
         <h1>Proyección de la pérdida glaciar</h1>
 
@@ -13506,7 +14374,10 @@ La invitación de Lonnie a China.<br>
       <span class="epilogue-event-title">“La Memoria del Huascarán”</span>
       <span>Frente a 600 personas</span>
       <span>Auditorio Huáscar y Huandy</span>
-      <span>Yungay: 56 años del sismo-alud de 1970</span>
+
+      <span>56 años del sismo-alud de 1970</span>
+<br><br>
+<span>Yungay, 29 de Mayo de 2026</span>
     </div>
   </div>
 </div>
@@ -13518,6 +14389,344 @@ La invitación de Lonnie a China.<br>
   </section>
 </template>
 
+<!-- PÁGINA NUEVA FINAL — BIBLIOGRAFÍA / XXV -->
+<template data-page>
+  <section class="page glacier-motion-page" data-page-key="como-se-mueve-una-montana-de-hielo">
+    <div class="glacier-motion-layout">
+
+      <aside class="glacier-motion-text">
+<div class="glacier-motion-kicker">XXV · BIBLIOGRAFÍA NUEVA · GLACIOLOGÍA VISUAL</div>
+
+<h1>Cómo se mueve una<br>montaña de hielo</h1>
+
+<p class="glacier-motion-subtitle">Dinámica glaciar</p>
+
+<p class="glacier-motion-location">Yanapaccha, Shallap, Vallunaraju</p>
+
+<div class="glacier-motion-line"></div>
+
+<div class="glacier-motion-lead">
+  Este capítulo presenta al glaciar no como una masa inmóvil, sino como un sistema físico en movimiento, sensible a la pendiente, al espesor, a la fricción basal y al tiempo de respuesta del hielo.
+</div>
+
+<div class="glacier-motion-grid">
+  <div class="glacier-motion-card">
+    <strong>Procesos de flujo</strong>
+    <ul>
+      <li>movimientos del glaciar</li>
+      <li>esfuerzo y deformación</li>
+      <li>deslizamiento basal</li>
+      <li>ley de flujo</li>
+    </ul>
+  </div>
+
+  <div class="glacier-motion-card">
+    <strong>Respuesta dinámica</strong>
+    <ul>
+      <li>velocidad superficial</li>
+      <li>espesor, geometría y respuesta dinámica</li>
+      <li>tiempos de respuesta del glaciar</li>
+      <li>estabilidad e inestabilidad</li>
+    </ul>
+  </div>
+</div>
+
+<div class="glacier-motion-note">
+  <strong>Idea central.</strong>
+  Este capítulo evita que el glaciar aparezca como una “masa pasiva” y lo muestra como un cuerpo mecánico.
+</div>
+      </aside>
+
+      <aside class="glacier-motion-visual">
+        <div class="glacier-motion-board">
+
+          <div class="glacier-motion-main">
+            <div class="glacier-motion-caption">
+              <strong>Dinámica del hielo en movimiento</strong>
+              <span>flujo · deformación · velocidad · geometría · respuesta glaciar</span>
+            </div>
+          </div>
+
+          <div class="glacier-motion-bottom">
+            <div class="glacier-motion-card image-a"></div>
+
+            <div class="glacier-motion-card text">
+              <strong>Idea central</strong>
+              <span>
+                Un glaciar se mueve porque el hielo se deforma, responde a la gravedad, interactúa con su base y cambia según su espesor, pendiente y geometría.
+              </span>
+            </div>
+
+            <div class="glacier-motion-card image-b"></div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+
+
+
+<template data-page>
+  <section class="page ice-science-page" data-page-key="balance-energia-glaciar">
+    <div class="ice-science-layout v13">
+
+      <aside class="ice-science-text energy-balance-text">
+        <div class="ice-science-kicker">XXVI · BIBLIOGRAFÍA NUEVA · GLACIOLOGÍA VISUAL</div>
+
+        <h1>Balance de energía</h1>
+
+        <p class="energy-balance-subtitle">
+          El caso de Yanamarey, Shallap, Artesonraju, Pastoruri
+        </p>
+
+        <div class="ice-science-line"></div>
+
+        <p class="energy-balance-lead">
+          El derretimiento glaciar no se explica solo con la temperatura. Para entender cómo un glaciar gana o pierde energía, hay que observar los intercambios radiativos, turbulentos y conductivos que actúan sobre su superficie.
+        </p>
+
+        <div class="energy-balance-grid">
+          <div class="energy-balance-card">
+            <strong>Entradas y flujos principales</strong>
+            <ul>
+              <li>radiación de onda corta y larga</li>
+              <li>albedo</li>
+              <li>flujos turbulentos</li>
+              <li>calor sensible y latente</li>
+              <li>lluvia sobre nieve</li>
+            </ul>
+          </div>
+
+          <div class="energy-balance-card">
+            <strong>Procesos de respuesta</strong>
+            <ul>
+              <li>sublimación</li>
+              <li>conducción en nieve/firn</li>
+              <li>por qué los glaciares tropicales tienen comportamientos distintos de muchos glaciares templados</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="energy-balance-note">
+          <strong>Importancia andina.</strong>
+          Este bloque es especialmente importante para el mundo andino tropical. Estudios recientes sobre glaciares andinos muestran la necesidad de resolver bien el balance de energía y su fuerte vínculo con la estacionalidad húmeda/seca.
+        </div>
+      </aside>
+
+      <aside class="ice-science-visual energy-balance-visual">
+        <div class="energy-balance-board">
+
+          <div class="energy-balance-main">
+            <div class="ice-science-caption">
+              <strong>Balance de energía glaciar</strong>
+              <span>radiación · albedo · sublimación · nieve · firn · estacionalidad</span>
+            </div>
+          </div>
+
+          <div class="energy-balance-steps">
+            <div class="energy-step">
+              <strong>01 · Radiación</strong>
+              <span>La energía solar y térmica controla gran parte del intercambio superficial.</span>
+            </div>
+
+            <div class="energy-step">
+              <strong>02 · Superficie</strong>
+              <span>El albedo, la nieve, el firn y la humedad modifican la absorción y la pérdida de energía.</span>
+            </div>
+
+            <div class="energy-step">
+              <strong>03 · Respuesta</strong>
+              <span>Fusión, sublimación y conducción definen cómo responde el glaciar tropical.</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<template data-page>
+  <section class="page ice-science-page" data-page-key="hidrologia-glaciar-santa">
+    <div class="ice-science-layout v13">
+
+      <aside class="ice-science-text energy-balance-text">
+        <div class="ice-science-kicker">XXVII · GLACIOLOGÍA VISUAL</div>
+
+        <h1>Hidrología glaciar</h1>
+
+        <p class="energy-balance-subtitle">
+          Del Huascarán al río Santa
+        </p>
+
+        <div class="ice-science-line"></div>
+
+        <p class="energy-balance-lead">
+          Este tema es indispensable para armonizar el libro con la Cordillera Blanca. El glaciar no solo conserva memoria climática: también regula, transforma y redistribuye agua a distintas escalas temporales dentro de la cuenca.
+        </p>
+
+        <div class="energy-balance-grid">
+          <div class="energy-balance-card">
+            <strong>Procesos hidrológicos clave</strong>
+            <ul>
+              <li>escorrentía supraglacial, englacial y subglacial</li>
+              <li>almacenamiento temporal del agua</li>
+              <li>hidrogramas</li>
+              <li>rol regulador del glaciar</li>
+            </ul>
+          </div>
+
+          <div class="energy-balance-card">
+            <strong>Transiciones y cambio futuro</strong>
+            <ul>
+              <li>diferencias entre aporte anual y aporte en estación seca</li>
+              <li>punto de “peak water” glaciar</li>
+              <li>transición desde mayor aporte temporal a disminución futura del caudal</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="energy-balance-note">
+          <strong>Cordillera Blanca.</strong>
+          En la Cordillera Blanca ya se ha documentado que varias subcuencas probablemente cruzaron un punto crítico y muestran disminución del caudal en estación seca; el efecto es particularmente importante en la cuenca del Santa.
+        </div>
+      </aside>
+
+      <aside class="ice-science-visual energy-balance-visual">
+        <div class="energy-balance-board">
+
+          <div class="energy-balance-main" style="background:
+            linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.22)),
+            url('hidrologia-glaciar-santa.jpg') center/cover no-repeat,
+            #082940;">
+            <div class="ice-science-caption">
+              <strong>Del glaciar a la cuenca</strong>
+              <span>escorrentía · almacenamiento · caudal · estación seca · peak water</span>
+            </div>
+          </div>
+
+          <div class="energy-balance-steps">
+            <div class="energy-step">
+              <strong>01 · APORTE</strong>
+              <span>El glaciar alimenta la cuenca mediante flujos supraglaciales, englaciales y subglaciales.</span>
+            </div>
+
+            <div class="energy-step">
+              <strong>02 · REGULACIÓN</strong>
+              <span>Parte del agua se almacena temporalmente y modula el caudal, sobre todo en estación seca.</span>
+            </div>
+
+            <div class="energy-step">
+              <strong>03 · TRANSICIÓN</strong>
+              <span>Tras el “peak water”, el aporte puede disminuir y afectar el futuro hídrico del Santa.</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
+<!-- PÁGINA FINAL: Modelamiento glaciar -->
+<template data-page>
+  <section class="page ice-science-page" data-page-key="modelamiento-glaciar">
+    <div class="ice-science-layout v13">
+
+      <aside class="ice-science-text">
+        <div class="ice-science-kicker">XXVIII · MODELAMIENTO GLACIAR</div>
+
+        <h1>Modelamiento glaciar</h1>
+
+        <p class="ice-science-subtitle">
+          Del hielo observado al hielo simulado
+        </p>
+
+        <div class="ice-science-line"></div>
+
+        <p>
+          Modelar un glaciar es construir una representación dinámica de su comportamiento y de los riesgos que puede generar. Integra topografía, clima, masa de hielo, flujo glaciar, lagunas, pendientes y aluviones para explorar escenarios y anticipar el futuro.
+        </p>
+
+        <div class="ice-concept-grid">
+          <div class="ice-concept">
+            <strong>De la montaña real al gemelo digital</strong>
+            <span>
+              drones y fotogrametría<br>
+              imágenes satelitales y radar<br>
+              modelos digitales de elevación<br>
+              GNSS y estaciones automáticas<br>
+              series temporales y datos en campo
+            </span>
+          </div>
+
+          <div class="ice-concept">
+            <strong>Simulación y escenarios</strong>
+            <span>
+              flujo y dinámica del hielo<br>
+              crecimiento de lagunas<br>
+              vaciamiento y desbordes<br>
+              aluviones y trayectorias<br>
+              áreas de impacto e inundación
+            </span>
+          </div>
+        </div>
+
+        <div class="ice-concept-grid" style="grid-template-columns:1fr; margin-top:-1.2%; margin-bottom:4.4%;">
+          <div class="ice-concept">
+            <strong>Herramientas en desarrollo</strong>
+            <span>
+              software de simulación numérica · SIG avanzados y análisis espacial · programación científica y modelos · visualización 3D y gemelos digitales · sistemas de alerta y apoyo a decisiones
+            </span>
+          </div>
+        </div>
+
+        <div class="ice-science-note">
+          El modelamiento glaciar se desarrolla en la Cordillera Blanca para reducir la incertidumbre, anticipar escenarios y fortalecer la gestión del riesgo. Ciencia, tecnología y territorio trabajan juntos para proteger vidas y construir un futuro más resiliente.
+        </div>
+      </aside>
+
+      <aside class="ice-science-visual">
+        <div class="cordillera-origin-grid">
+
+          <div class="cordillera-origin-card" style="
+            background:
+              linear-gradient(180deg, rgba(205,238,255,.10), rgba(2,14,24,.22)),
+              url('modelamiento-glaciar.jpg') center/cover no-repeat,
+              #082940;
+          ">
+            <div class="ice-science-caption">
+              <strong>Del modelo al territorio</strong>
+              <span>datos · modelos · escenarios · decisiones · acción temprana</span>
+            </div>
+          </div>
+
+          <div class="cordillera-origin-steps">
+            <div class="origin-step">
+              <strong>01 · Datos e instrumentación</strong>
+              <span>Sensores, estaciones, drones y redes que capturan información del glaciar y su entorno.</span>
+            </div>
+
+            <div class="origin-step">
+              <strong>02 · Modelamiento</strong>
+              <span>Procesamiento, simulación y escenarios que permiten explorar posibles condiciones futuras.</span>
+            </div>
+
+            <div class="origin-step">
+              <strong>03 · Decisiones y prevención</strong>
+              <span>Resultados que se traducen en alertas, planificación y acciones para proteger a las comunidades.</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</template>
   <script>
     const bookElement = document.getElementById('book');
 
