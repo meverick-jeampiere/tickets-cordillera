@@ -11344,6 +11344,277 @@ mask:
     grid-template-columns:1fr;
   }
 }
+/* =========================================================
+   PÁGINA FINAL — CONTRAPORTADA ÉPICA
+   Usa la imagen completa del pliego como fondo
+   ========================================================= */
+
+.final-back-cover-page{
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.96), transparent 34%),
+    linear-gradient(180deg,#fffdf7,#f4eee4);
+}
+
+.final-back-cover-layout{
+  width:100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+  background:var(--paper);
+}
+
+.final-back-cover-art{
+  position:absolute;
+  inset:0;
+  background:
+    url('contraportada-final.png') center/cover no-repeat;
+}
+
+/* En móvil usa la misma imagen adaptada */
+@media (orientation: portrait){
+  .final-back-cover-art{
+    background:
+      url('contraportada-final.png') center/cover no-repeat;
+  }
+}
+/* =========================
+   PÁGINA FINAL — CIERRE ÉPICO
+   ========================= */
+
+.final-epic-page {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(178, 220, 255, 0.18), transparent 36%),
+    linear-gradient(180deg, #0f2234 0%, #081521 58%, #06111b 100%);
+}
+
+.final-epic-bg,
+.final-epic-overlay,
+.final-epic-frame {
+  position: absolute;
+  inset: 0;
+}
+
+.final-epic-bg {
+  z-index: 1;
+  background-image:
+    linear-gradient(180deg, rgba(6, 16, 27, 0.12) 0%, rgba(6, 16, 27, 0.28) 45%, rgba(4, 10, 18, 0.74) 100%),
+    url("huascaran-final.jpg");
+  background-size: cover;
+  background-position: center center;
+  filter: saturate(1.02) contrast(1.03);
+  transform: scale(1.02);
+}
+
+.final-epic-overlay {
+  z-index: 2;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 237, 196, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(7, 17, 29, 0.16) 0%, rgba(7, 17, 29, 0.24) 30%, rgba(7, 17, 29, 0.72) 100%);
+}
+
+.final-epic-frame {
+  z-index: 3;
+  padding: 20px;
+}
+
+.final-epic-frame::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border: 1.5px solid rgba(215, 180, 115, 0.42);
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px rgba(255, 237, 204, 0.05) inset,
+    0 0 36px rgba(0, 0, 0, 0.12) inset;
+  pointer-events: none;
+}
+
+.final-epic-frame::after {
+  content: "";
+  position: absolute;
+  inset: 30px;
+  border: 1px solid rgba(215, 180, 115, 0.16);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.final-epic-inner {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 54px 64px 36px;
+}
+
+.final-epic-emblem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  color: #e3bb77;
+  opacity: 0.95;
+  margin-top: 18px;
+}
+
+.final-epic-star {
+  display: none;
+}
+
+.final-epic-mountain {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  transform: translateY(10px);
+}
+
+.final-epic-copy {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+  transform: translateY(6px);
+}
+
+.final-epic-kicker {
+  margin: 0 0 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: rgba(245, 242, 236, 0.88);
+  text-transform: uppercase;
+}
+
+.final-epic-line {
+  margin: 0;
+  color: rgba(248, 245, 240, 0.96);
+  text-wrap: balance;
+}
+
+.final-epic-line-top {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.16;
+  margin-bottom: 8px;
+}
+
+.final-epic-highlight {
+  margin: 0 0 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 74px;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #e1b36b;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+}
+
+.final-epic-line-mid {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.08;
+  margin-bottom: 6px;
+}
+
+.final-epic-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 82px;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #f8f4ed;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.18);
+}
+
+.final-epic-pillars {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 0 12px;
+}
+
+.final-epic-pillar {
+  position: relative;
+  text-align: center;
+  padding: 0 18px;
+}
+
+.final-epic-pillar:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 0;
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(
+    180deg,
+    rgba(223, 188, 126, 0.04) 0%,
+    rgba(223, 188, 126, 0.48) 50%,
+    rgba(223, 188, 126, 0.04) 100%
+  );
+}
+
+.pillar-label {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #e5be7d;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pillar-sub {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: rgba(244, 239, 231, 0.88);
+  text-transform: uppercase;
+}
+
+.final-epic-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.final-epic-footer span {
+  width: 110px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(223, 188, 126, 0) 0%,
+    rgba(223, 188, 126, 0.85) 50%,
+    rgba(223, 188, 126, 0) 100%
+  );
+}
+
+.final-epic-footer p {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  color: #dcb46d;
+  text-transform: uppercase;
+}
   </style>
 </head>
 <body>
@@ -14727,6 +14998,73 @@ La invitación de Lonnie a China.<br>
     </div>
   </section>
 </template>
+  </template>
+
+  <!-- PÁGINA FINAL — CIERRE ÉPICO -->
+  <template data-page>
+    <section class="page final-epic-page">
+      <div class="final-epic-bg"></div>
+      <div class="final-epic-overlay"></div>
+
+      <div class="final-epic-frame">
+        <div class="final-epic-inner">
+          <div class="final-epic-emblem">
+            <span class="final-epic-star">✦</span>
+            <span class="final-epic-mountain">△</span>
+          </div>
+
+          <div class="final-epic-copy">
+            <p class="final-epic-kicker">
+              AHORA QUE HAS CONTEMPLADO LA ESTRUCTURA DE ESTA OBRA,
+            </p>
+
+            <p class="final-epic-line final-epic-line-top">
+              tu participación en este libro permitirá que
+            </p>
+
+            <h1 class="final-epic-highlight">
+              la expedición trascienda en el tiempo
+            </h1>
+
+            <p class="final-epic-line final-epic-line-mid">
+              y hará eterna
+            </p>
+
+            <h2 class="final-epic-title">
+              la Memoria del Huascarán.
+            </h2>
+          </div>
+
+          <div class="final-epic-pillars">
+            <div class="final-epic-pillar">
+              <span class="pillar-label">CIENCIA</span>
+              <span class="pillar-sub">CONOCEMOS</span>
+            </div>
+            <div class="final-epic-pillar">
+              <span class="pillar-label">MEMORIA</span>
+              <span class="pillar-sub">RECORDAMOS</span>
+            </div>
+            <div class="final-epic-pillar">
+              <span class="pillar-label">TERRITORIO</span>
+              <span class="pillar-sub">CUIDAMOS</span>
+            </div>
+            <div class="final-epic-pillar">
+              <span class="pillar-label">FUTURO</span>
+              <span class="pillar-sub">PROYECTAMOS</span>
+            </div>
+          </div>
+
+          <div class="final-epic-footer">
+            <span></span>
+            <p>LA MEMORIA DEL HUASCARÁN</p>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+</div>
   <script>
     const bookElement = document.getElementById('book');
 
