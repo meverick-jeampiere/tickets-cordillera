@@ -165,6 +165,18 @@
       background:var(--paper);
       filter:drop-shadow(0 22px 30px rgba(20,13,6,.22));
     }
+#book{
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#book .stf__wrapper,
+#book .stf__block,
+#book .stf__item,
+#book .stf__page{
+  touch-action: pan-y;
+}
 
     #book canvas,
     #book .stf__wrapper,
@@ -2460,26 +2472,15 @@ mask:
     0 10px 24px rgba(20,13,6,.08);
 }
 
-.reader-preview-stage{
+.reader-preview-image{
   position:absolute;
-  left:0;
-  top:0;
-  width:980px;
-  height:620px;
-  transform-origin:top left;
-  transform:scale(.214);
+  inset:0;
+  border-radius:14px;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-color:#efe6d8;
   pointer-events:none;
-}
-
-.reader-preview-stage .page{
-  width:980px !important;
-  height:620px !important;
-  margin:0 !important;
-  box-shadow:none !important;
-}
-
-.reader-preview-stage .page::after{
-  opacity:.08;
 }
 
 .reader-preview-meta{
@@ -11615,6 +11616,2233 @@ mask:
   color: #dcb46d;
   text-transform: uppercase;
 }
+/* =========================================================
+   AJUSTE RESPONSIVE PARA LAPTOPS NO MAXIMIZADAS
+   Pegar al final del CSS
+   ========================================================= */
+
+:root{
+  --compact-scale: 1;
+  --compact-pad: 1;
+  --compact-gap: 1;
+}
+
+/* Laptop horizontal con altura más limitada */
+@media (orientation: landscape) and (max-height: 980px){
+  :root{
+    --compact-scale: .94;
+    --compact-pad: .9;
+    --compact-gap: .9;
+  }
+
+  .app{
+    grid-template-rows: 14px minmax(0,1fr) 36px 16px;
+    padding: 4px 6px 0;
+    gap: 2px;
+  }
+
+  .topbar{
+    font-size: 13px;
+  }
+
+  .stage{
+    border-radius: 16px;
+    padding: 2px;
+  }
+
+  .footer-reader{
+    height: 16px;
+    font-size: 9px;
+  }
+
+  .reader-progress{
+    width: min(640px, 68vw);
+  }
+
+  .fullscreen-btn{
+    top: 20px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* Tipografía general más compacta en horizontal bajo */
+  .kicker,
+  .opened-kicker,
+  .chapter-kicker,
+  .part-guide-kicker,
+  .snow-guide-kicker,
+  .masters-guide-kicker,
+  .summit-guide-kicker,
+  .expedition-guide-kicker,
+  .sixth-guide-kicker,
+  .seventh-guide-kicker,
+  .eighth-guide-kicker,
+  .ninth-guide-kicker,
+  .tenth-guide-kicker,
+  .visual-glaciology-kicker,
+  .altitude-kicker,
+  .criosphere-kicker,
+  .ice-science-kicker,
+  .glacier-society-kicker,
+  .musho-kicker,
+  .memory-drill-kicker,
+  .ice-office-kicker,
+  .bedrock-kicker,
+  .glacier-motion-kicker{
+    font-size: clamp(7px, .52vw, 10px);
+    margin-bottom: 2.4%;
+  }
+
+  .participants-side,
+  .opened-left,
+  .chapter-types-left,
+  .part-guide-left,
+  .snow-guide-left,
+  .masters-guide-left,
+  .summit-guide-left,
+  .expedition-guide-left,
+  .sixth-guide-left,
+  .seventh-guide-left,
+  .eighth-guide-left,
+  .ninth-guide-left,
+  .tenth-guide-left,
+  .visual-glaciology-left,
+  .altitude-right,
+  .criosphere-text,
+  .ice-science-text,
+  .glacier-society-text,
+  .musho-voices-text,
+  .memory-drill-text,
+  .ice-office-text,
+  .bedrock-text,
+  .glacier-motion-text{
+    padding-top: calc(6.2% * var(--compact-pad)) !important;
+    padding-bottom: calc(5.2% * var(--compact-pad)) !important;
+  }
+
+  .part-guide-right,
+  .snow-guide-right,
+  .masters-guide-right,
+  .summit-guide-right,
+  .expedition-guide-right,
+  .sixth-guide-right,
+  .seventh-guide-right,
+  .eighth-guide-right,
+  .ninth-guide-right,
+  .tenth-guide-right,
+  .visual-glaciology-right,
+  .altitude-left,
+  .criosphere-visual,
+  .ice-science-visual,
+  .glacier-society-visual,
+  .musho-voices-visual,
+  .memory-drill-visual,
+  .ice-office-visual,
+  .bedrock-visual{
+    padding: 4.2% !important;
+  }
+
+  /* Títulos principales */
+  .participants-side h1,
+  .mobile-intro h1{
+    font-size: clamp(24px, 2.55vw, 46px);
+    margin-bottom: 2.8%;
+  }
+
+  .opened-left h1,
+  .chapter-types-left h1,
+  .part-guide-left h1,
+  .snow-guide-left h1,
+  .masters-guide-left h1,
+  .summit-guide-left h1,
+  .expedition-guide-left h1,
+  .sixth-guide-left h1,
+  .seventh-guide-left h1,
+  .ninth-guide-left h1,
+  .tenth-guide-left h1,
+  .visual-glaciology-left h1,
+  .altitude-right h1,
+  .criosphere-text h1,
+  .ice-science-text h1,
+  .glacier-society-text h1,
+  .musho-voices-text h1,
+  .memory-drill-text h1,
+  .ice-office-text h1,
+  .bedrock-text h1,
+  .glacier-motion-text h1{
+    font-size: clamp(28px, 3vw, 54px) !important;
+    line-height: .92;
+    margin-bottom: 2.8%;
+  }
+
+  .tenth-guide-left h1{
+    max-width: 82%;
+  }
+
+  /* Subtítulos y párrafos */
+  .institution,
+  .opened-subtitle,
+  .chapter-types-subtitle,
+  .part-guide-subtitle,
+  .snow-guide-subtitle,
+  .masters-guide-subtitle,
+  .summit-guide-subtitle,
+  .expedition-guide-subtitle,
+  .sixth-guide-subtitle,
+  .seventh-guide-subtitle,
+  .ninth-guide-subtitle,
+  .tenth-guide-subtitle,
+  .visual-glaciology-meta,
+  .altitude-subtitle,
+  .criosphere-subtitle,
+  .ice-science-subtitle,
+  .glacier-society-subtitle,
+  .musho-subtitle,
+  .memory-drill-subtitle,
+  .ice-office-subtitle,
+  .bedrock-subtitle,
+  .glacier-motion-subtitle,
+  .energy-balance-subtitle{
+    font-size: clamp(14px, .95vw, 20px) !important;
+    margin-bottom: 3%;
+  }
+
+  .opened-left p,
+  .chapter-type-block p,
+  .part-guide-item p,
+  .snow-guide-item p,
+  .masters-guide-item p,
+  .summit-guide-item p,
+  .expedition-guide-item p,
+  .sixth-guide-item p,
+  .seventh-guide-item p,
+  .eighth-guide-item p,
+  .ninth-guide-item p,
+  .tenth-guide-item p,
+  .visual-glaciology-left p,
+  .altitude-right p,
+  .criosphere-text p,
+  .ice-science-text p,
+  .glacier-society-text p,
+  .musho-voices-text p,
+  .memory-drill-text p,
+  .ice-office-text p,
+  .bedrock-text p,
+  .glacier-motion-lead,
+  .energy-balance-lead{
+    font-size: clamp(13px, .9vw, 17px) !important;
+    line-height: 1.14 !important;
+    margin-bottom: 3%;
+    max-width: 96%;
+  }
+
+  .opened-quote{
+    font-size: clamp(17px, 1.3vw, 24px) !important;
+    line-height: 1.02 !important;
+  }
+
+  /* Listas */
+  .expedition-list li{
+    font-size: clamp(10px, .72vw, 14px);
+    padding: 1.2% 0;
+    gap: 6px;
+  }
+
+  .chapter-guide-item,
+  .snow-guide-item,
+  .masters-guide-item,
+  .summit-guide-item,
+  .expedition-guide-item,
+  .sixth-guide-item,
+  .seventh-guide-item,
+  .eighth-guide-item,
+  .ninth-guide-item,
+  .tenth-guide-item{
+    padding-top: 1.1% !important;
+    padding-bottom: 1.25% !important;
+  }
+
+  .chapter-guide-item h2,
+  .snow-guide-item h2,
+  .masters-guide-item h2,
+  .summit-guide-item h2,
+  .expedition-guide-item h2,
+  .sixth-guide-item h2,
+  .seventh-guide-item h2,
+  .eighth-guide-item h2,
+  .ninth-guide-item h2,
+  .tenth-guide-item h2{
+    font-size: clamp(16px, 1.05vw, 22px) !important;
+    margin-bottom: 4px;
+  }
+
+  /* Tarjetas técnicas */
+  .guide-tech-card,
+  .snow-tech-card,
+  .summit-tech-card,
+  .expedition-tech-card,
+  .sixth-tech-card,
+  .tenth-tech-card{
+    min-height: 44px !important;
+    margin: .8% 0 .95% !important;
+  }
+
+  .guide-tech-card .tech-content,
+  .snow-tech-content,
+  .summit-tech-content,
+  .expedition-tech-content,
+  .sixth-tech-content,
+  .tenth-tech-content{
+    min-height: 44px !important;
+  }
+
+  .tech-content strong,
+  .snow-tech-content strong,
+  .summit-tech-content strong,
+  .expedition-tech-content strong,
+  .sixth-tech-content strong,
+  .tenth-tech-content strong{
+    font-size: clamp(15px, .98vw, 20px) !important;
+  }
+
+  .snow-tech-content span,
+  .summit-tech-content span,
+  .expedition-tech-content span,
+  .sixth-tech-content span,
+  .tenth-tech-content span{
+    font-size: clamp(10px, .68vw, 13px) !important;
+    line-height: 1.08;
+  }
+
+  .tech-icon,
+  .snow-tech-icon,
+  .summit-tech-icon,
+  .expedition-tech-icon,
+  .sixth-tech-icon,
+  .tenth-tech-icon,
+  .musho-green-card .musho-flag-icon{
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 24px !important;
+  }
+
+  /* Visuales */
+  .chapter-image-card,
+  .part-guide-image,
+  .snow-guide-image,
+  .masters-guide-image,
+  .summit-guide-image,
+  .expedition-guide-image,
+  .sixth-guide-image,
+  .seventh-guide-image,
+  .eighth-guide-image,
+  .ninth-guide-image,
+  .tenth-guide-image,
+  .huascaran-anatomy-card,
+  .criosphere-infographic-card,
+  .ice-science-card,
+  .monitoring-main-card,
+  .summit-altitude-card,
+  .risk-main-card,
+  .memory-drill-card,
+  .ice-office-main,
+  .bedrock-hero,
+  .glacier-society-main,
+  .glacier-motion-main,
+  .energy-balance-main{
+    border-radius: 22px;
+  }
+
+  /* Final épico */
+  .final-epic-inner{
+    padding: 36px 42px 24px;
+  }
+
+  .final-epic-kicker{
+    font-size: 11px;
+    letter-spacing: .24em;
+    margin-bottom: 12px;
+  }
+
+  .final-epic-line-top{
+    font-size: 28px;
+  }
+
+  .final-epic-highlight{
+    font-size: 56px;
+    margin-bottom: 4px;
+  }
+
+  .final-epic-line-mid{
+    font-size: 26px;
+    margin-bottom: 2px;
+  }
+
+  .final-epic-title{
+    font-size: 62px;
+  }
+
+  .pillar-label{
+    font-size: 13px;
+  }
+
+  .pillar-sub{
+    font-size: 11px;
+  }
+
+  .final-epic-footer p{
+    font-size: 11px;
+    letter-spacing: .24em;
+  }
+
+  .final-epic-footer span{
+    width: 72px;
+  }
+}
+
+/* Laptop todavía más baja */
+@media (orientation: landscape) and (max-height: 860px){
+  .topbar{
+    font-size: 12px;
+  }
+
+  .reader-progress{
+    width: min(560px, 64vw);
+  }
+
+  .participants-side,
+  .opened-left,
+  .chapter-types-left,
+  .part-guide-left,
+  .snow-guide-left,
+  .masters-guide-left,
+  .summit-guide-left,
+  .expedition-guide-left,
+  .sixth-guide-left,
+  .seventh-guide-left,
+  .eighth-guide-left,
+  .ninth-guide-left,
+  .tenth-guide-left,
+  .visual-glaciology-left,
+  .altitude-right,
+  .criosphere-text,
+  .ice-science-text,
+  .glacier-society-text,
+  .musho-voices-text,
+  .memory-drill-text,
+  .ice-office-text,
+  .bedrock-text,
+  .glacier-motion-text{
+    padding-top: 5.2% !important;
+    padding-bottom: 4.2% !important;
+  }
+
+  .participants-side h1,
+  .opened-left h1,
+  .chapter-types-left h1,
+  .part-guide-left h1,
+  .snow-guide-left h1,
+  .masters-guide-left h1,
+  .summit-guide-left h1,
+  .expedition-guide-left h1,
+  .sixth-guide-left h1,
+  .seventh-guide-left h1,
+  .ninth-guide-left h1,
+  .tenth-guide-left h1,
+  .visual-glaciology-left h1,
+  .altitude-right h1,
+  .criosphere-text h1,
+  .ice-science-text h1,
+  .glacier-society-text h1,
+  .musho-voices-text h1,
+  .memory-drill-text h1,
+  .ice-office-text h1,
+  .bedrock-text h1,
+  .glacier-motion-text h1{
+    font-size: clamp(24px, 2.6vw, 46px) !important;
+  }
+
+  .opened-left p,
+  .chapter-type-block p,
+  .part-guide-item p,
+  .snow-guide-item p,
+  .masters-guide-item p,
+  .summit-guide-item p,
+  .expedition-guide-item p,
+  .sixth-guide-item p,
+  .seventh-guide-item p,
+  .eighth-guide-item p,
+  .ninth-guide-item p,
+  .tenth-guide-item p,
+  .visual-glaciology-left p,
+  .altitude-right p,
+  .criosphere-text p,
+  .ice-science-text p,
+  .glacier-society-text p,
+  .musho-voices-text p,
+  .memory-drill-text p,
+  .ice-office-text p,
+  .bedrock-text p,
+  .glacier-motion-lead,
+  .energy-balance-lead{
+    font-size: clamp(12px, .82vw, 15px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .guide-tech-card,
+  .snow-tech-card,
+  .summit-tech-card,
+  .expedition-tech-card,
+  .sixth-tech-card,
+  .tenth-tech-card{
+    min-height: 40px !important;
+  }
+
+  .guide-tech-card .tech-content,
+  .snow-tech-content,
+  .summit-tech-content,
+  .expedition-tech-content,
+  .sixth-tech-content,
+  .tenth-tech-content{
+    min-height: 40px !important;
+  }
+
+  .final-epic-inner{
+    padding: 28px 32px 20px;
+  }
+
+  .final-epic-highlight{
+    font-size: 48px;
+  }
+
+  .final-epic-title{
+    font-size: 54px;
+  }
+}
+/* =========================================================
+   COMPACTACIÓN EXTRA PARA LAPTOPS BAJAS
+   Páginas:
+   - A hombros de grandes maestros
+   - Oyendo la voz de Musho
+   - La memoria del Huascarán
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 860px){
+
+  /* ---------- 1) A HOMBROS DE GRANDES MAESTROS ---------- */
+  .masters-guide-left{
+    padding:5.2% 6.4% 4.6%;
+  }
+
+  .masters-guide-kicker{
+    margin-bottom:2.1%;
+  }
+
+  .masters-guide-left h1{
+    font-size:clamp(30px,3.1vw,56px);
+    margin:0 0 2.2%;
+    line-height:.9;
+  }
+
+  .masters-guide-subtitle{
+    font-size:clamp(13px,.92vw,18px);
+    margin:0 0 3%;
+  }
+
+  .masters-guide-left .gold-line{
+    margin:0 0 3.2%;
+  }
+
+  .masters-guide-list{
+    margin-top:0;
+    gap:0;
+  }
+
+  .masters-guide-item{
+    padding:.85% 0 1.05%;
+  }
+
+  .masters-guide-number{
+    width:34px;
+    height:34px;
+    font-size:10px;
+  }
+
+  .masters-guide-item h2{
+    font-size:clamp(15px,1vw,21px);
+    margin:0 0 2px;
+    line-height:1;
+  }
+
+  .masters-guide-item p{
+    font-size:clamp(10px,.66vw,13px);
+    line-height:1.08;
+  }
+
+  .masters-guide-list .snow-tech-card{
+    min-height:42px;
+    margin:.7% 0 .8%;
+    padding:0 3.2% 0 6%;
+  }
+
+  .masters-guide-list .snow-tech-icon{
+    width:40px;
+    height:40px;
+    font-size:26px;
+  }
+
+  .masters-guide-list .snow-tech-content{
+    min-height:42px;
+  }
+
+  .masters-guide-list .snow-tech-content strong{
+    font-size:clamp(15px,.95vw,19px);
+    margin:0 0 1px;
+    line-height:1;
+  }
+
+  .masters-guide-list .snow-tech-content span{
+    font-size:clamp(10px,.62vw,12px);
+    line-height:1.05;
+  }
+
+  .masters-guide-right{
+    padding:4.2%;
+  }
+
+  .masters-guide-image{
+    border-radius:22px;
+  }
+
+
+  /* ---------- 2) OYENDO LA VOZ DE MUSHO ---------- */
+  .musho-voices-text{
+    padding:5.1% 5.6% 4.8%;
+  }
+
+  .musho-kicker{
+    margin-bottom:2.2%;
+  }
+
+  .musho-voices-text h1{
+    font-size:clamp(28px,2.95vw,54px);
+    margin:0 0 2%;
+  }
+
+  .musho-subtitle{
+    font-size:clamp(14px,.95vw,19px);
+    margin:0 0 1.6%;
+  }
+
+  .musho-line{
+    margin:0 0 3.2%;
+  }
+
+  .musho-voices-text p{
+    font-size:clamp(11px,.72vw,14px);
+    line-height:1.1;
+    margin:0 0 2.6%;
+    max-width:96%;
+  }
+
+  .musho-list{
+    margin:.4% 0 2.6%;
+  }
+
+  .musho-item{
+    grid-template-columns:40px 1fr;
+    gap:10px;
+    padding:1.25% 0 1.35%;
+  }
+
+  .musho-item-number{
+    width:30px;
+    height:30px;
+    font-size:10px;
+  }
+
+  .musho-item h2{
+    font-size:clamp(15px,1vw,21px);
+    margin:0 0 2px;
+  }
+
+  .musho-item p{
+    font-size:clamp(10px,.64vw,12.5px);
+    line-height:1.08;
+  }
+
+  .musho-bottom-card{
+    margin-top:1%;
+    padding:14px 16px 14px 58px;
+    border-radius:16px;
+  }
+
+  .musho-bottom-card::before{
+    left:16px;
+    width:30px;
+    height:30px;
+    font-size:17px;
+  }
+
+  .musho-bottom-card strong{
+    font-size:clamp(15px,1vw,21px);
+    margin-bottom:2px;
+  }
+
+  .musho-bottom-card span{
+    font-size:clamp(10px,.7vw,13px);
+    line-height:1.08;
+  }
+
+  .musho-voices-visual{
+    padding:4%;
+  }
+
+  .musho-board{
+    grid-template-rows:1.02fr .72fr auto;
+    gap:2%;
+  }
+
+  .musho-main-photo,
+  .musho-small-photo,
+  .musho-quote-card,
+  .musho-ice-photo{
+    border-radius:18px;
+  }
+
+  .musho-main-quote{
+    max-width:38%;
+    right:4.5%;
+    bottom:5.5%;
+  }
+
+  .musho-main-quote p{
+    font-size:clamp(14px,1.08vw,22px);
+    margin:0 0 6px;
+    line-height:1.06;
+  }
+
+  .musho-main-quote span{
+    font-size:clamp(7px,.48vw,9px);
+  }
+
+  .musho-quote-card{
+    padding:7.5% 8%;
+  }
+
+  .musho-quote-card p{
+    font-size:clamp(14px,1vw,20px);
+    margin:0 0 8px;
+    line-height:1.08;
+  }
+
+  .musho-quote-card span{
+    font-size:clamp(7px,.48vw,9px);
+  }
+
+  .musho-footer-note{
+    padding:14px 16px 14px 62px;
+    border-radius:16px;
+  }
+
+  .musho-footer-note::before{
+    left:18px;
+    width:32px;
+    height:32px;
+    font-size:18px;
+  }
+
+  .musho-footer-note strong{
+    font-size:clamp(15px,1vw,21px);
+    margin-bottom:2px;
+  }
+
+  .musho-footer-note span{
+    font-size:clamp(10px,.68vw,13px);
+    line-height:1.08;
+  }
+
+
+  /* ---------- 3) LA MEMORIA DEL HUASCARÁN ---------- */
+  .ninth-guide-left{
+    padding:5.2% 6.4% 4.8%;
+  }
+
+  .ninth-guide-kicker{
+    margin-bottom:2%;
+  }
+
+  .ninth-guide-left h1{
+    font-size:clamp(30px,3.1vw,56px);
+    margin:0 0 2.2%;
+    line-height:.9;
+  }
+
+  .ninth-guide-subtitle{
+    font-size:clamp(13px,.92vw,18px);
+    margin:0 0 3%;
+  }
+
+  .ninth-guide-left .gold-line{
+    margin:0 0 3.2%;
+  }
+
+  .ninth-guide-list{
+    margin-top:0;
+  }
+
+  .ninth-guide-item{
+    padding:.9% 0 1.05%;
+  }
+
+  .ninth-guide-number{
+    width:34px;
+    height:34px;
+    font-size:10px;
+  }
+
+  .ninth-guide-item h2{
+    font-size:clamp(15px,1vw,21px);
+    margin:0 0 2px;
+    line-height:1;
+  }
+
+  .ninth-guide-item p{
+    font-size:clamp(10px,.66vw,13px);
+    line-height:1.08;
+  }
+
+  .ninth-guide-highlight{
+    margin:.9% 0 1%;
+    padding:1.15% 0 1.2%;
+  }
+
+  .ninth-guide-highlight-roman{
+    font-size:clamp(22px,1.7vw,34px);
+  }
+
+  .ninth-guide-highlight-title{
+    font-size:clamp(18px,1.3vw,28px);
+  }
+
+  .ninth-guide-highlight p{
+    font-size:clamp(11px,.76vw,14px);
+    line-height:1.08;
+  }
+
+  .ninth-guide-comment{
+    margin:1.8% 0 0;
+  }
+
+  .ninth-guide-comment-inner{
+    padding:14px 16px 14px 22px;
+  }
+
+  .ninth-guide-comment-text{
+    font-size:clamp(12px,.8vw,15px);
+    line-height:1.08;
+  }
+
+  .ninth-guide-right{
+    padding:4.2%;
+  }
+
+  .ninth-guide-image{
+    border-radius:22px;
+  }
+
+  .ninth-guide-caption strong{
+    font-size:clamp(21px,1.65vw,32px);
+    margin-bottom:5px;
+  }
+
+  .ninth-guide-caption span{
+    font-size:clamp(7px,.48vw,9px);
+  }
+}
+
+
+/* EXTRA: compactación más fuerte para laptops todavía más bajas */
+@media (orientation: landscape) and (max-height: 760px){
+
+  .masters-guide-left,
+  .ninth-guide-left{
+    padding:4.6% 5.8% 4.2%;
+  }
+
+  .masters-guide-left h1,
+  .ninth-guide-left h1{
+    font-size:clamp(27px,2.8vw,48px);
+  }
+
+  .masters-guide-item p,
+  .ninth-guide-item p{
+    font-size:clamp(9.5px,.6vw,12px);
+  }
+
+  .musho-voices-text{
+    padding:4.6% 5.2% 4.2%;
+  }
+
+  .musho-voices-text h1{
+    font-size:clamp(26px,2.7vw,46px);
+  }
+
+  .musho-item p,
+  .musho-bottom-card span,
+  .musho-footer-note span{
+    font-size:clamp(9.5px,.6vw,12px);
+  }
+
+  .musho-board{
+    gap:1.6%;
+  }
+}
+/* =========================================================
+   COMPACTACIÓN MÁS FUERTE SOLO PARA PÁGINAS ALTAS EN CONTENIDO
+   Añadir DESPUÉS del bloque anterior
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 860px) {
+
+  /* ===== 1) A HOMBROS DE GRANDES MAESTROS ===== */
+  .masters-guide-left{
+    padding: 4.3% 5.5% 3.6%;
+  }
+
+  .masters-guide-right{
+    padding: 3.2%;
+  }
+
+  .masters-guide-left h1{
+    font-size: clamp(27px, 2.65vw, 46px);
+    line-height: 0.9;
+    margin: 0 0 1.4%;
+  }
+
+  .masters-guide-subtitle{
+    font-size: clamp(12px, 0.8vw, 15px);
+    margin: 0 0 1.6%;
+  }
+
+  .masters-guide-left .gold-line{
+    margin: 0 0 2%;
+    width: 42px;
+  }
+
+  .masters-guide-list{
+    gap: 0;
+  }
+
+  .masters-guide-item{
+    padding: 0.45% 0 0.62%;
+    gap: 10px;
+  }
+
+  .masters-guide-number{
+    width: 30px;
+    height: 30px;
+    font-size: 9px;
+  }
+
+  .masters-guide-item h2{
+    font-size: clamp(13.5px, 0.9vw, 18px);
+    line-height: 1;
+    margin: 0 0 1px;
+  }
+
+  .masters-guide-item p{
+    font-size: clamp(9px, 0.58vw, 11.5px);
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .masters-guide-list .snow-tech-card{
+    min-height: 34px;
+    margin: 0.35% 0 0.45%;
+    padding: 0 2.4% 0 5.2%;
+  }
+
+  .masters-guide-list .snow-tech-icon{
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .masters-guide-list .snow-tech-content{
+    min-height: 34px;
+  }
+
+  .masters-guide-list .snow-tech-content strong{
+    font-size: clamp(12.5px, 0.82vw, 16px);
+    line-height: 1;
+    margin: 0 0 1px;
+  }
+
+  .masters-guide-list .snow-tech-content span{
+    font-size: clamp(8.5px, 0.52vw, 10.5px);
+    line-height: 1;
+  }
+
+  .masters-guide-image{
+    border-radius: 18px;
+    aspect-ratio: 0.95 / 1;
+    object-fit: cover;
+  }
+
+
+  /* ===== 2) OYENDO LA VOZ DE MUSHO ===== */
+  .musho-voices-text{
+    padding: 3.9% 4.5% 3.6%;
+  }
+
+  .musho-voices-visual{
+    padding: 2.8%;
+  }
+
+  .musho-voices-text h1{
+    font-size: clamp(26px, 2.45vw, 42px);
+    line-height: 0.92;
+    margin: 0 0 1.2%;
+  }
+
+  .musho-subtitle{
+    font-size: clamp(12px, 0.8vw, 15px);
+    margin: 0 0 1.2%;
+  }
+
+  .musho-line{
+    margin: 0 0 2%;
+    width: 42px;
+  }
+
+  .musho-voices-text > p{
+    font-size: clamp(9px, 0.6vw, 11.5px);
+    line-height: 1.04;
+    margin: 0 0 1.5%;
+    max-width: 98%;
+  }
+
+  .musho-list{
+    margin: 0.2% 0 1.5%;
+  }
+
+  .musho-item{
+    grid-template-columns: 34px 1fr;
+    gap: 8px;
+    padding: 0.8% 0 0.9%;
+  }
+
+  .musho-item-number{
+    width: 26px;
+    height: 26px;
+    font-size: 9px;
+  }
+
+  .musho-item h2{
+    font-size: clamp(13.5px, 0.9vw, 18px);
+    line-height: 1;
+    margin: 0 0 1px;
+  }
+
+  .musho-item p{
+    font-size: clamp(8.8px, 0.56vw, 11px);
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .musho-bottom-card{
+    margin-top: 0.5%;
+    padding: 11px 13px 11px 50px;
+    border-radius: 14px;
+  }
+
+  .musho-bottom-card::before{
+    left: 14px;
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+  }
+
+  .musho-bottom-card strong{
+    font-size: clamp(13px, 0.88vw, 17px);
+    line-height: 1;
+    margin-bottom: 1px;
+  }
+
+  .musho-bottom-card span{
+    font-size: clamp(8.8px, 0.56vw, 11px);
+    line-height: 1.02;
+  }
+
+  .musho-board{
+    grid-template-rows: 0.95fr 0.6fr auto;
+    gap: 1.5%;
+  }
+
+  .musho-main-photo,
+  .musho-small-photo,
+  .musho-quote-card,
+  .musho-ice-photo{
+    border-radius: 15px;
+  }
+
+  .musho-main-quote{
+    max-width: 36%;
+    right: 4%;
+    bottom: 4%;
+  }
+
+  .musho-main-quote p{
+    font-size: clamp(12px, 0.9vw, 17px);
+    line-height: 1.02;
+    margin: 0 0 4px;
+  }
+
+  .musho-main-quote span{
+    font-size: clamp(6.5px, 0.42vw, 8px);
+    letter-spacing: 0.08em;
+  }
+
+  .musho-quote-card{
+    padding: 6.5% 7%;
+  }
+
+  .musho-quote-card p{
+    font-size: clamp(12px, 0.9vw, 17px);
+    line-height: 1.03;
+    margin: 0 0 6px;
+  }
+
+  .musho-quote-card span{
+    font-size: clamp(6.5px, 0.42vw, 8px);
+  }
+
+  .musho-footer-note{
+    padding: 11px 13px 11px 52px;
+    border-radius: 14px;
+  }
+
+  .musho-footer-note::before{
+    left: 15px;
+    width: 27px;
+    height: 27px;
+    font-size: 15px;
+  }
+
+  .musho-footer-note strong{
+    font-size: clamp(13px, 0.88vw, 17px);
+    line-height: 1;
+    margin-bottom: 1px;
+  }
+
+  .musho-footer-note span{
+    font-size: clamp(8.8px, 0.56vw, 11px);
+    line-height: 1.02;
+  }
+
+
+  /* ===== 3) LA MEMORIA DEL HUASCARÁN ===== */
+  .ninth-guide-left{
+    padding: 4.3% 5.5% 3.6%;
+  }
+
+  .ninth-guide-right{
+    padding: 3.2%;
+  }
+
+  .ninth-guide-left h1{
+    font-size: clamp(27px, 2.65vw, 46px);
+    line-height: 0.9;
+    margin: 0 0 1.4%;
+  }
+
+  .ninth-guide-subtitle{
+    font-size: clamp(12px, 0.8vw, 15px);
+    margin: 0 0 1.6%;
+  }
+
+  .ninth-guide-left .gold-line{
+    margin: 0 0 2%;
+    width: 42px;
+  }
+
+  .ninth-guide-item{
+    padding: 0.45% 0 0.62%;
+    gap: 10px;
+  }
+
+  .ninth-guide-number{
+    width: 30px;
+    height: 30px;
+    font-size: 9px;
+  }
+
+  .ninth-guide-item h2{
+    font-size: clamp(13.5px, 0.9vw, 18px);
+    line-height: 1;
+    margin: 0 0 1px;
+  }
+
+  .ninth-guide-item p{
+    font-size: clamp(9px, 0.58vw, 11.5px);
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .ninth-guide-highlight{
+    margin: 0.45% 0 0.6%;
+    padding: 0.75% 0 0.8%;
+  }
+
+  .ninth-guide-highlight-roman{
+    font-size: clamp(17px, 1.15vw, 22px);
+    line-height: 1;
+  }
+
+  .ninth-guide-highlight-title{
+    font-size: clamp(13px, 0.86vw, 17px);
+    line-height: 1;
+  }
+
+  .ninth-guide-highlight p{
+    font-size: clamp(8.5px, 0.52vw, 10.5px);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .ninth-guide-comment{
+    margin: 1% 0 0;
+  }
+
+  .ninth-guide-comment-inner{
+    padding: 10px 12px 10px 16px;
+  }
+
+  .ninth-guide-comment-text{
+    font-size: clamp(10px, 0.62vw, 12px);
+    line-height: 1.02;
+  }
+
+  .ninth-guide-image{
+    border-radius: 18px;
+    aspect-ratio: 0.95 / 1;
+    object-fit: cover;
+  }
+
+  .ninth-guide-caption strong{
+    font-size: clamp(17px, 1.18vw, 23px);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .ninth-guide-caption span{
+    font-size: clamp(6.5px, 0.42vw, 8px);
+    letter-spacing: 0.08em;
+  }
+}
+
+
+/* ===== AJUSTE AÚN MÁS AGRESIVO PARA ALTURAS MUY BAJAS ===== */
+@media (orientation: landscape) and (max-height: 760px) {
+
+  .masters-guide-left,
+  .ninth-guide-left{
+    padding: 3.8% 4.8% 3.1%;
+  }
+
+  .masters-guide-right,
+  .ninth-guide-right{
+    padding: 2.8%;
+  }
+
+  .musho-voices-text{
+    padding: 3.5% 4.1% 3.1%;
+  }
+
+  .musho-voices-visual{
+    padding: 2.4%;
+  }
+
+  .masters-guide-left h1,
+  .ninth-guide-left h1{
+    font-size: clamp(24px, 2.35vw, 38px);
+  }
+
+  .musho-voices-text h1{
+    font-size: clamp(23px, 2.2vw, 36px);
+  }
+
+ 
+
+  .masters-guide-list .snow-tech-card{
+    min-height: 30px;
+  }
+
+  .masters-guide-list .snow-tech-icon{
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+  }
+
+  .musho-board{
+    grid-template-rows: 0.9fr 0.56fr auto;
+    gap: 1.2%;
+  }
+
+  .musho-main-quote p,
+  .musho-quote-card p{
+    font-size: clamp(11px, 0.8vw, 15px);
+  }
+
+  .ninth-guide-highlight{
+    padding: 0.58% 0 0.62%;
+  }
+}
+/* =========================================================
+   COMPACTACIÓN ESPECÍFICA — A HOMBROS DE GRANDES MAESTROS
+   Pegar AL FINAL de todos tus estilos
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 860px) {
+
+  .masters-guide-page .masters-guide-left{
+    padding: 3.4% 4.6% 2.6%;
+  }
+
+  .masters-guide-page .masters-guide-right{
+    padding: 2.4%;
+  }
+
+  .masters-guide-page .masters-guide-left h1{
+    font-size: clamp(22px, 2.15vw, 34px);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.8%;
+  }
+
+  .masters-guide-page .masters-guide-subtitle{
+    font-size: clamp(10px, 0.7vw, 13px);
+    line-height: 1;
+    margin: 0 0 0.8%;
+  }
+
+  .masters-guide-page .masters-guide-left .gold-line{
+    width: 42px;
+    margin: 0 0 1.25%;
+  }
+
+  .masters-guide-page .masters-guide-list{
+    gap: 0;
+  }
+
+  .masters-guide-page .masters-guide-item{
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 8px;
+    padding: 0.18% 0 0.26%;
+    align-items: start;
+  }
+
+  .masters-guide-page .masters-guide-number{
+    width: 24px;
+    height: 24px;
+    font-size: 8px;
+    margin-top: 2px;
+  }
+
+  .masters-guide-page .masters-guide-item h2{
+    font-size: clamp(11.8px, 0.8vw, 15px);
+    line-height: 0.98;
+    margin: 0 0 1px;
+  }
+
+  .masters-guide-page .masters-guide-item p{
+    font-size: clamp(8px, 0.5vw, 10px);
+    line-height: 1;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-card{
+    min-height: 26px;
+    margin: 0.15% 0 0.2%;
+    padding: 0 1.8% 0 4.2%;
+    border-radius: 6px;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon{
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content{
+    min-height: 26px;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content strong{
+    font-size: clamp(10.8px, 0.72vw, 13.5px);
+    line-height: 0.96;
+    margin: 0 0 1px;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content span{
+    font-size: clamp(7px, 0.44vw, 8.8px);
+    line-height: 0.95;
+    margin: 0;
+  }
+
+  .masters-guide-page .masters-guide-image{
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 0;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+
+  .masters-guide-page .masters-guide-caption strong{
+    font-size: clamp(16px, 1.02vw, 21px);
+    line-height: 0.96;
+    margin-bottom: 2px;
+  }
+
+  .masters-guide-page .masters-guide-caption span{
+    font-size: clamp(6px, 0.38vw, 7.5px);
+    line-height: 1;
+    letter-spacing: 0.08em;
+  }
+}
+/* =========================================================
+   FIX REAL — A HOMBROS DE GRANDES MAESTROS
+   Evita el recorte por centrado vertical
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 860px) {
+
+  .masters-guide-page .masters-guide-layout{
+    grid-template-columns: .485fr .515fr;
+  }
+
+  .masters-guide-page .masters-guide-left{
+    justify-content: flex-start !important;
+    align-items: stretch;
+    padding: 2.8% 4.6% 2.1% !important;
+  }
+
+  .masters-guide-page .masters-guide-kicker{
+    font-size: clamp(8px, 0.52vw, 10px);
+    line-height: 1;
+    margin: 0 0 0.5%;
+  }
+
+  .masters-guide-page .masters-guide-left h1{
+    font-size: clamp(19px, 1.8vw, 29px) !important;
+    line-height: 0.84 !important;
+    letter-spacing: -0.035em;
+    margin: 0 0 0.45% !important;
+  }
+
+  .masters-guide-page .masters-guide-subtitle{
+    font-size: clamp(9px, 0.56vw, 11px) !important;
+    line-height: 1;
+    margin: 0 0 0.45% !important;
+  }
+
+  .masters-guide-page .masters-guide-left .gold-line{
+    width: 36px !important;
+    height: 2px;
+    margin: 0 0 0.85% !important;
+  }
+
+  .masters-guide-page .masters-guide-list{
+    --marker-size: 28px;
+    --marker-left: 12px;
+    --content-left: 56px;
+    margin-top: 0 !important;
+    padding-left: var(--content-left) !important;
+    max-width: 100%;
+  }
+
+  .masters-guide-page .masters-guide-item{
+    padding: 0.48% 0 0.62% !important;
+  }
+
+  .masters-guide-page .masters-guide-number{
+    font-size: 8px !important;
+    box-shadow: 0 5px 12px rgba(167,101,32,.12);
+  }
+
+  .masters-guide-page .masters-guide-item h2{
+    font-size: clamp(10.5px, 0.72vw, 13px) !important;
+    line-height: 0.96 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-item p{
+    font-size: clamp(7.2px, 0.44vw, 8.8px) !important;
+    line-height: 0.96 !important;
+    margin: 0 !important;
+    max-width: 100%;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-card{
+    min-height: 24px !important;
+    margin: 0.22% 0 0.28% !important;
+    padding: 0 1.4% 0 3.6% !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon{
+    width: 24px !important;
+    height: 24px !important;
+    left: calc(-1 * var(--content-left) + var(--marker-left) - 24px / 2) !important;
+    font-size: 13px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::before{
+    inset: -4px;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::after{
+    top: -28px;
+    height: calc(100% + 56px);
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content{
+    min-height: 24px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content strong{
+    font-size: clamp(9.6px, 0.62vw, 12px) !important;
+    line-height: 0.95 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content span{
+    font-size: clamp(6.5px, 0.39vw, 8px) !important;
+    line-height: 0.94 !important;
+    margin: 0 !important;
+  }
+
+  .masters-guide-page .masters-guide-right{
+    padding: 2.1% !important;
+  }
+
+  .masters-guide-page .masters-guide-image{
+    border-radius: 18px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption{
+    left: 7%;
+    right: 7%;
+    bottom: 5.5%;
+  }
+
+  .masters-guide-page .masters-guide-caption strong{
+    font-size: clamp(15px, 0.95vw, 19px) !important;
+    line-height: 0.96 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption span{
+    font-size: clamp(6px, 0.34vw, 7px) !important;
+    line-height: 1 !important;
+  }
+}
+@media (orientation: landscape) and (max-height: 760px) {
+  .masters-guide-page .masters-guide-left{
+    padding: 2.2% 4.2% 1.8% !important;
+  }
+
+  .masters-guide-page .masters-guide-left h1{
+    font-size: clamp(17px, 1.6vw, 25px) !important;
+  }
+
+  .masters-guide-page .masters-guide-item p{
+    font-size: clamp(6.8px, 0.4vw, 8px) !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-card,
+  .masters-guide-page .masters-guide-list .snow-tech-content{
+    min-height: 22px !important;
+  }
+}
+/* =========================================================
+   FIX DEFINITIVO — A HOMBROS DE GRANDES MAESTROS
+   Evita apilado a 1 columna y evita el estrangulamiento del texto
+   ========================================================= */
+
+@media screen and (orientation: landscape) and (max-height: 900px) {
+
+  .masters-guide-page .masters-guide-layout{
+    grid-template-columns: 0.495fr 0.505fr !important;
+    grid-template-rows: 1fr !important;
+  }
+
+  .masters-guide-page .masters-guide-left{
+    justify-content: flex-start !important;
+    padding: 2.6% 4.2% 2% !important;
+    min-width: 0;
+  }
+
+  .masters-guide-page .masters-guide-right{
+    padding: 2.1% !important;
+    min-width: 0;
+  }
+
+  .masters-guide-page .masters-guide-kicker{
+    font-size: clamp(7px, 0.46vw, 9px) !important;
+    line-height: 1 !important;
+    margin: 0 0 0.35% !important;
+  }
+
+  .masters-guide-page .masters-guide-left h1{
+    font-size: clamp(18px, 1.72vw, 27px) !important;
+    line-height: 0.84 !important;
+    letter-spacing: -0.04em !important;
+    margin: 0 0 0.35% !important;
+  }
+
+  .masters-guide-page .masters-guide-subtitle{
+    font-size: clamp(8px, 0.5vw, 10px) !important;
+    line-height: 1 !important;
+    margin: 0 0 0.35% !important;
+  }
+
+  .masters-guide-page .masters-guide-left .gold-line{
+    width: 34px !important;
+    margin: 0 0 0.7% !important;
+  }
+
+  .masters-guide-page .masters-guide-list{
+    --marker-size: 24px;
+    --marker-left: 11px;
+    --content-left: 48px;
+    margin-top: 0 !important;
+    padding-left: var(--content-left) !important;
+    max-width: 100% !important;
+    gap: 0 !important;
+  }
+
+  /* IMPORTANTE: volver al flujo normal, no usar grid aquí */
+  .masters-guide-page .masters-guide-item{
+    display: block !important;
+    padding: 0.42% 0 0.5% !important;
+  }
+
+  .masters-guide-page .masters-guide-number{
+    width: var(--marker-size) !important;
+    height: var(--marker-size) !important;
+    font-size: 7px !important;
+  }
+
+  .masters-guide-page .masters-guide-item h2{
+    font-size: clamp(10px, 0.64vw, 12px) !important;
+    line-height: 0.95 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-item p{
+    font-size: clamp(6.7px, 0.41vw, 8.1px) !important;
+    line-height: 0.94 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-card{
+    min-height: 22px !important;
+    margin: 0.14% 0 0.18% !important;
+    padding: 0 1.2% 0 3.1% !important;
+    border-radius: 5px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon{
+    width: 22px !important;
+    height: 22px !important;
+    left: calc(-1 * var(--content-left) + var(--marker-left) - 22px / 2) !important;
+    font-size: 12px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::before{
+    inset: -4px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::after{
+    top: -24px !important;
+    height: calc(100% + 48px) !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content{
+    min-height: 22px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content strong{
+    font-size: clamp(8.8px, 0.56vw, 10.8px) !important;
+    line-height: 0.94 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content span{
+    font-size: clamp(6px, 0.35vw, 7.1px) !important;
+    line-height: 0.92 !important;
+    margin: 0 !important;
+  }
+
+  .masters-guide-page .masters-guide-image{
+    border-radius: 18px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption{
+    left: 7% !important;
+    right: 7% !important;
+    bottom: 5.5% !important;
+  }
+
+  .masters-guide-page .masters-guide-caption strong{
+    font-size: clamp(15px, 0.94vw, 19px) !important;
+    line-height: 0.96 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption span{
+    font-size: clamp(5.8px, 0.33vw, 6.8px) !important;
+    line-height: 1 !important;
+  }
+}
+
+/* Extra seguro: aunque exista alguna regla móvil/portrait, en horizontal no apilar */
+@media screen and (min-aspect-ratio: 1/1) and (max-height: 900px) {
+  .masters-guide-page .masters-guide-layout{
+    grid-template-columns: 0.495fr 0.505fr !important;
+    grid-template-rows: 1fr !important;
+  }
+}
+/* =========================================================
+   MICROCOMPACTACIÓN FINAL — SOLO A HOMBROS DE GRANDES MAESTROS
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 860px) {
+
+  .masters-guide-page .masters-guide-layout{
+    grid-template-columns: .47fr .53fr !important;
+  }
+
+  .masters-guide-page .masters-guide-left{
+    padding: 2.2% 4.1% 1.7% !important;
+    justify-content: flex-start !important;
+  }
+
+  .masters-guide-page .masters-guide-right{
+    padding: 1.9% !important;
+  }
+
+  .masters-guide-page .masters-guide-kicker{
+    font-size: clamp(7px, 0.44vw, 8.5px) !important;
+    margin: 0 0 0.28% !important;
+    line-height: 1 !important;
+  }
+
+  .masters-guide-page .masters-guide-left h1{
+    font-size: clamp(20px, 1.9vw, 30px) !important;
+    line-height: 0.82 !important;
+    letter-spacing: -0.04em !important;
+    margin: 0 0 0.22% !important;
+  }
+
+  .masters-guide-page .masters-guide-subtitle{
+    font-size: clamp(8.2px, 0.5vw, 10px) !important;
+    line-height: 1 !important;
+    margin: 0 0 0.32% !important;
+  }
+
+  .masters-guide-page .masters-guide-left .gold-line{
+    width: 34px !important;
+    margin: 0 0 0.55% !important;
+  }
+
+  .masters-guide-page .masters-guide-list{
+    --marker-size: 22px !important;
+    --marker-left: 10px !important;
+    --content-left: 42px !important;
+    padding-left: var(--content-left) !important;
+    margin-top: 0 !important;
+    max-width: 100% !important;
+    gap: 0 !important;
+  }
+
+  .masters-guide-page .masters-guide-item{
+    display: block !important;
+    padding: 0.26% 0 0.32% !important;
+  }
+
+  .masters-guide-page .masters-guide-number{
+    width: var(--marker-size) !important;
+    height: var(--marker-size) !important;
+    font-size: 7px !important;
+  }
+
+  .masters-guide-page .masters-guide-item h2{
+    font-size: clamp(9.4px, 0.58vw, 11.2px) !important;
+    line-height: 0.92 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-item p{
+    font-size: clamp(6.2px, 0.37vw, 7.4px) !important;
+    line-height: 0.9 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-card{
+    min-height: 20px !important;
+    margin: 0.08% 0 0.12% !important;
+    padding: 0 1% 0 2.6% !important;
+    border-radius: 5px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon{
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 11px !important;
+    left: calc(-1 * var(--content-left) + var(--marker-left) - 10px) !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::before{
+    inset: -3px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon::after{
+    top: -20px !important;
+    height: calc(100% + 40px) !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content{
+    min-height: 20px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content strong{
+    font-size: clamp(7.8px, 0.49vw, 9.6px) !important;
+    line-height: 0.92 !important;
+    margin: 0 0 1px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-content span{
+    font-size: clamp(5.4px, 0.31vw, 6.3px) !important;
+    line-height: 0.9 !important;
+    margin: 0 !important;
+  }
+
+  .masters-guide-page .masters-guide-image{
+    border-radius: 16px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption{
+    left: 6.5% !important;
+    right: 6.5% !important;
+    bottom: 4.8% !important;
+  }
+
+  .masters-guide-page .masters-guide-caption strong{
+    font-size: clamp(14px, 0.86vw, 17px) !important;
+    line-height: 0.94 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .masters-guide-page .masters-guide-caption span{
+    font-size: clamp(5.2px, 0.29vw, 6px) !important;
+    line-height: 1 !important;
+  }
+}
+/* =========================================================
+   REDUCCIÓN GRADUAL — LA MEMORIA DEL HUASCARÁN
+   Solo párrafos de la columna izquierda
+   Sustituye todo el bloque anterior de escalones
+   ========================================================= */
+
+@media (orientation: landscape) and (max-height: 1100px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(8.8px, 0.54vw, 11.2px) !important;
+    line-height: 1.02 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 1060px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(8.5px, 0.525vw, 10.9px) !important;
+    line-height: 1.00 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 1020px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(8.2px, 0.505vw, 10.6px) !important;
+    line-height: 0.98 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 980px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(7.9px, 0.485vw, 10.2px) !important;
+    line-height: 0.96 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 940px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(7.6px, 0.465vw, 9.8px) !important;
+    line-height: 0.95 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 900px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(7.3px, 0.445vw, 9.4px) !important;
+    line-height: 0.94 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 880px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(7.1px, 0.435vw, 9.1px) !important;
+    line-height: 0.93 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 860px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(6.9px, 0.425vw, 8.8px) !important;
+    line-height: 0.92 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 840px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(6.7px, 0.41vw, 8.5px) !important;
+    line-height: 0.91 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 820px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(6.5px, 0.395vw, 8.2px) !important;
+    line-height: 0.90 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 800px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(6.3px, 0.382vw, 7.9px) !important;
+    line-height: 0.89 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 780px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(6.1px, 0.37vw, 7.6px) !important;
+    line-height: 0.88 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 760px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(5.9px, 0.358vw, 7.3px) !important;
+    line-height: 0.87 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 740px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(5.7px, 0.345vw, 7.0px) !important;
+    line-height: 0.86 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 720px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(5.5px, 0.333vw, 6.7px) !important;
+    line-height: 0.85 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 700px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(5.3px, 0.32vw, 6.4px) !important;
+    line-height: 0.84 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 680px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(5.1px, 0.307vw, 6.1px) !important;
+    line-height: 0.82 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 660px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(4.9px, 0.295vw, 5.8px) !important;
+    line-height: 0.80 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 640px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(4.7px, 0.283vw, 5.5px) !important;
+    line-height: 0.78 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 620px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(4.5px, 0.27vw, 5.2px) !important;
+    line-height: 0.76 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .memory-guide-page .memory-guide-item p{
+    font-size: clamp(4.3px, 0.258vw, 4.9px) !important;
+    line-height: 0.74 !important;
+  }
+}
+/* =========================================================
+   BARRA INFERIOR EN MODO MAXIMIZADO
+   Aparece al acercar el cursor a la parte baja
+   ========================================================= */
+
+.fullscreen-bottom-reveal{
+  position:absolute;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%) translateY(18px);
+  width:min(760px, 72vw);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+  opacity:0;
+  transition:
+    opacity .28s ease,
+    transform .28s ease;
+  z-index:9999;
+}
+
+.fullscreen-bottom-reveal.is-visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+  pointer-events:auto;
+}
+
+.fullscreen-bottom-reveal .fullscreen-reader-progress-wrap{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+
+.fullscreen-bottom-reveal .reader-progress{
+  width:100%;
+}
+
+body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
+  display:none;
+}
+/* =========================================================
+   PÁGINA INICIAL — ELECCIÓN DE IDIOMA
+   Misma familia visual de la página final
+   ========================================================= */
+
+.language-entry-page{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.09), transparent 28%),
+    radial-gradient(circle at 12% 18%, rgba(183,126,56,.18), transparent 26%),
+    radial-gradient(circle at 88% 82%, rgba(109,142,168,.14), transparent 28%),
+    linear-gradient(135deg,#0f1218 0%, #161b23 36%, #0f141c 70%, #0a0d12 100%);
+  color:#f6f2ea;
+}
+
+.language-entry-page::after{
+  background-image:
+    radial-gradient(rgba(255,255,255,.045) .62px, transparent .62px);
+  background-size:14px 14px;
+  opacity:.12;
+  mix-blend-mode:screen;
+}
+
+.language-entry-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.42)),
+    url('huascaran-portada.jpg') center/cover no-repeat;
+  opacity:.22;
+  pointer-events:none;
+}
+
+.language-entry-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 14%, rgba(255,255,255,.06), transparent 26%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.16));
+  pointer-events:none;
+}
+
+.language-entry-frame{
+  position:absolute;
+  inset:4.6%;
+  border-radius:28px;
+  border:1px solid rgba(210,175,124,.18);
+  background:
+    linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
+    url('huascaran-hielo.jpg') center/cover no-repeat;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.18);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  overflow:hidden;
+}
+
+.language-entry-inner{
+  position:absolute;
+  inset:0;
+  padding:6.2% 8%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:0;
+}
+
+.language-entry-emblem{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:2.2%;
+  opacity:.92;
+}
+
+.language-entry-emblem .star{
+  font-size:22px;
+  color:#d5a15e;
+}
+
+.language-entry-emblem .mountain{
+  font-size:28px;
+  color:#e9dcc9;
+}
+
+.language-entry-kicker{
+  margin:0 0 1.2%;
+  font-family:Inter, sans-serif;
+  font-size:clamp(9px,.72vw,13px);
+  font-weight:800;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:#c78b47;
+}
+
+.language-entry-title{
+  margin:0 0 1.8%;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(42px,4.3vw,82px);
+  line-height:.9;
+  letter-spacing:-.04em;
+  font-weight:700;
+  color:#f6f2ea;
+}
+
+.language-entry-subtitle{
+  margin:0 0 4.4%;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(18px,1.45vw,30px);
+  line-height:1.08;
+  font-style:italic;
+  color:rgba(242,234,223,.86);
+}
+
+.language-entry-grid{
+  width:min(980px, 100%);
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:16px;
+  margin-bottom:4.4%;
+}
+
+.language-option{
+  border:1px solid rgba(210,175,124,.22);
+  border-radius:18px;
+  padding:18px 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)),
+    rgba(255,255,255,.02);
+  color:#f6f2ea;
+  font-family:Inter, sans-serif;
+  font-size:clamp(13px,1vw,18px);
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 12px 28px rgba(0,0,0,.16);
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease;
+}
+
+.language-option:hover{
+  transform:translateY(-2px);
+  border-color:rgba(210,175,124,.46);
+  background:
+    linear-gradient(180deg, rgba(199,139,71,.18), rgba(255,255,255,.03)),
+    rgba(255,255,255,.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 34px rgba(0,0,0,.22);
+}
+
+.language-entry-note{
+  margin:0;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(14px,1vw,20px);
+  line-height:1.12;
+  color:rgba(242,234,223,.72);
+  font-style:italic;
+}
+
+@media (orientation: portrait){
+  .language-entry-inner{
+    padding:10% 7%;
+  }
+
+  .language-entry-title{
+    font-size:clamp(38px, 11vw, 68px);
+  }
+
+  .language-entry-subtitle{
+    font-size:clamp(18px, 5vw, 28px);
+    margin-bottom:7%;
+  }
+
+  .language-entry-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-bottom:7%;
+  }
+
+  .language-option{
+    padding:16px 14px;
+    font-size:clamp(13px, 4vw, 18px);
+  }
+}
   </style>
 </head>
 <body>
@@ -11624,44 +13852,114 @@ mask:
       <div class="hint">Usa ← → o toca los lados para pasar página</div>
     </header>
 
-   <main class="stage">
+<main class="stage">
   <button id="fullscreenBtn" class="fullscreen-btn" type="button" aria-label="Ver en pantalla completa" title="Pantalla completa">
     ⛶
   </button>
+
   <div id="book"></div>
+
+  <div class="fullscreen-bottom-reveal" id="fullscreenBottomReveal" aria-hidden="true">
+    <div class="reader-progress-wrap fullscreen-reader-progress-wrap">
+     <div
+  class="reader-progress fullscreen-progress"
+  id="fullscreenReaderProgress"
+  role="slider"
+  tabindex="0"
+  aria-label="Progreso del libro en pantalla completa"
+  aria-valuemin="1"
+  aria-valuemax="1"
+  aria-valuenow="1"
+>
+  <div class="reader-progress-rail"></div>
+  <div class="reader-progress-fill" id="fullscreenProgressFill"></div>
+  <div class="reader-progress-thumb" id="fullscreenProgressThumb"></div>
+
+  <div class="reader-preview fullscreen-reader-preview" id="fullscreenReaderPreview" aria-hidden="true">
+    <div class="reader-preview-shell">
+      <div class="reader-preview-image" id="fullscreenReaderPreviewImage"></div>
+    </div>
+    <div class="reader-preview-meta">
+      <span class="reader-preview-page" id="fullscreenReaderPreviewPage">Página 1</span>
+      <strong class="reader-preview-title" id="fullscreenReaderPreviewTitle">Portada</strong>
+    </div>
+  </div>
+</div>
 </main>
+
 <div class="reader-progress-wrap">
   <div
-    class="reader-progress interactive"
+    class="reader-progress"
     id="readerProgress"
     role="slider"
-    aria-label="Navegación de páginas"
+    tabindex="0"
+    aria-label="Progreso del libro"
     aria-valuemin="1"
     aria-valuemax="1"
     aria-valuenow="1"
-    tabindex="0"
   >
     <div class="reader-progress-rail"></div>
     <div class="reader-progress-fill" id="readerProgressFill"></div>
     <div class="reader-progress-thumb" id="readerProgressThumb"></div>
 
     <div class="reader-preview" id="readerPreview" aria-hidden="true">
-      <div class="reader-preview-shell">
-        <div class="reader-preview-stage" id="readerPreviewStage"></div>
-      </div>
-      <div class="reader-preview-meta">
-        <span class="reader-preview-page" id="readerPreviewPage">Página 1</span>
-        <span class="reader-preview-title" id="readerPreviewTitle">Portada</span>
-      </div>
-    </div>
+  <div class="reader-preview-shell">
+    <div class="reader-preview-image" id="readerPreviewImage"></div>
+  </div>
+  <div class="reader-preview-meta">
+    <span class="reader-preview-page" id="readerPreviewPage">Página 1</span>
+    <strong class="reader-preview-title" id="readerPreviewTitle">Portada</strong>
+  </div>
+</div>
   </div>
 </div>
 
-  </div>
+<div class="footer-reader"></div>
+</div>
+</main>
 
+
+  </div>
+<!-- PÁGINA INICIAL — ELECCIÓN DE IDIOMA -->
+<template data-page>
+  <section class="page language-entry-page" data-thumbnail="huascaran-final.jpg">
+    <div class="language-entry-bg"></div>
+    <div class="language-entry-overlay"></div>
+
+    <div class="language-entry-frame">
+      <div class="language-entry-inner">
+
+        <div class="language-entry-emblem">
+        
+          <span class="mountain">△</span>
+        </div>
+
+        <p class="language-entry-kicker">Edición internacional</p>
+
+        <h1 class="language-entry-title">La Memoria del Huascarán</h1>
+
+        <p class="language-entry-subtitle">Elige tu idioma</p>
+
+        <div class="language-entry-grid">
+          <a class="language-option" href="#" data-lang="it">Italiano</a>
+          <a class="language-option" href="#" data-lang="en">Inglés</a>
+          <a class="language-option" href="#" data-lang="es">Español</a>
+          <a class="language-option" href="#" data-lang="ru">Ruso</a>
+          <a class="language-option" href="#" data-lang="fr">Francés</a>
+          <a class="language-option" href="#" data-lang="pt">Portugués</a>
+        </div>
+
+        <p class="language-entry-note">
+          Una expedición al hielo que guarda la memoria del planeta
+        </p>
+
+      </div>
+    </div>
+  </section>
+</template>
   <!-- PÁGINA 1: horizontal tipo libro abierto / vertical tipo móvil -->
   <template data-page>
-    <section class="page intro-page">
+    <section class="page intro-page" data-thumbnail="afiche.jpeg">
       <div class="page-content desktop-opening">
         <div class="book-opening">
           <aside class="participants-side">
@@ -11758,7 +14056,7 @@ mask:
 </template>
   <!-- PÁGINA 2: libro desplegado ocupando todo el cuadro -->
 <template data-page>
-  <section class="page opened-book-page">
+  <section class="page opened-book-page" data-thumbnail="foto-prologo.jpg">
     <div class="opened-book-layout">
 
       <aside class="opened-left">
@@ -11786,7 +14084,7 @@ mask:
 </template>
 <!-- PÁGINA DESKTOP: Tipos de capítulos del libro -->
 <template data-page data-desktop-only>
-  <section class="page chapter-types-page">
+  <section class="page chapter-types-page" data-thumbnail="capitulo-narrativo.jpg">
     <div class="chapter-types-layout">
 
       <aside class="chapter-types-left">
@@ -11889,7 +14187,7 @@ mask:
 </template>
 <!-- PÁGINA 4: Guía de la primera parte -->
 <template data-page>
-  <section class="page part-guide-page">
+  <section class="page part-guide-page" data-thumbnail="guia-primera-parte.jpg">
     <div class="part-guide-layout">
 
       <aside class="part-guide-left">
@@ -11994,7 +14292,7 @@ mask:
 <!-- PÁGINA: I. El maestro ya ascendía al Huascarán -->
 
 <template data-page>
-  <section class="page visual-glaciology-page" data-page-key="maestro-huascaran">
+  <section class="page visual-glaciology-page" data-page-key="maestro-huascaran" data-thumbnail="anatomia-huascaran.jpg">
     <div class="visual-glaciology-layout">
 
       <aside class="visual-glaciology-left">
@@ -12033,7 +14331,7 @@ mask:
 </template>
 <!-- PÁGINA 6: II. Cómo se midió por primera vez la altitud del Huascarán -->
 <template data-page>
-  <section class="page altitude-page" data-page-key="altitud-huascaran">
+  <section class="page altitude-page" data-page-key="altitud-huascaran" data-thumbnail="altitud-huascaran-cumbre.jpg">
     <div class="altitude-layout">
 
       <aside class="altitude-left">
@@ -12074,7 +14372,7 @@ mask:
 
 <!-- PÁGINA BLOQUE III-B: La criósfera y sus componentes -->
 <template data-page>
-  <section class="page criosphere-page" data-page-key="criosfera-componentes">
+  <section class="page criosphere-page" data-page-key="criosfera-componentes" data-thumbnail="criosfera-componentes.jpg">
     <div class="criosphere-layout">
 
       <aside class="criosphere-text">
@@ -12115,7 +14413,7 @@ mask:
 </template>
 <!-- PÁGINA BLOQUE III-A: Partes de un glaciar -->
 <template data-page>
-  <section class="page criosphere-page" data-page-key="criosfera-cordillera-blanca">
+  <section class="page criosphere-page" data-page-key="criosfera-cordillera-blanca" data-thumbnail="partes-glaciar.jpg">
     <div class="criosphere-layout">
 
       <aside class="criosphere-text">
@@ -12156,7 +14454,7 @@ mask:
 </template>
 <!-- PÁGINA NUEVA: Segunda parte — Aprendiendo a leer la nieve -->
 <template data-page>
-  <section class="page snow-guide-page">
+  <section class="page snow-guide-page" data-thumbnail="segunda-parte-nieve.jpg">
     <div class="snow-guide-layout">
 
       <aside class="snow-guide-left">
@@ -12231,7 +14529,7 @@ mask:
 </template>
 <!-- PÁGINA IV: Cuando la nieve se convierte en archivo -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="nieve-archivo">
+  <section class="page ice-science-page" data-page-key="nieve-archivo" data-thumbnail="nieve-archivo.jpg">
     <div class="ice-science-layout v4">
 
       <aside class="ice-science-text">
@@ -12293,7 +14591,7 @@ mask:
 
 <!-- PÁGINA V: El efecto albedo -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="efecto-albedo">
+  <section class="page ice-science-page" data-page-key="efecto-albedo" data-thumbnail="efecto-albedo.jpg">
     <div class="ice-science-layout v5">
 
       <aside class="ice-science-visual">
@@ -12352,7 +14650,7 @@ mask:
 
 <!-- PÁGINA VI: Avance, equilibrio y retroceso glaciar -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="avance-retroceso-glaciar">
+  <section class="page ice-science-page" data-page-key="avance-retroceso-glaciar" data-thumbnail="avance-retroceso-glaciar.jpg">
     <div class="ice-science-layout v6">
 
       <aside class="ice-science-text">
@@ -12414,7 +14712,7 @@ mask:
 </template>
 <!-- PÁGINA NUEVA: Tercera parte — A hombros de grandes maestros -->
 <template data-page>
-  <section class="page masters-guide-page">
+  <section class="page masters-guide-page" data-thumbnail="tercera-parte-maestros.jpg">
     <div class="masters-guide-layout">
 
       <aside class="masters-guide-left">
@@ -12519,7 +14817,7 @@ mask:
 </template>
 <!-- PÁGINA VII: Las obras de prevención y las investigaciones glaciológicas -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="obras-prevencion-glaciologica">
+ <section class="page ice-science-page" data-page-key="obras-prevencion-glaciologica" data-thumbnail="obras-prevencion-glaciologica.jpg">
     <div class="ice-science-layout v7">
 
       <aside class="ice-science-text">
@@ -12576,7 +14874,7 @@ mask:
 </template>
 <!-- PÁGINA VIII: El riesgo de las lagunas peligrosas de origen glaciar en Perú -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="lagunas-peligrosas-peru">
+  <section class="page ice-science-page" data-page-key="lagunas-peligrosas-peru" data-thumbnail="lagunas-peligrosas-peru.jpg">
     <div class="ice-science-layout v8">
 
       <aside class="ice-science-visual">
@@ -12629,7 +14927,7 @@ mask:
 </template>
 <!-- PÁGINA IX: Balance de masa -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="balance-de-masa">
+  <section class="page ice-science-page" data-page-key="balance-de-masa" data-thumbnail="balance-de-masa.jpg">
     <div class="ice-science-layout v9">
 
       <aside class="ice-science-text">
@@ -12696,7 +14994,7 @@ mask:
 </template>
 <!-- PÁGINA NUEVA: Cuarta parte — Antes de la cumbre -->
 <template data-page>
-  <section class="page summit-guide-page">
+  <section class="page summit-guide-page" data-thumbnail="cuarta-parte-cumbre.jpg">
     <div class="summit-guide-layout">
 
       <aside class="summit-guide-left">
@@ -12789,7 +15087,7 @@ mask:
 </template>
 <!-- PÁGINA X: La pérdida de la memoria del Quelccaya -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="perdida-memoria-quelccaya">
+  <section class="page ice-science-page" data-page-key="perdida-memoria-quelccaya" data-thumbnail="perdida-memoria-quelccaya.jpg">
     <div class="ice-science-layout v10">
 
       <aside class="ice-science-text">
@@ -12852,7 +15150,7 @@ mask:
 </template>
 <!-- PÁGINA XII: Paleoclimatología e historia climática a partir del hielo -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="paleoclimatologia-hielo">
+  <section class="page ice-science-page" data-page-key="paleoclimatologia-hielo" data-thumbnail="paleoclimatologia-hielo.jpg">
     <div class="ice-science-layout v12">
 
       <aside class="ice-science-text">
@@ -12941,13 +15239,13 @@ mask:
 </template>
 <!-- PÁGINA XIII: El origen de la Cordillera Blanca y su historia glaciar -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="origen-cordillera-blanca">
+  <section class="page ice-science-page" data-page-key="origen-cordillera-blanca" data-thumbnail="origen-cordillera-blanca.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
         <div class="ice-science-kicker">XII · Glaciología visual</div>
 
-        <h1>El origen de la Cordillera Blanca y su historia glaciar</h1>
+        <h1>El origen de la Cordillera Blanca</h1>
 
         <p class="ice-science-subtitle">
           Batolito, glaciaciones, geomorfología y memoria larga del hielo andino.
@@ -13025,7 +15323,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Quinta parte — La expedición al Huascarán -->
 <template data-page>
-  <section class="page expedition-guide-page">
+  <section class="page expedition-guide-page" data-thumbnail="quinta-parte-expedicion.jpg">
     <div class="expedition-guide-layout">
 
       <aside class="expedition-guide-left">
@@ -13119,7 +15417,7 @@ mask:
   </section>
 </template>
 <template data-page>
-  <section class="page event-photo-page">
+  <section class="page event-photo-page" data-thumbnail="visita-presidente.jpg">
     <div class="event-photo-layout">
 
       <aside class="event-photo-sidebar">
@@ -13143,7 +15441,7 @@ mask:
   </section>
 </template>
 <template data-page>
-  <section class="page event-photo-page">
+  <section class="page event-photo-page" data-thumbnail="equipo-internacional-cientificos.jpg">
     <div class="event-photo-layout">
 
       <aside class="event-photo-sidebar">
@@ -13171,7 +15469,7 @@ mask:
 </template>
 <!-- PÁGINA XIV: Cómo estudiar y vigilar un glaciar en la Cordillera Blanca -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="monitoreo-glaciar-cordillera-blanca">
+  <section class="page ice-science-page" data-page-key="monitoreo-glaciar-cordillera-blanca" data-thumbnail="monitoreo-glaciar-cordillera-blanca.jpg">
     <div class="ice-science-layout v14">
 
       <aside class="ice-science-text">
@@ -13256,13 +15554,13 @@ mask:
 
 
 <template data-page>
-  <section class="page event-photo-page">
+  <section class="page event-photo-page" data-thumbnail="equipo-porteadores-guias.jpg">
     <div class="event-photo-layout">
 
       <aside class="event-photo-sidebar">
         <div class="event-photo-kicker">Un gran equipo al mando de Félix Vicencio</div>
         <div class="event-photo-note">
-          Los héroes silenciosos pero extremadamente importantes dentro de la expedición.
+          Los héroes detrás del éxito de la expedición.
         </div>
       </aside>
 
@@ -13284,7 +15582,7 @@ mask:
 </template>
 
 <template data-page>
-  <section class="page event-photo-page">
+  <section class="page event-photo-page" data-thumbnail="perforadora-hielo.jpg">
     <div class="event-photo-layout">
 
       <aside class="event-photo-sidebar">
@@ -13314,7 +15612,7 @@ mask:
 <!-- PÁGINA XV: Midiendo la real altitud del Huascarán desde la cumbre -->
 <!-- PÁGINA XV: Midiendo la real altitud del Huascarán desde la cumbre -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="altitud-huascaran-cumbre">
+  <section class="page ice-science-page" data-page-key="altitud-huascaran-cumbre" data-thumbnail="altitud-huascaran-cumbre.jpg">
     <div class="ice-science-layout v15">
 
       <aside class="ice-science-visual">
@@ -13395,7 +15693,7 @@ mask:
 </template>
 <!-- PÁGINA XVI: Las heridas del Huascarán y del Callejón de Huaylas -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="riesgo-glaciar-callejon-huaylas">
+  <section class="page ice-science-page" data-page-key="riesgo-glaciar-callejon-huaylas" data-thumbnail="riesgo-glaciar-callejon-huaylas.jpg">
     <div class="ice-science-layout v16">
 
       <aside class="ice-science-text">
@@ -13484,7 +15782,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Sexta parte — Perforar la memoria -->
 <template data-page>
-  <section class="page sixth-guide-page">
+  <section class="page sixth-guide-page" data-thumbnail="sexta-parte-guia.jpg">
     <div class="sixth-guide-layout">
 
       <aside class="sixth-guide-left">
@@ -13548,7 +15846,7 @@ mask:
 
 <!-- PÁGINA XVII: Cómo se extrae el tiempo -->
 <template data-page>
-  <section class="page memory-drill-page" data-page-key="como-se-extrae-el-tiempo">
+  <section class="page memory-drill-page" data-page-key="como-se-extrae-el-tiempo" data-thumbnail="extraccion-tiempo.jpg">
     <div class="memory-drill-layout">
 
       <aside class="memory-drill-text">
@@ -13608,7 +15906,7 @@ mask:
 
 <!-- PÁGINA XVIII: La oficina sobre el hielo -->
 <template data-page>
-  <section class="page ice-office-page" data-page-key="oficina-sobre-el-hielo">
+  <section class="page ice-office-page" data-page-key="oficina-sobre-el-hielo" data-thumbnail="oficina-hielo.jpg">
     <div class="ice-office-layout">
 
       <aside class="ice-office-visual">
@@ -13675,7 +15973,7 @@ mask:
 
 <!-- PÁGINA XIX: Cuando el hielo toca la roca -->
 <template data-page>
-  <section class="page bedrock-page" data-page-key="cuando-el-hielo-toca-la-roca">
+  <section class="page bedrock-page" data-page-key="cuando-el-hielo-toca-la-roca" data-thumbnail="hielo-roca.jpg">
     <div class="bedrock-layout">
 
       <aside class="bedrock-visual">
@@ -13738,7 +16036,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Séptima parte — El conflicto -->
 <template data-page>
-  <section class="page seventh-guide-page">
+ <section class="page seventh-guide-page" data-thumbnail="septima-parte-conflicto.jpg">
     <div class="seventh-guide-layout">
 
       <aside class="seventh-guide-left">
@@ -13813,7 +16111,7 @@ mask:
 </template>
 <!-- PÁGINA 34: Oyendo la voz de la población local de Musho -->
 <template data-page>
-  <section class="page musho-voices-page" data-page-key="voz-poblacion-musho">
+  <section class="page musho-voices-page" data-page-key="voz-poblacion-musho" data-thumbnail="musho-reunion-comunidad.jpg">
     <div class="musho-voices-layout">
 
       <aside class="musho-voices-text">
@@ -13933,7 +16231,7 @@ mask:
 </template>
 <!-- PÁGINA XVII: El Huascarán y la gente del Callejón de Huaylas -->
 <template data-page>
-  <section class="page glacier-society-page" data-page-key="glaciares-agua-sociedad">
+  <section class="page glacier-society-page" data-page-key="glaciares-agua-sociedad" data-thumbnail="glaciares-agua-sociedad.jpg">
     <div class="glacier-society-layout">
 
       <aside class="glacier-society-text">
@@ -14034,7 +16332,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Octava parte — El rescate de las muestras -->
 <template data-page>
-  <section class="page eighth-guide-page">
+  <section class="page eighth-guide-page" data-thumbnail="octava-parte-rescate-muestras.jpg">
     <div class="eighth-guide-layout">
 
       <aside class="eighth-guide-left">
@@ -14111,7 +16409,7 @@ mask:
 </template>
 <!-- PÁGINA XVIII: Las técnicas de guiado en la Cordillera Blanca -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="tecnicas-guiado-cordillera-blanca">
+  <section class="page ice-science-page" data-page-key="tecnicas-guiado-cordillera-blanca" data-thumbnail="tecnicas-guiado-cordillera-blanca.jpg">
     <div class="ice-science-layout v14">
 
       <aside class="ice-science-text">
@@ -14198,7 +16496,7 @@ mask:
 </template>
 <!-- PÁGINA XIX: Características de la glaciología tropical -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="glaciologia-tropical">
+  <section class="page ice-science-page" data-page-key="glaciologia-tropical" data-thumbnail="glaciologia-tropical.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
@@ -14289,7 +16587,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Novena parte — La memoria del Huascarán -->
 <template data-page>
-  <section class="page ninth-guide-page">
+  <section class="page ninth-guide-page" data-thumbnail="novena-parte-memoria-huascaran.jpg">
     <div class="ninth-guide-layout">
 
       <aside class="ninth-guide-left">
@@ -14376,7 +16674,7 @@ mask:
 </template>
 <!-- PÁGINA XX: Huellas humanas sobre la nieve -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="huellas-humanas-nieve">
+  <section class="page ice-science-page" data-page-key="huellas-humanas-nieve" data-thumbnail="huellas-humanas-nieve.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
@@ -14463,7 +16761,7 @@ mask:
 </template>
 <!-- PÁGINA GUÍA: Décima parte — Una memoria para el futuro -->
 <template data-page>
-  <section class="page tenth-guide-page">
+  <section class="page tenth-guide-page" data-thumbnail="decima-parte-futuro.jpg">
     <div class="tenth-guide-layout">
 
 <aside class="tenth-guide-left">
@@ -14536,7 +16834,7 @@ La invitación de Lonnie a China.<br>
 </template>
 
 <template data-page>
-  <section class="page ice-science-page" data-page-key="proyeccion-perdida-glaciar">
+  <section class="page ice-science-page" data-page-key="proyeccion-perdida-glaciar" data-thumbnail="proyeccion-perdida-glaciar.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
@@ -14622,7 +16920,7 @@ La invitación de Lonnie a China.<br>
   </section>
 </template>
 <template data-page>
-  <section class="page epilogue-photo-page">
+  <section class="page epilogue-photo-page" data-thumbnail="epilogo-huascaran.jpg">
     <div class="epilogue-photo-layout">
 
       <aside class="epilogue-photo-sidebar">
@@ -14662,7 +16960,7 @@ La invitación de Lonnie a China.<br>
 
 <!-- PÁGINA NUEVA FINAL — BIBLIOGRAFÍA / XXV -->
 <template data-page>
-  <section class="page glacier-motion-page" data-page-key="como-se-mueve-una-montana-de-hielo">
+  <section class="page glacier-motion-page" data-page-key="como-se-mueve-una-montana-de-hielo" data-thumbnail="dinamica-glaciar-main.jpg">
     <div class="glacier-motion-layout">
 
       <aside class="glacier-motion-text">
@@ -14741,7 +17039,7 @@ La invitación de Lonnie a China.<br>
 
 
 <template data-page>
-  <section class="page ice-science-page" data-page-key="balance-energia-glaciar">
+  <section class="page ice-science-page" data-page-key="balance-energia-glaciar" data-thumbnail="balance-energia-glaciar.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text energy-balance-text">
@@ -14821,7 +17119,7 @@ La invitación de Lonnie a China.<br>
   </section>
 </template>
 <template data-page>
-  <section class="page ice-science-page" data-page-key="hidrologia-glaciar-santa">
+  <section class="page ice-science-page" data-page-key="hidrologia-glaciar-santa" data-thumbnail="hidrologia-glaciar-santa.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text energy-balance-text">
@@ -14904,7 +17202,7 @@ La invitación de Lonnie a China.<br>
 </template>
 <!-- PÁGINA FINAL: Modelamiento glaciar -->
 <template data-page>
-  <section class="page ice-science-page" data-page-key="modelamiento-glaciar">
+  <section class="page ice-science-page" data-page-key="modelamiento-glaciar" data-thumbnail="modelamiento-glaciar.jpg">
     <div class="ice-science-layout v13">
 
       <aside class="ice-science-text">
@@ -15002,7 +17300,7 @@ La invitación de Lonnie a China.<br>
 
   <!-- PÁGINA FINAL — CIERRE ÉPICO -->
   <template data-page>
-    <section class="page final-epic-page">
+    <section class="page final-epic-page" data-thumbnail="huascaran-final.jpg">
       <div class="final-epic-bg"></div>
       <div class="final-epic-overlay"></div>
 
@@ -15056,7 +17354,7 @@ La invitación de Lonnie a China.<br>
 
           <div class="final-epic-footer">
             <span></span>
-            <p>LA MEMORIA DEL HUASCARÁN</p>
+            <p>SISTEMA DESARROLLADO POR MEVERICK JEAMPIERE</p>
             <span></span>
           </div>
         </div>
@@ -15074,9 +17372,13 @@ const readerProgress = document.getElementById('readerProgress');
 const readerProgressFill = document.getElementById('readerProgressFill');
 const readerProgressThumb = document.getElementById('readerProgressThumb');
 const readerPreview = document.getElementById('readerPreview');
-const readerPreviewStage = document.getElementById('readerPreviewStage');
+const readerPreviewImage = document.getElementById('readerPreviewImage');
 const readerPreviewPage = document.getElementById('readerPreviewPage');
 const readerPreviewTitle = document.getElementById('readerPreviewTitle');
+const fullscreenReaderPreview = document.getElementById('fullscreenReaderPreview');
+const fullscreenReaderPreviewImage = document.getElementById('fullscreenReaderPreviewImage');
+const fullscreenReaderPreviewPage = document.getElementById('fullscreenReaderPreviewPage');
+const fullscreenReaderPreviewTitle = document.getElementById('fullscreenReaderPreviewTitle');
 
 let pageFlip;
 let isFlipping = false;
@@ -15084,36 +17386,50 @@ let isDraggingProgress = false;
 let pendingPreviewIndex = 0;
 let previewHideTimer = null;
 
-   function getPageSize(){
+function getPageSize(){
   const stage = stageElement.getBoundingClientRect();
   const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 
-  const availableW = Math.max(300, stage.width - 4);
-  const availableH = Math.max(420, stage.height - 4);
+  const availableW = Math.max(300, stage.width - 12);
+  const availableH = Math.max(420, stage.height - 12);
 
-  if(isPortrait){
+  if (isPortrait) {
     const ratio = 2121 / 3000;
-    let h = availableH * 0.998;
+    let h = availableH * 0.965;
     let w = h * ratio;
 
-    if(w > availableW * 0.998){
-      w = availableW * 0.998;
+    if (w > availableW * 0.965) {
+      w = availableW * 0.965;
       h = w / ratio;
     }
 
-    return { width: Math.round(w), height: Math.round(h) };
+    return {
+      width: Math.round(w),
+      height: Math.round(h)
+    };
   }
 
   const ratio = 1.72;
-  let h = availableH * 0.998;
+
+  let heightFactor = 0.955;
+  let widthFactor = 0.965;
+
+  if (window.innerHeight <= 980) heightFactor = 0.93;
+  if (window.innerHeight <= 900) heightFactor = 0.905;
+  if (window.innerHeight <= 820) heightFactor = 0.88;
+
+  let h = availableH * heightFactor;
   let w = h * ratio;
 
-  if(w > availableW * 0.998){
-    w = availableW * 0.998;
+  if (w > availableW * widthFactor) {
+    w = availableW * widthFactor;
     h = w / ratio;
   }
 
-  return { width: Math.round(w), height: Math.round(h) };
+  return {
+    width: Math.round(w),
+    height: Math.round(h)
+  };
 }
 
    function populatePages(){
@@ -15179,20 +17495,30 @@ function getPageTitleFromElement(pageEl, index){
 
   return `Página ${index + 1}`;
 }
+function getPreviewImageForPage(pageEl){
+  if(!pageEl) return '';
+
+  if(pageEl.dataset.thumbnail){
+    return pageEl.dataset.thumbnail;
+  }
+
+  return '';
+}
 
 function renderPreviewForPage(index){
-  if(!pageFlip || !readerPreviewStage) return;
+  if(!pageFlip || !readerPreviewImage) return;
 
   const pages = Array.from(bookElement.querySelectorAll('.page'));
   const target = pages[index];
   if(!target) return;
 
-  readerPreviewStage.innerHTML = '';
-  const clone = target.cloneNode(true);
+  const imageUrl = getPreviewImageForPage(target);
 
-  clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-
-  readerPreviewStage.appendChild(clone);
+  if(imageUrl){
+    readerPreviewImage.style.backgroundImage = `url("${imageUrl}")`;
+  }else{
+    readerPreviewImage.style.backgroundImage = 'none';
+  }
 
   if(readerPreviewPage){
     readerPreviewPage.textContent = `Página ${index + 1}`;
@@ -15236,6 +17562,61 @@ function hideReaderPreview(delay = 120){
     if(!isDraggingProgress){
       readerPreview.classList.remove('is-visible');
       updateReaderProgress();
+    }
+  }, delay);
+}
+function renderFullscreenPreviewForPage(index){
+  if(!pageFlip || !fullscreenReaderPreviewImage) return;
+
+  const pages = Array.from(bookElement.querySelectorAll('.page'));
+  const target = pages[index];
+  if(!target) return;
+
+  const imageUrl = getPreviewImageForPage(target);
+
+  if(imageUrl){
+    fullscreenReaderPreviewImage.style.backgroundImage = `url("${imageUrl}")`;
+  }else{
+    fullscreenReaderPreviewImage.style.backgroundImage = 'none';
+  }
+
+  if(fullscreenReaderPreviewPage){
+    fullscreenReaderPreviewPage.textContent = `Página ${index + 1}`;
+  }
+
+  if(fullscreenReaderPreviewTitle){
+    fullscreenReaderPreviewTitle.textContent = getPageTitleFromElement(target, index);
+  }
+}
+
+function showFullscreenPreview(index, clientX = null){
+  if(!fullscreenReaderPreview || !fullscreenReaderProgress || !pageFlip) return;
+
+  const total = pageFlip.getPageCount();
+  const safeIndex = Math.max(0, Math.min(total - 1, index));
+
+  renderFullscreenPreviewForPage(safeIndex);
+
+  const trackRect = fullscreenReaderProgress.getBoundingClientRect();
+  const ratio = total <= 1 ? 0 : safeIndex / (total - 1);
+
+  let leftPx = clientX !== null
+    ? (clientX - trackRect.left)
+    : ratio * trackRect.width;
+
+  leftPx = Math.max(22, Math.min(trackRect.width - 22, leftPx));
+  const leftPercent = (leftPx / trackRect.width) * 100;
+
+  fullscreenReaderProgress.style.setProperty('--preview-left', `${leftPercent}%`);
+  fullscreenReaderPreview.classList.add('is-visible');
+}
+
+function hideFullscreenPreview(delay = 120){
+  if(!fullscreenReaderPreview) return;
+
+  setTimeout(() => {
+    if(!isDraggingFullscreenProgress){
+      fullscreenReaderPreview.classList.remove('is-visible');
     }
   }, delay);
 }
@@ -15338,23 +17719,75 @@ if(fullscreenBtn){
       populatePages();
       const size = getPageSize();
       pageFlip = new St.PageFlip(bookElement,{
-        width:size.width,
-        height:size.height,
-        size:'fixed',
-        showCover:false,
-        usePortrait:true,
-        drawShadow:true,
-        maxShadowOpacity:.12,
-        flippingTime:1050,
-        startZIndex:0,
-        mobileScrollSupport:false,
-        clickEventForward:true,
-        useMouseEvents:true,
-        swipeDistance:14,
-        showPageCorners:true,
-        disableFlipByClick:false,
-        autoSize:false
-      });
+  width:size.width,
+  height:size.height,
+  size:'fixed',
+  showCover:false,
+  usePortrait:true,
+  drawShadow:true,
+  maxShadowOpacity:.12,
+  flippingTime:700,
+  startZIndex:0,
+  mobileScrollSupport:true,
+  clickEventForward:true,
+  useMouseEvents:false,
+  swipeDistance:8,
+  showPageCorners:true,
+  disableFlipByClick:false,
+  autoSize:false
+});
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let touchMoved = false;
+
+bookElement.addEventListener('touchstart', (event) => {
+  if (!event.touches || !event.touches.length) return;
+  const t = event.touches[0];
+  touchStartX = t.clientX;
+  touchStartY = t.clientY;
+  touchEndX = t.clientX;
+  touchEndY = t.clientY;
+  touchMoved = false;
+}, { passive: true });
+
+bookElement.addEventListener('touchmove', (event) => {
+  if (!event.touches || !event.touches.length) return;
+  const t = event.touches[0];
+  touchEndX = t.clientX;
+  touchEndY = t.clientY;
+
+  if (
+    Math.abs(touchEndX - touchStartX) > 8 ||
+    Math.abs(touchEndY - touchStartY) > 8
+  ) {
+    touchMoved = true;
+  }
+}, { passive: true });
+
+bookElement.addEventListener('touchend', () => {
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+
+  if (absX > 36 && absX > absY * 1.2) {
+    if (dx < 0) {
+      goNext();
+    } else {
+      goPrev();
+    }
+    return;
+  }
+
+  if (!touchMoved) {
+    const rect = bookElement.getBoundingClientRect();
+    const x = touchStartX - rect.left;
+    x > rect.width / 2 ? goNext() : goPrev();
+  }
+}, { passive: true });
       pageFlip.loadFromHTML(bookElement.querySelectorAll('.page'));
       pageFlip.turnToPage(Math.min(startPage,pageFlip.getPageCount()-1));
       pageFlip.on('flip',()=>{isFlipping=false;updateCounter();});
@@ -15505,5 +17938,201 @@ if(readerProgress){
 }
     window.addEventListener('load',()=>initReader(0));
   </script>
+
+<script>
+  (function () {
+    const revealBar = document.getElementById("fullscreenBottomReveal");
+    const fullscreenFill = document.getElementById("fullscreenProgressFill");
+    const fullscreenThumb = document.getElementById("fullscreenProgressThumb");
+const fullscreenReaderProgress = document.getElementById("fullscreenReaderProgress");
+let isDraggingFullscreenProgress = false;
+
+    if (!revealBar || !fullscreenFill || !fullscreenThumb) return;
+
+    let hideTimer = null;
+
+    function isFullscreenNow() {
+      return !!document.fullscreenElement;
+    }
+
+    function setFullscreenState() {
+      document.body.classList.toggle("is-fullscreen-active", isFullscreenNow());
+      if (!isFullscreenNow()) {
+        revealBar.classList.remove("is-visible");
+      }
+    }
+
+    function showRevealBar() {
+      if (!isFullscreenNow()) return;
+      revealBar.classList.add("is-visible");
+
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        revealBar.classList.remove("is-visible");
+      }, 1400);
+    }
+
+   function syncFullscreenProgressFromMain() {
+  const mainFill = document.getElementById("readerProgressFill");
+  const mainThumb = document.getElementById("readerProgressThumb");
+  const mainProgress = document.getElementById("readerProgress");
+  const fullscreenProgress = document.getElementById("fullscreenReaderProgress");
+
+  if (mainFill) {
+    fullscreenFill.style.width = mainFill.style.width || "0%";
+  }
+
+  if (mainThumb) {
+    fullscreenThumb.style.left = mainThumb.style.left || "0%";
+  }
+
+  if (mainProgress && fullscreenProgress) {
+    const now = mainProgress.getAttribute("aria-valuenow") || "1";
+    const max = mainProgress.getAttribute("aria-valuemax") || "1";
+    fullscreenProgress.setAttribute("aria-valuenow", now);
+    fullscreenProgress.setAttribute("aria-valuemax", max);
+  }
+}
+function getFullscreenIndexFromClientX(clientX) {
+  if (!fullscreenReaderProgress || !pageFlip) return 0;
+  const rect = fullscreenReaderProgress.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+const total = pageFlip?.getPageCount?.() || 1;
+
+  return Math.round(ratio * Math.max(0, total - 1));
+}
+
+function updateFullscreenThumbFromClientX(clientX) {
+  if (!fullscreenReaderProgress) return;
+
+  const rect = fullscreenReaderProgress.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  const percent = ratio * 100;
+
+  fullscreenFill.style.width = `${percent}%`;
+  fullscreenThumb.style.left = `${percent}%`;
+}
+
+    document.addEventListener("fullscreenchange", () => {
+      setFullscreenState();
+      syncFullscreenProgressFromMain();
+    });
+if (fullscreenReaderProgress) {
+  const finishFullscreenDrag = (event) => {
+  if (!pageFlip) return;
+
+  const index = getFullscreenIndexFromClientX(event.clientX);
+
+  if (isDraggingFullscreenProgress && typeof goToPageIndex === "function") {
+    goToPageIndex(index);
+  }
+
+  isDraggingFullscreenProgress = false;
+  fullscreenReaderProgress.classList.remove("is-dragging");
+
+  try {
+    fullscreenReaderProgress.releasePointerCapture?.(event.pointerId);
+  } catch (_) {}
+
+  requestAnimationFrame(() => {
+    syncFullscreenProgressFromMain();
+  });
+};
+
+  fullscreenReaderProgress.addEventListener("pointerdown", (event) => {
+    if (!isFullscreenNow() || !pageFlip) return;
+
+    event.preventDefault();
+
+    isDraggingFullscreenProgress = true;
+    fullscreenReaderProgress.classList.add("is-dragging");
+    fullscreenReaderProgress.setPointerCapture?.(event.pointerId);
+
+    updateFullscreenThumbFromClientX(event.clientX);
+    showFullscreenPreview(getFullscreenIndexFromClientX(event.clientX), event.clientX);
+
+    clearTimeout(hideTimer);
+    revealBar.classList.add("is-visible");
+  });
+
+  fullscreenReaderProgress.addEventListener("pointermove", (event) => {
+    if (!isFullscreenNow() || !pageFlip) return;
+
+    const index = getFullscreenIndexFromClientX(event.clientX);
+
+    if (isDraggingFullscreenProgress) {
+      event.preventDefault();
+      updateFullscreenThumbFromClientX(event.clientX);
+      showFullscreenPreview(index, event.clientX);
+    } else {
+      showFullscreenPreview(index, event.clientX);
+    }
+  });
+
+  fullscreenReaderProgress.addEventListener("pointerup", (event) => {
+    if (!isFullscreenNow() || !pageFlip) return;
+    finishFullscreenDrag(event);
+    hideFullscreenPreview(140);
+  });
+
+  fullscreenReaderProgress.addEventListener("pointercancel", (event) => {
+    isDraggingFullscreenProgress = false;
+    fullscreenReaderProgress.classList.remove("is-dragging");
+    hideFullscreenPreview(80);
+
+    try {
+      fullscreenReaderProgress.releasePointerCapture?.(event.pointerId);
+    } catch (_) {}
+  });
+
+  fullscreenReaderProgress.addEventListener("pointerleave", () => {
+    if (!isDraggingFullscreenProgress) {
+      hideFullscreenPreview(80);
+    }
+  });
+}
+
+    document.addEventListener("mousemove", (e) => {
+
+  if (!isFullscreenNow()) return;
+  const threshold = Math.max(window.innerHeight * 0.16, 120);
+  const nearBottom = e.clientY >= window.innerHeight - threshold;
+  if (nearBottom) {
+    if (!isDraggingFullscreenProgress) {
+      syncFullscreenProgressFromMain();
+    }
+    showRevealBar();
+  }
+});
+
+    revealBar.addEventListener("mouseenter", () => {
+      if (!isFullscreenNow()) return;
+      clearTimeout(hideTimer);
+      revealBar.classList.add("is-visible");
+    });
+
+    revealBar.addEventListener("mouseleave", () => {
+      if (!isFullscreenNow()) return;
+      hideTimer = setTimeout(() => {
+        revealBar.classList.remove("is-visible");
+      }, 500);
+    });
+const mainFillObserverTarget = document.getElementById("readerProgressFill");
+
+if (mainFillObserverTarget) {
+  const observer = new MutationObserver(() => {
+    if (!isDraggingFullscreenProgress) {
+      syncFullscreenProgressFromMain();
+    }
+  });
+
+  observer.observe(mainFillObserverTarget, {
+    attributes: true,
+    attributeFilter: ["style"]
+  });
+}
+    setFullscreenState();
+  })();
+</script>
 </body>
 </html>
