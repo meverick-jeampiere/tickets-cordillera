@@ -13848,12 +13848,12 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
 <body>
   <div class="app">
     <header class="topbar">
-      <div>La memoria del Huascarán</div>
-      <div class="hint">Usa ← → o toca los lados para pasar página</div>
+      <div id="topbarTitle" data-i18n="topbar_title">La memoria del Huascarán</div>
+      <div class="hint" id="topbarHint" data-i18n="topbar_hint">Usa ← → o toca los lados para pasar página</div>
     </header>
 
 <main class="stage">
-  <button id="fullscreenBtn" class="fullscreen-btn" type="button" aria-label="Ver en pantalla completa" title="Pantalla completa">
+  <button id="fullscreenBtn" class="fullscreen-btn" type="button" aria-label="Ver en pantalla completa" title="Pantalla completa" data-i18n-aria-label="fullscreen_enter" data-i18n-title="fullscreen_enter">
     ⛶
   </button>
 
@@ -13866,7 +13866,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
   id="fullscreenReaderProgress"
   role="slider"
   tabindex="0"
-  aria-label="Progreso del libro en pantalla completa"
+  aria-label="Progreso del libro en pantalla completa" data-i18n-aria-label="progress_fullscreen"
   aria-valuemin="1"
   aria-valuemax="1"
   aria-valuenow="1"
@@ -13880,8 +13880,8 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
       <div class="reader-preview-image" id="fullscreenReaderPreviewImage"></div>
     </div>
     <div class="reader-preview-meta">
-      <span class="reader-preview-page" id="fullscreenReaderPreviewPage">Página 1</span>
-      <strong class="reader-preview-title" id="fullscreenReaderPreviewTitle">Portada</strong>
+      <span class="reader-preview-page" id="fullscreenReaderPreviewPage" data-i18n="preview_page_default">Página 1</span>
+      <strong class="reader-preview-title" id="fullscreenReaderPreviewTitle" data-i18n="preview_title_default">Portada</strong>
     </div>
   </div>
 </div>
@@ -13893,7 +13893,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
     id="readerProgress"
     role="slider"
     tabindex="0"
-    aria-label="Progreso del libro"
+    aria-label="Progreso del libro" data-i18n-aria-label="progress_main"
     aria-valuemin="1"
     aria-valuemax="1"
     aria-valuenow="1"
@@ -13907,8 +13907,8 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
     <div class="reader-preview-image" id="readerPreviewImage"></div>
   </div>
   <div class="reader-preview-meta">
-    <span class="reader-preview-page" id="readerPreviewPage">Página 1</span>
-    <strong class="reader-preview-title" id="readerPreviewTitle">Portada</strong>
+    <span class="reader-preview-page" id="readerPreviewPage" data-i18n="preview_page_default">Página 1</span>
+    <strong class="reader-preview-title" id="readerPreviewTitle" data-i18n="preview_title_default">Portada</strong>
   </div>
 </div>
   </div>
@@ -13922,7 +13922,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
   </div>
 <!-- PÁGINA INICIAL — ELECCIÓN DE IDIOMA -->
 <template data-page>
-  <section class="page language-entry-page" data-thumbnail="huascaran-final.jpg">
+  <section class="page language-entry-page" data-thumbnail="huascaran-final.jpg" data-page-key="language-entry" data-page-title-key="page_language">
     <div class="language-entry-bg"></div>
     <div class="language-entry-overlay"></div>
 
@@ -13934,22 +13934,22 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
           <span class="mountain">△</span>
         </div>
 
-        <p class="language-entry-kicker">Edición internacional</p>
+        <p class="language-entry-kicker" data-i18n="language_kicker">Edición internacional</p>
 
-        <h1 class="language-entry-title">La Memoria del Huascarán</h1>
+        <h1 class="language-entry-title" data-i18n="language_title">La Memoria del Huascarán</h1>
 
-        <p class="language-entry-subtitle">Elige tu idioma</p>
+        <p class="language-entry-subtitle" data-i18n="language_choose">Elige tu idioma</p>
 
         <div class="language-entry-grid">
-          <a class="language-option" href="#" data-lang="it">Italiano</a>
-          <a class="language-option" href="#" data-lang="en">Inglés</a>
-          <a class="language-option" href="#" data-lang="es">Español</a>
-          <a class="language-option" href="#" data-lang="ru">Ruso</a>
-          <a class="language-option" href="#" data-lang="fr">Francés</a>
-          <a class="language-option" href="#" data-lang="pt">Portugués</a>
+          <a class="language-option" href="#" data-lang="it" data-i18n="language_it">Italiano</a>
+          <a class="language-option" href="#" data-lang="en" data-i18n="language_en">Inglés</a>
+          <a class="language-option" href="#" data-lang="es" data-i18n="language_es">Español</a>
+          <a class="language-option" href="#" data-lang="ru" data-i18n="language_ru">Ruso</a>
+          <a class="language-option" href="#" data-lang="fr" data-i18n="language_fr">Francés</a>
+          <a class="language-option" href="#" data-lang="pt" data-i18n="language_pt">Portugués</a>
         </div>
 
-        <p class="language-entry-note">
+        <p class="language-entry-note" data-i18n="language_note">
           Una expedición al hielo que guarda la memoria del planeta
         </p>
 
@@ -13959,14 +13959,14 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
 </template>
   <!-- PÁGINA 1: horizontal tipo libro abierto / vertical tipo móvil -->
   <template data-page>
-    <section class="page intro-page" data-thumbnail="afiche.jpeg">
+    <section class="page intro-page" data-thumbnail="afiche.jpeg" data-page-key="intro" data-page-title-key="page_intro">
       <div class="page-content desktop-opening">
         <div class="book-opening">
           <aside class="participants-side">
-            <div class="kicker">PARA LOS CIENTÍFICOS DE LA</div>
-            <h1>Expedición al Huascarán<br>de 2019</h1>
+            <div class="kicker" data-i18n="intro_kicker">PARA LOS CIENTÍFICOS DE LA</div>
+            <h1 data-i18n-html="intro_heading">Expedición al Huascarán<br>de 2019</h1>
             <div class="gold-line"></div>
-            <p class="institution">Invitación de Colaboración:</p>
+            <p class="institution" data-i18n="intro_institution">Invitación de Colaboración:</p>
             <ul class="expedition-list">
               <li><span>Lonnie Thompson <span class="country">(EE.UU.)</span></span></li>
               <li><span>Paolo Gabrielli <span class="country">(Italia)</span></span></li>
@@ -13979,7 +13979,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
         
             </ul>
 <div class="sender-signature">
-  <span>De parte de</span>
+  <span data-i18n="intro_from">De parte de</span>
   <strong>Wilmer Sánchez</strong>
 </div>
           </aside>
@@ -14006,9 +14006,9 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
         <div class="mobile-content">
           <div>
             <div class="kicker">PARA LOS CIENTÍFICOS DE LA</div>
-             <h1>Expedición al Huascarán<br>de 2019</h1>
+             <h1 data-i18n-html="intro_heading">Expedición al Huascarán<br>de 2019</h1>
             <div class="gold-line"></div>
-            <p class="institution">Invitación de Colaboración:</p>
+            <p class="institution" data-i18n="intro_institution">Invitación de Colaboración:</p>
             <ul class="expedition-list">
               <li><span>Lonnie Thompson <span class="country">(EE.UU.)</span></span></li>
               <li><span>Paolo Gabrielli <span class="country">(Italia)</span></span></li>
@@ -14021,7 +14021,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
           
             </ul>
 <div class="sender-signature">
-  <span>De parte de</span>
+  <span data-i18n="intro_from">De parte de</span>
   <strong>Wilmer Sánchez</strong>
 </div>
           </div>
@@ -16208,7 +16208,7 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
 
             <div class="musho-quote-card">
               <p>
-                No queríamos pelear, solo saber la verdad. El Huascarán es nuestro apu, no permitiremos que lo engañen.
+                No queríamos pelear, solo saber la verdad. El Huascarán es nuestro apu, no permitiremos que nos engañen.
               </p>
               <span>Comunera de Musho</span>
             </div>
@@ -17363,7 +17363,239 @@ La invitación de Lonnie a China.<br>
   </template>
 
 </div>
-  <script>
+  
+<script>
+    const I18N = {
+      es: {
+        topbar_title: "La memoria del Huascarán",
+        topbar_hint: "Usa ← → o toca los lados para pasar página",
+        fullscreen_enter: "Pantalla completa",
+        fullscreen_exit: "Salir de pantalla completa",
+        progress_main: "Progreso del libro",
+        progress_fullscreen: "Progreso del libro en pantalla completa",
+        preview_page_default: "Página 1",
+        preview_title_default: "Portada",
+        page_fallback: "Página",
+        page_language: "Elección de idioma",
+        page_intro: "Portada",
+        language_kicker: "Edición internacional",
+        language_title: "La Memoria del Huascarán",
+        language_choose: "Elige tu idioma",
+        language_it: "Italiano",
+        language_en: "Inglés",
+        language_es: "Español",
+        language_ru: "Ruso",
+        language_fr: "Francés",
+        language_pt: "Portugués",
+        language_note: "Una expedición al hielo que guarda la memoria del planeta",
+        intro_kicker: "PARA LOS CIENTÍFICOS DE LA",
+        intro_heading: "Expedición al Huascarán<br>de 2019",
+        intro_institution: "Invitación de Colaboración:",
+        intro_from: "De parte de"
+      },
+      en: {
+        topbar_title: "The Memory of Huascarán",
+        topbar_hint: "Use ← → or tap the sides to turn pages",
+        fullscreen_enter: "Fullscreen",
+        fullscreen_exit: "Exit fullscreen",
+        progress_main: "Book progress",
+        progress_fullscreen: "Book progress in fullscreen",
+        preview_page_default: "Page 1",
+        preview_title_default: "Cover",
+        page_fallback: "Page",
+        page_language: "Language selection",
+        page_intro: "Cover",
+        language_kicker: "International edition",
+        language_title: "The Memory of Huascarán",
+        language_choose: "Choose your language",
+        language_it: "Italian",
+        language_en: "English",
+        language_es: "Spanish",
+        language_ru: "Russian",
+        language_fr: "French",
+        language_pt: "Portuguese",
+        language_note: "An expedition into the ice that holds the memory of the planet",
+        intro_kicker: "FOR THE SCIENTISTS OF THE",
+        intro_heading: "Huascarán Expedition<br>of 2019",
+        intro_institution: "Invitation to collaborate:",
+        intro_from: "From"
+      },
+      it: {
+        topbar_title: "La Memoria dell’Huascarán",
+        topbar_hint: "Usa ← → o tocca i lati per cambiare pagina",
+        fullscreen_enter: "Schermo intero",
+        fullscreen_exit: "Esci da schermo intero",
+        progress_main: "Avanzamento del libro",
+        progress_fullscreen: "Avanzamento del libro a schermo intero",
+        preview_page_default: "Pagina 1",
+        preview_title_default: "Copertina",
+        page_fallback: "Pagina",
+        page_language: "Scelta della lingua",
+        page_intro: "Copertina",
+        language_kicker: "Edizione internazionale",
+        language_title: "La Memoria dell’Huascarán",
+        language_choose: "Scegli la tua lingua",
+        language_it: "Italiano",
+        language_en: "Inglese",
+        language_es: "Spagnolo",
+        language_ru: "Russo",
+        language_fr: "Francese",
+        language_pt: "Portoghese",
+        language_note: "Una spedizione nel ghiaccio che custodisce la memoria del pianeta",
+        intro_kicker: "PER GLI SCIENZIATI DELLA",
+        intro_heading: "Spedizione all’Huascarán<br>del 2019",
+        intro_institution: "Invito alla collaborazione:",
+        intro_from: "Da parte di"
+      },
+      fr: {
+        topbar_title: "La Mémoire du Huascarán",
+        topbar_hint: "Utilisez ← → ou touchez les côtés pour tourner les pages",
+        fullscreen_enter: "Plein écran",
+        fullscreen_exit: "Quitter le plein écran",
+        progress_main: "Progression du livre",
+        progress_fullscreen: "Progression du livre en plein écran",
+        preview_page_default: "Page 1",
+        preview_title_default: "Couverture",
+        page_fallback: "Page",
+        page_language: "Choix de la langue",
+        page_intro: "Couverture",
+        language_kicker: "Édition internationale",
+        language_title: "La Mémoire du Huascarán",
+        language_choose: "Choisissez votre langue",
+        language_it: "Italien",
+        language_en: "Anglais",
+        language_es: "Espagnol",
+        language_ru: "Russe",
+        language_fr: "Français",
+        language_pt: "Portugais",
+        language_note: "Une expédition dans la glace qui garde la mémoire de la planète",
+        intro_kicker: "POUR LES SCIENTIFIQUES DE L’",
+        intro_heading: "Expédition au Huascarán<br>de 2019",
+        intro_institution: "Invitation à collaborer :",
+        intro_from: "De la part de"
+      },
+      pt: {
+        topbar_title: "A Memória do Huascarán",
+        topbar_hint: "Use ← → ou toque nas laterais para virar as páginas",
+        fullscreen_enter: "Tela cheia",
+        fullscreen_exit: "Sair da tela cheia",
+        progress_main: "Progresso do livro",
+        progress_fullscreen: "Progresso do livro em tela cheia",
+        preview_page_default: "Página 1",
+        preview_title_default: "Capa",
+        page_fallback: "Página",
+        page_language: "Escolha do idioma",
+        page_intro: "Capa",
+        language_kicker: "Edição internacional",
+        language_title: "A Memória do Huascarán",
+        language_choose: "Escolha seu idioma",
+        language_it: "Italiano",
+        language_en: "Inglês",
+        language_es: "Espanhol",
+        language_ru: "Russo",
+        language_fr: "Francês",
+        language_pt: "Português",
+        language_note: "Uma expedição ao gelo que guarda a memória do planeta",
+        intro_kicker: "PARA OS CIENTISTAS DA",
+        intro_heading: "Expedição ao Huascarán<br>de 2019",
+        intro_institution: "Convite para colaboração:",
+        intro_from: "De parte de"
+      },
+      ru: {
+        topbar_title: "Память Уаскарана",
+        topbar_hint: "Используйте ← → или касайтесь краёв, чтобы перелистывать страницы",
+        fullscreen_enter: "Полный экран",
+        fullscreen_exit: "Выйти из полного экрана",
+        progress_main: "Прогресс книги",
+        progress_fullscreen: "Прогресс книги в полноэкранном режиме",
+        preview_page_default: "Страница 1",
+        preview_title_default: "Обложка",
+        page_fallback: "Страница",
+        page_language: "Выбор языка",
+        page_intro: "Обложка",
+        language_kicker: "Международное издание",
+        language_title: "Память Уаскарана",
+        language_choose: "Выберите язык",
+        language_it: "Итальянский",
+        language_en: "Английский",
+        language_es: "Испанский",
+        language_ru: "Русский",
+        language_fr: "Французский",
+        language_pt: "Португальский",
+        language_note: "Экспедиция в лёд, хранящий память планеты",
+        intro_kicker: "ДЛЯ УЧЁНЫХ",
+        intro_heading: "Экспедиция на Уаскаран<br>2019 года",
+        intro_institution: "Приглашение к сотрудничеству:",
+        intro_from: "От"
+      }
+    };
+
+    const DEFAULT_LANG = 'es';
+
+    function getCurrentLanguage(){
+      return localStorage.getItem('bookLanguage') || DEFAULT_LANG;
+    }
+
+    function translate(key, lang = getCurrentLanguage()){
+      return I18N[lang]?.[key] ?? I18N[DEFAULT_LANG]?.[key] ?? null;
+    }
+
+    function applyI18nAttributes(root = document, lang = getCurrentLanguage()){
+      root.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        const value = translate(key, lang);
+        if (value !== null) el.textContent = value;
+      });
+
+      root.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const key = el.dataset.i18nHtml;
+        const value = translate(key, lang);
+        if (value !== null) el.innerHTML = value;
+      });
+
+      root.querySelectorAll('[data-i18n-title]').forEach((el) => {
+        const key = el.dataset.i18nTitle;
+        const value = translate(key, lang);
+        if (value !== null) el.setAttribute('title', value);
+      });
+
+      root.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+        const key = el.dataset.i18nAriaLabel;
+        const value = translate(key, lang);
+        if (value !== null) el.setAttribute('aria-label', value);
+      });
+    }
+
+    function applyLanguage(lang){
+      const safeLang = I18N[lang] ? lang : DEFAULT_LANG;
+      localStorage.setItem('bookLanguage', safeLang);
+      document.documentElement.lang = safeLang;
+      applyI18nAttributes(document, safeLang);
+      updateFullscreenButtonLanguage?.();
+      updateReaderProgress?.();
+    }
+
+    function bindLanguageButtons(root = document){
+      root.querySelectorAll('.language-option[data-lang]').forEach((button) => {
+        if (button.dataset.langBound === 'true') return;
+        button.dataset.langBound = 'true';
+
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const lang = button.dataset.lang || DEFAULT_LANG;
+          applyLanguage(lang);
+
+          if (window.pageFlip && typeof window.pageFlip.flipNext === 'function') {
+            window.pageFlip.flipNext();
+          } else if (typeof window.goNext === 'function') {
+            window.goNext();
+          }
+        });
+      });
+    }
+</script>
+
+<script>
     const bookElement = document.getElementById('book');
 
 const stageElement = document.querySelector('.stage');
@@ -17449,6 +17681,9 @@ function getPageSize(){
 
     bookElement.appendChild(template.content.firstElementChild.cloneNode(true));
   });
+
+  applyI18nAttributes(bookElement);
+  bindLanguageButtons(bookElement);
 }
 
 function updateReaderProgress(previewIndex = null){
@@ -17474,9 +17709,23 @@ function updateReaderProgress(previewIndex = null){
   readerProgress.setAttribute('aria-valuemin', '1');
   readerProgress.setAttribute('aria-valuemax', String(total));
   readerProgress.setAttribute('aria-valuenow', String(activeIndex + 1));
+
+  const pageLabel = `${translate('page_fallback')} ${activeIndex + 1}`;
+  if(readerPreviewPage && !readerPreviewPage.dataset.lockedPreviewLabel){
+    readerPreviewPage.textContent = pageLabel;
+  }
+  if(fullscreenReaderPreviewPage && !fullscreenReaderPreviewPage.dataset.lockedPreviewLabel){
+    fullscreenReaderPreviewPage.textContent = pageLabel;
+  }
 }
 function getPageTitleFromElement(pageEl, index){
-  if(!pageEl) return `Página ${index + 1}`;
+  if(!pageEl) return `${translate('page_fallback')} ${index + 1}`;
+
+  const pageTitleKey = pageEl.dataset.pageTitleKey;
+  if(pageTitleKey){
+    const translatedTitle = translate(pageTitleKey);
+    if(translatedTitle) return translatedTitle;
+  }
 
   const key = pageEl.dataset.pageKey;
   const heading =
@@ -17493,7 +17742,7 @@ function getPageTitleFromElement(pageEl, index){
     return key.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   }
 
-  return `Página ${index + 1}`;
+  return `${translate('page_fallback')} ${index + 1}`;
 }
 function getPreviewImageForPage(pageEl){
   if(!pageEl) return '';
@@ -17521,7 +17770,8 @@ function renderPreviewForPage(index){
   }
 
   if(readerPreviewPage){
-    readerPreviewPage.textContent = `Página ${index + 1}`;
+    readerPreviewPage.textContent = `${translate('page_fallback')} ${index + 1}`;
+    readerPreviewPage.dataset.lockedPreviewLabel = 'true';
   }
 
   if(readerPreviewTitle){
@@ -17561,6 +17811,7 @@ function hideReaderPreview(delay = 120){
   previewHideTimer = setTimeout(() => {
     if(!isDraggingProgress){
       readerPreview.classList.remove('is-visible');
+      if(readerPreviewPage) delete readerPreviewPage.dataset.lockedPreviewLabel;
       updateReaderProgress();
     }
   }, delay);
@@ -17581,7 +17832,8 @@ function renderFullscreenPreviewForPage(index){
   }
 
   if(fullscreenReaderPreviewPage){
-    fullscreenReaderPreviewPage.textContent = `Página ${index + 1}`;
+    fullscreenReaderPreviewPage.textContent = `${translate('page_fallback')} ${index + 1}`;
+    fullscreenReaderPreviewPage.dataset.lockedPreviewLabel = 'true';
   }
 
   if(fullscreenReaderPreviewTitle){
@@ -17617,6 +17869,7 @@ function hideFullscreenPreview(delay = 120){
   setTimeout(() => {
     if(!isDraggingFullscreenProgress){
       fullscreenReaderPreview.classList.remove('is-visible');
+      if(fullscreenReaderPreviewPage) delete fullscreenReaderPreviewPage.dataset.lockedPreviewLabel;
     }
   }, delay);
 }
@@ -17647,6 +17900,21 @@ function updateCounter(){
     readerProgress.setAttribute('aria-valuenow', String(current));
   }
 }
+function updateFullscreenButtonLanguage(){
+  if(!fullscreenBtn) return;
+
+  const isFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement;
+
+  const ariaKey = isFullscreen ? 'fullscreen_exit' : 'fullscreen_enter';
+  const titleKey = isFullscreen ? 'fullscreen_exit' : 'fullscreen_enter';
+
+  fullscreenBtn.setAttribute('aria-label', translate(ariaKey));
+  fullscreenBtn.setAttribute('title', translate(titleKey));
+}
+
 function updateFullscreenButton(){
   if(!pageFlip || !fullscreenBtn) return;
 
@@ -17662,14 +17930,7 @@ function updateFullscreenButton(){
 
   fullscreenBtn.classList.toggle('is-fullscreen', !!isFullscreen);
   fullscreenBtn.textContent = isFullscreen ? '×' : '⛶';
-  fullscreenBtn.setAttribute(
-    'aria-label',
-    isFullscreen ? 'Salir de pantalla completa' : 'Ver en pantalla completa'
-  );
-  fullscreenBtn.setAttribute(
-    'title',
-    isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'
-  );
+  updateFullscreenButtonLanguage();
 }
 
 async function toggleFullscreen(){
@@ -17789,13 +18050,19 @@ bookElement.addEventListener('touchend', () => {
   }
 }, { passive: true });
       pageFlip.loadFromHTML(bookElement.querySelectorAll('.page'));
+      window.pageFlip = pageFlip;
       pageFlip.turnToPage(Math.min(startPage,pageFlip.getPageCount()-1));
       pageFlip.on('flip',()=>{isFlipping=false;updateCounter();});
 pageFlip.on('changeState',(e)=>{isFlipping=e.data==='flipping';});
 updateCounter();
 updateReaderProgress();
 updateFullscreenButton();
+      applyI18nAttributes(bookElement);
+      bindLanguageButtons(bookElement);
     }
+    window.goNext = goNext;
+    window.goPrev = goPrev;
+    window.goToPageIndex = goToPageIndex;
 
     function goNext(){if(!pageFlip||isFlipping)return;pageFlip.flipNext();}
     function goPrev(){if(!pageFlip||isFlipping)return;pageFlip.flipPrev();}
@@ -17936,7 +18203,11 @@ if(readerProgress){
     }
   });
 }
-    window.addEventListener('load',()=>initReader(0));
+    window.addEventListener('load',()=>{
+      applyLanguage(getCurrentLanguage());
+      bindLanguageButtons(document);
+      initReader(0);
+    });
   </script>
 
 <script>
