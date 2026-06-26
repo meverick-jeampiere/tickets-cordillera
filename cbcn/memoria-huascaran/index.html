@@ -13860,6 +13860,160 @@ body:not(.is-fullscreen-active) .fullscreen-bottom-reveal{
 body.is-language-entry .fullscreen-btn{
   display:none !important;
 }
+
+/* =========================================================
+   CONTROLES PREMIUM DE PANTALLA COMPLETA
+   ========================================================= */
+
+.fullscreen-esc-toast{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%) translateY(-10px);
+  z-index:10030;
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(16,24,38,.78);
+  color:#fffdf7;
+  font-family:Inter, sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.04em;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s ease, transform .28s ease;
+}
+
+.fullscreen-esc-toast.is-visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.fullscreen-corner-zone{
+  position:absolute;
+  top:0;
+  right:0;
+  width:min(190px, 24vw);
+  height:min(190px, 24vh);
+  z-index:10025;
+  display:none;
+  pointer-events:auto;
+}
+
+body.is-fullscreen-active .fullscreen-corner-zone{
+  display:block;
+}
+
+.fullscreen-close-btn{
+  position:absolute;
+  top:22px;
+  right:22px;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(12,18,28,.72);
+  color:#fffdf7;
+  font-family:Inter, sans-serif;
+  font-size:25px;
+  font-weight:700;
+  line-height:1;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(-6px) scale(.96);
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    background .22s ease;
+}
+
+.fullscreen-corner-zone:hover .fullscreen-close-btn,
+.fullscreen-close-btn:focus-visible,
+.fullscreen-close-btn.is-visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.fullscreen-close-btn:hover{
+  background:rgba(12,18,28,.88);
+}
+
+.fullscreen-exit-guide{
+  position:absolute;
+  inset:0;
+  z-index:10020;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  background:
+    radial-gradient(circle at calc(100% - 42px) 38px, rgba(0,0,0,.80) 0 62px, rgba(0,0,0,.55) 63px, transparent 190px),
+    linear-gradient(225deg, rgba(0,0,0,.58) 0 0, transparent 34%);
+  transition:opacity .35s ease, visibility .35s ease;
+}
+
+.fullscreen-exit-guide.is-visible{
+  opacity:1;
+  visibility:visible;
+}
+
+.fullscreen-exit-guide-card{
+  position:absolute;
+  top:72px;
+  right:24px;
+  width:min(310px, calc(100vw - 44px));
+  padding:14px 16px;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:18px;
+  background:rgba(13,20,32,.82);
+  color:#fffdf7;
+  font-family:Inter, sans-serif;
+  box-shadow:0 20px 50px rgba(0,0,0,.32);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.fullscreen-exit-guide-card strong{
+  display:block;
+  font-size:13px;
+  line-height:1.15;
+  margin-bottom:6px;
+}
+
+.fullscreen-exit-guide-card span{
+  display:block;
+  font-size:11px;
+  line-height:1.35;
+  color:rgba(255,253,247,.78);
+}
+
+.fullscreen-exit-guide-arrow{
+  position:absolute;
+  top:26px;
+  right:78px;
+  color:#fffdf7;
+  font-size:34px;
+  line-height:1;
+  transform:rotate(-18deg);
+  text-shadow:0 8px 24px rgba(0,0,0,.45);
+}
+
+body.is-language-entry .fullscreen-btn.is-visible{
+  display:flex !important;
+}
+
   </style>
 
 </head>
@@ -13875,6 +14029,25 @@ body.is-language-entry .fullscreen-btn{
   <button id="fullscreenBtn" class="fullscreen-btn" type="button" aria-label="Ver en pantalla completa" title="Pantalla completa" data-i18n-aria-label="fullscreen_enter" data-i18n-title="fullscreen_enter">
     ⛶
   </button>
+
+
+  <div id="fullscreenEscToast" class="fullscreen-esc-toast" aria-live="polite">
+    Presione Esc para salir
+  </div>
+
+  <div id="fullscreenExitGuide" class="fullscreen-exit-guide" aria-hidden="true">
+    <div class="fullscreen-exit-guide-arrow">↗</div>
+    <div class="fullscreen-exit-guide-card">
+      <strong>Para salir del modo maximizado</strong>
+      <span>Acerque el puntero a la esquina superior derecha y presione la ×.</span>
+    </div>
+  </div>
+
+  <div id="fullscreenCornerZone" class="fullscreen-corner-zone" aria-hidden="true">
+    <button id="fullscreenCloseBtn" class="fullscreen-close-btn" type="button" aria-label="Salir de pantalla completa" title="Salir de pantalla completa">
+      ×
+    </button>
+  </div>
 
   <div id="book"></div>
 
@@ -24582,10 +24755,14 @@ final_epic_footer: "SYSTEM DEVELOPED BY MEVERICK JEAMPIERE"
         if (button.dataset.langBound === 'true') return;
         button.dataset.langBound = 'true';
 
-        button.addEventListener('click', (event) => {
+        button.addEventListener('click', async (event) => {
           event.preventDefault();
           const lang = button.dataset.lang || DEFAULT_LANG;
           applyLanguage(lang);
+
+          if (typeof window.enterFullscreenIfNeeded === 'function') {
+            await window.enterFullscreenIfNeeded({ showGuide: true });
+          }
 
           if (window.pageFlip && typeof window.pageFlip.flipNext === 'function') {
             window.pageFlip.flipNext();
@@ -24602,6 +24779,9 @@ final_epic_footer: "SYSTEM DEVELOPED BY MEVERICK JEAMPIERE"
 
 const stageElement = document.querySelector('.stage');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
+const fullscreenEscToast = document.getElementById('fullscreenEscToast');
+const fullscreenCloseBtn = document.getElementById('fullscreenCloseBtn');
+const fullscreenExitGuide = document.getElementById('fullscreenExitGuide');
 const readerProgress = document.getElementById('readerProgress');
 const readerProgressFill = document.getElementById('readerProgressFill');
 const readerProgressThumb = document.getElementById('readerProgressThumb');
@@ -24619,6 +24799,123 @@ let isFlipping = false;
 let isDraggingProgress = false;
 let pendingPreviewIndex = 0;
 let previewHideTimer = null;
+
+
+let fullscreenToastTimer = null;
+let fullscreenGuideTimer = null;
+let fullscreenCloseTimer = null;
+
+function isFullscreenNow(){
+  return !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement
+  );
+}
+
+function showFullscreenEscToast(){
+  if(!fullscreenEscToast) return;
+
+  fullscreenEscToast.classList.add('is-visible');
+  clearTimeout(fullscreenToastTimer);
+  fullscreenToastTimer = setTimeout(() => {
+    fullscreenEscToast.classList.remove('is-visible');
+  }, 4000);
+}
+
+function showFullscreenExitGuideOnce(){
+  if(!fullscreenExitGuide) return;
+
+  const guideSeen = localStorage.getItem('huascaranFullscreenExitGuideSeen') === 'true';
+  if(guideSeen) return;
+
+  localStorage.setItem('huascaranFullscreenExitGuideSeen', 'true');
+  fullscreenExitGuide.classList.add('is-visible');
+
+  clearTimeout(fullscreenGuideTimer);
+  fullscreenGuideTimer = setTimeout(() => {
+    fullscreenExitGuide.classList.remove('is-visible');
+  }, 5600);
+}
+
+function showFullscreenCloseButtonBriefly(){
+  if(!fullscreenCloseBtn) return;
+
+  fullscreenCloseBtn.classList.add('is-visible');
+  clearTimeout(fullscreenCloseTimer);
+  fullscreenCloseTimer = setTimeout(() => {
+    fullscreenCloseBtn.classList.remove('is-visible');
+  }, 5200);
+}
+
+async function enterFullscreenIfNeeded({ showGuide = false } = {}){
+  if(isFullscreenNow()){
+    showFullscreenEscToast();
+    if(showGuide){
+      showFullscreenExitGuideOnce();
+      showFullscreenCloseButtonBriefly();
+    }
+    return true;
+  }
+
+  try{
+    const target = stageElement;
+
+    if(target.requestFullscreen){
+      await target.requestFullscreen();
+    }else if(target.webkitRequestFullscreen){
+      target.webkitRequestFullscreen();
+    }else if(target.msRequestFullscreen){
+      target.msRequestFullscreen();
+    }else{
+      console.warn('Este navegador no soporta fullscreen API en este contexto.');
+      return false;
+    }
+
+    showFullscreenEscToast();
+
+    if(showGuide){
+      showFullscreenExitGuideOnce();
+      showFullscreenCloseButtonBriefly();
+    }
+
+    updateFullscreenButton();
+    return true;
+  }catch(error){
+    console.warn('No se pudo entrar a pantalla completa:', error);
+    return false;
+  }
+}
+
+async function exitFullscreenIfNeeded(){
+  if(!isFullscreenNow()) return true;
+
+  try{
+    if(document.exitFullscreen){
+      await document.exitFullscreen();
+    }else if(document.webkitExitFullscreen){
+      document.webkitExitFullscreen();
+    }else if(document.msExitFullscreen){
+      document.msExitFullscreen();
+    }
+    updateFullscreenButton();
+    return true;
+  }catch(error){
+    console.warn('No se pudo salir de pantalla completa:', error);
+    return false;
+  }
+}
+
+async function requestFullscreenBeforeForwardNavigation(){
+  if(!pageFlip) return;
+  const currentIndex = pageFlip.getCurrentPageIndex();
+  const total = pageFlip.getPageCount();
+
+  if(currentIndex < total - 1){
+    await enterFullscreenIfNeeded({ showGuide: true });
+  }
+}
+
 
 function updateFullscreenButtonForLanguagePage(){
   if(!pageFlip || !bookElement) return;
@@ -24932,53 +25229,23 @@ function updateFullscreenButtonLanguage(){
 }
 
 function updateFullscreenButton(){
-  if(!pageFlip || !fullscreenBtn) return;
+  if(!fullscreenBtn) return;
 
-  const current = pageFlip.getCurrentPageIndex();
+  const fullscreenActive = isFullscreenNow();
+  const current = pageFlip ? pageFlip.getCurrentPageIndex() : 0;
   const isFirstPage = current === 0;
 
-  fullscreenBtn.classList.toggle('is-visible', isFirstPage);
-
-  const isFullscreen =
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.msFullscreenElement;
-
-  fullscreenBtn.classList.toggle('is-fullscreen', !!isFullscreen);
-  fullscreenBtn.textContent = isFullscreen ? '×' : '⛶';
+  fullscreenBtn.classList.toggle('is-visible', isFirstPage && !fullscreenActive);
+  fullscreenBtn.classList.toggle('is-fullscreen', fullscreenActive);
+  fullscreenBtn.textContent = '⛶';
   updateFullscreenButtonLanguage();
 }
 
 async function toggleFullscreen(){
-  const fullscreenElement =
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.msFullscreenElement;
-
-  try{
-    if(!fullscreenElement){
-      const target = stageElement;
-
-      if(target.requestFullscreen){
-        await target.requestFullscreen();
-      }else if(target.webkitRequestFullscreen){
-        target.webkitRequestFullscreen();
-      }else if(target.msRequestFullscreen){
-        target.msRequestFullscreen();
-      }else{
-        console.warn('Este navegador no soporta fullscreen API en este contexto.');
-      }
-    }else{
-      if(document.exitFullscreen){
-        await document.exitFullscreen();
-      }else if(document.webkitExitFullscreen){
-        document.webkitExitFullscreen();
-      }else if(document.msExitFullscreen){
-        document.msExitFullscreen();
-      }
-    }
-  }catch(error){
-    console.warn('No se pudo cambiar a pantalla completa:', error);
+  if(isFullscreenNow()){
+    await exitFullscreenIfNeeded();
+  }else{
+    await enterFullscreenIfNeeded({ showGuide: true });
   }
 
   updateFullscreenButton();
@@ -24991,6 +25258,16 @@ if(fullscreenBtn){
     await toggleFullscreen();
   });
 }
+
+
+if(fullscreenCloseBtn){
+  fullscreenCloseBtn.addEventListener('click', async (event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    await exitFullscreenIfNeeded();
+  });
+}
+
 
     function initReader(startPage=0){
       populatePages();
@@ -25043,7 +25320,7 @@ bookElement.addEventListener('touchmove', (event) => {
   }
 }, { passive: true });
 
-bookElement.addEventListener('touchend', () => {
+bookElement.addEventListener('touchend', async () => {
   const dx = touchEndX - touchStartX;
   const dy = touchEndY - touchStartY;
 
@@ -25052,7 +25329,7 @@ bookElement.addEventListener('touchend', () => {
 
   if (absX > 36 && absX > absY * 1.2) {
     if (dx < 0) {
-      goNext();
+      await goNext();
     } else {
       goPrev();
     }
@@ -25062,7 +25339,11 @@ bookElement.addEventListener('touchend', () => {
   if (!touchMoved) {
     const rect = bookElement.getBoundingClientRect();
     const x = touchStartX - rect.left;
-    x > rect.width / 2 ? goNext() : goPrev();
+    if (x > rect.width / 2) {
+      await goNext();
+    } else {
+      goPrev();
+    }
   }
 }, { passive: true });
       pageFlip.loadFromHTML(bookElement.querySelectorAll('.page'));
@@ -25084,8 +25365,13 @@ bindLanguageButtons(bookElement);
     window.goNext = goNext;
     window.goPrev = goPrev;
     window.goToPageIndex = goToPageIndex;
+    window.enterFullscreenIfNeeded = enterFullscreenIfNeeded;
 
-    function goNext(){if(!pageFlip||isFlipping)return;pageFlip.flipNext();}
+    async function goNext(){
+      if(!pageFlip || isFlipping) return;
+      await requestFullscreenBeforeForwardNavigation();
+      pageFlip.flipNext();
+    }
     function goPrev(){if(!pageFlip||isFlipping)return;pageFlip.flipPrev();}
 
  function goToPageByKey(pageKey){
@@ -25135,10 +25421,10 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .su
   x>rect.width/2 ? goNext() : goPrev();
 });
 
-    window.addEventListener('keydown',(event)=>{
+    window.addEventListener('keydown', async (event)=>{
       const tag=document.activeElement?.tagName?.toLowerCase();
       if(tag==='input'||tag==='textarea'||tag==='select') return;
-      if(event.key==='ArrowRight'){event.preventDefault();goNext();}
+      if(event.key==='ArrowRight'){event.preventDefault();await goNext();}
       if(event.key==='ArrowLeft'){event.preventDefault();goPrev();}
     });
 
@@ -25150,9 +25436,22 @@ const guideButton = event.target.closest('.guide-tech-card, .snow-tech-card, .su
         initReader(current);
       },220);
     });
-document.addEventListener('fullscreenchange', updateFullscreenButton);
-document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-document.addEventListener('msfullscreenchange', updateFullscreenButton);
+function handleFullscreenStateChange(){
+  updateFullscreenButton();
+
+  if(isFullscreenNow()){
+    document.body.classList.add('is-fullscreen-active');
+    showFullscreenEscToast();
+  }else{
+    document.body.classList.remove('is-fullscreen-active');
+    fullscreenExitGuide?.classList.remove('is-visible');
+    fullscreenCloseBtn?.classList.remove('is-visible');
+  }
+}
+
+document.addEventListener('fullscreenchange', handleFullscreenStateChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenStateChange);
+document.addEventListener('msfullscreenchange', handleFullscreenStateChange);
 if(readerProgress){
   readerProgress.addEventListener('pointerdown', (event) => {
     event.preventDefault();
