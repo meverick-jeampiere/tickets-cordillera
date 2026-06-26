@@ -14013,12 +14013,106 @@ body.is-fullscreen-active .fullscreen-corner-zone{
 body.is-language-entry .fullscreen-btn.is-visible{
   display:flex !important;
 }
+.viewport-warning{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 36%),
+    linear-gradient(135deg, rgba(12,18,28,.94), rgba(23,32,46,.96));
+  color:#fffdf7;
+  text-align:center;
+  font-family:Inter, system-ui, sans-serif;
+}
 
+.viewport-warning-card{
+  width:min(420px, 100%);
+  padding:28px 24px 24px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.16);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.viewport-warning-icon{
+  width:66px;
+  height:66px;
+  margin:0 auto 18px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  font-size:34px;
+  font-weight:800;
+  line-height:1;
+}
+
+.viewport-warning h2{
+  margin:0 0 10px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:34px;
+  line-height:1;
+  font-weight:700;
+}
+
+.viewport-warning p{
+  margin:0 auto 16px;
+  max-width:340px;
+  font-size:14px;
+  line-height:1.45;
+  color:rgba(255,253,247,.82);
+}
+
+.viewport-warning span{
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  color:rgba(255,253,247,.88);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+/* Mostrar aviso en pantallas verticales o demasiado angostas */
+@media (orientation: portrait), (max-width: 820px){
+  .viewport-warning{
+    display:flex;
+  }
+}
+
+/* Ocultar aviso cuando la pantalla ya está en horizontal y tiene espacio suficiente */
+@media (orientation: landscape) and (min-width: 821px){
+  .viewport-warning{
+    display:none;
+  }
+}
   </style>
 
 </head>
 <body>
-
+<div class="viewport-warning" id="viewportWarning" aria-live="polite">
+  <div class="viewport-warning-card">
+    <div class="viewport-warning-icon">↻</div>
+    <h2>Landscape view recommended</h2>
+    <p>
+      This interactive book is optimized for landscape orientation or desktop viewing.
+      Please rotate your device or use a wider screen for the best reading experience.
+    </p>
+    
+  </div>
+</div>
   <div class="app">
     <header class="topbar">
       <div id="topbarTitle" data-i18n="topbar_title">La memoria del Huascarán</div>
