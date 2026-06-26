@@ -24800,10 +24800,12 @@ let isDraggingProgress = false;
 let pendingPreviewIndex = 0;
 let previewHideTimer = null;
 
-
 let fullscreenToastTimer = null;
 let fullscreenGuideTimer = null;
 let fullscreenCloseTimer = null;
+let fullscreenHelpShown = false;
+let fullscreenHelpPending = false;
+let fullscreenGuidePending = false;
 
 function isFullscreenNow(){
   return !!(
@@ -24848,41 +24850,60 @@ function showFullscreenCloseButtonBriefly(){
   }, 5200);
 }
 
-async function enterFullscreenIfNeeded({ showGuide = false } = {}){
+function showFullscreenHelpNow(){
+  if(fullscreenHelpShown) return;
+
+  showFullscreenEscToast();
+  showFullscreenCloseButtonBriefly();
+
+  if(fullscreenGuidePending){
+    showFullscreenExitGuideOnce();
+  }
+
+  fullscreenHelpShown = true;
+  fullscreenHelpPending = false;
+  fullscreenGuidePending = false;
+}
+
+async function enterFullscreenIfNeeded({ showGuide = false, showHelp = false } = {}){
   if(isFullscreenNow()){
-    showFullscreenEscToast();
-    if(showGuide){
-      showFullscreenExitGuideOnce();
-      showFullscreenCloseButtonBriefly();
+    updateFullscreenButton();
+
+    if(showHelp && !fullscreenHelpShown){
+      fullscreenGuidePending = showGuide;
+      showFullscreenHelpNow();
     }
+
     return true;
   }
 
+  fullscreenHelpPending = showHelp && !fullscreenHelpShown;
+  fullscreenGuidePending = showGuide;
+
   try{
-    const target = stageElement;
+    const target = stageElement || document.documentElement;
 
     if(target.requestFullscreen){
       await target.requestFullscreen();
     }else if(target.webkitRequestFullscreen){
-      target.webkitRequestFullscreen();
-    }else if(target.msRequestFullscreen){
-      target.msRequestFullscreen();
+      await target.webkitRequestFullscreen();
     }else{
-      console.warn('Este navegador no soporta fullscreen API en este contexto.');
+      fullscreenHelpPending = false;
+      fullscreenGuidePending = false;
       return false;
     }
 
-    showFullscreenEscToast();
+    updateFullscreenButton();
 
-    if(showGuide){
-      showFullscreenExitGuideOnce();
-      showFullscreenCloseButtonBriefly();
+    if(fullscreenHelpPending && isFullscreenNow()){
+      showFullscreenHelpNow();
     }
 
-    updateFullscreenButton();
     return true;
   }catch(error){
-    console.warn('No se pudo entrar a pantalla completa:', error);
+    fullscreenHelpPending = false;
+    fullscreenGuidePending = false;
+    console.warn('No se pudo activar pantalla completa:', error);
     return false;
   }
 }
@@ -24908,11 +24929,15 @@ async function exitFullscreenIfNeeded(){
 
 async function requestFullscreenBeforeForwardNavigation(){
   if(!pageFlip) return;
+
   const currentIndex = pageFlip.getCurrentPageIndex();
   const total = pageFlip.getPageCount();
 
-  if(currentIndex < total - 1){
-    await enterFullscreenIfNeeded({ showGuide: true });
+  if(currentIndex < total - 1 && !isFullscreenNow()){
+    await enterFullscreenIfNeeded({
+      showGuide: false,
+      showHelp: false
+    });
   }
 }
 
@@ -25255,7 +25280,11 @@ if(fullscreenBtn){
   fullscreenBtn.addEventListener('click', async (event)=>{
     event.preventDefault();
     event.stopPropagation();
-    await toggleFullscreen();
+
+    await enterFullscreenIfNeeded({
+      showGuide: true,
+      showHelp: true
+    });
   });
 }
 
@@ -25441,11 +25470,18 @@ function handleFullscreenStateChange(){
 
   if(isFullscreenNow()){
     document.body.classList.add('is-fullscreen-active');
-    showFullscreenEscToast();
+
+    if(fullscreenHelpPending){
+      showFullscreenHelpNow();
+    }
   }else{
     document.body.classList.remove('is-fullscreen-active');
     fullscreenExitGuide?.classList.remove('is-visible');
     fullscreenCloseBtn?.classList.remove('is-visible');
+    fullscreenEscToast?.classList.remove('is-visible');
+
+    fullscreenHelpPending = false;
+    fullscreenGuidePending = false;
   }
 }
 
