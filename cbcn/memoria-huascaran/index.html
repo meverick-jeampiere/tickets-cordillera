@@ -12902,559 +12902,224 @@ mask:
   }
 }
 /* =========================================================
-   COMPACTACIÓN ESPECÍFICA — A HOMBROS DE GRANDES MAESTROS
-   Pegar AL FINAL de todos tus estilos
+   FIX LIMPIO — A HOMBROS DE GRANDES MAESTROS
+   Para pantallas horizontales bajas sin destruir la legibilidad
    ========================================================= */
 
-@media (orientation: landscape) and (max-height: 860px) {
+@media (orientation: landscape) and (max-height: 900px){
+
+  .masters-guide-page .masters-guide-layout{
+    grid-template-columns:.48fr .52fr !important;
+    grid-template-rows:1fr !important;
+  }
 
   .masters-guide-page .masters-guide-left{
-    padding: 3.4% 4.6% 2.6%;
+    justify-content:flex-start !important;
+    padding:4.2% 5.8% 3.6% !important;
+    overflow:hidden !important;
   }
 
   .masters-guide-page .masters-guide-right{
-    padding: 2.4%;
-  }
-
-  .masters-guide-page .masters-guide-left h1{
-    font-size: clamp(22px, 2.15vw, 34px);
-    line-height: 0.86;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.8%;
-  }
-
-  .masters-guide-page .masters-guide-subtitle{
-    font-size: clamp(10px, 0.7vw, 13px);
-    line-height: 1;
-    margin: 0 0 0.8%;
-  }
-
-  .masters-guide-page .masters-guide-left .gold-line{
-    width: 42px;
-    margin: 0 0 1.25%;
-  }
-
-  .masters-guide-page .masters-guide-list{
-    gap: 0;
-  }
-
-  .masters-guide-page .masters-guide-item{
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 8px;
-    padding: 0.18% 0 0.26%;
-    align-items: start;
-  }
-
-  .masters-guide-page .masters-guide-number{
-    width: 24px;
-    height: 24px;
-    font-size: 8px;
-    margin-top: 2px;
-  }
-
-  .masters-guide-page .masters-guide-item h2{
-    font-size: clamp(11.8px, 0.8vw, 15px);
-    line-height: 0.98;
-    margin: 0 0 1px;
-  }
-
-  .masters-guide-page .masters-guide-item p{
-    font-size: clamp(8px, 0.5vw, 10px);
-    line-height: 1;
-    margin: 0;
-    text-wrap: pretty;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-card{
-    min-height: 26px;
-    margin: 0.15% 0 0.2%;
-    padding: 0 1.8% 0 4.2%;
-    border-radius: 6px;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon{
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content{
-    min-height: 26px;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content strong{
-    font-size: clamp(10.8px, 0.72vw, 13.5px);
-    line-height: 0.96;
-    margin: 0 0 1px;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content span{
-    font-size: clamp(7px, 0.44vw, 8.8px);
-    line-height: 0.95;
-    margin: 0;
-  }
-
-  .masters-guide-page .masters-guide-image{
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-    min-height: 0;
-    object-fit: cover;
-    border-radius: 18px;
-  }
-
-  .masters-guide-page .masters-guide-caption strong{
-    font-size: clamp(16px, 1.02vw, 21px);
-    line-height: 0.96;
-    margin-bottom: 2px;
-  }
-
-  .masters-guide-page .masters-guide-caption span{
-    font-size: clamp(6px, 0.38vw, 7.5px);
-    line-height: 1;
-    letter-spacing: 0.08em;
-  }
-}
-/* =========================================================
-   FIX REAL — A HOMBROS DE GRANDES MAESTROS
-   Evita el recorte por centrado vertical
-   ========================================================= */
-
-@media (orientation: landscape) and (max-height: 860px) {
-
-  .masters-guide-page .masters-guide-layout{
-    grid-template-columns: .485fr .515fr;
-  }
-
-  .masters-guide-page .masters-guide-left{
-    justify-content: flex-start !important;
-    align-items: stretch;
-    padding: 2.8% 4.6% 2.1% !important;
+    padding:3.4% !important;
+    overflow:hidden !important;
   }
 
   .masters-guide-page .masters-guide-kicker{
-    font-size: clamp(8px, 0.52vw, 10px);
-    line-height: 1;
-    margin: 0 0 0.5%;
+    font-size:clamp(7px,.48vw,9px) !important;
+    line-height:1 !important;
+    margin:0 0 1.1% !important;
   }
 
   .masters-guide-page .masters-guide-left h1{
-    font-size: clamp(19px, 1.8vw, 29px) !important;
-    line-height: 0.84 !important;
-    letter-spacing: -0.035em;
-    margin: 0 0 0.45% !important;
+    font-size:clamp(24px,2.45vw,42px) !important;
+    line-height:.86 !important;
+    letter-spacing:-.04em !important;
+    margin:0 0 1.4% !important;
   }
 
   .masters-guide-page .masters-guide-subtitle{
-    font-size: clamp(9px, 0.56vw, 11px) !important;
-    line-height: 1;
-    margin: 0 0 0.45% !important;
+    font-size:clamp(11px,.72vw,14px) !important;
+    line-height:1.05 !important;
+    margin:0 0 1.7% !important;
   }
 
   .masters-guide-page .masters-guide-left .gold-line{
-    width: 36px !important;
-    height: 2px;
-    margin: 0 0 0.85% !important;
+    width:38px !important;
+    height:2px !important;
+    margin:0 0 2.2% !important;
   }
 
   .masters-guide-page .masters-guide-list{
-    --marker-size: 28px;
-    --marker-left: 12px;
-    --content-left: 56px;
-    margin-top: 0 !important;
-    padding-left: var(--content-left) !important;
-    max-width: 100%;
+    --marker-size:30px !important;
+    --marker-left:13px !important;
+    --content-left:56px !important;
+
+    margin-top:0 !important;
+    padding-left:var(--content-left) !important;
+    max-width:100% !important;
+    gap:0 !important;
   }
 
   .masters-guide-page .masters-guide-item{
-    padding: 0.48% 0 0.62% !important;
+    display:block !important;
+    padding:.72% 0 .88% !important;
+    border-bottom:1px solid rgba(20,18,14,.10) !important;
   }
 
   .masters-guide-page .masters-guide-number{
-    font-size: 8px !important;
-    box-shadow: 0 5px 12px rgba(167,101,32,.12);
+    width:var(--marker-size) !important;
+    height:var(--marker-size) !important;
+    left:calc(-1 * var(--content-left) + var(--marker-left) - var(--marker-size) / 2) !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    font-size:9px !important;
   }
 
   .masters-guide-page .masters-guide-item h2{
-    font-size: clamp(10.5px, 0.72vw, 13px) !important;
-    line-height: 0.96 !important;
-    margin: 0 0 1px !important;
+    font-size:clamp(13px,.86vw,17px) !important;
+    line-height:1 !important;
+    margin:0 0 2px !important;
   }
 
   .masters-guide-page .masters-guide-item p{
-    font-size: clamp(7.2px, 0.44vw, 8.8px) !important;
-    line-height: 0.96 !important;
-    margin: 0 !important;
-    max-width: 100%;
+    font-size:clamp(8.4px,.54vw,10.6px) !important;
+    line-height:1.05 !important;
+    margin:0 !important;
+    max-width:100% !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-card{
-    min-height: 24px !important;
-    margin: 0.22% 0 0.28% !important;
-    padding: 0 1.4% 0 3.6% !important;
+    min-height:34px !important;
+    margin:.42% 0 .52% !important;
+    padding:0 2.4% 0 5.2% !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-icon{
-    width: 24px !important;
-    height: 24px !important;
-    left: calc(-1 * var(--content-left) + var(--marker-left) - 24px / 2) !important;
-    font-size: 13px !important;
+    width:30px !important;
+    height:30px !important;
+    left:calc(-1 * var(--content-left) + var(--marker-left) - 30px / 2) !important;
+    font-size:18px !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-icon::before{
-    inset: -4px;
+    inset:-4px !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-icon::after{
-    top: -28px;
-    height: calc(100% + 56px);
+    top:-28px !important;
+    height:calc(100% + 56px) !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content{
-    min-height: 24px !important;
+    min-height:34px !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content strong{
-    font-size: clamp(9.6px, 0.62vw, 12px) !important;
-    line-height: 0.95 !important;
-    margin: 0 0 1px !important;
+    font-size:clamp(12px,.78vw,15.5px) !important;
+    line-height:1 !important;
+    margin:0 0 1px !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content span{
-    font-size: clamp(6.5px, 0.39vw, 8px) !important;
-    line-height: 0.94 !important;
-    margin: 0 !important;
-  }
-
-  .masters-guide-page .masters-guide-right{
-    padding: 2.1% !important;
+    font-size:clamp(8px,.5vw,10px) !important;
+    line-height:1.02 !important;
+    margin:0 !important;
   }
 
   .masters-guide-page .masters-guide-image{
-    border-radius: 18px !important;
+    width:100% !important;
+    height:100% !important;
+    border-radius:20px !important;
+    background-position:center center !important;
+    background-size:cover !important;
   }
 
   .masters-guide-page .masters-guide-caption{
-    left: 7%;
-    right: 7%;
-    bottom: 5.5%;
+    left:7% !important;
+    right:7% !important;
+    bottom:5.8% !important;
   }
 
   .masters-guide-page .masters-guide-caption strong{
-    font-size: clamp(15px, 0.95vw, 19px) !important;
-    line-height: 0.96 !important;
-    margin-bottom: 2px !important;
+    font-size:clamp(18px,1.18vw,25px) !important;
+    line-height:1 !important;
+    margin-bottom:4px !important;
   }
 
   .masters-guide-page .masters-guide-caption span{
-    font-size: clamp(6px, 0.34vw, 7px) !important;
-    line-height: 1 !important;
+    font-size:clamp(6.8px,.42vw,8.5px) !important;
+    line-height:1 !important;
+    letter-spacing:.09em !important;
   }
 }
-@media (orientation: landscape) and (max-height: 760px) {
-  .masters-guide-page .masters-guide-left{
-    padding: 2.2% 4.2% 1.8% !important;
-  }
 
-  .masters-guide-page .masters-guide-left h1{
-    font-size: clamp(17px, 1.6vw, 25px) !important;
-  }
 
-  .masters-guide-page .masters-guide-item p{
-    font-size: clamp(6.8px, 0.4vw, 8px) !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-card,
-  .masters-guide-page .masters-guide-list .snow-tech-content{
-    min-height: 22px !important;
-  }
-}
-/* =========================================================
-   FIX DEFINITIVO — A HOMBROS DE GRANDES MAESTROS
-   Evita apilado a 1 columna y evita el estrangulamiento del texto
-   ========================================================= */
-
-@media screen and (orientation: landscape) and (max-height: 900px) {
-
-  .masters-guide-page .masters-guide-layout{
-    grid-template-columns: 0.495fr 0.505fr !important;
-    grid-template-rows: 1fr !important;
-  }
+/* Ajuste un poco más compacto solo si la altura es muy baja */
+@media (orientation: landscape) and (max-height: 760px){
 
   .masters-guide-page .masters-guide-left{
-    justify-content: flex-start !important;
-    padding: 2.6% 4.2% 2% !important;
-    min-width: 0;
+    padding:3.4% 5% 2.8% !important;
   }
 
   .masters-guide-page .masters-guide-right{
-    padding: 2.1% !important;
-    min-width: 0;
-  }
-
-  .masters-guide-page .masters-guide-kicker{
-    font-size: clamp(7px, 0.46vw, 9px) !important;
-    line-height: 1 !important;
-    margin: 0 0 0.35% !important;
+    padding:2.8% !important;
   }
 
   .masters-guide-page .masters-guide-left h1{
-    font-size: clamp(18px, 1.72vw, 27px) !important;
-    line-height: 0.84 !important;
-    letter-spacing: -0.04em !important;
-    margin: 0 0 0.35% !important;
+    font-size:clamp(21px,2.12vw,34px) !important;
+    margin-bottom:1% !important;
   }
 
   .masters-guide-page .masters-guide-subtitle{
-    font-size: clamp(8px, 0.5vw, 10px) !important;
-    line-height: 1 !important;
-    margin: 0 0 0.35% !important;
+    font-size:clamp(10px,.66vw,13px) !important;
+    margin-bottom:1.2% !important;
   }
 
   .masters-guide-page .masters-guide-left .gold-line{
-    width: 34px !important;
-    margin: 0 0 0.7% !important;
+    margin-bottom:1.6% !important;
   }
 
   .masters-guide-page .masters-guide-list{
-    --marker-size: 24px;
-    --marker-left: 11px;
-    --content-left: 48px;
-    margin-top: 0 !important;
-    padding-left: var(--content-left) !important;
-    max-width: 100% !important;
-    gap: 0 !important;
-  }
-
-  /* IMPORTANTE: volver al flujo normal, no usar grid aquí */
-  .masters-guide-page .masters-guide-item{
-    display: block !important;
-    padding: 0.42% 0 0.5% !important;
-  }
-
-  .masters-guide-page .masters-guide-number{
-    width: var(--marker-size) !important;
-    height: var(--marker-size) !important;
-    font-size: 7px !important;
-  }
-
-  .masters-guide-page .masters-guide-item h2{
-    font-size: clamp(10px, 0.64vw, 12px) !important;
-    line-height: 0.95 !important;
-    margin: 0 0 1px !important;
-  }
-
-  .masters-guide-page .masters-guide-item p{
-    font-size: clamp(6.7px, 0.41vw, 8.1px) !important;
-    line-height: 0.94 !important;
-    margin: 0 !important;
-    max-width: 100% !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-card{
-    min-height: 22px !important;
-    margin: 0.14% 0 0.18% !important;
-    padding: 0 1.2% 0 3.1% !important;
-    border-radius: 5px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon{
-    width: 22px !important;
-    height: 22px !important;
-    left: calc(-1 * var(--content-left) + var(--marker-left) - 22px / 2) !important;
-    font-size: 12px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon::before{
-    inset: -4px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon::after{
-    top: -24px !important;
-    height: calc(100% + 48px) !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content{
-    min-height: 22px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content strong{
-    font-size: clamp(8.8px, 0.56vw, 10.8px) !important;
-    line-height: 0.94 !important;
-    margin: 0 0 1px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-content span{
-    font-size: clamp(6px, 0.35vw, 7.1px) !important;
-    line-height: 0.92 !important;
-    margin: 0 !important;
-  }
-
-  .masters-guide-page .masters-guide-image{
-    border-radius: 18px !important;
-  }
-
-  .masters-guide-page .masters-guide-caption{
-    left: 7% !important;
-    right: 7% !important;
-    bottom: 5.5% !important;
-  }
-
-  .masters-guide-page .masters-guide-caption strong{
-    font-size: clamp(15px, 0.94vw, 19px) !important;
-    line-height: 0.96 !important;
-    margin-bottom: 2px !important;
-  }
-
-  .masters-guide-page .masters-guide-caption span{
-    font-size: clamp(5.8px, 0.33vw, 6.8px) !important;
-    line-height: 1 !important;
-  }
-}
-
-/* Extra seguro: aunque exista alguna regla móvil/portrait, en horizontal no apilar */
-@media screen and (min-aspect-ratio: 1/1) and (max-height: 900px) {
-  .masters-guide-page .masters-guide-layout{
-    grid-template-columns: 0.495fr 0.505fr !important;
-    grid-template-rows: 1fr !important;
-  }
-}
-/* =========================================================
-   MICROCOMPACTACIÓN FINAL — SOLO A HOMBROS DE GRANDES MAESTROS
-   ========================================================= */
-
-@media (orientation: landscape) and (max-height: 860px) {
-
-  .masters-guide-page .masters-guide-layout{
-    grid-template-columns: .47fr .53fr !important;
-  }
-
-  .masters-guide-page .masters-guide-left{
-    padding: 2.2% 4.1% 1.7% !important;
-    justify-content: flex-start !important;
-  }
-
-  .masters-guide-page .masters-guide-right{
-    padding: 1.9% !important;
-  }
-
-  .masters-guide-page .masters-guide-kicker{
-    font-size: clamp(7px, 0.44vw, 8.5px) !important;
-    margin: 0 0 0.28% !important;
-    line-height: 1 !important;
-  }
-
-  .masters-guide-page .masters-guide-left h1{
-    font-size: clamp(20px, 1.9vw, 30px) !important;
-    line-height: 0.82 !important;
-    letter-spacing: -0.04em !important;
-    margin: 0 0 0.22% !important;
-  }
-
-  .masters-guide-page .masters-guide-subtitle{
-    font-size: clamp(8.2px, 0.5vw, 10px) !important;
-    line-height: 1 !important;
-    margin: 0 0 0.32% !important;
-  }
-
-  .masters-guide-page .masters-guide-left .gold-line{
-    width: 34px !important;
-    margin: 0 0 0.55% !important;
-  }
-
-  .masters-guide-page .masters-guide-list{
-    --marker-size: 22px !important;
-    --marker-left: 10px !important;
-    --content-left: 42px !important;
-    padding-left: var(--content-left) !important;
-    margin-top: 0 !important;
-    max-width: 100% !important;
-    gap: 0 !important;
+    --marker-size:27px !important;
+    --marker-left:12px !important;
+    --content-left:52px !important;
   }
 
   .masters-guide-page .masters-guide-item{
-    display: block !important;
-    padding: 0.26% 0 0.32% !important;
-  }
-
-  .masters-guide-page .masters-guide-number{
-    width: var(--marker-size) !important;
-    height: var(--marker-size) !important;
-    font-size: 7px !important;
+    padding:.55% 0 .68% !important;
   }
 
   .masters-guide-page .masters-guide-item h2{
-    font-size: clamp(9.4px, 0.58vw, 11.2px) !important;
-    line-height: 0.92 !important;
-    margin: 0 0 1px !important;
+    font-size:clamp(12px,.76vw,15px) !important;
   }
 
   .masters-guide-page .masters-guide-item p{
-    font-size: clamp(6.2px, 0.37vw, 7.4px) !important;
-    line-height: 0.9 !important;
-    margin: 0 !important;
-    max-width: 100% !important;
+    font-size:clamp(7.8px,.48vw,9.6px) !important;
+    line-height:1.02 !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-card{
-    min-height: 20px !important;
-    margin: 0.08% 0 0.12% !important;
-    padding: 0 1% 0 2.6% !important;
-    border-radius: 5px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon{
-    width: 20px !important;
-    height: 20px !important;
-    font-size: 11px !important;
-    left: calc(-1 * var(--content-left) + var(--marker-left) - 10px) !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon::before{
-    inset: -3px !important;
-  }
-
-  .masters-guide-page .masters-guide-list .snow-tech-icon::after{
-    top: -20px !important;
-    height: calc(100% + 40px) !important;
+    min-height:30px !important;
+    margin:.3% 0 .38% !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content{
-    min-height: 20px !important;
+    min-height:30px !important;
+  }
+
+  .masters-guide-page .masters-guide-list .snow-tech-icon{
+    width:27px !important;
+    height:27px !important;
+    left:calc(-1 * var(--content-left) + var(--marker-left) - 27px / 2) !important;
+    font-size:16px !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content strong{
-    font-size: clamp(7.8px, 0.49vw, 9.6px) !important;
-    line-height: 0.92 !important;
-    margin: 0 0 1px !important;
+    font-size:clamp(11px,.68vw,13.5px) !important;
   }
 
   .masters-guide-page .masters-guide-list .snow-tech-content span{
-    font-size: clamp(5.4px, 0.31vw, 6.3px) !important;
-    line-height: 0.9 !important;
-    margin: 0 !important;
-  }
-
-  .masters-guide-page .masters-guide-image{
-    border-radius: 16px !important;
-  }
-
-  .masters-guide-page .masters-guide-caption{
-    left: 6.5% !important;
-    right: 6.5% !important;
-    bottom: 4.8% !important;
-  }
-
-  .masters-guide-page .masters-guide-caption strong{
-    font-size: clamp(14px, 0.86vw, 17px) !important;
-    line-height: 0.94 !important;
-    margin-bottom: 2px !important;
-  }
-
-  .masters-guide-page .masters-guide-caption span{
-    font-size: clamp(5.2px, 0.29vw, 6px) !important;
-    line-height: 1 !important;
+    font-size:clamp(7.4px,.44vw,9px) !important;
   }
 }
 /* =========================================================
